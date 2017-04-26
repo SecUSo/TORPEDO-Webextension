@@ -1,0 +1,86 @@
+<html>
+	<head>
+		<title>Link Revealer Options</title>
+		<link type="text/css" rel="stylesheet" href="css/jquery.growl.css" />
+		<link type="text/css" rel="stylesheet" href="css/style.css" />
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.growl.js"></script>
+		<script type="text/Javascript" src="js/default.js"></script>
+		<script type="text/javascript" src="js/options.js"></script>
+	</head>
+	<body>
+		<fieldset>
+			<ul class="keys">
+				<li>
+					<h1>Link<br/>Revealer</h1>
+				</li>
+				<li class="panel">
+					<label>Show as tooltip</label>
+					<input id="astooltip" type="checkbox" checked="checked" />
+				</li>
+				<li class="panel">
+					<label>Show after</label>
+					<input id="timeoutms" value="1000" /><br/>
+					<span>If this will be set to 0, this will be shown on hover.</span>
+				</li>
+				<li class="panel">
+					<label>Highlight domain with color</label>
+					<input id="domaincolor" type="color" value="#FFFF00"/></br/>
+					<span>This will be used to highlight domain color into the tooltip.</span>
+					<span class="seo">SEO</span>
+				</li>
+				<li class="panel">
+					<h2>Show, relative to the window, at:</h2>
+					<ul>
+						<li>
+							<label>Left Top</label>
+							<input name="position" type="radio" value="left top"/>
+						</li>
+						<li>
+							<label>Center Top</label>
+							<input name="position" type="radio" value="center top"/>
+						<li>
+						<li>
+							<label>Right Top</label>
+							<input name="position" type="radio" value="right top"/>
+						<li>
+					</ul>
+					<ul>
+						<li>
+							<label>Left Center</label>
+							<input name="position" type="radio" value="left center"/>
+						</li>
+						<li>
+							<label>Center Center</label>
+							<input name="position" type="radio" value="center center"/>
+						<li>
+						<li>
+							<label>Right Center</label>
+							<input name="position" type="radio" value="right center"/>
+						<li>
+					</ul>
+					<ul>
+						<li>
+							<label>Left Bottom</label>
+							<input name="position" type="radio" value="left bottom" checked="checked"/>
+						</li>
+						<li>
+							<label>Center Bottom</label>
+							<input name="position" type="radio" value="center bottom"/>
+						<li>
+						<li>
+							<label>Right Bottom</label>
+							<input name="position" type="radio" value="right bottom"/>
+						<li>
+					</ul>
+					<span>This will be used only if it's NOT a tooltip.</span>
+				</li>
+				<li>
+					<button id="save"><span>Save settings</span></button>
+					<button id="load"><span>Load settings</span></button>
+					<button id="reset"><span>Reset settings</span></button>
+				</li>
+			</ul>
+		</fieldset>
+	</body>
+</html>
