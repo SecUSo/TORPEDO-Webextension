@@ -7,7 +7,8 @@ jQuery(function($){
                     position,
                     text = uri.source.replace(uri.host, uri.host.replace(extractDomain(uri.host),"")+'<span style="color:#0033cc">' + extractDomain(uri.host) + '</span>');
                     position = {
-                        my: 'bottom center',
+                        at: 'center bottom',
+                        my: 'top left',
                         target: 'mouse',
                         viewport: $(window),
                         adjust: {
@@ -27,14 +28,14 @@ jQuery(function($){
                         ready: true,
                         solo: true,
                         effect: function() {
-                          $(this).fadeTo(500, 1);
+                          $(this).slideDown(100);
                         }
                     },
                     hide: {
                         fixed: true,
-                        delay: 500,
+                        delay: 1000,
                         effect: function() {
-                          $(this).slideUp();
+                          $(this).slideUp(300);
                         }
                     },
                     position: position,

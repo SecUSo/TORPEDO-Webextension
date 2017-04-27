@@ -16,8 +16,18 @@
 	"content_scripts":[
 		{
 		  "matches": [
-		  	"http://*/*",
-		  	"https://*/*"
+				"https://webmail.rbg.informatik.tu-darmstadt.de/*",
+		  	"https://mail.google.com/*",
+				"https://mail.aol.de/*",
+				"https://mg.mail.yahoo.com/*",
+				"https://bap.navigator.web.de/*",
+				"https://email.t-online.de/*",
+				"https://email.freenet.de/*",
+				"https://email.vodafone.de/*",
+				"https://webmail.ewe.de/*",
+				"https://webmail.unity-mail.de/*",
+				"https://outlook.live.com/*",
+		  	"https://navigator.gmx.net/*"
 		  ],
 		  "permissions":[
 		    "webRequest",
@@ -27,7 +37,6 @@
 		  ],
 		  "css": [
 		  	"css/jquery.qtip.min.css",
-		  	"css/font-awesome.min.css",
 				"css/tooltip.css"
 		  ],
 		  "js": [
@@ -38,8 +47,5 @@
 		  ],
 		  "run_at": "document_idle"
 		}
-	],
-	"web_accessible_resources": [
-		"fonts/*"
 	]
 }
