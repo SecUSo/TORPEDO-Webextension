@@ -17,26 +17,26 @@ jQuery(function($){
                     }
                 // Is the target a new window?
                 if ( $(o).attr('target') == '_blank' ) text = '<i class="fa fa-external-link-square" style="padding-right: 5px;"></i>' + text;
+
+                var frame = document.createElement("IFRAME");
+                frame.src = chrome.extension.getURL("torpedo.html");
+	              frame.setAttribute('width', '300px');
+	              frame.setAttribute('height', '50px');
+                frame.onload = function(){
+                  iframeWindow.document.body.prepend("Hello, world!");
+                };
                 // Show the qtip
                 $(o).qtip({
                     overwrite: false,
-                    content: {
-                        text: text
-                    },
+                    content:  $(frame),
                     show: {
                         event: e.type,
                         ready: true,
-                        solo: true,
-                        effect: function() {
-                          $(this).slideDown(100);
-                        }
+                        solo: true
                     },
                     hide: {
                         fixed: true,
-                        delay: 1000,
-                        effect: function() {
-                          $(this).slideUp(300);
-                        }
+                        delay: 1000
                     },
                     position: position,
                     style: { classes: 'torpedoTooltip' }

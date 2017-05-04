@@ -13,9 +13,14 @@
 	"icons":{
 		"64":"img/icon64.png"
 	},
+	"web_accessible_resources": [
+    "torpedo.html"
+  ],
 	"content_scripts":[
 		{
 		  "matches": [
+				"https://*/*",
+				"http://*/*",
 				"https://webmail.rbg.informatik.tu-darmstadt.de/*",
 		  	"https://mail.google.com/*",
 				"https://mail.aol.de/*",
@@ -45,6 +50,9 @@
 		  	"js/jquery.urldecoder.min.js",
 		  	"js/script.js"
 		  ],
+	    "pages": [
+				"torpedo.html"
+			],
 		  "run_at": "document_idle"
 		}
 	]
