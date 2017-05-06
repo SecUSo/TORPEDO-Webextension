@@ -2,20 +2,17 @@
 	"manifest_version":2,
 	"name":"TORPEDO - TOoltip poweRed Phishing Email DetectiOn",
 	"version":"3.0",
+	"default_locale": "de",
 	"description":"Show URLs and their security status when you hover over links in a webpage which belongs to an e-mail provider",
 	"background":{
 		"scripts":[
 			"js/jquery-2.1.1.min.js",
-			"js/default.js",
 			"background.js"
 		]
 	},
 	"icons":{
 		"64":"img/icon64.png"
 	},
-	"web_accessible_resources": [
-    "torpedo.html"
-  ],
 	"content_scripts":[
 		{
 		  "matches": [
@@ -50,9 +47,6 @@
 		  	"js/jquery.urldecoder.min.js",
 		  	"js/script.js"
 		  ],
-	    "pages": [
-				"torpedo.html"
-			],
 		  "run_at": "document_idle"
 		}
 	]

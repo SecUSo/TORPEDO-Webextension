@@ -1,0 +1,57 @@
+{
+  "extensionName": {
+    "message": "TORPEDO - TOoltip-poweRed Phishing Email DetectiOn",
+    "description": "Name of the extension."
+  },
+
+  "extensionDescription": {
+    "message": "Zeigt URLs und deren Sicherheitsstatus, sobald mit der Maus über einen Link auf einer Website eines E-Mail-Providers gefahren wird.",
+    "description": "Description of the extension."
+  },
+
+  "lowRiskDomain": {
+    "message": "Die Domain (hervorgehobener Bereich) wurde von den Entwicklern von TORPEDO als wenig riskant eingestuft.",
+    "description": "Risk status of this domain (low)."
+  },
+
+  "userDefinedDomain": {
+    "message": "Die Domain (hervorgehobener Bereich) wurde von Ihnen als wenig riskant eingestuft (entweder manuell oder weil Sie früher auf einen entsprechenden Link geklickt haben).",
+    "description": "Risk status of this domain (user defined)."
+  },
+
+  "unknownDomain": {
+    "message": "Die Domain (hervorgehobener Bereich) der URL ist TORPEDO nicht bekannt und kann daher nicht automatisch beurteilt werden.",
+    "description": "Risk status of this domain (unknown)."
+  },
+
+  "redirectDomain": {
+    "message": "Diese Webadresse ist eine sogenannte ‘Kurz-URL’, d.h. es ist nicht die Zieladresse. Von dieser Kurz-URL werden Sie auf eine andere Webadresse weitergeleitet.",
+    "description": "Risk status of this domain (redirect)."
+  },
+
+  "linkDelay": {
+    "message": "Link ist deaktiviert, damit Sie die Domain in Ruhe prüfen.",
+    "description": "Information about link deactivation and delay."
+  },
+
+  "waitingTime": {
+    "message": "Verbleibende Zeit: $TIME$ Sekunde(n).",
+    "description": "Remaining time until link is activated.",
+    "placeholders": {
+      "time" : {
+        "content" : "$1",
+        "example" : "3"
+      }
+    }
+  },
+
+  "redirectSign": {
+    "message": "Die URL hinter dem Link ist nicht das tatsächliche Ziel. Sie werden auf die folgende URL weitergeleitet:",
+    "description": "Tell user that this is a redirect link."
+  },
+
+  "phishWarning": {
+    "message": "Die URL, die in der E-Mail angegeben ist, stimmt nicht mit der tatsächlichen URL hinter dem Link überein. Dies deutet auf einen Betrugsversuch hin. Die tatsächliche URL ist:",
+    "description": "Warn user against a potential phish attack."
+  }
+}
