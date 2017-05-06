@@ -45,7 +45,8 @@
 		  	"js/jquery-2.1.1.min.js",
 		  	"js/jquery.qtip.min.js",
 		  	"js/jquery.urldecoder.min.js",
-		  	"js/script.js"
+		  	"js/script.js",
+		  	"js/timer.js"
 		  ],
 		  "run_at": "document_idle"
 		}

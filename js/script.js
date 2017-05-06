@@ -1,12 +1,10 @@
+security = "unknown";
+
 jQuery(function($){
     $('body').on('mouseenter', 'a', function(e) {
         var o = this;
-        if ( o.href != '#' && o.href != 'javascript:void(0)' && o.id != 'torpedoHref') {
+        if ( o.href != '#' && o.href != 'javascript:void(0)' && o.id != 'torpedoURL') {
             chrome.extension.sendRequest('show', function(r) {
-                // Is the target a new window?
-                //if ( $(o).attr('target') == '_blank' ) ...
-
-                // Show the qtip
                 $(o).qtip({
                     overwrite: false,
                     content:  {
@@ -35,11 +33,11 @@ jQuery(function($){
                       render: function(event, api) {
                         //var iframe = $('iframe', this)[0];
                         //var tooltip = $(this);
-                        //$('<p id="torpedoSecurityStatus">'+chrome.i18n.getMessage("waitingTime", "3")+'</p>').appendTo(api.elements.content);
+                        countdown(3,api.elements.content,o);
                         console.log(api.elements.content.html());
+
                       },
                       hide: function(event, api) {
-                        //console.log("hide");
                       }
                     }
                 }, e);
@@ -73,7 +71,7 @@ function tooltipText(href){
   var advice = "";
   var wait = "<p id='torpedoLinkDelay'>" + chrome.i18n.getMessage("linkDelay") + '</p>';
   var timer = "<p id='torpedoTimer'>" + chrome.i18n.getMessage("waitingTime", "3") + '</p>';
-  // TODO: timer function, local user settings
+  // TODO: user preferences for timer
 
   switch(getSecurityStatus(url)){
     case "lowrisk":
@@ -86,14 +84,14 @@ function tooltipText(href){
       wait = ""; timer = "";
       // TODO: connect waitingTime with user settings
       break;
-    case "lowrisk":
+    case "unknown":
       securityStatus = "<p id='torpedoSecurityStatus'>" + chrome.i18n.getMessage("lowRiskDomain") + '</p>';
       break;
     case "redirect":
       securityStatus = "<p id='torpedoSecurityStatus'>" + chrome.i18n.getMessage("redirectDomain") + '</p>';
       break;
     case "encrypted":
-      top = "<p id='top'>" + chrome.i18n.getMessage("encryptedDomain") + '</p>';
+      top = "<p id='torpedoTop'>" + chrome.i18n.getMessage("encryptedDomain") + '</p>';
       // TODO: switch case to other security statuses
       break;
     case "phish":
@@ -104,5 +102,6 @@ function tooltipText(href){
 };
 
 function getSecurityStatus(domain){
+  security = "unknown";
   return "unknown";
 }
