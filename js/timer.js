@@ -10,10 +10,20 @@ function countdown(startTime, tooltip, aElement) {
       try{
         tooltip.find("#torpedoTimer")[0].remove();
       }catch(e){}
+      console.log(tooltip.html());
       $('<p id="torpedoTimer">'+chrome.i18n.getMessage("waitingTime", ""+time)+'</p>').appendTo(tooltip);
+      console.log(tooltip.html());
     }
 
     // TODO: user preferences for timer, link deactivation
+
+    // deactivate link
+    $(aElement).unbind("click");
+    $(aElement).bind("click", function(event){event.preventDefault();});
+    try{
+      $(tooltip.find("#torpedoURL")[0]).unbind("click");
+      $(tooltip.find("#torpedoURL")[0]).bind("click", function(event){event.preventDefault();});
+    }catch(e){}
 
     showTime();
     --time;
@@ -23,20 +33,13 @@ function countdown(startTime, tooltip, aElement) {
         clearInterval(timerInterval);
 
         // reactivate link
-        aElement.removeAttribute("onclick");
+        $(aElement).unbind("click");
         try{
-          tooltip.find("#torpedoURL")[0].removeAttribute("onclick");
+          $(tooltip.find("#torpedoURL")[0]).unbind("click");
         }catch(e){}
       }
       else{
         --time;
-
-        // deactivate link
-        aElement.setAttribute("onclick", "return false;");
-        try{
-          tooltip.find("#torpedoURL")[0].setAttribute("onclick", "return false;");
-        }catch(e){}
       }
-      console.log(tooltip.html());
     }, 1000);
 }
