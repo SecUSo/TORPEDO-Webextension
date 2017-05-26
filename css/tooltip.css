@@ -1,28 +1,68 @@
 .torpedoTooltip{
-    border-color: grey;
-    border-width: 2px;
-    border-radius: 5px;
-    background-color: white;
-    min-width: 300px;
-    color: black;
-    font-size: 13px;
-}
-#torpedoSecurityStatus{
-  margin-top: 5px;
+  border: solid 2.5px #bfb9b9;
+  border-radius: 5px;
+  background-color: white;
+  min-width: 350px;
+  color: black;
   font-size: 13px;
+}
+.torpedoTrusted{
+  border-color: green;
+}
+.torpedoUserDefined{
+  border-color: #1a509d;
+}
+.torpedoPhish{
+  border-color: red;
+  background-color: #feffcc;
+}
+#torpedoWarningImage{
+  float: left;
+  width: 25px;
+  height: 25px;
+  margin: 0 5px 0px 0;
+}
+#torpedoWarningText{
+  float: right;
+  margin: 0 0 10px 0;
+}
+#torpedoURL{
+  color: black;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding-bottom: 10px;
 }
 #torpedoDomain{
   color:#0033cc;
   letter-spacing: 2px;
 }
-#torpedoURL{
-  color: black;
-  max-height: 5px;
-  word-wrap: break-word;
-  word-break: break-all;
+#torpedoSecurityStatus{
+  font-size: 13px;
+  margin: 10px 0 5px 0;
+}
+#torpedoAdviceImage{
+  float: left;
+  width: 25px;
+  height: 25px;
+  margin: 5px 4px 10px 0;
+}
+#torpedoAdviceText{
+  float: right;
+  margin: 2px 0 5px 0;
+}
+#torpedoInfoImage{
+  float: left;
+  width: 25px;
+  height: 25px;
+  margin: 0 4px 5px 0;
+}
+#torpedoInfoText{
+  float: right;
+  margin: 5px 0 0 0;
 }
 #torpedoLinkDelay{
-  margin-top: 5px;
+  margin: 5px 0 0 0;
 }
 #torpedoTimer{
+  margin: 0 0 0 0;
 }

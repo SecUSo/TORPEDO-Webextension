@@ -53,5 +53,35 @@
   "phishWarning": {
     "message": "Die URL, die in der E-Mail angegeben ist, stimmt nicht mit der tatsächlichen URL hinter dem Link überein. Dies deutet auf einen Betrugsversuch hin. Die tatsächliche URL ist:",
     "description": "Warn user against a potential phish attack."
+  },
+
+  "unknownAdvice": {
+    "message": "Überprüfen Sie die Domain gründlich und entscheiden dann, ob dieser vertraut werden kann. Nur wenn diese vertrauenswürdig ist, klicken Sie auf den Link, ansonsten löschen Sie diese E-Mail.",
+    "description": "Advice on trusting a domain (unknown)."
+  },
+
+  "redirectAdvice": {
+    "message": "Im Falle, dass Sie zweifeln, ob Sie diese URL anklicken sollten, empfehlen wir Ihnen, dies nicht zu tun. Kriminelle nutzen dies oft, um schädliche Links zu verstecken.",
+    "description": "Advice on trusting a domain (redirect)."
+  },
+
+  "phishAdvice": {
+    "message": "Überprüfen Sie daher die Domain besonders gründlich und entscheiden dann, ob dieser vertraut werden kann. Nur wenn dieser vertraut werden kann, klicken Sie auf den Link. Sonst löschen Sie diese E-Mail.",
+    "description": "Advice on trusting a domain (phish)."
+  },
+
+  "lowRiskInfo": {
+    "message": "Mehr Informationen zu den  'wenig riskant' eingestuften Domains",
+    "description": "More information (low risk domain)."
+  },
+
+  "moreInfo": {
+    "message": "Mehr Informationen zur Durchführung der Überprüfung",
+    "description": "More information (unknown and user defined domain)."
+  },
+
+  "specialCaseInfo": {
+    "message": "Mehr Informationen zu diesem Spezialfall und zur Durchführung der Überprüfung",
+    "description": "More information (redirect, encrypted and phish domain)."
   }
 }

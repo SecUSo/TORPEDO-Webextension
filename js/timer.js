@@ -1,8 +1,9 @@
 /**
 * countdown function for the temporal deactivation of URLs
 */
-function countdown(startTime, tooltip, aElement) {
+function countdown(startTime, tooltip) {
     var time = startTime;
+    $(tooltip.find("#torpedoLinkDelay")[0]).html(chrome.i18n.getMessage("linkDelay"));
     /**
     * assert time to tooltip text
     */
@@ -10,16 +11,12 @@ function countdown(startTime, tooltip, aElement) {
       try{
         tooltip.find("#torpedoTimer")[0].remove();
       }catch(e){}
-      console.log(tooltip.html());
       $('<p id="torpedoTimer">'+chrome.i18n.getMessage("waitingTime", ""+time)+'</p>').appendTo(tooltip);
-      console.log(tooltip.html());
     }
 
-    // TODO: user preferences for timer, link deactivation
-
     // deactivate link
-    $(aElement).unbind("click");
-    $(aElement).bind("click", function(event){event.preventDefault();});
+    $(torpedo.target).unbind("click");
+    $(torpedo.target).bind("click", function(event){event.preventDefault();});
     try{
       $(tooltip.find("#torpedoURL")[0]).unbind("click");
       $(tooltip.find("#torpedoURL")[0]).bind("click", function(event){event.preventDefault();});
@@ -33,9 +30,11 @@ function countdown(startTime, tooltip, aElement) {
         clearInterval(timerInterval);
 
         // reactivate link
-        $(aElement).unbind("click");
+        $(torpedo.target).unbind("click");
+        $(torpedo.target).bind("click",function(event){processClick();});
         try{
           $(tooltip.find("#torpedoURL")[0]).unbind("click");
+            $(tooltip.find("#torpedoURL")[0]).bind("click",function(event){processClick();});
         }catch(e){}
       }
       else{

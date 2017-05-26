@@ -7,12 +7,16 @@
 	"background":{
 		"scripts":[
 			"js/jquery-2.1.1.min.js",
+			"js/preferences.js",
 			"background.js"
 		]
 	},
 	"icons":{
 		"64":"img/icon64.png"
 	},
+	"web_accessible_resources": [
+		"img/*.png"
+	],
 	"content_scripts":[
 		{
 		  "matches": [
@@ -35,7 +39,8 @@
 		    "webRequest",
 		    "webRequestBlocking",
 		  	"http://*/*",
-		  	"https://*/*"
+		  	"https://*/*",
+				"storage"
 		  ],
 		  "css": [
 		  	"css/jquery.qtip.min.css",
@@ -44,9 +49,11 @@
 		  "js": [
 		  	"js/jquery-2.1.1.min.js",
 		  	"js/jquery.qtip.min.js",
-		  	"js/jquery.urldecoder.min.js",
-		  	"js/script.js",
-		  	"js/timer.js"
+		  	"js/contentscript.js",
+		  	"js/timer.js",
+				"js/tooltip.js",
+		  	"js/status.js",
+		  	"js/storage.js"
 		  ],
 		  "run_at": "document_idle"
 		}

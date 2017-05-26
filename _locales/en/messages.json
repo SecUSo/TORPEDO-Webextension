@@ -1,27 +1,87 @@
 {
   "extensionName": {
-    "message": "Notify link clicks i18n",
+    "message": "TORPEDO - TOoltip-poweRed Phishing Email DetectiOn",
     "description": "Name of the extension."
   },
 
   "extensionDescription": {
-    "message": "Shows a notification when the user clicks on links.",
+    "message": "Show URLs and their security status when you hover over links in a webpage which belongs to an e-mail provider.",
     "description": "Description of the extension."
   },
 
-  "notificationTitle": {
-    "message": "Click notification",
-    "description": "Title of the click notification."
+  "lowRiskDomain": {
+    "message": "The developers considered the domain (highlighted part) of this URL as low-risk.",
+    "description": "Risk status of this domain (low)."
   },
 
-  "notificationContent": {
-    "message": "You clicked $URL$.",
-    "description": "Tells the user which link they clicked.",
+  "userDefinedDomain": {
+    "message": "You considered the domain (highlighted part) of this URL as low-risk.",
+    "description": "Risk status of this domain (user defined)."
+  },
+
+  "unknownDomain": {
+    "message": "This domain is not yet known or considered by TORPEDO.",
+    "description": "Risk status of this domain (unknown)."
+  },
+
+  "redirectDomain": {
+    "message": "This URL is a so-called ‘short URL’, i.e. it is not the actual URL. Clicking on this short URL will redirect you to another URL. Before checking the actual URL, TORPEDO can't finish examination and displays one of the three standard cases.",
+    "description": "Risk status of this domain (redirect)."
+  },
+
+  "linkDelay": {
+    "message": "Link is deactivated to give you time to check it.",
+    "description": "Information about link deactivation and delay."
+  },
+
+  "waitingTime": {
+    "message": "Time remaining: $TIME$ second(s).",
+    "description": "Remaining time until link is activated.",
     "placeholders": {
-      "url" : {
+      "time" : {
         "content" : "$1",
-        "example" : "https://developer.mozilla.org"
+        "example" : "3"
       }
     }
+  },
+
+  "redirectSign": {
+    "message": "The URL behind this link is not the actual URL. You will be redirected to the following URL:",
+    "description": "Tell user that this is a redirect link."
+  },
+
+  "phishWarning": {
+    "message": "Attention! There is a mismatch between the URL shown in the email and the URL behind the link. This might be a fraud attempt.",
+    "description": "Warn user against a potential phish attack."
+  },
+
+  "unknownAdvice": {
+    "message": "Please check the domain (highlighted part) carefully and then decide whether you can click it safely or you should delete it.",
+    "description": "Advice on trusting a domain (unknown)."
+  },
+
+  "redirectAdvice": {
+    "message": "Before clicking the URL or the button below, you should carefully consider the importance of following the link. If you want to follow, we recommend to first ask TORPEDO to check for the actual URL.",
+    "description": "Advice on trusting a domain (redirect)."
+  },
+
+  "phishAdvice": {
+    "message": "Please check the domain (highlighted part) carefully before you click. If you are still uncertain about the risk, you should try to get more information either using a search engine or contacting the sender.",
+    "description": "Advice on trusting a domain (phish)."
+  },
+
+  "lowRiskInfo": {
+    "message": "More information on risk consideration",
+    "description": "More information (low risk domain)."
+  },
+
+  "moreInfo": {
+    "message": "More information on how to check the URL",
+    "description": "More information (unknown and user defined domain)."
+  },
+
+  "specialCaseInfo": {
+    "message": "More information on this special case and how to check the URL",
+    "description": "More information (redirect, encrypted and phish domain)."
   }
 }
