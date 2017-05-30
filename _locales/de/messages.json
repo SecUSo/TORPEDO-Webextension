@@ -83,5 +83,45 @@
   "specialCaseInfo": {
     "message": "Mehr Informationen zu diesem Spezialfall und zur Durchführung der Überprüfung",
     "description": "More information (redirect, encrypted and phish domain)."
+  },
+
+  "moreInfoLowRisk": {
+    "message": "Ein grüner Rahmen bedeutet, dass die Domain in die Kategorie niedriges Risiko von den Entwicklern von TORPEDO (d.h. Mitarbeitern der TU Darmstadt) eingeordnet wird. Diese Domains erscheinen in der Liste der 100 meist besuchten Webseiten.",
+    "description": "Information on domain (low risk domain)."
+  },
+
+  "moreInfoUserDefined": {
+    "message": "Ein blauer Rahmen bedeutet, dass Sie zuvor die Domain als niedriges Risiko eingeordnet haben, d.h. a) Sie haben auf URLs mit derselben Domain mindestens zwei mal geklickt, seitdem Sie TORPEDO installiert haben, b) Sie haben die hervorgehobene Domain manuell hinzugefügt.",
+    "description": "Information on domain (user defined domain)."
+  },
+
+  "moreInfoRedirect": {
+    "message": "Der Kurz-URL Fall bedeutet, dass die URL hinter dem Link nicht die tatsächliche Ziel-URL ist. Von der ursprünglichen URL werden Sie jedoch zum tatsächlichen Ziel weitergeleitet. Um dementsprechend zu überprüfen, ob der Link gefährlich ist, muss TORPEDO das Ziel untersuchen. TORPEDO leitet diese Informationen mit Hilfe eines webbasierten Services ab. Obwohl Kurz-URLs auch für vertrauenswürdige E-Mails genutzt werden können, ist dies eine Technik, die oft von Kriminellen benutzt wird.",
+    "description": "Information on domain (redirect domain)."
+  },
+
+  "moreInfoEncrypted": {
+    "message": "Der Weiterleitungsfall bedeutet, dass die angezeigte URL nicht die tatsächliche Ziel-URL ist. Von dieser URL werden Sie jedoch auf die tatsächliche weitergeleitet. In diesem Fall kann TORPEDO die tatsächliche Ziel-URL ableiten und Ihnen direkt die Informationen zur tatsächlichen Ziel-URL anzeigen. Der Tooltip-Rahmen und die Instruktionen hängen somit von der Einschätzung der Domain ab.",
+    "description": "Information on domain (encrypted domain)."
+  },
+
+  "moreInfoPhish": {
+    "message": "Der Unstimmigkeitsfall bedeutet, dass die Ziel-URL und die dargestellte URL im Text nicht übereinstimmen. Die Domain ist bisher nicht sicher. Obwohl das versehentlich passieren kann, wird dies von Kriminellen oft genutzt, um schädliche URLs zu verstecken.",
+    "description": "Information on domain (phish domain)."
+  },
+
+  "checkURL":{
+    "message": "Informationen zur Durchführung der Überprüfung",
+    "description": "Button for URL checking"
+  },
+
+  "infoImage":{
+    "message": "img/info_de.png",
+    "description": "Address of info image"
+  },
+
+  "deduceURL":{
+    "message": "Ziel-URL ermitteln",
+    "description": "Button text for deducing the target URL if the URL is a redirect"
   }
 }

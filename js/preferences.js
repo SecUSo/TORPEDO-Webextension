@@ -10,5 +10,13 @@ var Torpedo = {
 	timer:{
 		label:'timer',
 		value:3
+	},
+	referrerPart1:{
+		label:'referrerPart1',
+		value:["https://deref-gmx.net/mail/client/","https://deref-web-02.de/mail/client/"]
+	},
+	referrerPart2:{
+		label:'referrerPart2',
+		value:["dereferrer/?redirectUrl=","dereferrer/?redirectUrl="]
 	}
 };

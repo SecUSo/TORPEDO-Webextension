@@ -10,7 +10,9 @@ chrome.extension.onRequest.addListener(function(request,sender,sendResponse){
 		var r = {
 			onceClickedDomains:(window.localStorage.getItem(Torpedo.onceClickedDomains.label)),
 			userDefinedDomains:(window.localStorage.getItem(Torpedo.userDefinedDomains.label)),
-			timer:parseInt(window.localStorage.getItem(Torpedo.timer.label))
+			timer:parseInt(window.localStorage.getItem(Torpedo.timer.label)),
+			referrerPart1:(window.localStorage.getItem(Torpedo.referrerPart1.label)),
+			referrerPart2:(window.localStorage.getItem(Torpedo.referrerPart2.label))
 		};
 		sendResponse(r);
 	}

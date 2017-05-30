@@ -6,12 +6,13 @@ torpedo.status = "unknown";
 * determine security status of domain by
 * looking up trusted, redirect, and user defined domains
 */
-function getSecurityStatus(domain, userDefinedDomains){
+function getSecurityStatus(domain, userDefinedDomains, referrerPart1, isRedirect){
   // TODO: phish and encryption
-  if(isPhish(domain)) torpedo.status = "phish";
+  if(!isRedirect && isPhish(domain)) torpedo.status = "phish";
   else if(trustedDomains.indexOf(domain) > -1) torpedo.status = "trusted";
   else if(redirectDomains.indexOf(domain) > -1) torpedo.status = "redirect";
   else if(userDefinedDomains.indexOf(domain) > -1) torpedo.status = "userdefined";
+  else if(referrerPart1.indexOf(domain) > -1) torpedo.status = "encrypted";
   else torpedo.status = "unknown";
 };
 
@@ -24,8 +25,8 @@ function isPhish(domain){
     const linkText = new URL(torpedo.target.innerHTML.replace(" ",""));
     //console.log(window.location.host); TODO: needed for encrypted urls / gmx redirects
     console.log("dahinterliegende url: "+torpedo.domain);
-    console.log("angezeigte url: "+linkText.hostname);
-    if(torpedo.domain != linkText.hostname) return true;
+    console.log("angezeigte url: "+extractDomain(linkText.hostname));
+    if(linkText.hostname && linkText.hostname.indexOf("spanid")>-1 && torpedo.domain != extractDomain(linkText.hostname)) return true;
     else return false;
   } catch (e) {
     return false;

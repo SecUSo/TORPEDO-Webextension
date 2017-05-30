@@ -6,6 +6,11 @@
   color: black;
   font-size: 13px;
 }
+.torpedoPopup{
+  max-width: none !important;
+  background-color: white;
+  border-color: black;
+}
 .torpedoTrusted{
   border-color: green;
 }
@@ -44,11 +49,10 @@
   float: left;
   width: 25px;
   height: 25px;
-  margin: 5px 4px 10px 0;
+  margin: 5px 4px 5px 0;
 }
 #torpedoAdviceText{
-  float: right;
-  margin: 2px 0 5px 0;
+  margin: 2px 0 10px 0;
 }
 #torpedoInfoImage{
   float: left;
@@ -57,12 +61,29 @@
   margin: 0 4px 5px 0;
 }
 #torpedoInfoText{
-  float: right;
   margin: 5px 0 0 0;
 }
+#torpedoInfoText:hover{
+  text-decoration: underline;
+}
+#torpedoInfo{
+  clear: both;
+  margin: 5px 0 5px 0;
+}
+#torpedoInfoButton{
+  margin: 0 0 5px 0;
+}
+#torpedoRedirectButton{
+  margin: 5px 0 5px 0;
+}
 #torpedoLinkDelay{
+  clear: both;
   margin: 5px 0 0 0;
 }
 #torpedoTimer{
   margin: 0 0 0 0;
+}
+#torpedoPopupImage{
+  width: 600px;
+  height: 380px;
 }

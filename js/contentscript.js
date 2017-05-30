@@ -1,14 +1,17 @@
 var torpedo = torpedo || {};
 torpedo.target = null;
+torpedo.api;
 
 jQuery(function($){
     $('body').on('mouseenter', 'a', function(e) {
         torpedo.target = this;
-        if (this.href != "#" && this.href != "javascript:void(0);" && this.id != 'torpedoURL') {
+        if (this.href != "#" && !this.href.startsWith("javascript:void(0)") && !this.href.startsWith("mailto:") && this.id != 'torpedoURL') {
           try{
             const url = new URL(torpedo.target.href);
-            $(torpedo.target).qtip({
-              overwrite: false,
+            $(this).qtip({
+              id: "torpedo",
+              overwrite: true,
+              suppress: true,
               content:  {
                 text: tooltipText(url)
               },
@@ -19,33 +22,37 @@ jQuery(function($){
               },
               hide: {
                 fixed: true,
-                delay: 1500
+                event: "mouseleave",
+                delay: 200
               },
               position: {
                 at: 'center bottom',
                 my: 'top left',
-                target: 'mouse',
+                target: 'event',
                 viewport: $(window),
                 adjust: {
-                  mouse: false
+                  mouse: false,
+                  method: 'flipinvert flipinvert',
+                  scroll: false
                 }
               },
               style: { classes: 'torpedoTooltip' },
               events: {
-                render: function(event, api) {
-                  //var iframe = $('iframe', this)[0];
-                  //var tooltip = $(this);
-                  fillTooltip(api.elements.content);
+                show: function(event, api){
+                  if(event.originalEvent.button == 2) {
+                    try { event.preventDefault(); console.log("left click") } catch(e) {}
+                  }
                 },
-                hide: function(event, api) {
+                render: function(event, api) {
+                  torpedo.api = api;
+                  torpedo.tooltip = api.elements.content;
+                  fillTooltip();
                 }
+                //hide: function(event, api) {
+                //}
               }
           }, e);
         }catch(e){}
       }
-    }).on('mouseleave', 'a', function(e){
-        try{
-          $(this).qtip('destroy');
-        }catch(e){}
-    })
+    });
 });
