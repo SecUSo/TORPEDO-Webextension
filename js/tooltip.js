@@ -1,6 +1,6 @@
 var torpedo = torpedo || {};
 torpedo.domain = "";
-torpedo.uri;
+torpedo.uri = "";
 torpedo.url = "";
 torpedo.tooltip;
 /**
@@ -77,7 +77,7 @@ function fillTooltip(){
         $(t.find("#torpedoInfoText")[0]).html("<img id='torpedoInfoImage' src='"+chrome.extension.getURL("img/info.png")+"'>"+chrome.i18n.getMessage("specialCaseInfo"));
         $(t.find("#torpedoInfo")[0]).html(chrome.i18n.getMessage("moreInfoEncrypted"));
         countdown(r.timer);
-        updateTooltip(resolveReferrer(r.referrerPart1,r.referrerPart2), true);
+        updateTooltip(resolveReferrer(r.referrerPart1,r.referrerPart2));
         break;
       case "phish":
         $(".torpedoTooltip").addClass("torpedoPhish");
@@ -94,14 +94,12 @@ function fillTooltip(){
 /**
 *   update tooltip after resolving a redirect
 */
-function updateTooltip(url,isReferrer){
-  console.log(isReferrer + " : " + url);
+function updateTooltip(url){
   var t = torpedo.tooltip;
   $(t.find("#torpedoURL")[0]).html(url.href.replace(extractDomain(url.hostname), '<span id="torpedoDomain">' + extractDomain(url.hostname) + '</span>') );
   $(t.find("#torpedoRedirectButton")[0]).hide();
   chrome.extension.sendRequest('show', function(r){
     getSecurityStatus(url.href,r.userDefinedDomains, r.referrerPart1,true);
-    console.log(torpedo.status);
     switch(torpedo.status){
       case "trusted":
         $(".torpedoTooltip").addClass("torpedoTrusted");
@@ -172,6 +170,7 @@ function openInfoImage(event){
     }
   });
 };
+
 /**
 * get domain out of hostname
 */

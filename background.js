@@ -25,7 +25,8 @@ chrome.extension.onRequest.addListener(function(request,sender,sendResponse){
 // CSP settings
 var callback = function(details) {
   for (var i = 0; i < details.responseHeaders.length; i++) {
-    if ('content-security-policy' === details.responseHeaders[i].name.toLowerCase()) {
+		console.log(details.responseHeaders[i]);
+    if ('http' === details.responseHeaders[i].name.toLowerCase()) {
       details.responseHeaders[i].value = '';
     }
   }
@@ -39,4 +40,4 @@ var filter = {
   types: ["main_frame", "sub_frame"]
 };
 
-//chrome.webRequest.onHeadersReceived.addListener(callback, filter, ["blocking", "responseHeaders"]);
+chrome.webRequest.onHeadersReceived.addListener(callback, filter, ["blocking", "responseHeaders"]);

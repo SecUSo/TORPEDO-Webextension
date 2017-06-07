@@ -1,8 +1,11 @@
 var torpedo = torpedo || {};
 torpedo.target = null;
 torpedo.api;
+document.body.onclick = function() {console.log(this)};
+console.log(document.getElementById("thirdPartyFrame_mail"));
 
 jQuery(function($){
+  $('body').click(function(e){console.log(this)});
     $('body').on('mouseenter', 'a', function(e) {
         torpedo.target = this;
         if (this.href != "#" && !this.href.startsWith("javascript:void(0)") && !this.href.startsWith("mailto:") && this.id != 'torpedoURL') {
@@ -39,9 +42,11 @@ jQuery(function($){
               style: { classes: 'torpedoTooltip' },
               events: {
                 show: function(event, api){
-                  if(event.originalEvent.button == 2) {
-                    try { event.preventDefault(); console.log("left click") } catch(e) {}
-                  }
+                  // TODO: right click
+                  //if(event.originalEvent.button == 2) {
+                    try { ///event.preventDefault();
+                      console.log(event.originalEvent.button) } catch(e) {}
+                  //}
                 },
                 render: function(event, api) {
                   torpedo.api = api;

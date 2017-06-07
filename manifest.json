@@ -2,14 +2,15 @@
 	"manifest_version":2,
 	"name":"__MSG_extensionName__",
 	"version":"3.0",
-	"default_locale": "de",
+	"default_locale": "en",
 	"description":"__MSG_extensionDescription__",
 	"background":{
 		"scripts":[
 			"js/jquery-2.1.1.min.js",
 			"js/preferences.js",
 			"background.js"
-		]
+		],
+		"persistent":true
 	},
 	"icons":{
 		"64":"img/icon64.png"
@@ -22,7 +23,6 @@
 		  "matches": [
 				"https://*/*",
 				"http://*/*",
-				"https://webmail.rbg.informatik.tu-darmstadt.de/*",
 		  	"https://mail.google.com/*",
 				"https://mail.aol.de/*",
 				"https://mg.mail.yahoo.com/*",
@@ -36,8 +36,8 @@
 		  	"https://navigator.gmx.net/*"
 		  ],
 		  "permissions":[
-		    "webRequest",
-		    "webRequestBlocking",
+				"webRequest",
+				"webRequestBlocking",
 		  	"http://*/*",
 		  	"https://*/*",
 				"storage"
