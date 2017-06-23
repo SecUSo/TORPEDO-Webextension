@@ -40,7 +40,7 @@ function fillTooltip(){
   $(t.find("#torpedoInfoButton")[0]).click(function(event){openInfoImage(event)});
   $(t.find("#torpedoRedirectButton")[0]).click(function(event){resolveRedirect(event)});
   chrome.extension.sendRequest('show', function(r){
-    getSecurityStatus(torpedo.domain,r.userDefinedDomains,r.referrerPart1, false);
+    getSecurityStatus(torpedo.domain, r, false);
     switch(torpedo.status){
       case "trusted":
         $(".torpedoTooltip").addClass("torpedoTrusted");
@@ -48,6 +48,7 @@ function fillTooltip(){
         $(t.find("#torpedoInfoText")[0]).html("<img id='torpedoInfoImage' src='"+chrome.extension.getURL("img/info.png")+"'>"+chrome.i18n.getMessage("lowRiskInfo"));
         $(t.find("#torpedoAdviceText")[0]).hide();
         $(t.find("#torpedoInfo")[0]).html(chrome.i18n.getMessage("moreInfoLowRisk"));
+        if(r.trustedTimerActivated=="true") countdown(r.timer);
         break;
       case "userdefined":
         $(".torpedoTooltip").addClass("torpedoUserDefined");
@@ -55,6 +56,7 @@ function fillTooltip(){
         $(t.find("#torpedoInfoText")[0]).html("<img id='torpedoInfoImage' src='"+chrome.extension.getURL("img/info.png")+"'>"+chrome.i18n.getMessage("moreInfo"));
         $(t.find("#torpedoAdviceText")[0]).hide();
         $(t.find("#torpedoInfo")[0]).html(chrome.i18n.getMessage("moreInfoUserDefined"));
+        if(r.userTimerActivated=="true") countdown(r.timer);
         break;
       case "unknown":
         $(t.find("#torpedoSecurityStatus")[0]).html(chrome.i18n.getMessage("unknownDomain"));
@@ -99,7 +101,7 @@ function updateTooltip(url){
   $(t.find("#torpedoURL")[0]).html(url.href.replace(extractDomain(url.hostname), '<span id="torpedoDomain">' + extractDomain(url.hostname) + '</span>') );
   $(t.find("#torpedoRedirectButton")[0]).hide();
   chrome.extension.sendRequest('show', function(r){
-    getSecurityStatus(url.href,r.userDefinedDomains, r.referrerPart1,true);
+    getSecurityStatus(url.href,r, true);
     switch(torpedo.status){
       case "trusted":
         $(".torpedoTooltip").addClass("torpedoTrusted");

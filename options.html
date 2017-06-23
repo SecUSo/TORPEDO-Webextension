@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  		<title id="title"></title>
+      <link type="text/css" rel="stylesheet" href="css/options.css" />
+  		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		  <script type="text/javascript" src="js/preferences.js"></script>
+  		<script type="text/javascript" src="js/options.js"></script>
+	</head>
+	<body>
+    <h1 id="options"></h1>
+    <div class="tabs">
+      <ul class="tab-links">
+          <li class="active"><a href="#tab1">Timer</a></li>
+          <li><a href="#tab2">Domains</a></li>
+          <li><a href="#tab3">Referrer</a></li>
+      </ul>
+
+      <div class="tab-content">
+          <div id="tab1" class="tab active">
+            <div>
+              <input id="timerCheckbox" class="left" type="checkbox">
+              <p id="timerCheckboxText" class="right"></p>
+            </div>
+            <div class="clear">
+              <p id="timerAmountText" class="left"></p>
+              <input id="timerInput" class="left right" type="number" value="3" min="0" max="100">
+              <p id="seconds" class="last"></p>
+            </div>
+            <div class="clear">
+              <div>
+                <input id="trustedTimerCheckbox" class="left" type="checkbox">
+                <p id="trustedTimerActivated" class="right"></p>
+              </div>
+            </div>
+            <div>
+              <div>
+                <input id="userTimerCheckbox" class="left" type="checkbox" >
+                <p id="userTimerActivated" class="right"></p>
+              </div>
+            </div>
+          </div>
+
+          <div id="tab2" class="tab">
+            <p id="trustedListText"></p>
+            <div>
+              <input id="trustedListActivated" class="left" type="checkbox">
+              <p id="activateTrustedList" class="right"></p>
+            </div>
+            <div>
+              <button id="showTrustedDomains"></button>
+            </div>
+            <p id="userListText"></p>
+            <div>
+              <button id="editSecond"></button>
+            </div>
+          </div>
+
+          <div id="tab3" class="tab">
+            <p id="referrerDialog1"></p>
+	           <p id="referrerExample"></p>
+            <table id="referrerList">
+              <tr>
+                <th id="referrerListTitle"></th>
+              </tr>
+            </table>
+            <button id="clearReferrer"></button>
+            <p id="referrerHeadline"></p>
+            <p id="referrerDialog2"></p>
+            <input id="referrerInput" type="text"/>
+						<button id="addReferrer"></button>
+						<button id="insertRandom"></button>
+      </div>
+    </div>
+
+    <div id="optionButtons">
+      <button id="saveChanges"></button>
+      <button id="revertChanges"></button>
+      <button id="defaultSettings"></button>
+    </div>
+
+    <p id="statusSettings"></p>
+
+	</body>
+</html>

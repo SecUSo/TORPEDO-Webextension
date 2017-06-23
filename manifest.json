@@ -4,14 +4,23 @@
 	"version":"3.0",
 	"default_locale": "en",
 	"description":"__MSG_extensionDescription__",
+	"permissions":[
+		"webRequest",
+		"webRequestBlocking",
+		"http://*/*",
+		"https://*/*",
+		"storage"
+	],
 	"background":{
 		"scripts":[
 			"js/jquery-2.1.1.min.js",
 			"js/preferences.js",
+			"js/options.js",
 			"background.js"
 		],
 		"persistent":true
 	},
+	"options_page":"options.html",
 	"icons":{
 		"64":"img/icon64.png"
 	},
@@ -26,7 +35,7 @@
 		  	"https://mail.google.com/*",
 				"https://mail.aol.de/*",
 				"https://mg.mail.yahoo.com/*",
-				"https://bap.navigator.web.de/*",
+				"https://navigator.web.de/*",
 				"https://email.t-online.de/*",
 				"https://email.freenet.de/*",
 				"https://email.vodafone.de/*",
@@ -34,13 +43,6 @@
 				"https://webmail.unity-mail.de/*",
 				"https://outlook.live.com/*",
 		  	"https://navigator.gmx.net/*"
-		  ],
-		  "permissions":[
-				"webRequest",
-				"webRequestBlocking",
-		  	"http://*/*",
-		  	"https://*/*",
-				"storage"
 		  ],
 		  "css": [
 		  	"css/jquery.qtip.min.css",

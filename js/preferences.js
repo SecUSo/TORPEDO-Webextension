@@ -9,7 +9,19 @@ var Torpedo = {
 	},
 	timer:{
 		label:'timer',
-		value:3
+		value:2
+	},
+	trustedTimerActivated:{
+		label:'trustedTimerActivated',
+		value:false
+	},
+	userTimerActivated:{
+		label:'userTimerActivated',
+		value:false
+	},
+	trustedListActivated:{
+		label:'trustedListActivated',
+		value:true
 	},
 	referrerPart1:{
 		label:'referrerPart1',
@@ -17,6 +29,6 @@ var Torpedo = {
 	},
 	referrerPart2:{
 		label:'referrerPart2',
-		value:["dereferrer/?redirectUrl=","dereferrer/?redirectUrl="]
+		value:["/dereferrer/?redirectUrl=","/dereferrer/?redirectUrl="]
 	}
 };
