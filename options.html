@@ -6,6 +6,8 @@
   		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 		  <script type="text/javascript" src="js/preferences.js"></script>
   		<script type="text/javascript" src="js/options.js"></script>
+  		<script type="text/javascript" src="js/status.js"></script>
+  		<script type="text/javascript" src="js/tooltip.js"></script>
 	</head>
 	<body>
     <h1 id="options"></h1>
@@ -51,8 +53,10 @@
               <button id="showTrustedDomains"></button>
             </div>
             <p id="userListText"></p>
+						<button id="editUserDefined"></button>
             <div>
-              <button id="editSecond"></button>
+            	<input id="userDefinedInput" type="text" autofocus/>
+              <button id="addUserDefined"></button>
             </div>
           </div>
 
@@ -67,7 +71,7 @@
             <button id="clearReferrer"></button>
             <p id="referrerHeadline"></p>
             <p id="referrerDialog2"></p>
-            <input id="referrerInput" type="text"/>
+            <input id="referrerInput" type="text" autofocus/>
 						<button id="addReferrer"></button>
 						<button id="insertRandom"></button>
       </div>
@@ -80,6 +84,18 @@
     </div>
 
     <p id="statusSettings"></p>
+		<div>
+		<table id="trustedList">
+			<tr>
+				<th id="trustedListTitle"></th>
+			</tr>
+		</table>
 
+		<table id="userList">
+			<tr>
+				<th id="userListTitle"></th>
+			</tr>
+		</table>
+	</div>
 	</body>
 </html>

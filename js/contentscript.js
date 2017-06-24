@@ -38,7 +38,7 @@ jQuery(function($){
       //body = window.frames["thirdPartyFrame_mail"].contentWindow.document.body;
       //id : panel-mail-display
     }catch(e){console.log(e);console.log("!!!!!!!!!!!!!!!!!!!!")}
-
+    console.log(body);
     $(body).on('mouseenter', 'a', function(e) {
         torpedo.target = this;
         if (this.href != "#" && !this.href.startsWith("javascript:void(0)") && !this.href.startsWith("mailto:") && this.id != 'torpedoURL') {

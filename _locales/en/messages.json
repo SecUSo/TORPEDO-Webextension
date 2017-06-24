@@ -161,13 +161,23 @@
   },
 
   "showLowRiskList":{
-    "message": "Show entries",
-    "description": "Show list of trusted domains."
+    "message": "Toggle entries",
+    "description": "Toggle list of trusted domains."
+  },
+
+  "trustedList":{
+    "message": "Liste der Entwickler",
+    "description": "Trusted domains."
   },
 
   "userDomains":{
     "message": "Domains you considered as 'low-risk' (blue).",
     "description": "Activate timer on list of user list domains."
+  },
+
+  "userList":{
+    "message": "Liste der von Ihnen als 'niedriges Risiko' eingestuften Domains",
+    "description": "User risk domains."
   },
 
   "activateTimerOnUserList":{
@@ -176,7 +186,7 @@
   },
 
   "editUserList":{
-    "message": "Edit and delete entries",
+    "message": "Show and edit entries",
     "description": "Show and edit list of user risk domains."
   },
 
@@ -216,8 +226,8 @@
   },
 
   "addEntries":{
-    "message": "Add entries",
-    "description": "Add entries"
+    "message": "Add entry",
+    "description": "Add entry"
   },
 
   "clearEntries":{

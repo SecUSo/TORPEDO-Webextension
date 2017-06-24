@@ -9,7 +9,7 @@ var Torpedo = {
 	},
 	timer:{
 		label:'timer',
-		value:2
+		value:3
 	},
 	trustedTimerActivated:{
 		label:'trustedTimerActivated',
