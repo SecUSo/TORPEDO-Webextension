@@ -4,7 +4,28 @@ $.each(Torpedo,function(i,v){
 		window.localStorage.setItem(v.label,v.value);
 	}
 });
-
+chrome.runtime.onMessage.addListener(function(request, sender, callback) {
+    if (request.action == "xhttp") {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            callback(xhttp.responseText);
+        };
+        xhttp.onerror = function() {
+            callback();
+        };
+        xhttp.open('GET', request.url, true);
+			  xhttp.onreadystatechange = function(){
+			    if(this.readyState == 4){
+			      try{
+			        const redirect = new URL(xhttp.responseURL);
+			        console.log(redirect);
+			      }catch(e){console.log(e)}
+			    }
+			  };
+			  xhttp.send(null);
+        return true;
+    }
+});
 chrome.extension.onRequest.addListener(function(request,sender,sendResponse){
 	if(request == "show"){
 		var r = {

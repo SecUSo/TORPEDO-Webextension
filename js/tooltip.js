@@ -23,7 +23,7 @@ function tooltipText(url){
               </p>\
               <p id='torpedoInfo' hidden></p> \
               <button id='torpedoInfoButton' type='button' hidden></button> \
-              <button id='torpedoRedirectButton' type='button' hidden></button> \
+              <button id='torpedoRedirectButton' type='button' hidden'></button> \
               <p id='torpedoLinkDelay'></p> \
               <p id='torpedoTimer'></p>";
   return text;
@@ -36,6 +36,7 @@ function fillTooltip(){
   var t = torpedo.tooltip;
   $(t.find("#torpedoInfo")[0]).hide();
   $(t.find("#torpedoInfoButton")[0]).hide();
+  $(t.find("#torpedoRedirectButton")[0]).hide();
   $(t.find("#torpedoInfoText")[0]).click(function(event){showInfo(event)});
   $(t.find("#torpedoInfoButton")[0]).click(function(event){openInfoImage(event)});
   $(t.find("#torpedoRedirectButton")[0]).click(function(event){resolveRedirect(event)});

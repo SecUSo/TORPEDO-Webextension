@@ -6,40 +6,34 @@ jQuery(function($){
   $(document).ready(function(){
     var location = window.location.host;
 
-    // location: mail.google.com, mg.mail.yahoo.com,
     var target = "event";
     var body = "body";
+    var hide = "mouseleave";
+    var mouseenter = "a"
+    console.log(location);
 
-    // location: email.t-online.de
-    try {
+    if(location=="mg.mail.yahoo.com"){
+      mouseenter = ".email-wrapped a";
+    }
+    else if(location=="mail.google.com"){
+      mouseenter=".adn a";
+    }
+    else if(location=="outlook.live.com"){
+      mouseenter="._n_Y a";
+    }
+    else if(location=="email.t-online.de"){
       body = window.frames["messageBody"].contentWindow.document.body;
       target = [10,10];
-    } catch(e){}
+      hide = false;
+    }
+    else if(location=="navigator.web.de" || location=="navigator.gmx.net"){
+        body = document.getElementById("app-contents-wrapper").getElementsByTagName("pos-app-stack")[0];
+        var d = body.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
+        console.log(d);
+        $(body).on("click", function(){console.log("click")});
+    }
 
-    // location: navigator.web.de
-    try{
-      var i = window.frames["thirdPartyFrame_mail"];
-      console.log(i);
-      console.log(i.attributes);
-      console.log(i.attributes[0].ownerDocument.body);
-      var b = i.attributes[0].ownerDocument.body;
-      var d = b.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
-      var e = d.firstChild.nextSibling.nextSibling;
-      console.log(d);
-      console.log(e);
-      d.onclick = function(e){console.log("kflöajksldöfjlaödklaöfjeklö")};
-      e.onclick = function(e){console.log("eeeeeeeeeeeeeeee")};
-      d.addEventListener("click", function(){console.log("aaaaaaaaaa")});
-      body = document.getElementById("app-contents-wrapper");
-      body = body.getElementsByTagName("pos-app-stack")[0];
-      console.log($(body).html());
-
-      $(body).on("click", function(){console.log("click")});
-      //body = window.frames["thirdPartyFrame_mail"].contentWindow.document.body;
-      //id : panel-mail-display
-    }catch(e){console.log(e);console.log("!!!!!!!!!!!!!!!!!!!!")}
-    console.log(body);
-    $(body).on('mouseenter', 'a', function(e) {
+    $(body).on('mouseenter', mouseenter, function(e) {
         torpedo.target = this;
         if (this.href != "#" && !this.href.startsWith("javascript:void(0)") && !this.href.startsWith("mailto:") && this.id != 'torpedoURL') {
           try{
@@ -50,7 +44,8 @@ jQuery(function($){
               overwrite: true,
               suppress: true,
               content:  {
-                text: tooltipText(url)
+                text: tooltipText(url),
+                button: true
               },
               show: {
                 event: e.type,
@@ -59,7 +54,7 @@ jQuery(function($){
               },
               hide: {
                 fixed: true,
-                event: "mouseleave",
+                event: hide,
                 delay: 200
               },
               position: {
@@ -77,10 +72,10 @@ jQuery(function($){
               events: {
                 show: function(event, api){
                   // TODO: right click
-                  //if(event.originalEvent.button == 2) {
-                  //  try { ///event.preventDefault();
-                    //  console.log(event.originalEvent.button) } catch(e) {}
-                  //}
+                  console.log(event.originalEvent.button);
+                  if(event.originalEvent.button == 2) {
+                    event.preventDefault();
+                  }
                 },
                 render: function(event, api) {
                   torpedo.api = api;
