@@ -3,6 +3,7 @@ torpedo.domain = "";
 torpedo.uri = "";
 torpedo.url = "";
 torpedo.tooltip;
+
 /**
 * fill tooltip with html structure
 */
@@ -154,7 +155,8 @@ function openInfoImage(event){
   $(t.find("#torpedoInfoImage")[0]).qtip({
     overwrite: false,
     content:  {
-      text: "<img id='torpedoPopupImage' src='"+chrome.extension.getURL(chrome.i18n.getMessage("infoImage"))+"'> "
+      text: "<img id='torpedoPopupImage' src='"+chrome.extension.getURL(chrome.i18n.getMessage("infoImage"))+"'> ",
+      button: true
     },
     show: {
       event: event.type,

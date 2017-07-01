@@ -4,28 +4,57 @@ $.each(Torpedo,function(i,v){
 		window.localStorage.setItem(v.label,v.value);
 	}
 });
-chrome.runtime.onMessage.addListener(function(request, sender, callback) {
-    if (request.action == "xhttp") {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-            callback(xhttp.responseText);
-        };
-        xhttp.onerror = function() {
-            callback();
-        };
-        xhttp.open('GET', request.url, true);
-			  xhttp.onreadystatechange = function(){
-			    if(this.readyState == 4){
-			      try{
-			        const redirect = new URL(xhttp.responseURL);
-			        console.log(redirect);
-			      }catch(e){console.log(e)}
-			    }
-			  };
-			  xhttp.send(null);
-        return true;
-    }
+
+loc = "";
+err = "";
+reload = true;
+
+function sendEmail() {
+    var emailUrl = 'mailto:betty.ballin@secuso.org?subject='
+                           + encodeURIComponent("Error with TORPEDO Webextension")
+                           + "&body="
+                           + encodeURIComponent("Mail panel could not be found in page: " + loc);
+    chrome.tabs.create({ url: emailUrl });
+}
+function getStatus(){
+	return {loc:loc,err:err};
+}
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
+	console.log(tabId);
+	console.log(changeInfo);
+	console.log(tabInfo);
+	console.log("err? " + err);
+  chrome.pageAction.show(tabId);
+	chrome.tabs.sendMessage(tabId, {}, function(response) {});
+  if (inList(tabInfo.url)) {
+		var img = err?"img/error38.png":"img/icon38.png";
+		chrome.pageAction.setIcon({tabId, path: { "38" : img }});
+    chrome.pageAction.setPopup({tabId, popup: "/icon.html"});
+		if(tabInfo.url.indexOf("email.t-online.de")>-1 && tabInfo.url.indexOf("showReadmail")>-1){
+			if(reload) {
+				chrome.tabs.reload();
+				reload = false;
+			}
+			if(changeInfo.status && changeInfo.status=="complete"){
+				reload = true;
+			}
+		}
+  }
+	else{
+		chrome.pageAction.setIcon({tabId, path: { "38" : "img/none38.png" }});
+		chrome.pageAction.setPopup({tabId, popup: ""});
+  }
 });
+
+function inList(url){
+	var urls = ["mail.google.com","mail.aol.de","mg.mail.yahoo.com","navigator.web.de","email.t-online.de","email.freenet.de","email.vodafone.de","webmail.ewe.de","webmail.unity-mail.de","outlook.live.com","navigator.gmx.net"]
+	var i = 0;
+	for(i=0; i< urls.length; i++){
+		if(url.indexOf(urls[i])>-1) return true;
+	}
+	return false;
+}
+
 chrome.extension.onRequest.addListener(function(request,sender,sendResponse){
 	if(request == "show"){
 		var r = {
@@ -39,6 +68,30 @@ chrome.extension.onRequest.addListener(function(request,sender,sendResponse){
 			referrerPart2:(window.localStorage.getItem(Torpedo.referrerPart2.label))
 		};
 		sendResponse(r);
+	}
+	else if(request.name == "redirect"){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if (xhttp.readyState == 4){
+				sendResponse({url:xhttp.responseURL});
+			}
+		};
+		xhttp.open('GET', request.url, true);
+		xhttp.send();
+	}
+	else if(request.name == "error"){
+		chrome.tabs.getSelected(null, function(tab){
+			chrome.pageAction.setIcon({tabId: tab.id, path: { "38" : "img/error38.png" }});
+		});
+		loc = request.case;
+		err = "err";
+	}
+	else if(request.name == "ok"){
+		chrome.tabs.getSelected(null, function(tab){
+			chrome.pageAction.setIcon({tabId: tab.id, path: { "38" : "img/icon38.png" }});
+		});
+		loc = request.case;
+		err = "";
 	}
 	else{
 		window.localStorage.setItem(request.name,request.value);

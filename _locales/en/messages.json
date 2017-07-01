@@ -5,7 +5,7 @@
   },
 
   "extensionDescription": {
-    "message": "Show URLs and their security status when you hover over links in a webpage which belongs to an e-mail provider.",
+    "message": "Show URLs and their security status when you move your mouse over links in a webpage which belongs to an e-mail provider.",
     "description": "Description of the extension."
   },
 
@@ -126,8 +126,23 @@
   },
 
   "options":{
-    "message": "TORPEDO Optionen",
+    "message": "TORPEDO Options",
     "description": "Options"
+  },
+
+  "OK":{
+    "message": "Status: TORPEDO works properly",
+    "description": "Status:OK"
+  },
+
+  "none":{
+    "message": "Status: TORPEDO is not active on this page",
+    "description": "Status:None"
+  },
+
+  "error":{
+    "message": "Status: TORPEDO can't display a tooltip on this page, because the mail panel element cannot be detected on this page. Click here to inform the developers.",
+    "description": "Status:Error"
   },
 
   "timerActivated":{

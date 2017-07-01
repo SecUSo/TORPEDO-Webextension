@@ -1,5 +1,5 @@
 body{
-  background: #ebe0e0;
+  background: #fafafa;
   font-family: Helvetica;
 }
 table, td {
@@ -92,7 +92,7 @@ table, td {
         padding:15px;
         border-radius:3px;
         box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
-        background:#fff;
+        background: #f2f2f2;
         border:1px solid #999;
     }
     .tab {

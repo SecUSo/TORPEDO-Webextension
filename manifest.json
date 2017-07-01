@@ -5,12 +5,22 @@
 	"default_locale": "en",
 	"description":"__MSG_extensionDescription__",
 	"permissions":[
+		"tabs",
+		"background",
 		"webRequest",
 		"webRequestBlocking",
 		"http://*/*",
 		"https://*/*",
 		"storage"
 	],
+	"page_action": {
+		"default_icon": {
+	    "38": "img/icon38.png",
+	    "64": "img/icon64.png"
+	  },
+	  "default_title": "__MSG_extensionName__",
+		"default_popup": "icon.html"
+  },
 	"background":{
 		"scripts":[
 			"js/jquery-2.1.1.min.js",
@@ -22,6 +32,7 @@
 	},
 	"options_page":"options.html",
 	"icons":{
+		"38":"img/icon38.png",
 		"64":"img/icon64.png"
 	},
 	"web_accessible_resources": [
@@ -30,8 +41,6 @@
 	"content_scripts":[
 		{
 		  "matches": [
-				"https://*/*",
-				"http://*/*",
 		  	"https://mail.google.com/*",
 				"https://mail.aol.de/*",
 				"https://mg.mail.yahoo.com/*",

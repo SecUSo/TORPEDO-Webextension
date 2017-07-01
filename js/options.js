@@ -34,14 +34,14 @@ function init(){
   $("#showTrustedDomains").prop("disabled",window.localStorage.getItem(Torpedo.trustedListActivated.label) == "false");
 
   // Referrer tab
-  fillReferrerList();
+  if(document.getElementById("referrerList")) fillReferrerList();
 
   // Additional buttons
   $("#statusSettings").html("");
 
   // Additional lists
-  fillTrustedList();
-  fillUserList();
+  if(document.getElementById("trustedList")) fillTrustedList();
+  if(document.getElementById("userList")) fillUserList();
   $("#trustedList").hide();
   $("#userList").hide();
 }
@@ -281,7 +281,7 @@ function addReferrer(){
   var input = $("#referrerInput").val().replace(" ","").split("[...]");
 
     // TODO: Error message: tried to enter an invalid URL
-  
+
   var row = table.insertRow(table.rows.length);
   var cell = row.insertCell(0);
   if(input[1] == undefined) input[1] = "";

@@ -3,15 +3,6 @@
 */
 function resolveRedirect(event){
   var url = torpedo.url;
-  chrome.runtime.sendMessage({
-    method: 'POST',
-    action: 'xhttp',
-    url: torpedo.url,
-    data: 'q=something'
-    }, function(responseText) {
-      alert(responseText);
-      /*Callback function to deal with the response*/
-    });
   // url as well as url result has to be https not http!!
   if(url.indexOf("http") == 0){
     if(url.indexOf("https") == -1) url = url.slice(0, 4) + "s" + url.slice(4);
@@ -19,11 +10,17 @@ function resolveRedirect(event){
   else{
     url = "https://" + url;
   }
-  console.log(url);
-  var t = torpedo.tooltip;
-  torpedo.api.set("hide.event","unfocus");
-  torpedo.api.set("hide.delay",0);
-//  updateTooltip(redirect);
+
+  chrome.extension.sendRequest({name: "redirect", url: url},function(r){
+    torpedo.api.set("hide.event","unfocus");
+    torpedo.api.set("hide.delay",0);
+    try{
+      const redirect = new URL(r.url);
+      updateTooltip(redirect);
+    }catch(e){
+      updateTooltip(url);
+    }
+  });
 };
 
 /**

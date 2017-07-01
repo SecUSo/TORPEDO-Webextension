@@ -1,0 +1,30 @@
+body {
+  overflow: hidden;
+  width: 250px;
+}
+div:first-child {
+  margin-top: 0px;
+}
+div {
+  cursor: pointer;
+  text-align: center;
+  padding: 1px 3px;
+  font-family: sans-serif;
+  font-size: 1em;
+  margin-top: 2px;
+  background: #cccccc;
+}
+div:hover {
+  background: #aaaaaa;
+}
+#torpedoPage,#options,#error{
+  border: 1px solid black;
+}
+.working{
+  background: #00e673;
+  cursor: pointer;
+}
+.error{
+  background: red;
+  cursor: help;
+}
