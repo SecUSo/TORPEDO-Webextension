@@ -41,7 +41,7 @@ function fillTooltip(){
   $(t.find("#torpedoInfoText")[0]).click(function(event){showInfo(event)});
   $(t.find("#torpedoInfoButton")[0]).click(function(event){openInfoImage(event)});
   $(t.find("#torpedoRedirectButton")[0]).click(function(event){resolveRedirect(event)});
-  chrome.extension.sendRequest('show', function(r){
+  chrome.runtime.sendMessage('show', function(r){
     getSecurityStatus(torpedo.domain, r, false);
     switch(torpedo.status){
       case "trusted":
@@ -102,7 +102,7 @@ function updateTooltip(url){
   var t = torpedo.tooltip;
   $(t.find("#torpedoURL")[0]).html(url.href.replace(extractDomain(url.hostname), '<span id="torpedoDomain">' + extractDomain(url.hostname) + '</span>') );
   $(t.find("#torpedoRedirectButton")[0]).hide();
-  chrome.extension.sendRequest('show', function(r){
+  chrome.runtime.sendMessage('show', function(r){
     getSecurityStatus(url.href,r, true);
     switch(torpedo.status){
       case "trusted":

@@ -1,0 +1,23 @@
+body
+{
+  width: 800px;
+  height: 400px;
+  background-color: #eeeeee;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  text-align: center;
+  overflow: auto;
+}
+
+.image
+{
+  clear: both;
+  position: relative;
+  width: 800px;
+  height: 600px;
+  -webkit-transition: left 2s;
+  -moz-transition: left 2s;
+  -o-transition: left 2s;
+  transition: left 2s;
+}

@@ -11,7 +11,7 @@ function resolveRedirect(event){
     url = "https://" + url;
   }
 
-  chrome.extension.sendRequest({name: "redirect", url: url},function(r){
+  chrome.runtime.sendMessage({name: "redirect", url: url},function(r){
     torpedo.api.set("hide.event","unfocus");
     torpedo.api.set("hide.delay",0);
     try{

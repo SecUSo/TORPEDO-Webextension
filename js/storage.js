@@ -5,7 +5,7 @@ var torpedo = torpedo || {};
 */
 function processClick(){
   if(torpedo.status == "unknown"){
-    chrome.extension.sendRequest('show', function(r){
+    chrome.runtime.sendMessage('show', function(r){
       var domains = r.onceClickedDomains;
       if(domains) domains = JSON.parse(domains);
       else domains = [];
@@ -14,18 +14,18 @@ function processClick(){
           // remove domain from once clicked domains
           var index = domains.indexOf(torpedo.domain);
           domains.splice(index, 1);
-          chrome.extension.sendRequest({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting onceClickedDomains is: " +r)});
+          chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting onceClickedDomains is: " +r)});
           // add domain to user defined domains
           domains = r.userDefinedDomains;
           if(domains) domains = JSON.parse(domains);
           else domains = [];
           domains[domains.length] = torpedo.domain;
-          chrome.extension.sendRequest({name : "userDefinedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting userDefinedDomains is: " +r)});
+          chrome.runtime.sendMessage({name : "userDefinedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting userDefinedDomains is: " +r)});
       }
       // add domain to once clicked domains
       else {
         domains[domains.length] = torpedo.domain;
-        chrome.extension.sendRequest({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting onceClickedDomains is: " +r)});
+        chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting onceClickedDomains is: " +r)});
       }
     });
   }

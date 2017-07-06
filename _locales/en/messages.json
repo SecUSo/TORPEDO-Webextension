@@ -273,6 +273,26 @@
   "defaultSettingsRestored":{
     "message": "Default settings restored! Please reload the page on which you are using TORPEDO.",
     "description": "Default settings"
+  },
+
+  "nonValidUrl":{
+    "message": "The URL you entered is invalid. Please enter the URL according to the following scheme: http://www.example.com/ .",
+    "description": "Entered URL is not valid"
+  },
+
+  "alreadyInTrustedUrls":{
+    "message": "The URL you entered already appears in the list of domains the developers considered as trustworthy.",
+    "description": "Entered URL is already in list of trusted URLs"
+  },
+
+  "alreadyInUserDefinedDomains":{
+    "message": "The URL you entered already appears in the list of domains you consider as trustworthy.",
+    "description": "Entered URL is already in list of user defined URLs"
+  },
+
+  "alreadyInReferrerList":{
+    "message": "The URL you entered already appears in the list of referrer domains",
+    "description": "Entered URL is already in list of referrer URLs"
   }
 
 }

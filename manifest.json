@@ -1,12 +1,24 @@
 {
+	"applications": {
+  	"gecko": {
+    	"id": "torpedo@tu-darmstadt.de"
+  	}
+	},
 	"manifest_version":2,
 	"name":"__MSG_extensionName__",
 	"version":"3.0",
 	"default_locale": "en",
 	"description":"__MSG_extensionDescription__",
+	"background":{
+		"scripts":[
+			"js/jquery-2.1.1.min.js",
+			"js/preferences.js",
+			"js/options.js",
+			"background.js"
+		]
+	},
 	"permissions":[
 		"tabs",
-		"background",
 		"webRequest",
 		"webRequestBlocking",
 		"http://*/*",
@@ -14,6 +26,7 @@
 		"storage"
 	],
 	"page_action": {
+		"browser_style": true,
 		"default_icon": {
 	    "38": "img/icon38.png",
 	    "64": "img/icon64.png"
@@ -21,16 +34,10 @@
 	  "default_title": "__MSG_extensionName__",
 		"default_popup": "icon.html"
   },
-	"background":{
-		"scripts":[
-			"js/jquery-2.1.1.min.js",
-			"js/preferences.js",
-			"js/options.js",
-			"background.js"
-		],
-		"persistent":true
+	"options_ui":{
+		"page": "options.html",
+		"browser_style": true
 	},
-	"options_page":"options.html",
 	"icons":{
 		"38":"img/icon38.png",
 		"64":"img/icon64.png"

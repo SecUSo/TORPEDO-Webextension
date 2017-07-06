@@ -4,7 +4,12 @@ $.each(Torpedo,function(i,v){
 		window.localStorage.setItem(v.label,v.value);
 	}
 });
-
+function showTutorial(){
+	chrome.tabs.create({
+	    url: chrome.runtime.getURL('tutorial.html')
+	});
+};
+chrome.runtime.onInstalled.addListener(showTutorial);
 loc = "";
 err = "";
 reload = true;
@@ -16,14 +21,12 @@ function sendEmail() {
                            + encodeURIComponent("Mail panel could not be found in page: " + loc);
     chrome.tabs.create({ url: emailUrl });
 }
+
 function getStatus(){
 	return {loc:loc,err:err};
 }
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
-	console.log(tabId);
-	console.log(changeInfo);
-	console.log(tabInfo);
-	console.log("err? " + err);
   chrome.pageAction.show(tabId);
 	chrome.tabs.sendMessage(tabId, {}, function(response) {});
   if (inList(tabInfo.url)) {
@@ -55,7 +58,7 @@ function inList(url){
 	return false;
 }
 
-chrome.extension.onRequest.addListener(function(request,sender,sendResponse){
+chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 	if(request == "show"){
 		var r = {
 			onceClickedDomains:(window.localStorage.getItem(Torpedo.onceClickedDomains.label)),
@@ -80,15 +83,15 @@ chrome.extension.onRequest.addListener(function(request,sender,sendResponse){
 		xhttp.send();
 	}
 	else if(request.name == "error"){
-		chrome.tabs.getSelected(null, function(tab){
-			chrome.pageAction.setIcon({tabId: tab.id, path: { "38" : "img/error38.png" }});
+		chrome.tabs.query({currentWindow: true,active:true}, function(tabs){
+			chrome.pageAction.setIcon({tabId: tabs[0].id, path: { "38" : "img/error38.png" }});
 		});
 		loc = request.case;
 		err = "err";
 	}
 	else if(request.name == "ok"){
-		chrome.tabs.getSelected(null, function(tab){
-			chrome.pageAction.setIcon({tabId: tab.id, path: { "38" : "img/icon38.png" }});
+		chrome.tabs.query({currentWindow: true, active:true}, function(tabs){
+			chrome.pageAction.setIcon({tabId: tabs[0].id, path: { "38" : "img/icon38.png" }});
 		});
 		loc = request.case;
 		err = "";

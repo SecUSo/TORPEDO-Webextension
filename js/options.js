@@ -10,7 +10,13 @@ $(document).ready(function() {
         // Change/remove current tab to active
         $(this).parent('li').addClass('active').siblings().removeClass('active');
         e.preventDefault();
+      });
+    $('li').on("click", function(e){
+      $("#trustedList").hide();
+      $("#userList").hide();
     });
+    $("#trustedList").hide();
+    $("#userList").hide();
     getTexts();
     init();
     addEvents();
@@ -42,8 +48,7 @@ function init(){
   // Additional lists
   if(document.getElementById("trustedList")) fillTrustedList();
   if(document.getElementById("userList")) fillUserList();
-  $("#trustedList").hide();
-  $("#userList").hide();
+  $("#errorAddUserDefined").html("");
 }
 
 /**
@@ -176,16 +181,26 @@ function fillReferrerList(){
       var cell = row.insertCell(0);
       var placeholder = arr2[i]? "<span style='color:blue;'> [...] </span>" : "";
       $(cell).html('<div><button id="row'+i+'" style="margin-right:10px;color:red">X</button><span>'+arr1[i]+placeholder+arr2[i]+"</span></div>");
+
       $("#row"+i).on("click",function(e){
         save(Torpedo.referrerPart1.label, window.localStorage.getItem(Torpedo.referrerPart1.label));
         save(Torpedo.referrerPart2.label, window.localStorage.getItem(Torpedo.referrerPart2.label));
-        $(this).parent().parent().remove();
-        var arr1 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart1.label));
-        var arr2 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart2.label));
-        arr1.splice(i, 1);
-        arr2.splice(i, 1);
-        window.localStorage.setItem(Torpedo.referrerPart1.label,JSON.stringify(arr1));
-        window.localStorage.setItem(Torpedo.referrerPart2.label,JSON.stringify(arr2));
+        var split = $(this).next().html().split('<span style="color:blue;"> [...] </span>');
+        var index = $(this).attr("id").replace("row","");
+        $(this).parent().parent().parent().remove();
+        if(!split[1]) split[1] = "";
+        var arr1 = [];
+        try{
+          arr1 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart1.label));
+        }catch(err){}
+        var arr2 = [];
+        try{
+          arr2 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart2.label));
+        }catch(err){}
+        arr1.splice(index, 1);
+        arr2.splice(index, 1);
+        window.localStorage.setItem(Torpedo.referrerPart1.label, JSON.stringify(arr1));
+        window.localStorage.setItem(Torpedo.referrerPart2.label, JSON.stringify(arr2));
       });
     }
   }
@@ -220,16 +235,15 @@ function fillUserList(){
     var cell = row.insertCell(0);
     $(cell).html('<div><button id="user'+i+'" name="'+userDomains[i]+'" style="margin-right:10px;color:red">X</button><span>'+userDomains[i]+'</span></div>');
     $("#user"+i).on("click",function(e){
-      $(this).parent().parent().remove();
-      var element = $(this).attr("name");
+      save(Torpedo.userDefinedDomains.label, window.localStorage.getItem(Torpedo.userDefinedDomains.label));
+      var element = $(this).next().html();
+      var index = $(this).attr("id").replace("user","");
+      $(this).parent().parent().parent().remove();
       var arr = [];
       try{
         arr = JSON.parse(window.localStorage.getItem(Torpedo.userDefinedDomains.label));
       }catch(err){}
-      var index = arr.indexOf(element);
-      if (index > -1) {
-        arr.splice(index, 1);
-      }
+      arr.splice(index, 1);
       window.localStorage.setItem(Torpedo.userDefinedDomains.label,JSON.stringify(arr));
     });
   }
@@ -242,33 +256,36 @@ function addUserDefined(){
   save(Torpedo.userDefinedDomains.label, window.localStorage.getItem(Torpedo.userDefinedDomains.label));
   var table = document.getElementById("userList");
   var input = $("#userDefinedInput").val().replace(" ","");
+  $("#errorAddUserDefined").html("");
 
-    // TODO: Error message: tried to enter an invalid URL
-
-  var row = table.insertRow(table.rows.length);
-  var cell = row.insertCell(0);
-  $(cell).html('<div><button id="user'+table.rows.length+'" name="'+input+'" style="margin-right:10px;color:red">X</button><span>'+input+"</span></div>");
+  try{
+    const href = new URL(input);
+    input = extractDomain(href.hostname);
+  }catch(e){
+    $("#errorAddUserDefined").html(chrome.i18n.getMessage("nonValidUrl"));
+    return;
+  }
+  if(torpedo.trustedDomains.indexOf(input)>-1 && window.localStorage.getItem(Torpedo.trustedListActivated.label) == "true"){
+      $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInTrustedUrls"));
+      return;
+  }
   var arr = [];
   try{
     arr = JSON.parse(window.localStorage.getItem(Torpedo.userDefinedDomains.label));
   }catch(err){}
+  if(arr.indexOf(input)>-1){
+    $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInUserDefinedDomains"));
+    return;
+  }
+  $("#userDefinedInput").val("");
   arr.push(input);
   window.localStorage.setItem(Torpedo.userDefinedDomains.label, JSON.stringify(arr));
-  $("#user"+table.rows.length).on("click",function(e){
-    save(Torpedo.userDefinedDomains.label, window.localStorage.getItem(Torpedo.userDefinedDomains.label));
-    $(this).parent().parent().remove();
-    var element = $(this).attr("name");
-    var arr = [];
-    try{
-      arr = JSON.parse(window.localStorage.getItem(Torpedo.userDefinedDomains.label));
-    }catch(err){}
-    var index = arr.indexOf(element);
-    if (index > -1) {
-      arr.splice(index, 1);
-    }
-    window.localStorage.setItem(Torpedo.userDefinedDomains.label, JSON.stringify(arr));
-  });
+
+  var row = table.insertRow(table.rows.length);
+  var cell = row.insertCell(0);
+  $(cell).html('<div><button id="user'+table.rows.length+'" name="'+input+'" style="margin-right:10px;color:red">X</button><span>'+input+"</span></div>");
   $("#userDefinedInput").val("");
+  init();
 }
 
 /**
@@ -280,13 +297,6 @@ function addReferrer(){
   var table = document.getElementById("referrerList");
   var input = $("#referrerInput").val().replace(" ","").split("[...]");
 
-    // TODO: Error message: tried to enter an invalid URL
-
-  var row = table.insertRow(table.rows.length);
-  var cell = row.insertCell(0);
-  if(input[1] == undefined) input[1] = "";
-  var placeholder = input[1]? "<span style='color:blue'> [...] </span>" : "";
-  $(cell).html('<div><button id="row'+table.rows.length+'" name="'+input[0]+','+input[1]+'" style="margin-right:10px;color:red">X</button><span>'+input[0]+placeholder+input[1]+"</span></div>");
   var arr1 = [];
   try{
     arr1 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart1.label));
@@ -295,33 +305,22 @@ function addReferrer(){
   try{
     arr2 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart2.label));
   }catch(err){}
+
+  if(arr1.indexOf(input[0])>-1 && ((!input[1] && !arr2[arr1.indexOf(input[0])]) || (input[1] && arr2.indexOf(input[1])>-1))){
+    $("#errorAddReferrer").html(chrome.i18n.getMessage("alreadyInReferrerList"));
+    return;
+  }
+  var row = table.insertRow(table.rows.length);
+  var cell = row.insertCell(0);
+  if(input[1] == undefined) input[1] = "";
+  var placeholder = input[1]? "<span style='color:blue'> [...] </span>" : "";
+  $(cell).html('<div><button id="row'+table.rows.length+'" name="'+input[0]+','+input[1]+'" style="margin-right:10px;color:red">X</button><span>'+input[0]+placeholder+input[1]+"</span></div>");
   arr1.push(input[0]);
   arr2.push(input[1]);
   window.localStorage.setItem(Torpedo.referrerPart1.label, JSON.stringify(arr1));
   window.localStorage.setItem(Torpedo.referrerPart2.label, JSON.stringify(arr2));
-  $("#row"+table.rows.length).on("click",function(e){
-    save(Torpedo.referrerPart1.label, window.localStorage.getItem(Torpedo.referrerPart1.label));
-    save(Torpedo.referrerPart2.label, window.localStorage.getItem(Torpedo.referrerPart2.label));
-    $(this).parent().parent().remove();
-    var split = $(this).attr("name").split(",");
-    if(split[1] == undefined) split[1] = "";
-    var arr1 = [];
-    try{
-      arr1 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart1.label));
-    }catch(err){}
-    var arr2 = [];
-    try{
-      arr2 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart2.label));
-    }catch(err){}
-    var index = arr1.indexOf(split[0]);
-    if (index > -1) {
-      arr1.splice(index, 1);
-      arr2.splice(index, 1);
-    }
-    window.localStorage.setItem(Torpedo.referrerPart1.label, JSON.stringify(arr1));
-    window.localStorage.setItem(Torpedo.referrerPart2.label, JSON.stringify(arr2));
-  });
   $("#referrerInput").val("");
+  init();
 }
 
 /**

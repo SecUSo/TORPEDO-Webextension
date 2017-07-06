@@ -36,7 +36,7 @@ function processPage(){
             try{
               body = window.frames["messageBody"].contentWindow.document.body;
             }catch(e){
-              chrome.extension.sendRequest({"name": "error", "case": loc},function(r){});
+              chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});
             }
           }
         target = [10,10];
@@ -53,17 +53,17 @@ function processPage(){
       $(body).unbind();
       // set icon to error if element is not found
       if($(body).find(mouseenter)[0] == undefined){
-        chrome.extension.sendRequest({"name": "error", "case": loc},function(r){});
+        chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});
         if(outer && $(body).find(outer)[0]){
           // set icon to normal if everything works fine
-          chrome.extension.sendRequest({"name": "ok", "case": loc},function(r){});
+          chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
           // open tooltip
           $(body).on('mouseenter', outer+"a", function(e){openTooltip(e)});
         }
       }
       else{
         // set icon to normal if everything works fine
-        chrome.extension.sendRequest({"name": "ok", "case": loc},function(r){});
+        chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
         // open tooltip
         mouseenter = mouseenter == "a"? "a" : mouseenter+"a";
         $(body).on('mouseenter', mouseenter, function(e){openTooltip(e)});
@@ -108,19 +108,11 @@ function openTooltip(e){
         },
         style: { classes: 'torpedoTooltip' },
         events: {
-          show: function(event, api){
-            // TODO: right click
-            if(event.originalEvent.button) {
-              console.log(event.originalEvent.button);
-            }
-          },
           render: function(event, api) {
             torpedo.api = api;
             torpedo.tooltip = api.elements.content;
             fillTooltip();
           }
-          //hide: function(event, api) {
-          //}
         }
       });
     }catch(err){console.log(err)}

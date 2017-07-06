@@ -9,7 +9,6 @@ table, td {
   display: inline-block;
   border: 2.5px solid #1a509d;
 }
-
 #trustedList{
   float: left;
   margin-right: 10px;
@@ -28,6 +27,9 @@ table, td {
 }
 #optionButtons{
   margin-top: 10px;
+}
+#userDefinedInput, #referrerInput{
+  width: 400px;
 }
 .left{
   float: left;
