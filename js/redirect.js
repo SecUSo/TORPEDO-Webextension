@@ -2,24 +2,13 @@
 *   resolve a redirection url, f.e. tinyurl
 */
 function resolveRedirect(event){
-  var url = torpedo.url;
-  // url as well as url result has to be https not http!!
-  if(url.indexOf("http") == 0){
-    if(url.indexOf("https") == -1) url = url.slice(0, 4) + "s" + url.slice(4);
-  }
-  else{
-    url = "https://" + url;
-  }
-
-  chrome.runtime.sendMessage({name: "redirect", url: url},function(r){
+  chrome.runtime.sendMessage({name: "redirect", url: torpedo.url},function(r){
     torpedo.api.set("hide.event","unfocus");
     torpedo.api.set("hide.delay",0);
     try{
       const redirect = new URL(r.url);
       updateTooltip(redirect);
-    }catch(e){
-      updateTooltip(url);
-    }
+    }catch(e){}
   });
 };
 

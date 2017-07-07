@@ -31,45 +31,46 @@ function processPage(){
         mouseenter = "._n_Y ";
         break;
         case "email.t-online.de":
-          mouseenter = "a";
-          if(window.location.href.indexOf("showReadmail")>-1){
-            try{
-              body = window.frames["messageBody"].contentWindow.document.body;
-            }catch(e){
-              chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});
-            }
+        mouseenter = "a";
+        body = "#messageContainer";
+        if(window.location.href.indexOf("showReadmail")>-1){
+          try{
+            body = window.frames["messageBody"].contentWindow.document.body;
+            chrome.runtime.sendMessage({"name": "ok", "case": loc});
+          }catch(e){
+            chrome.runtime.sendMessage({"name": "error", "case": loc});
           }
+        }
         target = [10,10];
         hide = false;
         break;
       }
+
       /*if(location=="navigator.web.de" || location=="navigator.gmx.net"){
       body = document.getElementById("app-contents-wrapper").getElementsByTagName("pos-app-stack")[0];
       var d = body.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
-      console.log(d);
-      $(body).on("click", function(){console.log("click")});
-      }*/
+    }*/
 
-      $(body).unbind();
-      // set icon to error if element is not found
-      if($(body).find(mouseenter)[0] == undefined){
-        chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});
-        if(outer && $(body).find(outer)[0]){
-          // set icon to normal if everything works fine
-          chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
-          // open tooltip
-          $(body).on('mouseenter', outer+"a", function(e){openTooltip(e)});
-        }
-      }
-      else{
+    $(body).unbind();
+    // set icon to error if element is not found
+    if($(body).find(mouseenter)[0] == undefined){
+      chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});
+      if(outer && $(body).find(outer)[0]){
         // set icon to normal if everything works fine
         chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
         // open tooltip
-        mouseenter = mouseenter == "a"? "a" : mouseenter+"a";
-        $(body).on('mouseenter', mouseenter, function(e){openTooltip(e)});
+        $(body).on('mouseenter', mouseenter+"a", function(e){openTooltip(e)});
       }
-    });
+    }
+    else{
+      // set icon to normal if everything works fine
+      chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
+      // open tooltip
+      mouseenter = mouseenter == "a"? "a" : mouseenter+"a";
+      $(body).on('mouseenter', mouseenter, function(e){openTooltip(e)});
+    }
   });
+});
 }
 
 function openTooltip(e){
@@ -115,7 +116,7 @@ function openTooltip(e){
           }
         }
       });
-    }catch(err){console.log(err)}
+    }catch(err){console.log(err);chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});}
   }
 }
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {processPage();});

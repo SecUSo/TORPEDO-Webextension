@@ -19,10 +19,7 @@
 	},
 	"permissions":[
 		"tabs",
-		"webRequest",
-		"webRequestBlocking",
-		"http://*/*",
-		"https://*/*",
+		"<all_urls>",
 		"storage"
 	],
 	"page_action": {
@@ -49,16 +46,9 @@
 		{
 		  "matches": [
 		  	"https://mail.google.com/*",
-				"https://mail.aol.de/*",
 				"https://mg.mail.yahoo.com/*",
-				"https://navigator.web.de/*",
 				"https://email.t-online.de/*",
-				"https://email.freenet.de/*",
-				"https://email.vodafone.de/*",
-				"https://webmail.ewe.de/*",
-				"https://webmail.unity-mail.de/*",
-				"https://outlook.live.com/*",
-		  	"https://navigator.gmx.net/*"
+				"https://outlook.live.com/*"
 		  ],
 		  "css": [
 		  	"css/jquery.qtip.min.css",

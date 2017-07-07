@@ -14,18 +14,18 @@ function processClick(){
           // remove domain from once clicked domains
           var index = domains.indexOf(torpedo.domain);
           domains.splice(index, 1);
-          chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting onceClickedDomains is: " +r)});
+          chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){});
           // add domain to user defined domains
           domains = r.userDefinedDomains;
           if(domains) domains = JSON.parse(domains);
           else domains = [];
           domains[domains.length] = torpedo.domain;
-          chrome.runtime.sendMessage({name : "userDefinedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting userDefinedDomains is: " +r)});
+          chrome.runtime.sendMessage({name : "userDefinedDomains", value : JSON.stringify(domains)},function(r){});
       }
       // add domain to once clicked domains
       else {
         domains[domains.length] = torpedo.domain;
-        chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){console.log("answer of request after setting onceClickedDomains is: " +r)});
+        chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){});
       }
     });
   }
