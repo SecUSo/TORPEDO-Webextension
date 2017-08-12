@@ -20,6 +20,8 @@
 	"permissions":[
 		"tabs",
 		"<all_urls>",
+		"webRequest",
+		"webRequestBlocking",
 		"storage"
 	],
 	"page_action": {
@@ -48,7 +50,9 @@
 		  	"https://mail.google.com/*",
 				"https://mg.mail.yahoo.com/*",
 				"https://email.t-online.de/*",
-				"https://outlook.live.com/*"
+				"https://outlook.live.com/*",
+				"https://*.web.de/*",
+				"https://*.gmx.net/*"
 		  ],
 		  "css": [
 		  	"css/jquery.qtip.min.css",
@@ -64,7 +68,8 @@
 		  	"js/redirect.js",
 		  	"js/storage.js"
 		  ],
-		  "run_at": "document_idle"
+		  "run_at": "document_idle",
+			"all_frames": true
 		}
 	]
 }

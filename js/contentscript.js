@@ -1,83 +1,103 @@
 var torpedo = torpedo || {};
 torpedo.target = null;
 torpedo.api;
-var loc = "";
-var target = "event";
-var body = "body";
-var hide = "mouseleave";
-var mouseenter = "";
-var outer = "";
+torpedo.uri = "";
+torpedo.url = "";
+torpedo.domain = "";
 
-function processPage(){
-  jQuery(function($){
-    $(document).ready(function(){
-      loc = window.location.host;
-      target = "event";
-      body = "body";
-      hide = "mouseleave";
-      mouseenter = "";
-      outer = "";
+var loc;
+var target;
+var body;
+var hide;
+var mouseenter;
+var outer;
+var iframe;
 
-      switch(loc){
-        case "mg.mail.yahoo.com":
-        outer = "#shellinner ";
-        mouseenter = ".email-wrapped ";
-        break;
-        case "mail.google.com":
-        mouseenter=".adn ";
-        outer = ".BltHke"
-        break;
-        case "outlook.live.com":
-        mouseenter = "._n_Y ";
-        break;
-        case "email.t-online.de":
-        mouseenter = "a";
-        body = "#messageContainer";
-        if(window.location.href.indexOf("showReadmail")>-1){
-          try{
-            body = window.frames["messageBody"].contentWindow.document.body;
-            chrome.runtime.sendMessage({"name": "ok", "case": loc});
-          }catch(e){
-            chrome.runtime.sendMessage({"name": "error", "case": loc});
-          }
-        }
-        target = [10,10];
-        hide = false;
-        break;
-      }
+$(document).ready(function(){
+  loc = window.location.host;
+  target = "mouse";
+  body = "body";
+  hide = "mouseleave";
+  mouseenter = "";
+  outer = "";
+  iframe = false;
 
-      /*if(location=="navigator.web.de" || location=="navigator.gmx.net"){
-      body = document.getElementById("app-contents-wrapper").getElementsByTagName("pos-app-stack")[0];
-      var d = body.firstChild.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling;
-    }*/
-
-    $(body).unbind();
-    // set icon to error if element is not found
-    if($(body).find(mouseenter)[0] == undefined){
-      chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});
-      if(outer && $(body).find(outer)[0]){
-        // set icon to normal if everything works fine
-        chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
-        // open tooltip
-        $(body).on('mouseenter', mouseenter+"a", function(e){openTooltip(e)});
+  switch(loc){
+    case "mg.mail.yahoo.com":
+    outer = "#shellinner";
+    mouseenter = ".email-wrapped";
+    break;
+    case "mail.google.com":
+    mouseenter=".adn";
+    outer = ".BltHke"
+    break;
+    case "outlook.live.com":
+    mouseenter = "._n_Y";
+    break;
+    case "email.t-online.de":
+    if(window.location.href.indexOf("showReadmail")>-1){
+      try{
+        window.frames["messageBody"].contentWindow.document.body;
+        chrome.runtime.sendMessage({"name": "ok", "case": loc});
+      }catch(e){
+        chrome.runtime.sendMessage({"name": "error", "case": loc});
       }
     }
-    else{
+    mouseenter = "#messageBody";
+    target = [10,10];
+    iframe = true;
+    hide = "unfocus";
+    break;
+    default:
+    target = [10,10];
+    hide = "unfocus";
+    iframe = true;
+    mouseenter = "#mail-detail";
+    break;
+  }
+  $(body).on('mouseenter', mouseenter+" a", function(e){ openTooltip(e) });
+/*
+  $(body).unbind();
+  // if mouseenter not found: try to open tooltip on "outer" frame
+  if($(body).find(mouseenter)[0] == undefined && !iframe){
+    if(outer && $(body).find(outer)[0]){
       // set icon to normal if everything works fine
       chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
       // open tooltip
-      mouseenter = mouseenter == "a"? "a" : mouseenter+"a";
-      $(body).on('mouseenter', mouseenter, function(e){openTooltip(e)});
+      $(body).on('mouseenter', mouseenter+"a", function(e){ openTooltip(e) });
     }
-  });
+    else {
+      // set icon to ERROR
+      chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});
+    }
+  }
+  else{
+    // set icon to normal if everything works fine
+    chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
+    // open tooltip
+    // mail panel in iframe
+    if(!iframe){
+      $(body).on('mouseenter', mouseenter+" a", function(e){ openTooltip(e) });
+    }
+    // normal mail panel
+    else{
+      $(body).on("mouseenter", mouseenter, function(e){
+        $(this.contentWindow.document.body).on("mouseenter", "a", function(a){openTooltip(a)})
+      });
+    }
+  }
+*/
 });
-}
 
 function openTooltip(e){
   torpedo.target = e.currentTarget;
   if (torpedo.target.href != "#" && !torpedo.target.href.startsWith("javascript:void(0)") && !torpedo.target.href.startsWith("mailto:") && torpedo.target.id != 'torpedoURL') {
     try{
       const url = new URL(torpedo.target.href);
+      torpedo.uri = url;
+      torpedo.url = url.href;
+      torpedo.domain = extractDomain(url.hostname);
+      console.log(hide);
       $(torpedo.target).qtip({
         id: "torpedo",
         overwrite: true,
@@ -94,7 +114,7 @@ function openTooltip(e){
         hide: {
           fixed: true,
           event: hide,
-          delay: 200
+          delay: 600
         },
         position: {
           at: 'center bottom',
@@ -107,16 +127,19 @@ function openTooltip(e){
             scroll: false
           }
         },
-        style: { classes: 'torpedoTooltip' },
+        style: {
+          classes: 'torpedoTooltip',
+          widget: false,
+          def: false
+        },
         events: {
           render: function(event, api) {
             torpedo.api = api;
             torpedo.tooltip = api.elements.content;
-            fillTooltip();
+            updateTooltip();
           }
         }
       });
     }catch(err){console.log(err);chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});}
   }
 }
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {processPage();});

@@ -53,7 +53,7 @@ chrome.tabs.onUpdated.addListener(function(tabId,status,info){
 });
 
 function inList(url){
-	var urls = ["mail.google.com","mg.mail.yahoo.com","email.t-online.de","outlook.live.com"]
+	var urls = ["mail.google.com","mg.mail.yahoo.com","email.t-online.de","outlook.live.com","navigator.web.de","navigator.gmx.net"]
 	var i = 0;
 	for(i=0; i< urls.length; i++){
 		if(url.indexOf(urls[i])>-1) return true;

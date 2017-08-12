@@ -6,12 +6,22 @@ torpedo.status = "unknown";
 * determine security status of domain by
 * looking up trusted, redirect, and user defined domains
 */
-function getSecurityStatus(domain, r, isRedirect){
-  if(!isRedirect && isPhish(domain)) torpedo.status = "phish";
-  else if(torpedo.trustedDomains.indexOf(domain) > -1 && r.trustedListActivated=="true") torpedo.status = "trusted";
-  else if(torpedo.redirectDomains.indexOf(domain) > -1) torpedo.status = "redirect";
-  else if(r.userDefinedDomains.indexOf(domain) > -1) torpedo.status = "userdefined";
-  else if(r.referrerPart1.indexOf(domain) > -1) torpedo.status = "encrypted";
+function getSecurityStatus(r){
+  var cantBePhish = false;
+  try{
+    const url = new URL(torpedo.target.innerHTML.replace(" ",""));
+    var linkTextDomain = extractDomain(url.hostname);
+    console.log(linkTextDomain + " is in referrer? " + r.referrerPart1.indexOf(linkTextDomain) > -1);
+    cantBePhish = r.referrerPart1.indexOf(linkTextDomain) > -1 || torpedo.redirectDomains.indexOf(linkTextDomain) > -1;
+  } catch(e){console.log(e);}
+  console.log("cant be phish: " + cantBePhish);
+  console.log("torpedo domain " + torpedo.domain);
+
+  if(r.referrerPart1.indexOf(torpedo.domain) > -1) torpedo.status = "encrypted";
+  else if(torpedo.redirectDomains.indexOf(torpedo.domain) > -1) torpedo.status = "redirect";
+  else if(!cantBePhish && isPhish(torpedo.domain)) torpedo.status = "phish";
+  else if(torpedo.trustedDomains.indexOf(torpedo.domain) > -1 && r.trustedListActivated=="true") torpedo.status = "trusted";
+  else if(r.userDefinedDomains.indexOf(torpedo.domain) > -1) torpedo.status = "userdefined";
   else torpedo.status = "unknown";
 };
 
@@ -19,10 +29,14 @@ function getSecurityStatus(domain, r, isRedirect){
 * return true if link text and link target differs (classify link as phish)
 * if link text does not contain url or is the same as target, return false
 */
-function isPhish(domain){
+function isPhish(){
   try {
     const linkText = new URL(torpedo.target.innerHTML.replace(" ",""));
-    if(linkText.hostname && linkText.hostname.indexOf("spanid")>-1 && torpedo.domain != extractDomain(linkText.hostname)) return true;
+    console.log(linkText);
+    var domain = extractDomain(linkText.hostname);
+    if(linkText.hostname && torpedo.domain != domain){
+      return true;
+    }
     else return false;
   } catch (e) {
     return false;

@@ -1,31 +1,33 @@
 changes = [];
 
 $(document).ready(function() {
-    $('.tabs .tab-links a').on('click', function(e)  {
-        var currentAttrValue = $(this).attr('href');
+  $('.tabs .tab-links a').on('click', function(e)  {
+    var currentAttrValue = $(this).attr('href');
 
-        // Show/Hide Tabs
-        $('.tabs ' + currentAttrValue).show().fadeIn(400).siblings().hide();
+    // Show/Hide Tabs
+    $('.tabs ' + currentAttrValue).show().fadeIn(400).siblings().hide();
 
-        // Change/remove current tab to active
-        $(this).parent('li').addClass('active').siblings().removeClass('active');
-        e.preventDefault();
-      });
-    $('li').on("click", function(e){
-      $("#trustedList").hide();
-      $("#userList").hide();
-    });
+    // Change/remove current tab to active
+    $(this).parent('li').addClass('active').siblings().removeClass('active');
+    e.preventDefault();
+  });
+  $('li').on("click", function(e){
     $("#trustedList").hide();
     $("#userList").hide();
-    getTexts();
-    init();
-    addEvents();
-});
+  });
+  $("#trustedList").hide();
+  $("#userList").hide();
 
+  getTexts();
+  init();
+  addEvents();
+});
 /**
 * initialize the options page
 */
 function init(){
+  console.log("init");
+
   // init changes for "revert changes" button
   changes = [];
 
@@ -95,12 +97,14 @@ function addEvents(){
     else $("#showTrustedDomains").prop("disabled",false);
   });
   $("#showTrustedDomains").on('click', function(e)  {
+    $("#userList").close();
     $("#trustedList").toggle();
   });
   $("#addUserDefined").on('click', function(e)  {
     addUserDefined();
   });
   $("#editUserDefined").on('click', function(e)  {
+    $("#trustedList").close();
     $("#userList").toggle();
   });
 
@@ -266,8 +270,8 @@ function addUserDefined(){
     return;
   }
   if(torpedo.trustedDomains.indexOf(input)>-1 && window.localStorage.getItem(Torpedo.trustedListActivated.label) == "true"){
-      $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInTrustedUrls"));
-      return;
+    $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInTrustedUrls"));
+    return;
   }
   var arr = [];
   try{

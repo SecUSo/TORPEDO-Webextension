@@ -6,8 +6,11 @@ function resolveRedirect(event){
     torpedo.api.set("hide.event","unfocus");
     torpedo.api.set("hide.delay",0);
     try{
-      const redirect = new URL(r.url);
-      updateTooltip(redirect);
+      const href = new URL(r.url);
+      torpedo.uri = href;
+      torpedo.url = href.href;
+      torpedo.domain = extractDomain(href.hostname);
+      updateTooltip();
     }catch(e){}
   });
 };
@@ -15,10 +18,11 @@ function resolveRedirect(event){
 /**
 *   resolve a referrer url, f.e. https://deref-gmx.net/mail/client/..
 */
-function resolveReferrer(part1,part2){
+function resolveReferrer(part1, part2){
   var url = torpedo.url;
   part1 = part1.split(",");
   part2 = part2.split(",");
+
   for(var i = 0; i < part1.length; i++){
     if(url.indexOf(part1[i] > -1)){
       var cut = part2[i] ? part2[i] : part1[i];
@@ -27,9 +31,12 @@ function resolveReferrer(part1,part2){
       temp = decodeURIComponent(temp);
       try{
         const href = new URL(temp);
-        return href;
-      }catch(e){break;}
+        torpedo.uri = href;
+        torpedo.url = href.href;
+        torpedo.domain = extractDomain(href.hostname);
+        updateTooltip();
+      }catch(e){console.log(e);}
+      break;
     }
   }
-  return torpedo.uri;
 };
