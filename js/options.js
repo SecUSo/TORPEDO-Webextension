@@ -157,14 +157,14 @@ function addEvents(){
     else $("#showTrustedDomains").prop("disabled",false);
   });
   $("#showTrustedDomains").on('click', function(e)  {
-    $("#userList").close();
+    $("#userList").hide();
     $("#trustedList").toggle();
   });
   $("#addUserDefined").on('click', function(e)  {
     addUserDefined();
   });
   $("#editUserDefined").on('click', function(e)  {
-    $("#trustedList").close();
+    $("#trustedList").hide();
     $("#userList").toggle();
   });
 

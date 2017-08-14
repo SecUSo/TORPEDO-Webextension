@@ -32,7 +32,13 @@ function tooltipText(){
 */
 function updateTooltip(){
   var t = torpedo.tooltip;
-  $(t.find("#torpedoURL")[0]).html(torpedo.url.replace(torpedo.domain, '<span id="torpedoDomain">' + torpedo.domain + '</span>'));
+  var url = torpedo.url;
+  var pathname = torpedo.pathname;
+  if(pathname.length > 100){
+    var replace = pathname.substring(0,100) + "...";
+    url = url.replace(pathname, replace);
+  }
+  $(t.find("#torpedoURL")[0]).html(url.replace(torpedo.domain, '<span id="torpedoDomain">' + torpedo.domain + '</span>'));
   $(t.find("#torpedoWarningImage")[0]).hide();
   $(t.find("#torpedoMoreInfo")[0]).hide();
   $(t.find("#torpedoMoreInfoButton")[0]).hide();
@@ -151,16 +157,12 @@ function extractDomain(url){
 
 /**
 * set given url as new global torpedo url
-* cut url after 200 characters
 */
 function setNewUrl(uri){
-  console.log(uri.pathname);
   torpedo.uri = uri;
   torpedo.url = uri.href;
   torpedo.domain = extractDomain(uri.hostname);
-  var pathname = uri.pathname;
-  if(pathname.length > 200){
-    var replace = pathname.substring(0,200) + "...";
-    torpedo.url = uri.href.replace(pathname, replace);
-  }
+  var index = torpedo.url.indexOf(torpedo.domain);
+  torpedo.pathname = torpedo.url.substring(index+torpedo.domain.length, torpedo.url.length);
+
 }

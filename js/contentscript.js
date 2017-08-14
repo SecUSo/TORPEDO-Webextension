@@ -4,6 +4,7 @@ torpedo.api;
 torpedo.uri = "";
 torpedo.url = "";
 torpedo.domain = "";
+torpedo.pathname = "";
 
 var loc;
 var target;
@@ -29,7 +30,7 @@ $(document).ready(function(){
     break;
     case "mail.google.com":
     mouseenter=".adn";
-    outer = ".BltHke"
+    outer = ".nH"
     break;
     case "outlook.live.com":
     mouseenter = "._n_Y";
@@ -55,15 +56,19 @@ $(document).ready(function(){
     mouseenter = "#mail-detail";
     break;
   }
-
+  console.log("iframe ? " + iframe);
+  console.log("mouseenter ? " + mouseenter);
+  console.log("mouseenter found? " + $(body).find(mouseenter)[0]);
+  console.log("outer ? " + outer);
+  console.log("outer found ? " + $(body).find(outer)[0]);
   $(body).unbind();
   // if mouseenter not found: try to open tooltip on "outer" frame
-  if($(body).find(mouseenter)[0] == undefined && !iframe){
+  if($(body).find(mouseenter)[0] && !iframe){
     if(outer && $(body).find(outer)[0]){
       // set icon to normal if everything works fine
       chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
       // open tooltip
-      $(body).on('mouseenter', mouseenter+"a", function(e){ openTooltip(e) });
+      $(body).on('mouseenter', mouseenter+' a', function(e){ openTooltip(e) });
     }
     else {
       // set icon to ERROR

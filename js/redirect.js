@@ -18,20 +18,28 @@ function resolveRedirect(event){
 */
 function resolveReferrer(part1, part2){
   var url = torpedo.url;
-  part1 = part1.split(",");
-  part2 = part2.split(",");
+  var arr1 = [];
+  try{
+    arr1 = JSON.parse(part1);
+  }catch(err){}
+  var arr2 = [];
+  try{
+    arr2 = JSON.parse(part2);
+  }catch(err){}
 
-  for(var i = 0; i < part1.length; i++){
-    if(url.indexOf(part1[i] > -1)){
-      var cut = part2[i] ? part2[i] : part1[i];
+  for(var i = 0; i < arr1.length; i++){
+    if(url.indexOf(arr1[i] > -1)){
+      var cut = arr2[i] ? arr2[i] : arr1[i];
       var index = url.indexOf(cut);
       var temp = url.substring(index+cut.length, url.length);
       temp = decodeURIComponent(temp);
       try{
         const href = new URL(temp);
         setNewUrl(href);
-        updateTooltip();
-      }catch(e){console.log(e);}
+      }catch(e){
+        console.log(e);
+      }
+      updateTooltip();
       break;
     }
   }

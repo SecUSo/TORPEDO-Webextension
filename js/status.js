@@ -12,7 +12,7 @@ function getSecurityStatus(r){
     const url = new URL(torpedo.target.innerHTML.replace(" ",""));
     var linkTextDomain = extractDomain(url.hostname);
     cantBePhish = r.referrerPart1.indexOf(linkTextDomain) > -1 || torpedo.redirectDomains.indexOf(linkTextDomain) > -1;
-  } catch(e){console.log(e);}
+  } catch(e){}
 
   if(r.referrerPart1.indexOf(torpedo.domain) > -1) torpedo.status = "encrypted";
   else if(torpedo.redirectDomains.indexOf(torpedo.domain) > -1) torpedo.status = "redirect";

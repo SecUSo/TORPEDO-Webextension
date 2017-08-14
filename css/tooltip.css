@@ -1,4 +1,4 @@
-.torpedoTooltip  .qtip-content{
+.torpedoTooltip{
   border: solid 2.5px #bfb9b9;
   border-radius: 5px;
   background-color: white;
@@ -35,14 +35,14 @@ img{
   border-color: black;
 }
 .torpedoTrusted{
-  border-color: green;
+  border-color: green !important;
 }
 .torpedoUserDefined{
-  border-color: #1a509d;
+  border-color: #1a509d !important;
 }
 .torpedoPhish{
-  border-color: red;
-  background-color: #feffcc;
+  border-color: red !important;
+  background-color: #feffcc !important;
 }
 
 #torpedoDomain{
