@@ -55,8 +55,7 @@ $(document).ready(function(){
     mouseenter = "#mail-detail";
     break;
   }
-  $(body).on('mouseenter', mouseenter+" a", function(e){ openTooltip(e) });
-/*
+
   $(body).unbind();
   // if mouseenter not found: try to open tooltip on "outer" frame
   if($(body).find(mouseenter)[0] == undefined && !iframe){
@@ -86,7 +85,6 @@ $(document).ready(function(){
       });
     }
   }
-*/
 });
 
 function openTooltip(e){
@@ -94,10 +92,7 @@ function openTooltip(e){
   if (torpedo.target.href != "#" && !torpedo.target.href.startsWith("javascript:void(0)") && !torpedo.target.href.startsWith("mailto:") && torpedo.target.id != 'torpedoURL') {
     try{
       const url = new URL(torpedo.target.href);
-      torpedo.uri = url;
-      torpedo.url = url.href;
-      torpedo.domain = extractDomain(url.hostname);
-      console.log(hide);
+      setNewUrl(url);
       $(torpedo.target).qtip({
         id: "torpedo",
         overwrite: true,
@@ -129,7 +124,6 @@ function openTooltip(e){
         },
         style: {
           classes: 'torpedoTooltip',
-          widget: false,
           def: false
         },
         events: {

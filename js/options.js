@@ -3,7 +3,6 @@ changes = [];
 $(document).ready(function() {
   $('.tabs .tab-links a').on('click', function(e)  {
     var currentAttrValue = $(this).attr('href');
-
     // Show/Hide Tabs
     $('.tabs ' + currentAttrValue).show().fadeIn(400).siblings().hide();
 
@@ -15,18 +14,64 @@ $(document).ready(function() {
     $("#trustedList").hide();
     $("#userList").hide();
   });
+
   $("#trustedList").hide();
   $("#userList").hide();
 
-  getTexts();
+  addTexts();
   init();
   addEvents();
 });
+
+/**
+* set texts of options page
+*/
+function addTexts(){
+  // Title
+  $("#options").html(chrome.i18n.getMessage("options"));
+  $("#title").html(chrome.i18n.getMessage("options"));
+
+  // Timer tab
+  $("#timerCheckboxText").html(chrome.i18n.getMessage("timerActivated"));
+  $("#timerAmountText").html(chrome.i18n.getMessage("timerAmount"));
+  $("#seconds").html(chrome.i18n.getMessage("seconds"));
+  $("#trustedTimerActivated").html(chrome.i18n.getMessage("activateTimerOnLowRisk"));
+  $("#userTimerActivated").html(chrome.i18n.getMessage("activateTimerOnUserList"));
+
+  // Domains tab
+  $("#trustedListText").html(chrome.i18n.getMessage("lowRiskDomains"));
+  $("#activateTrustedList").html(chrome.i18n.getMessage("activateLowRiskList"));
+  $("#showTrustedDomains").html(chrome.i18n.getMessage("showLowRiskList"));
+  $("#userListText").html(chrome.i18n.getMessage("userDomains"));
+  $("#addUserDefined").html(chrome.i18n.getMessage("addEntries"));
+  $("#editUserDefined").html(chrome.i18n.getMessage("editUserList"));
+
+  // Referrer tab
+  $("#referrerDialog1").html(chrome.i18n.getMessage("referrerInfo1"));
+  $("#referrerExample").html(chrome.i18n.getMessage("referrerExample"));
+  $("#referrerDialog2").html(chrome.i18n.getMessage("referrerInfo2"));
+  $("#referrerListTitle").html(chrome.i18n.getMessage("referrerList"));
+  $("#deleteReferrer").html(chrome.i18n.getMessage("deleteEntries"));
+  $("#clearReferrer").html(chrome.i18n.getMessage("clearEntries"));
+  $("#referrerHeadline").html(chrome.i18n.getMessage("addEntries"));
+  $("#addDefaultReferrer").html(chrome.i18n.getMessage("addDefaultReferrer"));
+  $("#addReferrer").html(chrome.i18n.getMessage("addEntries"));
+  $("#insertRandom").html(chrome.i18n.getMessage("insertRandom"));
+
+  // Additional buttons
+  $("#saveChanges").html(chrome.i18n.getMessage("saveChanges"));
+  $("#revertChanges").html(chrome.i18n.getMessage("revertChanges"));
+  $("#defaultSettings").html(chrome.i18n.getMessage("defaultSettings"));
+
+  // Lists
+  $("#trustedListTitle").html(chrome.i18n.getMessage("trustedList"));
+  $("#userListTitle").html(chrome.i18n.getMessage("userList"));
+}
+
 /**
 * initialize the options page
 */
 function init(){
-  console.log("init");
 
   // init changes for "revert changes" button
   changes = [];
@@ -42,6 +87,21 @@ function init(){
   $("#showTrustedDomains").prop("disabled",window.localStorage.getItem(Torpedo.trustedListActivated.label) == "false");
 
   // Referrer tab
+  var arr1 = [];
+  try{
+    arr1 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart1.label));
+  }catch(err){}
+  var arr2 = [];
+  try{
+    arr2 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart2.label));
+  }catch(err){}
+  var index1 = arr1.indexOf("https://deref-gmx.net/mail/client/");
+  var index2 = arr1.indexOf("https://deref-web-02.de/mail/client/");
+  var containsDefault = false;
+  if(index1 > -1 && index2 > -1){
+    containsDefault = arr2[index1] == "/dereferrer/?redirectUrl=" && arr2[index2] == "/dereferrer/?redirectUrl=";
+  }
+  if(document.getElementById("addDefaultReferrer")) document.getElementById("addDefaultReferrer").disabled = containsDefault;
   if(document.getElementById("referrerList")) fillReferrerList();
 
   // Additional buttons
@@ -118,9 +178,44 @@ function addEvents(){
     var arr2 = [];
     window.localStorage.setItem(Torpedo.referrerPart1.label, JSON.stringify(arr1));
     window.localStorage.setItem(Torpedo.referrerPart2.label, JSON.stringify(arr2));
+    init();
   });
+  $("#addDefaultReferrer").on('click',function(e){
+    save(Torpedo.referrerPart1.label, window.localStorage.getItem(Torpedo.referrerPart1.label));
+    save(Torpedo.referrerPart2.label, window.localStorage.getItem(Torpedo.referrerPart2.label));
+    var arr1 = [];
+    try{
+      arr1 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart1.label));
+    }catch(err){}
+    var arr2 = [];
+    try{
+      arr2 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart2.label));
+    }catch(err){}
+    var index1 = arr1.indexOf("https://deref-gmx.net/mail/client/");
+    var index2 = arr1.indexOf("https://deref-web-02.de/mail/client/");
+    var containsDefault = false;
+    if(index1 > -1 && index2 > -1){
+      containsDefault = arr2[index1] == "/dereferrer/?redirectUrl=" && arr2[index2] == "/dereferrer/?redirectUrl=";
+    }
+    if(!containsDefault){
+      if(index1 == -1){
+        arr1.push("https://deref-gmx.net/mail/client/");
+        arr2.push("/dereferrer/?redirectUrl=");
+      }
+      if(index2 == -1){
+        arr1.push("https://deref-web-02.de/mail/client/");
+        arr2.push("/dereferrer/?redirectUrl=");
+      }
+      window.localStorage.setItem(Torpedo.referrerPart1.label,JSON.stringify(arr1));
+      window.localStorage.setItem(Torpedo.referrerPart2.label,JSON.stringify(arr2));
+      fillReferrerList();
+    }
+    document.getElementById("addDefaultReferrer").disabled = true;
+  });
+
   $("#addReferrer").on('click', function(e) {
     addReferrer();
+    init();
   });
   $("#insertRandom").on('click', function(e)  {
     $("#referrerInput").val($("#referrerInput").val()+"[...]");
@@ -205,6 +300,7 @@ function fillReferrerList(){
         arr2.splice(index, 1);
         window.localStorage.setItem(Torpedo.referrerPart1.label, JSON.stringify(arr1));
         window.localStorage.setItem(Torpedo.referrerPart2.label, JSON.stringify(arr2));
+        init();
       });
     }
   }
@@ -325,48 +421,4 @@ function addReferrer(){
   window.localStorage.setItem(Torpedo.referrerPart2.label, JSON.stringify(arr2));
   $("#referrerInput").val("");
   init();
-}
-
-/**
-* set texts of options page
-*/
-function getTexts(){
-  // Title
-  $("#options").html(chrome.i18n.getMessage("options"));
-  $("#title").html(chrome.i18n.getMessage("options"));
-
-  // Timer tab
-  $("#timerCheckboxText").html(chrome.i18n.getMessage("timerActivated"));
-  $("#timerAmountText").html(chrome.i18n.getMessage("timerAmount"));
-  $("#seconds").html(chrome.i18n.getMessage("seconds"));
-  $("#trustedTimerActivated").html(chrome.i18n.getMessage("activateTimerOnLowRisk"));
-  $("#userTimerActivated").html(chrome.i18n.getMessage("activateTimerOnUserList"));
-
-  // Domains tab
-  $("#trustedListText").html(chrome.i18n.getMessage("lowRiskDomains"));
-  $("#activateTrustedList").html(chrome.i18n.getMessage("activateLowRiskList"));
-  $("#showTrustedDomains").html(chrome.i18n.getMessage("showLowRiskList"));
-  $("#userListText").html(chrome.i18n.getMessage("userDomains"));
-  $("#addUserDefined").html(chrome.i18n.getMessage("addEntries"));
-  $("#editUserDefined").html(chrome.i18n.getMessage("editUserList"));
-
-  // Referrer tab
-  $("#referrerDialog1").html(chrome.i18n.getMessage("referrerInfo1"));
-  $("#referrerExample").html(chrome.i18n.getMessage("referrerExample"));
-  $("#referrerDialog2").html(chrome.i18n.getMessage("referrerInfo2"));
-  $("#referrerListTitle").html(chrome.i18n.getMessage("referrerList"));
-  $("#deleteReferrer").html(chrome.i18n.getMessage("deleteEntries"));
-  $("#clearReferrer").html(chrome.i18n.getMessage("clearEntries"));
-  $("#referrerHeadline").html(chrome.i18n.getMessage("addEntries"));
-  $("#addReferrer").html(chrome.i18n.getMessage("addEntries"));
-  $("#insertRandom").html(chrome.i18n.getMessage("insertRandom"));
-
-  // Additional buttons
-  $("#saveChanges").html(chrome.i18n.getMessage("saveChanges"));
-  $("#revertChanges").html(chrome.i18n.getMessage("revertChanges"));
-  $("#defaultSettings").html(chrome.i18n.getMessage("defaultSettings"));
-
-  // Lists
-  $("#trustedListTitle").html(chrome.i18n.getMessage("trustedList"));
-  $("#userListTitle").html(chrome.i18n.getMessage("userList"));
 }

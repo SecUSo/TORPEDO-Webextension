@@ -7,9 +7,7 @@ function resolveRedirect(event){
     torpedo.api.set("hide.delay",0);
     try{
       const href = new URL(r.url);
-      torpedo.uri = href;
-      torpedo.url = href.href;
-      torpedo.domain = extractDomain(href.hostname);
+      setNewUrl(href);
       updateTooltip();
     }catch(e){}
   });
@@ -31,9 +29,7 @@ function resolveReferrer(part1, part2){
       temp = decodeURIComponent(temp);
       try{
         const href = new URL(temp);
-        torpedo.uri = href;
-        torpedo.url = href.href;
-        torpedo.domain = extractDomain(href.hostname);
+        setNewUrl(href);
         updateTooltip();
       }catch(e){console.log(e);}
       break;

@@ -1,24 +1,24 @@
-.torpedoTooltip{
+.torpedoTooltip  .qtip-content{
   border: solid 2.5px #bfb9b9;
   border-radius: 5px;
   background-color: white;
   min-width: 350px;
+  font-size: 13px !important;
+  font-family: Helvetica !important;
+  line-height: 100% !important;
 }
 #torpedoURL{
   color: black !important;
   word-wrap: break-word;
   word-break: break-all;
-  margin: 10px 0 10px 0 !important;
+  margin: 0px 0 10px 0 !important;
 }
 #torpedoSecurityStatus{
   margin-top: 5px;
 }
 p{
-  font-size: 13px !important;
   overflow: hidden !important;
   color: black !important;
-  font-family: Helvetica !important;
-  line-height: 110% !important;
 }
 img{
   float: left;

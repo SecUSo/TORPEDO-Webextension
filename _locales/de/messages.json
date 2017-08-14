@@ -220,6 +220,11 @@
     "description": "How to add referrer to TORPEDO."
   },
 
+  "addDefaultReferrer":{
+    "message": "Referrer-Domains für gmx.net und web.de hinzufügen (vom Entwickler-Team empfohlen)",
+    "description": "List of referrer domains"
+  },
+
   "referrerList":{
     "message": "Liste der Referrer-Domains",
     "description": "List of referrer domains"

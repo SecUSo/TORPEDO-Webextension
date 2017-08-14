@@ -40,12 +40,14 @@ chrome.tabs.onUpdated.addListener(function(tabId,status,info){
 					try{
 						chrome.pageAction.setIcon({tabId, path: { "38" : img }});
 			    	chrome.pageAction.setPopup({tabId, popup: "/icon.html"});
-					}catch(e){console.log(e)}
+					}catch(e){}
 			  }
 				else{
 					reload = 0;
-					chrome.pageAction.setIcon({tabId, path: { "38" : "img/none38.png" }});
-					chrome.pageAction.setPopup({tabId, popup: ""});
+					try{
+						chrome.pageAction.setIcon({tabId, path: { "38" : "img/none38.png" }});
+						chrome.pageAction.setPopup({tabId, popup: ""});
+					}catch(e){}
 			  }
 			});
 		}

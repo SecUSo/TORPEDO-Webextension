@@ -31,6 +31,13 @@ table, td {
 #userDefinedInput, #referrerInput{
   width: 400px;
 }
+#addDefaultReferrer{
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+#addDefaultReferrer:hover:enabled{
+  text-decoration: underline;
+}
 .left{
   float: left;
 }

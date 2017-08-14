@@ -11,11 +11,8 @@ function getSecurityStatus(r){
   try{
     const url = new URL(torpedo.target.innerHTML.replace(" ",""));
     var linkTextDomain = extractDomain(url.hostname);
-    console.log(linkTextDomain + " is in referrer? " + r.referrerPart1.indexOf(linkTextDomain) > -1);
     cantBePhish = r.referrerPart1.indexOf(linkTextDomain) > -1 || torpedo.redirectDomains.indexOf(linkTextDomain) > -1;
   } catch(e){console.log(e);}
-  console.log("cant be phish: " + cantBePhish);
-  console.log("torpedo domain " + torpedo.domain);
 
   if(r.referrerPart1.indexOf(torpedo.domain) > -1) torpedo.status = "encrypted";
   else if(torpedo.redirectDomains.indexOf(torpedo.domain) > -1) torpedo.status = "redirect";
@@ -32,7 +29,6 @@ function getSecurityStatus(r){
 function isPhish(){
   try {
     const linkText = new URL(torpedo.target.innerHTML.replace(" ",""));
-    console.log(linkText);
     var domain = extractDomain(linkText.hostname);
     if(linkText.hostname && torpedo.domain != domain){
       return true;

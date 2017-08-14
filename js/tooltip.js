@@ -148,3 +148,19 @@ function extractDomain(url){
   if(split.length > 2) url = split[split.length-2] + "." + split[split.length-1];
   return url;
 };
+
+/**
+* set given url as new global torpedo url
+* cut url after 200 characters
+*/
+function setNewUrl(uri){
+  console.log(uri.pathname);
+  torpedo.uri = uri;
+  torpedo.url = uri.href;
+  torpedo.domain = extractDomain(uri.hostname);
+  var pathname = uri.pathname;
+  if(pathname.length > 200){
+    var replace = pathname.substring(0,200) + "...";
+    torpedo.url = uri.href.replace(pathname, replace);
+  }
+}
