@@ -1,7 +1,7 @@
 {
 	"applications": {
   	"gecko": {
-    	"id": "torpedo-browser@tu-darmstadt.de"
+    	"id": "torpedo-browserbeta@tu-darmstadt.de"
   	}
 	},
 	"manifest_version":2,
