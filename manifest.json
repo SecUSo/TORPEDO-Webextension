@@ -1,12 +1,13 @@
 {
 	"applications": {
   	"gecko": {
-    	"id": "torpedo-browserbeta@tu-darmstadt.de"
+    	"id": "torpedo-browserbeta@tu-darmstadt.de",
+		"update_url": "https://addons.secuso.org/updates.rdf"
   	}
 	},
 	"manifest_version":2,
 	"name":"__MSG_extensionName__",
-	"version":"3.0",
+	"version":"3.0.1",
 	"default_locale": "en",
 	"description":"__MSG_extensionDescription__",
 	"background":{
