@@ -2,7 +2,7 @@
 	"applications": {
   	"gecko": {
     	"id": "torpedo-browserbeta@tu-darmstadt.de",
-		"update_url": "https://addons.secuso.org/updates.rdf"
+		"update_url": "https://addons.secuso.org/updates.json"
   	}
 	},
 	"manifest_version":2,
