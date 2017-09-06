@@ -87,11 +87,11 @@ function init(){
   $("#showTrustedDomains").prop("disabled",window.localStorage.getItem(Torpedo.trustedListActivated.label) == "false");
 
   // Referrer tab
-  var arr1 = [];
+  var arr1 = window.localStorage.getItem(Torpedo.referrerPart1.label).split(",");
   try{
     arr1 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart1.label));
   }catch(err){}
-  var arr2 = [];
+  var arr2 =window.localStorage.getItem(Torpedo.referrerPart2.label).split(",");
   try{
     arr2 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart2.label));
   }catch(err){}
@@ -266,11 +266,11 @@ function save(list,value){
 function fillReferrerList(){
   var table = document.getElementById("referrerList");
   table.getElementsByTagName("tbody")[0].innerHTML = table.rows[0].innerHTML;
-  var arr1 = [];
+  var arr1 = window.localStorage.getItem(Torpedo.referrerPart1.label).split(",");
   try{
     arr1 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart1.label));
   }catch(err){}
-  var arr2 = [];
+  var arr2 = window.localStorage.getItem(Torpedo.referrerPart2.label).split(",")
   try{
     arr2 = JSON.parse(window.localStorage.getItem(Torpedo.referrerPart2.label));
   }catch(err){}

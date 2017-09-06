@@ -6,22 +6,17 @@ torpedo.url = "";
 torpedo.domain = "";
 torpedo.pathname = "";
 
-var loc;
-var target;
-var body;
-var hide;
-var mouseenter;
-var outer;
-var iframe;
-
 $(document).ready(function(){
+  chrome.runtime.sendMessage('show', function(r){
+      if(r.firstRun){
+        chrome.runtime.sendMessage({name:"firstRun",value:"false"});
+      }
+    });
+
   loc = window.location.host;
-  target = "mouse";
-  body = "body";
-  hide = "mouseleave";
-  mouseenter = "";
-  outer = "";
-  iframe = false;
+  var mouseenter = "";
+  var outer = "";
+  var iframe = "";
 
   switch(loc){
     case "mg.mail.yahoo.com":
@@ -36,57 +31,44 @@ $(document).ready(function(){
     mouseenter = "._n_Y";
     break;
     case "email.t-online.de":
-    if(window.location.href.indexOf("showReadmail")>-1){
-      try{
-        window.frames["messageBody"].contentWindow.document.body;
-        chrome.runtime.sendMessage({"name": "ok", "case": loc});
-      }catch(e){
-        chrome.runtime.sendMessage({"name": "error", "case": loc});
-      }
-    }
-    mouseenter = "#messageBody";
-    target = [10,10];
-    iframe = true;
-    hide = "unfocus";
+    iframe = "mailreadview";
     break;
     default:
-    target = [10,10];
-    hide = "unfocus";
-    iframe = true;
-    mouseenter = "#mail-detail";
+    iframe = "mailbody";
     break;
   }
-  console.log("iframe ? " + iframe);
-  console.log("mouseenter ? " + mouseenter);
-  console.log("mouseenter found? " + $(body).find(mouseenter)[0]);
-  console.log("outer ? " + outer);
-  console.log("outer found ? " + $(body).find(outer)[0]);
-  $(body).unbind();
+  $("body").unbind();
+
   // if mouseenter not found: try to open tooltip on "outer" frame
-  if($(body).find(mouseenter)[0] && !iframe){
-    if(outer && $(body).find(outer)[0]){
+  if($("body").find(mouseenter)[0] && iframe==""){
+    if(outer && $("body").find(outer)[0]){
       // set icon to normal if everything works fine
-      chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
+      chrome.runtime.sendMessage({"name": "ok"});
       // open tooltip
-      $(body).on('mouseenter', mouseenter+' a', function(e){ openTooltip(e) });
+      $("body").on('mouseenter', mouseenter+' a', function(e){ openTooltip(e) });
     }
     else {
       // set icon to ERROR
-      chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});
+      chrome.runtime.sendMessage({"name": "error"});
     }
   }
   else{
-    // set icon to normal if everything works fine
-    chrome.runtime.sendMessage({"name": "ok", "case": loc},function(r){});
-    // open tooltip
-    // mail panel in iframe
-    if(!iframe){
-      $(body).on('mouseenter', mouseenter+" a", function(e){ openTooltip(e) });
+    // open tooltip in normal mail panel
+    if(iframe==""){
+      // set icon to normal if everything works fine
+      chrome.runtime.sendMessage({"name": "ok"});
+      $("body").on('mouseenter', mouseenter+" a", function(e){ openTooltip(e) });
     }
-    // normal mail panel
+    // open tooltip in iframe mail panel
     else{
-      $(body).on("mouseenter", mouseenter, function(e){
-        $(this.contentWindow.document.body).on("mouseenter", "a", function(a){openTooltip(a)})
+      if(window.location.href.indexOf(iframe)>-1){
+        chrome.runtime.sendMessage({"name": "ok"});
+      } else{
+        chrome.runtime.sendMessage({"name": "error"});
+      }
+      $("body").on("mouseenter", "a", function(e){
+        var location = e.view.location.href;
+        if(location.indexOf(iframe) > -1) {openTooltip(e);}
       });
     }
   }
@@ -113,13 +95,12 @@ function openTooltip(e){
         },
         hide: {
           fixed: true,
-          event: hide,
+          event: "mouseleave",
           delay: 600
         },
         position: {
           at: 'center bottom',
           my: 'top left',
-          target: target,
           viewport: $(window),
           adjust: {
             mouse: false,
@@ -128,6 +109,7 @@ function openTooltip(e){
           }
         },
         style: {
+          tip:false,
           classes: 'torpedoTooltip',
           def: false
         },
@@ -139,6 +121,6 @@ function openTooltip(e){
           }
         }
       });
-    }catch(err){console.log(err);chrome.runtime.sendMessage({"name": "error", "case": loc},function(r){});}
+    }catch(err){console.log(err); chrome.runtime.sendMessage({"name": "error"},function(r){});}
   }
 }

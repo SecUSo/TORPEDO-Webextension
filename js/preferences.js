@@ -1,4 +1,8 @@
 var Torpedo = {
+	firstRun:{
+		label:'firstRun',
+		value:true
+	},
 	onceClickedDomains:{
 		label:'onceClickedDomains',
 		value:[]

@@ -16,17 +16,16 @@ function resolveRedirect(event){
 /**
 *   resolve a referrer url, f.e. https://deref-gmx.net/mail/client/..
 */
-function resolveReferrer(part1, part2){
+function resolveReferrer(r){
   var url = torpedo.url;
-  var arr1 = [];
+  var arr1 = r.referrerPart1.split(",");
   try{
-    arr1 = JSON.parse(part1);
+    arr1 = JSON.parse(r.referrerPart1);
   }catch(err){}
-  var arr2 = [];
+  var arr2 = r.referrerPart2.split(",");
   try{
-    arr2 = JSON.parse(part2);
+    arr2 = JSON.parse(r.referrerPart2);
   }catch(err){}
-
   for(var i = 0; i < arr1.length; i++){
     if(url.indexOf(arr1[i] > -1)){
       var cut = arr2[i] ? arr2[i] : arr1[i];
@@ -36,9 +35,7 @@ function resolveReferrer(part1, part2){
       try{
         const href = new URL(temp);
         setNewUrl(href);
-      }catch(e){
-        console.log(e);
-      }
+      }catch(e){}
       updateTooltip();
       break;
     }

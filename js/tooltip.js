@@ -87,7 +87,7 @@ function updateTooltip(){
         $(t.find("#torpedoInfoText")[0]).html(chrome.i18n.getMessage("specialCaseInfo"));
         $(t.find("#torpedoMoreInfo")[0]).html(chrome.i18n.getMessage("moreInfoEncrypted"));
         countdown(r.timer);
-        resolveReferrer(r.referrerPart1,r.referrerPart2);
+        resolveReferrer(r);
         break;
       case "phish":
         $(".torpedoTooltip").addClass("torpedoPhish");

@@ -21,14 +21,7 @@ function sendEmail() {
 }
 
 // icon functions
-
-loc = "";
 err = "";
-reload = 0;
-
-function getStatus(){
-	return {loc:loc,err:err};
-}
 
 chrome.tabs.onUpdated.addListener(function(tabId,status,info){
   chrome.pageAction.show(tabId);
@@ -43,7 +36,6 @@ chrome.tabs.onUpdated.addListener(function(tabId,status,info){
 					}catch(e){}
 			  }
 				else{
-					reload = 0;
 					try{
 						chrome.pageAction.setIcon({tabId, path: { "38" : "img/none38.png" }});
 						chrome.pageAction.setPopup({tabId, popup: ""});
@@ -68,6 +60,7 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 	// storage get items message
 	if(request == "show"){
 		var r = {
+			firstRun:(window.localStorage.getItem(Torpedo.firstRun.label)),
 			onceClickedDomains:(window.localStorage.getItem(Torpedo.onceClickedDomains.label)),
 			userDefinedDomains:(window.localStorage.getItem(Torpedo.userDefinedDomains.label)),
 			timer:parseInt(window.localStorage.getItem(Torpedo.timer.label)),
@@ -97,22 +90,8 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 			chrome.tabs.query({currentWindow: true,active:true}, function(tabs){
 				chrome.pageAction.setIcon({tabId: tabs[0].id, path: { "38" : "img/error38.png" }});
 			});
-		}catch(e){console.log(e)}
-		loc = request.case;
+		}catch(e){}
 		err = "err";
-		reload = 0;
-		// reload t-online because otherwise iFrame body is not detected
-		if(loc == "email.t-online.de"){
-			// get current url
-			chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-				if(tabs[0].status=="complete" && tabs[0].url.indexOf("showReadmail")>-1){
-					if(reload < 1) {
-						reload++;
-						chrome.tabs.reload();
-					}
-				}
-			});
-		}
 		sendResponse({});
 	}
 	// tooltip works message
@@ -122,9 +101,13 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 				chrome.pageAction.setIcon({tabId: tabs[0].id, path: { "38" : "img/icon38.png" }});
 			});
 		}catch(e){}
-		loc = request.case;
 		err = "";
 		sendResponse({});
+	}
+	else if(request.name == "open"){
+		chrome.tabs.create({
+			 url: request.url
+	 	});
 	}
 	// storage set items message
 	else{
