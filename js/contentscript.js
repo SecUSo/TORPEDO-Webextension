@@ -79,47 +79,49 @@ function openTooltip(e){
   if (torpedo.target.href != "#" && !torpedo.target.href.startsWith("javascript:void(0)") && !torpedo.target.href.startsWith("mailto:") && torpedo.target.id != 'torpedoURL') {
     try{
       const url = new URL(torpedo.target.href);
-      setNewUrl(url);
-      $(torpedo.target).qtip({
-        id: "torpedo",
-        overwrite: true,
-        suppress: true,
-        content:  {
-          text: tooltipText(url),
-          button: true
-        },
-        show: {
-          event: e.type,
-          ready: true,
-          solo: true
-        },
-        hide: {
-          fixed: true,
-          event: "mouseleave",
-          delay: 600
-        },
-        position: {
-          at: 'center bottom',
-          my: 'top left',
-          viewport: $(window),
-          adjust: {
-            mouse: false,
-            method: 'flipinvert flipinvert',
-            scroll: false
+      chrome.runtime.sendMessage({"name":'TLD'}, function(tld){
+        setNewUrl(url,tld);
+        $(torpedo.target).qtip({
+          id: "torpedo",
+          overwrite: true,
+          suppress: true,
+          content:  {
+            text: tooltipText(url),
+            button: true
+          },
+          show: {
+            event: e.type,
+            ready: true,
+            solo: true
+          },
+          hide: {
+            fixed: true,
+            event: "mouseleave",
+            delay: 600
+          },
+          position: {
+            at: 'center bottom',
+            my: 'top left',
+            viewport: $(window),
+            adjust: {
+              mouse: false,
+              method: 'flipinvert flipinvert',
+              scroll: false
+            }
+          },
+          style: {
+            tip:false,
+            classes: 'torpedoTooltip',
+            def: false
+          },
+          events: {
+            render: function(event, api) {
+              torpedo.api = api;
+              torpedo.tooltip = api.elements.content;
+              updateTooltip();
+            }
           }
-        },
-        style: {
-          tip:false,
-          classes: 'torpedoTooltip',
-          def: false
-        },
-        events: {
-          render: function(event, api) {
-            torpedo.api = api;
-            torpedo.tooltip = api.elements.content;
-            updateTooltip();
-          }
-        }
+        });
       });
     }catch(err){console.log(err); chrome.runtime.sendMessage({"name": "error"},function(r){});}
   }

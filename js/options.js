@@ -358,34 +358,36 @@ function addUserDefined(){
   var input = $("#userDefinedInput").val().replace(" ","");
   $("#errorAddUserDefined").html("");
 
-  try{
-    const href = new URL(input);
-    input = extractDomain(href.hostname);
-  }catch(e){
-    $("#errorAddUserDefined").html(chrome.i18n.getMessage("nonValidUrl"));
-    return;
-  }
-  if(torpedo.trustedDomains.indexOf(input)>-1 && window.localStorage.getItem(Torpedo.trustedListActivated.label) == "true"){
-    $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInTrustedUrls"));
-    return;
-  }
-  var arr = [];
-  try{
-    arr = JSON.parse(window.localStorage.getItem(Torpedo.userDefinedDomains.label));
-  }catch(err){}
-  if(arr.indexOf(input)>-1){
-    $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInUserDefinedDomains"));
-    return;
-  }
-  $("#userDefinedInput").val("");
-  arr.push(input);
-  window.localStorage.setItem(Torpedo.userDefinedDomains.label, JSON.stringify(arr));
+  chrome.runtime.sendMessage({"name":'TLD'}, function(tld){
+    try{
+      const href = new URL(input);
+      input = extractDomain(href.hostname,tld);
+    }catch(e){
+      $("#errorAddUserDefined").html(chrome.i18n.getMessage("nonValidUrl"));
+      return;
+    }
+    if(torpedo.trustedDomains.indexOf(input)>-1 && window.localStorage.getItem(Torpedo.trustedListActivated.label) == "true"){
+      $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInTrustedUrls"));
+      return;
+    }
+    var arr = [];
+    try{
+      arr = JSON.parse(window.localStorage.getItem(Torpedo.userDefinedDomains.label));
+    }catch(err){}
+    if(arr.indexOf(input)>-1){
+      $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInUserDefinedDomains"));
+      return;
+    }
+    $("#userDefinedInput").val("");
+    arr.push(input);
+    window.localStorage.setItem(Torpedo.userDefinedDomains.label, JSON.stringify(arr));
 
-  var row = table.insertRow(table.rows.length);
-  var cell = row.insertCell(0);
-  $(cell).html('<div><button id="user'+table.rows.length+'" name="'+input+'" style="margin-right:10px;color:red">X</button><span>'+input+"</span></div>");
-  $("#userDefinedInput").val("");
-  init();
+    var row = table.insertRow(table.rows.length);
+    var cell = row.insertCell(0);
+    $(cell).html('<div><button id="user'+table.rows.length+'" name="'+input+'" style="margin-right:10px;color:red">X</button><span>'+input+"</span></div>");
+    $("#userDefinedInput").val("");
+    init();
+  });
 }
 
 /**

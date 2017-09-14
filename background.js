@@ -84,6 +84,17 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 		xhttp.send(null);
 		return true;
 	}
+	else if(request.name == "TLD"){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function(){
+			if (xhttp.readyState == 4){
+				sendResponse(xhttp.response);
+			}
+		};
+		xhttp.open('GET', "https://publicsuffix.org/list/public_suffix_list.dat", true);
+		xhttp.send(null);
+		return true;
+	}
 	// icon: error with finding mail panel message
 	else if(request.name == "error"){
 		try{
