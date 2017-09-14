@@ -16,11 +16,11 @@
 #torpedoSecurityStatus{
   margin-top: 5px;
 }
-p{
+.torpedoTooltip p{
   overflow: hidden !important;
   color: black !important;
 }
-img{
+.torpedoTooltip img{
   float: left;
   width: 25px;
   height: 25px;
