@@ -7,6 +7,53 @@
   font-family: Helvetica !important;
   line-height: 100% !important;
 }
+
+div.torpedoTooltip
+
+div.torpedoTooltip div, div.torpedoTooltip span, div.torpedoTooltip applet, div.torpedoTooltip object, div.torpedoTooltip iframe,
+h1, div.torpedoTooltip h2, div.torpedoTooltip h3, div.torpedoTooltip h4, div.torpedoTooltip h5, div.torpedoTooltip h6, div.torpedoTooltip p, div.torpedoTooltip blockquote, div.torpedoTooltip pre,
+a, div.torpedoTooltip abbr, div.torpedoTooltip acronym, div.torpedoTooltip address, div.torpedoTooltip big, div.torpedoTooltip cite, div.torpedoTooltip code,
+del, div.torpedoTooltip dfn, div.torpedoTooltip em, div.torpedoTooltip img, div.torpedoTooltip ins, div.torpedoTooltip kbd, div.torpedoTooltip q, div.torpedoTooltip s, div.torpedoTooltip samp,
+small, div.torpedoTooltip strike, div.torpedoTooltip strong, div.torpedoTooltip sub, div.torpedoTooltip sup, div.torpedoTooltip tt, div.torpedoTooltip var,
+b, div.torpedoTooltip u, div.torpedoTooltip i, div.torpedoTooltip center,
+dl, div.torpedoTooltip dt, div.torpedoTooltip dd, div.torpedoTooltip ol, div.torpedoTooltip ul, div.torpedoTooltip li,
+fieldset, div.torpedoTooltip form, div.torpedoTooltip label, div.torpedoTooltip legend,
+table, div.torpedoTooltip caption, div.torpedoTooltip tbody, div.torpedoTooltip tfoot, div.torpedoTooltip thead, div.torpedoTooltip tr, div.torpedoTooltip th, div.torpedoTooltip td,
+article, div.torpedoTooltip aside, div.torpedoTooltip canvas, div.torpedoTooltip details, div.torpedoTooltip embed, div.torpedoTooltip 
+figure, div.torpedoTooltip figcaption, div.torpedoTooltip footer, div.torpedoTooltip header, div.torpedoTooltip hgroup, div.torpedoTooltip 
+menu, div.torpedoTooltip nav, div.torpedoTooltip output, div.torpedoTooltip ruby, div.torpedoTooltip section, div.torpedoTooltip summary,
+time, div.torpedoTooltip mark, div.torpedoTooltip audio, div.torpedoTooltip video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, div.torpedoTooltip aside, div.torpedoTooltip details, div.torpedoTooltip figcaption, div.torpedoTooltip figure, div.torpedoTooltip 
+footer, div.torpedoTooltip header, div.torpedoTooltip hgroup, div.torpedoTooltip menu, div.torpedoTooltip nav, div.torpedoTooltip section {
+	display: block;
+}
+
+div.torpedoTooltip ol, div.torpedoTooltip ul {
+	list-style: none;
+}
+div.torpedoTooltip blockquote,div.torpedoTooltip q {
+	quotes: none;
+}
+div.torpedoTooltip blockquote:before, div.torpedoTooltip blockquote:after,
+div.torpedoTooltip q:before, div.torpedoTooltip q:after {
+	content: '';
+	content: none;
+}
+div.torpedoTooltip table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
 #torpedoURL{
   color: black !important;
   word-wrap: break-word;
