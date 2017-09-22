@@ -13,7 +13,6 @@
 	"background":{
 		"scripts":[
 			"js/jquery-2.1.1.min.js",
-			"js/storage.js",
 			"js/punycode.min.js",
 			"js/options.js",
 			"js/publicsuffixlist.min.js",

@@ -31,7 +31,6 @@ function tooltipText(){
 * fill the basic tooltip structure with corresponding texts
 */
 function updateTooltip(){
-  console.log("update");
   var t = torpedo.tooltip;
   var url = torpedo.url;
   var pathname = torpedo.pathname;
@@ -47,8 +46,7 @@ function updateTooltip(){
   $(t.find("#torpedoInfoText")[0]).click(function(event){showInfo(event)});
   $(t.find("#torpedoMoreInfoButton")[0]).click(function(event){openInfoImage(event)});
   $(t.find("#torpedoRedirectButton")[0]).click(function(event){resolveRedirect(event)});
-
-  chrome.runtime.sendMessage('show', function(r){
+  chrome.storage.sync.get(null,function(r) {
       getSecurityStatus(r);
       switch(torpedo.status){
         case "trusted":
@@ -152,6 +150,7 @@ function openInfoImage(event){
 */
 function extractDomain(url){
   var psl = window.publicSuffixList.getDomain(url);
+  // psl empty -> url is already a valid domain
   return psl != ""? psl : url;
 };
 
@@ -172,27 +171,23 @@ function setNewUrl(uri){
 */
 function processClick(){
   if(torpedo.status == "unknown"){
-    chrome.runtime.sendMessage('show', function(r){
+    chrome.storage.sync.get(null, function(r) {
       var domains = r.onceClickedDomains;
-      if(domains) domains = JSON.parse(domains);
-      else domains = [];
       // was domain clicked before ?
       if(domains.indexOf(torpedo.domain) > -1){
           // remove domain from once clicked domains
           var index = domains.indexOf(torpedo.domain);
           domains.splice(index, 1);
-          chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){});
+          chrome.storage.sync.set({ 'onceClickedDomains': domains });
           // add domain to user defined domains
           domains = r.userDefinedDomains;
-          if(domains) domains = JSON.parse(domains);
-          else domains = [];
           domains[domains.length] = torpedo.domain;
-          chrome.runtime.sendMessage({name : "userDefinedDomains", value : JSON.stringify(domains)},function(r){});
+          chrome.storage.sync.set({ 'userDefinedDomains': domains });
       }
       // add domain to once clicked domains
       else {
         domains[domains.length] = torpedo.domain;
-        chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){});
+        chrome.storage.sync.set({ 'onceClickedDomains': domains });
       }
     });
   }

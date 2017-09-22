@@ -10,12 +10,6 @@ $(document).ready(function(){
   chrome.runtime.sendMessage({name:"TLD"}, function(r){
     window.publicSuffixList.parse(r, punycode.toASCII);
   });
-  chrome.runtime.sendMessage('show', function(r){
-      if(r.firstRun){
-        chrome.runtime.sendMessage({name:"firstRun",value:"false"});
-      }
-    });
-
   loc = window.location.host;
   var mouseenter = "";
   var outer = "";
@@ -23,22 +17,22 @@ $(document).ready(function(){
 
   switch(loc){
     case "mg.mail.yahoo.com":
-    outer = "#shellinner";
-    mouseenter = ".email-wrapped";
-    break;
+      outer = "#shellinner";
+      mouseenter = ".email-wrapped";
+      break;
     case "mail.google.com":
-    mouseenter=".adn";
-    outer = ".nH"
-    break;
+      mouseenter=".adn";
+      outer = ".nH"
+      break;
     case "outlook.live.com":
-    mouseenter = "._n_Y";
-    break;
+      mouseenter = "._n_Y";
+      break;
     case "email.t-online.de":
-    iframe = "mailreadview";
-    break;
+      iframe = "mailreadview";
+      break;
     default:
-    iframe = "mailbody";
-    break;
+      iframe = "mailbody";
+      break;
   }
   $("body").unbind();
 
@@ -82,49 +76,48 @@ function openTooltip(e){
   if (torpedo.target.href != "#" && !torpedo.target.href.startsWith("javascript:void(0)") && !torpedo.target.href.startsWith("mailto:") && torpedo.target.id != 'torpedoURL') {
     try{
       const url = new URL(torpedo.target.href);
-        setNewUrl(url);
-        $(torpedo.target).qtip({
-          id: "torpedo",
-          overwrite: true,
-          suppress: true,
-          content:  {
-            text: tooltipText(url),
-            button: true
-          },
-          show: {
-            event: e.type,
-            ready: true,
-            solo: true
-          },
-          hide: {
-            fixed: true,
-            event: "mouseleave",
-            delay: 600
-          },
-          position: {
-            at: 'center bottom',
-            my: 'top left',
-            viewport: $(window),
-            adjust: {
-              mouse: false,
-              method: 'flipinvert flipinvert',
-              scroll: false
-            }
-          },
-          style: {
-            tip:false,
-            classes: 'torpedoTooltip',
-            def: false
-          },
-          events: {
-            render: function(event, api) {
-              torpedo.api = api;
-              torpedo.tooltip = api.elements.content;
-              console.log("render");
-              updateTooltip();
-            }
+      setNewUrl(url);
+      $(torpedo.target).qtip({
+        id: "torpedo",
+        overwrite: true,
+        suppress: true,
+        content:  {
+          text: tooltipText(url),
+          button: true
+        },
+        show: {
+          event: e.type,
+          ready: true,
+          solo: true
+        },
+        hide: {
+          fixed: true,
+          event: "mouseleave",
+          delay: 600
+        },
+        position: {
+          at: 'center bottom',
+          my: 'top left',
+          viewport: $(window),
+          adjust: {
+            mouse: false,
+            method: 'flipinvert flipinvert',
+            scroll: false
           }
-        });
+        },
+        style: {
+          tip:false,
+          classes: 'torpedoTooltip',
+          def: false
+        },
+        events: {
+          render: function(event, api) {
+            torpedo.api = api;
+            torpedo.tooltip = api.elements.content;
+            updateTooltip();
+          }
+        }
+      });
     }catch(err){console.log(err); chrome.runtime.sendMessage({"name": "error"},function(r){});}
   }
 }
