@@ -77,7 +77,7 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function(){
 			if (xhttp.readyState == 4){
-				sendResponse({url:xhttp.responseURL});
+				sendResponse(xhttp.responseURL);
 			}
 		};
 		xhttp.open('GET', request.url, true);

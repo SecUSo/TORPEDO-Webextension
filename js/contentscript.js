@@ -7,6 +7,9 @@ torpedo.domain = "";
 torpedo.pathname = "";
 
 $(document).ready(function(){
+  chrome.runtime.sendMessage({name:"TLD"}, function(r){
+    window.publicSuffixList.parse(r, punycode.toASCII);
+  });
   chrome.runtime.sendMessage('show', function(r){
       if(r.firstRun){
         chrome.runtime.sendMessage({name:"firstRun",value:"false"});
@@ -79,8 +82,7 @@ function openTooltip(e){
   if (torpedo.target.href != "#" && !torpedo.target.href.startsWith("javascript:void(0)") && !torpedo.target.href.startsWith("mailto:") && torpedo.target.id != 'torpedoURL') {
     try{
       const url = new URL(torpedo.target.href);
-      chrome.runtime.sendMessage({"name":'TLD'}, function(tld){
-        setNewUrl(url,tld);
+        setNewUrl(url);
         $(torpedo.target).qtip({
           id: "torpedo",
           overwrite: true,
@@ -118,11 +120,11 @@ function openTooltip(e){
             render: function(event, api) {
               torpedo.api = api;
               torpedo.tooltip = api.elements.content;
+              console.log("render");
               updateTooltip();
             }
           }
         });
-      });
     }catch(err){console.log(err); chrome.runtime.sendMessage({"name": "error"},function(r){});}
   }
 }

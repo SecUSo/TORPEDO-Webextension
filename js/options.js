@@ -357,12 +357,13 @@ function addUserDefined(){
   var table = document.getElementById("userList");
   var input = $("#userDefinedInput").val().replace(" ","");
   $("#errorAddUserDefined").html("");
-
-  chrome.runtime.sendMessage({"name":'TLD'}, function(tld){
+  chrome.runtime.sendMessage({"name":'TLD'}, function(r){
+    window.publicSuffixList.parse(r, punycode.toASCII);
     try{
       const href = new URL(input);
-      input = extractDomain(href.hostname,tld);
+      input = extractDomain(href.hostname);
     }catch(e){
+      console.log(e);
       $("#errorAddUserDefined").html(chrome.i18n.getMessage("nonValidUrl"));
       return;
     }

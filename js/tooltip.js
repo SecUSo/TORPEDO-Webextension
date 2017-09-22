@@ -31,6 +31,7 @@ function tooltipText(){
 * fill the basic tooltip structure with corresponding texts
 */
 function updateTooltip(){
+  console.log("update");
   var t = torpedo.tooltip;
   var url = torpedo.url;
   var pathname = torpedo.pathname;
@@ -48,8 +49,7 @@ function updateTooltip(){
   $(t.find("#torpedoRedirectButton")[0]).click(function(event){resolveRedirect(event)});
 
   chrome.runtime.sendMessage('show', function(r){
-    chrome.runtime.sendMessage({"name":'TLD'}, function(tld){
-      getSecurityStatus(r,tld);
+      getSecurityStatus(r);
       switch(torpedo.status){
         case "trusted":
           $(".torpedoTooltip").addClass("torpedoTrusted");
@@ -100,7 +100,6 @@ function updateTooltip(){
           $(t.find("#torpedoMoreInfo")[0]).html(chrome.i18n.getMessage("moreInfoPhish"));
           countdown(r.timer+2);
         }
-      });
     });
 };
 
@@ -151,27 +150,50 @@ function openInfoImage(event){
 /**
 * get domain out of hostname
 */
-function extractDomain(url,tld){
-  var split = url.split(".");
-  if(split.length > 2) url = split[split.length-2] + "." + split[split.length-1];
-
-  var arr = tld.split("\n").filter(function(value) { return value != "" && !value.startsWith("//") && value.split(".").length >= 3  });
-  if(arr.toString().indexOf(url) > -1){
-    var arr2 = tld.split("\n").filter(function(value) { return value != "" && !value.startsWith("//") && value.indexOf(url) > -1  });
-    var temp = "bla";
-    if(split.length >= 3) temp = split[split.length-3] + "." + split[split.length-2] + "." + split[split.length-1];
-    if(arr2.indexOf(temp) > -1 || (arr2.indexOf("*."+url) > -1 && arr2.indexOf("!"+temp) == -1)) return temp;
-  }
-  return url;
+function extractDomain(url){
+  var psl = window.publicSuffixList.getDomain(url);
+  return psl != ""? psl : url;
 };
 
 /**
 * set given url as new global torpedo url
 */
-function setNewUrl(uri,tld){
+function setNewUrl(uri){
   torpedo.uri = uri;
   torpedo.url = uri.href;
-  torpedo.domain = extractDomain(uri.hostname,tld);
+  torpedo.domain = extractDomain(uri.hostname);
   var index = torpedo.url.indexOf(torpedo.domain);
   torpedo.pathname = torpedo.url.substring(index+torpedo.domain.length, torpedo.url.length);
 }
+
+
+/**
+* user has clicked on a link via the tooltip
+*/
+function processClick(){
+  if(torpedo.status == "unknown"){
+    chrome.runtime.sendMessage('show', function(r){
+      var domains = r.onceClickedDomains;
+      if(domains) domains = JSON.parse(domains);
+      else domains = [];
+      // was domain clicked before ?
+      if(domains.indexOf(torpedo.domain) > -1){
+          // remove domain from once clicked domains
+          var index = domains.indexOf(torpedo.domain);
+          domains.splice(index, 1);
+          chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){});
+          // add domain to user defined domains
+          domains = r.userDefinedDomains;
+          if(domains) domains = JSON.parse(domains);
+          else domains = [];
+          domains[domains.length] = torpedo.domain;
+          chrome.runtime.sendMessage({name : "userDefinedDomains", value : JSON.stringify(domains)},function(r){});
+      }
+      // add domain to once clicked domains
+      else {
+        domains[domains.length] = torpedo.domain;
+        chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){});
+      }
+    });
+  }
+};

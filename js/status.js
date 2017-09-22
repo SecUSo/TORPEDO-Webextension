@@ -7,35 +7,23 @@ torpedo.status = "unknown";
 * determine security status of domain by
 * looking up trusted, redirect, and user defined domains
 */
-function getSecurityStatus(r,tld){
-  var cantBePhish = false;
+function getSecurityStatus(r){
+  console.log("STATUS");
+  var isPhish = false;
   try{
     const url = new URL(torpedo.target.innerHTML.replace(" ",""));
-    var linkTextDomain = extractDomain(url.hostname,tld);
-    cantBePhish = r.referrerPart1.indexOf(linkTextDomain) > -1 || torpedo.redirectDomains.indexOf(linkTextDomain) > -1;
+    var linkTextDomain = extractDomain(url.hostname);
+    if(r.referrerPart1.indexOf(linkTextDomain) > -1 || torpedo.redirectDomains.indexOf(linkTextDomain) > -1){
+      if(linkText.hostname && torpedo.domain != domain){
+        isPhish = true;
+      }
+    }
   } catch(e){}
 
   if(r.referrerPart1.indexOf(torpedo.domain) > -1) torpedo.status = "encrypted";
   else if(torpedo.redirectDomains.indexOf(torpedo.domain) > -1) torpedo.status = "redirect";
-  else if(!cantBePhish && isPhish(tld)) torpedo.status = "phish";
+  else if(isPhish) torpedo.status = "phish";
   else if(torpedo.trustedDomains.indexOf(torpedo.domain) > -1 && r.trustedListActivated=="true") torpedo.status = "trusted";
   else if(r.userDefinedDomains.indexOf(torpedo.domain) > -1) torpedo.status = "userdefined";
   else torpedo.status = "unknown";
-};
-
-/**
-* return true if link text and link target differs (classify link as phish)
-* if link text does not contain url or is the same as target, return false
-*/
-function isPhish(tld){
-  try {
-    const linkText = new URL(torpedo.target.innerHTML.replace(" ",""));
-    var domain = extractDomain(linkText.hostname,tld);
-    if(linkText.hostname && torpedo.domain != domain){
-      return true;
-    }
-    else return false;
-  } catch (e) {
-    return false;
-  }
 };

@@ -1,32 +1,38 @@
-var torpedo = torpedo || {};
-
-/**
-* user has clicked on a link via the tooltip
-*/
-function processClick(){
-  if(torpedo.status == "unknown"){
-    chrome.runtime.sendMessage('show', function(r){
-      var domains = r.onceClickedDomains;
-      if(domains) domains = JSON.parse(domains);
-      else domains = [];
-      // was domain clicked before ?
-      if(domains.indexOf(torpedo.domain) > -1){
-          // remove domain from once clicked domains
-          var index = domains.indexOf(torpedo.domain);
-          domains.splice(index, 1);
-          chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){});
-          // add domain to user defined domains
-          domains = r.userDefinedDomains;
-          if(domains) domains = JSON.parse(domains);
-          else domains = [];
-          domains[domains.length] = torpedo.domain;
-          chrome.runtime.sendMessage({name : "userDefinedDomains", value : JSON.stringify(domains)},function(r){});
-      }
-      // add domain to once clicked domains
-      else {
-        domains[domains.length] = torpedo.domain;
-        chrome.runtime.sendMessage({name : "onceClickedDomains", value : JSON.stringify(domains)},function(r){});
-      }
-    });
-  }
+var Torpedo = {
+	firstRun:{
+		label:'firstRun',
+		value:true
+	},
+	onceClickedDomains:{
+		label:'onceClickedDomains',
+		value:[]
+	},
+	userDefinedDomains:{
+		label:'userDefinedDomains',
+		value:[]
+	},
+	timer:{
+		label:'timer',
+		value:3
+	},
+	trustedTimerActivated:{
+		label:'trustedTimerActivated',
+		value:false
+	},
+	userTimerActivated:{
+		label:'userTimerActivated',
+		value:false
+	},
+	trustedListActivated:{
+		label:'trustedListActivated',
+		value:true
+	},
+	referrerPart1:{
+		label:'referrerPart1',
+		value:["https://deref-gmx.net/mail/client/","https://deref-web-02.de/mail/client/"]
+	},
+	referrerPart2:{
+		label:'referrerPart2',
+		value:["/dereferrer/?redirectUrl=","/dereferrer/?redirectUrl="]
+	}
 };
