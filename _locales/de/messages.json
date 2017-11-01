@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "TORPEDO - TOoltip-poweRed Phishing Email DetectiOn",
+    "message": "TORPEDO browser - TOoltip-poweRed Phishing Webmail DetectiOn",
     "description": "Name of the extension."
   },
 
@@ -276,7 +276,7 @@
   },
 
   "defaultSettingsRestored":{
-    "message": "Ursprungszustand wiederhersgestellt! Bitte laden Sie die Seite erneut, auf der Sie TORPEDO nutzen.",
+    "message": "Ursprungszustand wiederhergestellt! Bitte laden Sie die Seite erneut, auf der Sie TORPEDO nutzen.",
     "description": "Default settings"
   },
 
@@ -298,6 +298,21 @@
   "alreadyInReferrerList":{
     "message": "Die von Ihnen eingegebene URL befindet sich bereits in der Liste der Weiterleitungs-Domains.",
     "description": "Entered URL is already in list of referrer URLs"
+  },
+
+  "back":{
+    "message": "❮ Zurück",
+    "description": "Go back (for tutorial)"
+  },
+
+  "next":{
+    "message": "Weiter ❯",
+    "description": "Go next (for tutorial)"
+  },
+
+  "finish":{
+    "message": "Tutorial beenden ❯❯",
+    "description": "Finish tutorial"
   }
 
 }

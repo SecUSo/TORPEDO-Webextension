@@ -1,20 +1,20 @@
 {
 	"applications": {
   	"gecko": {
-    	"id": "torpedo-browserbeta@tu-darmstadt.de",
+    	"id": "torpedo-browser@tu-darmstadt.de",
 		"update_url": "https://addons.secuso.org/updates.json"
   	}
 	},
 	"manifest_version":2,
+	"author":"Betty Ballin",
 	"name":"__MSG_extensionName__",
-	"version":"3.0.3",
-	"default_locale": "en",
+	"version":"1.0",
+	"default_locale": "de",
 	"description":"__MSG_extensionDescription__",
 	"background":{
 		"scripts":[
 			"js/jquery-2.1.1.min.js",
 			"js/punycode.min.js",
-			"js/options.js",
 			"js/publicsuffixlist.min.js",
 			"background.js"
 		]
@@ -24,6 +24,7 @@
 		"https://mg.mail.yahoo.com/*",
 		"https://email.t-online.de/*",
 		"https://outlook.live.com/*",
+		"https://mail.aol.com/*",
 		"https://*.web.de/*",
 		"https://*.gmx.net/*",
 		"tabs",
@@ -56,8 +57,9 @@
 				"https://mg.mail.yahoo.com/*",
 				"https://email.t-online.de/*",
 				"https://outlook.live.com/*",
-				"https://*.web.de/*",
-				"https://*.gmx.net/*"
+				"https://mail.aol.com/*",
+				"https://bap.navigator.web.de/*",
+				"https://navigator.gmx.net/*"
 		  ],
 		  "css": [
 		  	"css/jquery.qtip.min.css",

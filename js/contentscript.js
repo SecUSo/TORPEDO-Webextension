@@ -8,14 +8,14 @@ torpedo.pathname = "";
 
 $(document).ready(function(){
   chrome.runtime.sendMessage({name:"TLD"}, function(r){
-    window.publicSuffixList.parse(r, punycode.toASCII);
+      window.publicSuffixList.parse(r, punycode.toASCII);
   });
   loc = window.location.host;
   var mouseenter = "";
   var outer = "";
   var iframe = "";
 
-  switch(loc){
+  switch( loc ){
     case "mg.mail.yahoo.com":
       outer = "#shellinner";
       mouseenter = ".email-wrapped";
@@ -26,6 +26,10 @@ $(document).ready(function(){
       break;
     case "outlook.live.com":
       mouseenter = "._n_Y";
+      break;
+    case "mail.aol.com":
+      mouseenter="#displayMessage";
+      outer = "#appContent"
       break;
     case "email.t-online.de":
       iframe = "mailreadview";
@@ -40,28 +44,28 @@ $(document).ready(function(){
   if($("body").find(mouseenter)[0] && iframe==""){
     if(outer && $("body").find(outer)[0]){
       // set icon to normal if everything works fine
-      chrome.runtime.sendMessage({"name": "ok"});
+      chrome.runtime.sendMessage({"name": "ok", "location":loc});
       // open tooltip
       $("body").on('mouseenter', mouseenter+' a', function(e){ openTooltip(e) });
     }
     else {
       // set icon to ERROR
-      chrome.runtime.sendMessage({"name": "error"});
+      chrome.runtime.sendMessage({"name": "error", "location":loc});
     }
   }
   else{
     // open tooltip in normal mail panel
     if(iframe==""){
       // set icon to normal if everything works fine
-      chrome.runtime.sendMessage({"name": "ok"});
+      chrome.runtime.sendMessage({"name": "ok", "location":loc});
       $("body").on('mouseenter', mouseenter+" a", function(e){ openTooltip(e) });
     }
     // open tooltip in iframe mail panel
     else{
       if(window.location.href.indexOf(iframe)>-1){
-        chrome.runtime.sendMessage({"name": "ok"});
+        chrome.runtime.sendMessage({"name": "ok", "location":loc});
       } else{
-        chrome.runtime.sendMessage({"name": "error"});
+        chrome.runtime.sendMessage({"name": "error", "location":loc});
       }
       $("body").on("mouseenter", "a", function(e){
         var location = e.view.location.href;

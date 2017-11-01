@@ -194,24 +194,24 @@ function addEvents(){
       $("#statusSettings").html(chrome.i18n.getMessage("savedChanges"));
     });
     $("#revertChanges").on('click', function(e)  {
-      for(var i=0; i<changes.length;i++)
-      if(changes[i][0]=="onceClickedDomains")
-        chrome.storage.sync.set({ 'onceClickedDomains'  :  changes[i][1] });
-      else if(changes[i][0]=="userDefinedDomains")
-        chrome.storage.sync.set({ 'userDefinedDomains' : changes[i][1] });
-      else if(changes[i][0]=="timer")
-        chrome.storage.sync.set({ 'timer' : changes[i][1] });
-      else if(changes[i][0]=="trustedTimerActivated")
-        chrome.storage.sync.set({ 'trustedTimerActivated' : changes[i][1] });
-      else if(changes[i][0]=="userTimerActivated")
-        chrome.storage.sync.set({ 'userTimerActivated' : changes[i][1] });
-      else if(changes[i][0]=="trustedListActivated")
-        chrome.storage.sync.set({ 'trustedListActivated' : changes[i][1] });
-      else if(changes[i][0]=="referrerPart1")
-        chrome.storage.sync.set({ 'referrerPart1' : changes[i][1] });
-      else if(changes[i][0]=="referrerPart2")
-        chrome.storage.sync.set({ 'referrerPart2' : changes[i][1] });
-
+      for(var i=0; i<changes.length;i++){
+        if(changes[i][0]=="onceClickedDomains")
+          chrome.storage.sync.set({ 'onceClickedDomains'  :  changes[i][1] });
+        else if(changes[i][0]=="userDefinedDomains")
+          chrome.storage.sync.set({ 'userDefinedDomains' : changes[i][1] });
+        else if(changes[i][0]=="timer")
+          chrome.storage.sync.set({ 'timer' : changes[i][1] });
+        else if(changes[i][0]=="trustedTimerActivated")
+          chrome.storage.sync.set({ 'trustedTimerActivated' : changes[i][1] });
+        else if(changes[i][0]=="userTimerActivated")
+          chrome.storage.sync.set({ 'userTimerActivated' : changes[i][1] });
+        else if(changes[i][0]=="trustedListActivated")
+          chrome.storage.sync.set({ 'trustedListActivated' : changes[i][1] });
+        else if(changes[i][0]=="referrerPart1")
+          chrome.storage.sync.set({ 'referrerPart1' : changes[i][1] });
+        else if(changes[i][0]=="referrerPart2")
+          chrome.storage.sync.set({ 'referrerPart2' : changes[i][1] });
+      }
       init();
       $("#statusSettings").html(chrome.i18n.getMessage("reversedChanges"));
     });

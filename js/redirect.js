@@ -18,14 +18,8 @@ function resolveRedirect(event){
 */
 function resolveReferrer(r){
   var url = torpedo.url;
-  var arr1 = r.referrerPart1.split(",");
-  try{
-    arr1 = JSON.parse(r.referrerPart1);
-  }catch(err){}
-  var arr2 = r.referrerPart2.split(",");
-  try{
-    arr2 = JSON.parse(r.referrerPart2);
-  }catch(err){}
+  var arr1 = r.referrerPart1;
+  var arr2 = r.referrerPart2;
   for(var i = 0; i < arr1.length; i++){
     if(url.indexOf(arr1[i] > -1)){
       var cut = arr2[i] ? arr2[i] : arr1[i];

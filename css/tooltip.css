@@ -7,7 +7,9 @@
   font-family: Helvetica !important;
   line-height: 100% !important;
 }
-
+.qtip-content{
+  background-color: white !important;
+}
 div.torpedoTooltip
 
 div.torpedoTooltip div, div.torpedoTooltip span, div.torpedoTooltip applet, div.torpedoTooltip object, div.torpedoTooltip iframe,
@@ -19,19 +21,20 @@ b, div.torpedoTooltip u, div.torpedoTooltip i, div.torpedoTooltip center,
 dl, div.torpedoTooltip dt, div.torpedoTooltip dd, div.torpedoTooltip ol, div.torpedoTooltip ul, div.torpedoTooltip li,
 fieldset, div.torpedoTooltip form, div.torpedoTooltip label, div.torpedoTooltip legend,
 table, div.torpedoTooltip caption, div.torpedoTooltip tbody, div.torpedoTooltip tfoot, div.torpedoTooltip thead, div.torpedoTooltip tr, div.torpedoTooltip th, div.torpedoTooltip td,
-article, div.torpedoTooltip aside, div.torpedoTooltip canvas, div.torpedoTooltip details, div.torpedoTooltip embed, div.torpedoTooltip 
-figure, div.torpedoTooltip figcaption, div.torpedoTooltip footer, div.torpedoTooltip header, div.torpedoTooltip hgroup, div.torpedoTooltip 
+article, div.torpedoTooltip aside, div.torpedoTooltip canvas, div.torpedoTooltip details, div.torpedoTooltip embed, div.torpedoTooltip
+figure, div.torpedoTooltip figcaption, div.torpedoTooltip footer, div.torpedoTooltip header, div.torpedoTooltip hgroup, div.torpedoTooltip
 menu, div.torpedoTooltip nav, div.torpedoTooltip output, div.torpedoTooltip ruby, div.torpedoTooltip section, div.torpedoTooltip summary,
 time, div.torpedoTooltip mark, div.torpedoTooltip audio, div.torpedoTooltip video {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
+  background-color: white;
 	font: inherit;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, div.torpedoTooltip aside, div.torpedoTooltip details, div.torpedoTooltip figcaption, div.torpedoTooltip figure, div.torpedoTooltip 
+article, div.torpedoTooltip aside, div.torpedoTooltip details, div.torpedoTooltip figcaption, div.torpedoTooltip figure, div.torpedoTooltip
 footer, div.torpedoTooltip header, div.torpedoTooltip hgroup, div.torpedoTooltip menu, div.torpedoTooltip nav, div.torpedoTooltip section {
 	display: block;
 }
