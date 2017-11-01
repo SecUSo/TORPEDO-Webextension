@@ -33,19 +33,28 @@ function sendEmail() {
     chrome.tabs.create({ url: emailUrl });
 }
 
+// enable page action only on email pages
 chrome.tabs.onUpdated.addListener(function(tabId,status,info){
-  chrome.pageAction.show(tabId);
-	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-		if(tabs[0].status == "complete"){
-	  	chrome.tabs.sendMessage(tabs[0].id, {msg:"hi"}, function(response) {
-				var img = err?"img/error38.png":"img/icon38.png";
-				try{
-					chrome.pageAction.setIcon({tabId, path: { "38" : img }});
-			   	chrome.pageAction.setPopup({tabId, popup: "/icon.html"});
-				}catch(e){}
-      });
-		}
-  });
+  var manifest = chrome.runtime.getManifest();
+  var websites = manifest.content_scripts[0].matches;
+  var showIcon = false;
+  for( var i = 0; i < websites.length; i++){
+    if(info.url.match(websites[i]) != null) showIcon = true;
+  }
+  if(showIcon){
+    chrome.pageAction.show(tabId);
+  }
+	/*chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    try{
+  		if(tabs[0].status == "complete"){
+  	  	chrome.tabs.sendMessage(tabs[0].id, {msg:"hi"}, function(response) {
+  				var img = "img/icon38.png";
+  				chrome.pageAction.setIcon({tabId, path: { "38" : img }});
+  			  chrome.pageAction.setPopup({tabId, popup: "/icon.html"});
+        });
+  		}
+    }catch(e){}
+  });*/
 });
 
 // message passing with content script
@@ -76,22 +85,23 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 	// icon: error with finding mail panel message
 	else if(request.name == "error"){
     loc = request.location;
-		try{
-			chrome.tabs.query({currentWindow: true,active:true}, function(tabs){
+  	chrome.tabs.query({currentWindow: true,active:true}, function(tabs){
+      try{
 				chrome.pageAction.setIcon({tabId: tabs[0].id, path: { "38" : "img/error38.png" }});
+      } catch(e){}
 			});
-		}catch(e){}
+
 		err = true;
 		sendResponse({});
 	}
 	// tooltip works message
 	else if(request.name == "ok"){
     loc = request.location;
-		try{
-			chrome.tabs.query({currentWindow: true,active:true}, function(tabs){
+		chrome.tabs.query({currentWindow: true,active:true}, function(tabs){
+      try{
 				chrome.pageAction.setIcon({tabId: tabs[0].id, path: { "38" : "img/icon38.png" }});
-			});
-		}catch(e){}
+      } catch(e){}
+		});
 		err = false;
 		sendResponse({});
 	}

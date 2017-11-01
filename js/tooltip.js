@@ -31,89 +31,101 @@ function tooltipText(){
 * fill the basic tooltip structure with corresponding texts
 */
 function updateTooltip(){
-  var t = torpedo.tooltip;
-  var url = torpedo.url;
-  var pathname = torpedo.pathname;
-  if(pathname.length > 100){
-    var replace = pathname.substring(0,100) + "...";
-    url = url.replace(pathname, replace);
-  }
-  $(t.find("#torpedoURL")[0]).html(url.replace(torpedo.domain, '<span id="torpedoDomain">' + torpedo.domain + '</span>'));
-  $(t.find("#torpedoWarningImage")[0]).hide();
-  $(t.find("#torpedoMoreInfo")[0]).hide();
-  $(t.find("#torpedoMoreInfoButton")[0]).hide();
-  $(t.find("#torpedoRedirectButton")[0]).hide();
-  $(t.find("#torpedoInfoText")[0]).click(function(event){showInfo(event)});
-  $(t.find("#torpedoMoreInfoButton")[0]).click(function(event){openInfoImage(event)});
-  $(t.find("#torpedoRedirectButton")[0]).click(function(event){resolveRedirect(event)});
   chrome.storage.sync.get(null,function(r) {
       getSecurityStatus(r);
-      switch(torpedo.status){
-        case "trusted":
-          $(".torpedoTooltip").addClass("torpedoTrusted");
-          $(t.find("#torpedoSecurityStatus")[0]).html(chrome.i18n.getMessage("lowRiskDomain"));
-          $(t.find("#torpedoInfoText")[0]).html(chrome.i18n.getMessage("lowRiskInfo"));
-          $(t.find("#torpedoAdvice")[0]).hide();
-          $(t.find("#torpedoMoreInfo")[0]).html(chrome.i18n.getMessage("moreInfoLowRisk"));
-          if(r.trustedTimerActivated=="true") countdown(r.timer);
-          break;
-        case "userdefined":
+      var state = torpedo.state;
+      console.log(state);
+
+      var t = torpedo.tooltip;
+      var url = torpedo.url;
+      var pathname = torpedo.pathname;
+      if(pathname.length > 100){
+        var replace = pathname.substring(0,100) + "...";
+        url = url.replace(pathname, replace);
+      }
+      $(t.find("#torpedoURL")[0]).html(url.replace(torpedo.domain, '<span id="torpedoDomain">' + torpedo.domain + '</span>'));
+      $(t.find("#torpedoWarningImage")[0]).hide();
+      $(t.find("#torpedoMoreInfo")[0]).hide();
+      $(t.find("#torpedoMoreInfoButton")[0]).hide();
+      $(t.find("#torpedoRedirectButton")[0]).hide();
+      $(t.find("#torpedoInfoText")[0]).click( function(event){ $(t.find("#torpedoMoreInfo")[0]).toggle() } );
+      $(t.find("#torpedoMoreInfoButton")[0]).click( function(event){ openInfoImage(event) } );
+      $(t.find("#torpedoRedirectButton")[0]).click( function(event){ resolveRedirect(event) } );
+
+      // get texts from textfile
+      var button = chrome.i18n.getMessage('ButtonWeiterleitung');
+      var ueberschrift = chrome.i18n.getMessage(state+"Ueberschrift");
+      var erklaerung = chrome.i18n.getMessage(state+"Erklaerung");
+      var mehrInfo = chrome.i18n.getMessage("MehrInfo");
+      var infotext = chrome.i18n.getMessage(state+"Infotext").replace("<URL>", url);
+      var infoCheck = chrome.i18n.getMessage("Info");
+      var gluehbirneText = chrome.i18n.getMessage(state+"GluehbirneText");
+      var linkDeaktivierung = chrome.i18n.getMessage(state+"LinkDeaktivierung");
+
+      // assign texts
+      $("#torpedoWarningText").html(ueberschrift);
+      $("#torpedoSecurityStatus").html(erklaerung);
+      $("#torpedoAdviceText").html(gluehbirneText);
+      $("#torpedoInfoText").html(mehrInfo);
+      $("#torpedoMoreInfo").html(infotext);
+      $("#torpedoRedirectButton").html(button);
+      $("#torpedoLinkDelay").html(linkDeaktivierung);
+      $("#torpedoMoreInfoButton").html(infoCheck);
+
+      console.log(ueberschrift);
+      console.log(erklaerung);
+      console.log(gluehbirneText);
+      console.log(mehrInfo);
+      console.log(infotext);
+      console.log(linkDeaktivierung);
+      console.log(infoCheck);
+
+      // hide light bulb if no text is there
+      if(gluehbirneText) $("#torpedoAdvice").show();
+      else $("#torpedoAdvice").hide();
+
+      switch(torpedo.state){
+        case "T3":
+        case "T3TH":
+        case "T3PH":
+        case "T3PH":
           $(".torpedoTooltip").addClass("torpedoUserDefined");
-          $(t.find("#torpedoSecurityStatus")[0]).html(chrome.i18n.getMessage("userDefinedDomain"));
-          $(t.find("#torpedoInfoText")[0]).html(chrome.i18n.getMessage("moreInfo"));
-          $(t.find("#torpedoAdvice")[0]).hide();
-          $(t.find("#torpedoMoreInfo")[0]).html(chrome.i18n.getMessage("moreInfoUserDefined"));
           if(r.userTimerActivated=="true") countdown(r.timer);
           break;
-        case "unknown":
-          $(t.find("#torpedoSecurityStatus")[0]).html(chrome.i18n.getMessage("unknownDomain"));
-          $(t.find("#torpedoInfoText")[0]).html(chrome.i18n.getMessage("moreInfo"));
-          $(t.find("#torpedoAdviceText")[0]).html(chrome.i18n.getMessage("unknownAdvice"));
-          countdown(r.timer);
+        case "T2":
+        case "T2TH":
+        case "T2PH":
+        case "T2PHTH":
+          $(".torpedoTooltip").addClass("torpedoTrusted");
+          if(r.trustedTimerActivated=="true") countdown(r.timer);
           break;
-        case "redirect":
-          $(t.find("#torpedoSecurityStatus")[0]).html(chrome.i18n.getMessage("redirectDomain"));
-          $(t.find("#torpedoInfoText")[0]).html(chrome.i18n.getMessage("specialCaseInfo"));
-          $(t.find("#torpedoAdviceText")[0]).html(chrome.i18n.getMessage("redirectAdvice"));
-          $(t.find("#torpedoMoreInfo")[0]).html(chrome.i18n.getMessage("moreInfoRedirect"));
-          $(t.find("#torpedoRedirectButton")[0]).html(chrome.i18n.getMessage("deduceURL"));
+        case "ShortURL":
           $(t.find("#torpedoRedirectButton")[0]).show();
           countdown(r.timer);
           break;
-        case "encrypted":
-          $(t.find("#torpedoWarningText")[0]).show();
-          $(t.find("#torpedoWarningText")[0]).html(chrome.i18n.getMessage("encryptedDomain"));
-          $(t.find("#torpedoInfoText")[0]).html(chrome.i18n.getMessage("specialCaseInfo"));
-          $(t.find("#torpedoMoreInfo")[0]).html(chrome.i18n.getMessage("moreInfoEncrypted"));
+        case "T1TH":
+          $(t.find("#torpedoRedirectButton")[0]).show();
           countdown(r.timer);
-          resolveReferrer(r);
           break;
-        case "phish":
+        case "URLnachErmittelnButton2":
+          $(t.find("#torpedoRedirectButton")[0]).show();
+          countdown(r.timer);
+          break;
+        case "T1":
+        case "T1PH":
+          $(".torpedoTooltip").addClass("torpedoUnknown");
+          countdown(r.timer);
+          break;
+        case "T1TH":
+        case "T1PHTH":
+        case "WarnungPhish":
           $(".torpedoTooltip").addClass("torpedoPhish");
           $(t.find("#torpedoWarningImage")[0]).show();
           $(t.find("#torpedoWarningText")[0]).show();
-          $(t.find("#torpedoWarningText")[0]).html(chrome.i18n.getMessage("phishWarning"));
-          $(t.find("#torpedoAdviceText")[0]).html(chrome.i18n.getMessage("redirectAdvice"));
-          $(t.find("#torpedoInfoText")[0]).html(chrome.i18n.getMessage("specialCaseInfo"));
-          $(t.find("#torpedoMoreInfo")[0]).html(chrome.i18n.getMessage("moreInfoPhish"));
           countdown(r.timer+2);
+          break;
         }
     });
-};
-
-/**
-* open info panel after a click on the "more info" field
-*/
-function showInfo(event){
-  var t = torpedo.tooltip;
-  if(torpedo.status != "unknown"){
-    $(t.find("#torpedoMoreInfo")[0]).toggle();
-  }
-  else openInfoImage(event);
-  if(torpedo.status == "redirect" || torpedo.status == "encrypted" || torpedo.status == "phish"){
-    $(t.find("#torpedoMoreInfoButton")[0]).html(chrome.i18n.getMessage("checkURL"));
-    $(t.find("#torpedoMoreInfoButton")[0]).toggle();
-  }
 };
 
 /**

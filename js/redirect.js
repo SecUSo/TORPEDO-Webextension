@@ -30,7 +30,6 @@ function resolveReferrer(r){
         const href = new URL(temp);
         setNewUrl(href);
       }catch(e){}
-      updateTooltip();
       break;
     }
   }

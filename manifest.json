@@ -20,22 +20,12 @@
 		]
 	},
 	"permissions":[
-		"https://mail.google.com/*",
-		"https://mg.mail.yahoo.com/*",
-		"https://email.t-online.de/*",
-		"https://outlook.live.com/*",
-		"https://mail.aol.com/*",
-		"https://*.web.de/*",
-		"https://*.gmx.net/*",
+		"<all_urls>",
 		"tabs",
 		"storage"
 	],
 	"page_action": {
 		"browser_style": true,
-		"default_icon": {
-	    "38": "img/icon38.png",
-	    "64": "img/icon64.png"
-	  },
 	  "default_title": "__MSG_extensionName__",
 		"default_popup": "icon.html"
   },
@@ -54,7 +44,7 @@
 		{
 		  "matches": [
 		  	"https://mail.google.com/*",
-				"https://mg.mail.yahoo.com/*",
+				"https://mail.yahoo.com/*",
 				"https://email.t-online.de/*",
 				"https://outlook.live.com/*",
 				"https://mail.aol.com/*",

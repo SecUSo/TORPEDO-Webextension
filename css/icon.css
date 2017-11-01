@@ -1,24 +1,22 @@
 body {
-  overflow: hidden;
   width: 250px;
 }
-div:first-child {
-  margin-top: 0px;
+button {
+    background-color: #0040ff;
+    border: 1px solid blue;
+    color: white;
+    padding: 5px 12px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
 }
-div {
-  cursor: pointer;
-  text-align: center;
-  padding: 1px 3px;
-  font-family: sans-serif;
-  font-size: 1em;
-  margin-top: 2px;
-  background: #cccccc;
+
+button:not(:last-child) {
+    border-bottom: none;
 }
-div:hover {
-  background: #aaaaaa;
-}
-#torpedoPage,#options,#error{
-  border: 1px solid black;
+
+button:hover {
+  background-color: #0033cc;
 }
 .working{
   background: #00e673;
