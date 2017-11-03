@@ -1,10 +1,4 @@
 {
-	"applications": {
-  	"gecko": {
-    	"id": "torpedo-browser@tu-darmstadt.de",
-		"update_url": "https://addons.secuso.org/updates.json"
-  	}
-	},
 	"manifest_version":2,
 	"author":"Betty Ballin",
 	"name":"__MSG_extensionName__",
