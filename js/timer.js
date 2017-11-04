@@ -9,14 +9,15 @@ function countdown(startTime) {
     var time = startTime
     torpedo.time = time;
     var t = torpedo.tooltip;
-    $(t.find("#torpedoLinkDelay")[0]).html(chrome.i18n.getMessage("linkDelay"));
+
+    $(t.find("#torpedoTimer")[0]).show();
     /**
     * assert time to tooltip text
     */
     function showTime() {
       try{
         t.find("#torpedoTimer")[0].remove();
-        $('<p id="torpedoTimer">'+chrome.i18n.getMessage("waitingTime", ""+time)+'</p>').appendTo(t);
+        $('<p id="torpedoTimer">'+chrome.i18n.getMessage("verbleibendeZeit", ""+time)+'</p>').appendTo(t);
       }catch(e){}
     }
 

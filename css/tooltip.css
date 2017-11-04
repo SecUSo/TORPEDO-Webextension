@@ -2,10 +2,34 @@
   border: solid 2.5px #bfb9b9;
   border-radius: 5px;
   background-color: white;
-  min-width: 350px;
-  font-size: 13px !important;
+  min-width: 430px;
+  font-size: 14px !important;
   font-family: Helvetica !important;
-  line-height: 100% !important;
+  line-height: 130% !important;
+}
+
+#torpedoContextMenu {
+  border: 1px solid #bfb9b9;
+  background-color: white;
+  font-size: 14px !important;
+  font-family: Helvetica !important;
+  line-height: 130% !important;
+}
+
+#torpedoContextMenu ul {
+  padding: 5px;
+  list-style: none;
+  margin: 0;
+}
+#torpedoContextMenu li{
+    list-style: none;
+    padding: 0 10px 0 10px;
+    margin: 1px 0 1px 0;
+    background-color: white;
+    color: black;
+}
+#torpedoContextMenu li:hover {
+  background-color: #cce0ff;
 }
 .qtip-content{
   background-color: white !important;
@@ -56,15 +80,13 @@ div.torpedoTooltip table {
 }
 
 
-
-#torpedoURL{
-  color: black !important;
-  word-wrap: break-word;
-  word-break: break-all;
-  margin: 0px 0 10px 0 !important;
+.torpedoPopup{
+  max-width: none !important;
+  background-color: white;
+  border: 2px solid black;
 }
-#torpedoSecurityStatus{
-  margin-top: 5px;
+.torpedoTooltip div{
+  margin: 0 0 10px 0;
 }
 .torpedoTooltip p{
   overflow: hidden !important;
@@ -74,40 +96,64 @@ div.torpedoTooltip table {
   float: left;
   width: 25px;
   height: 25px;
-  margin-right: 10px;
-}
-.torpedoBlock{
+  padding-right: 10px;
+  padding-bottom: 10px;
   margin-bottom: 5px;
 }
-.torpedoPopup{
-  max-width: none !important;
-  background-color: white;
-  border-color: black;
+.torpedoHighlight{
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0px !important;
+  margin-right: 2px;
 }
 .torpedoTrusted{
-  border-color: green !important;
+  border: 2px solid green !important;
 }
 .torpedoUserDefined{
-  border-color: #1a509d !important;
+  border: 2px solid #1a509d !important;
 }
 .torpedoPhish{
-  border-color: red !important;
+  border: 2px solid red !important;
   background-color: #feffcc !important;
 }
-
 #torpedoDomain{
-  color:#0033cc  !important;
-  letter-spacing: 2px;
-  margin-left: 2px;
-  margin-right: 2px;
+  font-weight: bold !important;
+  letter-spacing: 3px !important;
+  margin: 10px 2px 25px 2px;
+}
+#torpedoInfoImage,#torpedoAdviceImage,#torpedoWarningImage{
+  padding-right: 10px;
 }
 #torpedoInfoText:hover{
   text-decoration: underline;
 }
-#torpedoMoreInfo, #torpedoLinkDelay{
+
+#torpedoInfoDiv{
+  overflow-y: scroll;
+  height: 60px;
+}
+#torpedoInfoDiv, #torpedoLinkDelay, #torpedoURL, #torpedoMoreInfoButton, #torpedoRedirectButton{
   clear: both;
+  width: 100%;
+  margin-top: 5px;
 }
 #torpedoPopupImage{
   width: 600px;
   height: 380px;
+}
+#torpedoMoreInfoButton{
+  margin: 10px 0 0 10px;
+}
+#torpedoURL{
+  color: black !important;
+  word-wrap: break-word;
+  word-break: break-all;
+  margin-bottom: 13px;
+  text-decoration: none;
+}
+#torpedoSecurityStatus{
+  margin-top: 5px;
+}
+#torpedoInfo, #torpedoAdvice{
+  padding-bottom: 5px;
 }

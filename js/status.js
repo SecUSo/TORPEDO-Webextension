@@ -1,5 +1,6 @@
 var torpedo = torpedo || {};
 torpedo.state = "unknown";
+torpedo.oldDomain = "";
 r = null;
 
 /**
@@ -8,32 +9,43 @@ r = null;
 */
 function getSecurityStatus(storage){
   r = storage;
-
-  console.log(torpedo.domain);
-  console.log(" is referrer?" + isReferrer());
-
-      console.log(" is redirect?" + isRedirect());
-
-      console.log(" is mismatch?" + isMismatch());
-  if(isReferrer()){ // redirect
-    resolveReferrer(r);
-    console.log(torpedo.domain);
-    console.log(" is referrer?" + isReferrer());
-
-        console.log(" is redirect?" + isRedirect());
-
-        console.log(" is mismatch?" + isMismatch());
-    if(isReferrer()){// redirect + redirect
+  if(torpedo.state == "URLnachErmittelnButton2"){
+    if(isReferrer(torpedo.domain) || isRedirect(torpedo.domain)){
       torpedo.state = "WarnungPhish";
     }
-    else if(isRedirect()){ // redirect + short url
-      torpedo.state = "URLnachErmittelnButton2";
+    else{
+      if(inTrusted(torpedo.domain)){
+        torpedo.state = "T2Stern";
+      }
+      else if(inUserList(torpedo.domain)){
+        torpedo.state = "T3Stern";
+      }
+      else{
+        torpedo.state = "T1Stern";
+      }
     }
-    else if(isMismatch(true)){ // redirect + mismatch
-      if(inTrusted()){
+    return;
+  }
+
+  torpedo.oldDomain = torpedo.domain;
+  if(isReferrer(torpedo.domain)){ // redirect
+    resolveReferrer(r);
+    if(isReferrer(torpedo.domain)){// redirect + redirect
+      torpedo.state = "WarnungPhish";
+    }
+    else if(isRedirect(torpedo.domain)){ // redirect + short url
+      if(isMismatch(torpedo.domain)){
+        torpedo.state = "WarnungPhish";
+      }
+      else{
+        torpedo.state = "URLnachErmittelnButton2";
+      }
+    }
+    else if(isMismatch(torpedo.domain)){ // redirect + mismatch
+      if(inTrusted(torpedo.domain)){
         torpedo.state = "T2PHTH";
       }
-      else if(inUserList()){
+      else if(inUserList(torpedo.domain)){
         torpedo.state = "T3PHTH";
       }
       else{
@@ -41,12 +53,10 @@ function getSecurityStatus(storage){
       }
     }
     else { // simple redirect
-        console.log(" is in trusted?" + inTrusted());
-            console.log(" is in user?" + inUserList());
-      if(inTrusted()){
+      if(inTrusted(torpedo.domain)){
         torpedo.state = "T2PH";
       }
-      else if(inUserList()){
+      else if(inUserList(torpedo.domain)){
         torpedo.state = "T3PH";
       }
       else{
@@ -54,24 +64,19 @@ function getSecurityStatus(storage){
       }
     }
   }
-  else if(isRedirect()){ // short url
-  console.log(" is referrer?" + isReferrer());
-
-      console.log(" is redirect?" + isRedirect());
-
-      console.log(" is mismatch?" + isMismatch());
-    if(isMismatch(true)){
+  else if(isRedirect(torpedo.domain)){ // short url
+    if(isMismatch(torpedo.domain)){
       torpedo.state = "WarnungPhish";
     }
     else{
-      torpedo.state = "ShortURL";
+      torpedo.state = "URLnachErmittelnButton2";
     }
   }
-  else if(isMismatch()){ // mismatch
-    if(inTrusted()){
+  else if(isMismatch(torpedo.domain)){
+    if(inTrusted(torpedo.domain)){
       torpedo.state = "T2TH";
     }
-    else if(inUserList()){
+    else if(inUserList(torpedo.domain)){
       torpedo.state = "T3TH";
     }
     else{
@@ -79,10 +84,10 @@ function getSecurityStatus(storage){
     }
   }
   else{
-    if(inTrusted()){
+    if(inTrusted(torpedo.domain)){
       torpedo.state = "T2";
     }
-    else if(inUserList()){
+    else if(inUserList(torpedo.domain)){
       torpedo.state = "T3";
     }
     else{
@@ -91,50 +96,48 @@ function getSecurityStatus(storage){
   }
 };
 
-function isReferrer(){
+function isReferrer(url){
   var lst = r.referrerPart1;
   for(var i = 0; i < lst.length; i++){
-    if(lst[i].indexOf(torpedo.domain) > -1) return true;
+    if(lst[i].indexOf(url) > -1) return true;
   }
   return false;
 }
 
-function isRedirect(){
+function isRedirect(url){
   var lst = r.redirectDomains;
   for(var i = 0; i < lst.length; i++){
-    if(lst[i].indexOf(torpedo.domain) > -1) return true;
+    if(lst[i].indexOf(url) > -1) return true;
   }
   return false;
 }
 
-function isMismatch(alreadyChecked){
-  // TODO
-  if(alreadyChecked) return false;
+function isMismatch(url){
   try{
-    const url = new URL(torpedo.target.innerHTML.replace(" ",""));
-    var linkTextDomain = extractDomain(url.hostname);
-    if(linkTextDomain != torpedo.domain){
-        return true;
+    const uri = new URL(torpedo.target.innerHTML.replace(" ",""));
+    var linkTextDomain = extractDomain(uri.hostname);
+    if(linkTextDomain != torpedo.oldDomain && linkTextDomain != url){
+      return true;
     }
   } catch(e){}
   return false;
 }
 
-function inTrusted(){
+function inTrusted(url){
   if(r.trustedListActivated){
       var lst = r.trustedDomains;
       for(var i = 0; i < lst.length; i++){
-        if(lst[i].indexOf(torpedo.domain) > -1) return true;
+        if(lst[i].indexOf(url) > -1) return true;
       }
   }
   return false;
 }
 
 
-function inUserList(){
+function inUserList(url){
   var lst = r.userDefinedDomains;
   for(var i = 0; i < lst.length; i++){
-    if(lst[i].indexOf(torpedo.domain) > -1) return true;
+    if(lst[i].indexOf(url) > -1) return true;
   }
   return false;
 }

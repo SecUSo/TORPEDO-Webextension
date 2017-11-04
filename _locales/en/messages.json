@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "TORPEDO browser",
+    "message": "TORPEDO browser - TOoltip-poweRed Phishing Webmail DetectiOn",
     "description": "Name of the extension."
   },
 
@@ -18,6 +18,26 @@
         "example" : "3"
       }
     }
+  },
+
+  "openSettings": {
+    "message": "Open settings window",
+    "description": "Open settings pages"
+  },
+
+  "markAsTrusted": {
+    "message": "Mark domain as trustworthy",
+    "description": "Add domain to list of trusted domains"
+  },
+
+  "googleCheck": {
+    "message": "Check domain with google.com",
+    "description": "Check domain with google"
+  },
+
+  "openTutorial": {
+    "message": "Open tutorial",
+    "description": "Open tutorial page"
   },
 
   "Info": {
@@ -51,7 +71,7 @@
   },
 
   "T1SternGluehbirneText": {
-    "message": "<label class='highlight'>Please check the domain carefully.</label>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
+    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
     "description": "Advice for the user"
   },
 
@@ -126,7 +146,7 @@
   },
 
   "T1GluehbirneText": {
-    "message": "<label class='highlight'>Please check the domain carefully.</label>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
+    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
     "description": "Advice for the user"
   },
 
@@ -191,17 +211,17 @@
   },
 
   "T1PHErklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as uncertain risk (grey frame). You have to assess the risk yourself in this case.\n\nThe use of a redirection puts your privacy at risk.",
+    "message": "TORPEDO classified this domain (highlighted part) as uncertain risk (grey frame). You have to assess the risk yourself in this case.<br>The use of a redirection puts your privacy at risk.",
     "description": "Information on the classification of this domain"
   },
 
   "T1PHInfotext": {
-    "message": "The referred URL:\n<URL>\nFrom the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.\n\nTORPEDO classified the domain (highlighted part) of the target URL as uncertain risk (grey frame). You have to assess the risk yourself in this case. This means that the domain of the target URL is unknown to TORPEDO. The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
+    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>TORPEDO classified the domain (highlighted part) of the target URL as uncertain risk (grey frame). You have to assess the risk yourself in this case. This means that the domain of the target URL is unknown to TORPEDO. The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
     "description": "More information on the evaluation of this domain"
   },
 
   "T1PHGluehbirneText": {
-    "message": "label class='highlight'>Please check the domain carefully.</label>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
+    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
     "description": "Advice for the user"
   },
 
@@ -216,12 +236,12 @@
   },
 
   "T2PHErklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as low-risk (green frame).\n\nThe use of a redirection puts your privacy at risk.",
+    "message": "TORPEDO classified this domain (highlighted part) as low-risk (green frame).<br>The use of a redirection puts your privacy at risk.",
     "description": "Information on the classification of this domain"
   },
 
   "T2PHInfotext": {
-    "message": "The referred URL:\n<URL>\nFrom the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.\n\nTORPEDO classified the domain (highlighted part) of the target URL as low-risk (green frame). This means that this domain belongs to the 100 most frequented websites in Germany.",
+    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>TORPEDO classified the domain (highlighted part) of the target URL as low-risk (green frame). This means that this domain belongs to the 100 most frequented websites in Germany.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -241,12 +261,12 @@
   },
 
   "T3PHErklaerung": {
-    "message": "You have classified his domain (highlighted part) as low-risk (blue frame).\n\nThe use of a redirection puts your privacy at risk.",
+    "message": "You have classified his domain (highlighted part) as low-risk (blue frame).<br>The use of a redirection puts your privacy at risk.",
     "description": "Information on the classification of this domain"
   },
 
   "T3PHInfotext": {
-    "message": "The referred URL:\n<URL>\nFrom the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.\n\nYou classified the domain (highlighted part) of the target URL as low-risk (blue frame). This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
+    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>You classified the domain (highlighted part) of the target URL as low-risk (blue frame). This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -266,7 +286,7 @@
   },
 
   "ShortURLErklaerung": {
-    "message": "This domain (highlighted part) is not the target URL. You will be redirected to another URL. To classify the risk of the target URL, TORPEDO would have to detect the target URL.\n\nThis does not happen automatically, as the detection would put your privacy at risk.",
+    "message": "This domain (highlighted part) is not the target URL. You will be redirected to another URL. To classify the risk of the target URL, TORPEDO would have to detect the target URL.<br>This does not happen automatically, as the detection would put your privacy at risk.",
     "description": "Information on the classification of this domain"
   },
 
@@ -291,12 +311,12 @@
   },
 
   "URLnachErmittelnButton2Erklaerung": {
-    "message": "This domain (highlighted part) is not the target URL, either though. You will be redirected to another URL. To classify the risk of the target URL, TORPEDO would have to detect the target URL.\n\nThis does not happen automatically, as the detection would put your privacy at risk.",
+    "message": "This domain (highlighted part) is not the target URL, either though. You will be redirected to another URL. To classify the risk of the target URL, TORPEDO would have to detect the target URL.<br>This does not happen automatically, as the detection would put your privacy at risk.",
     "description": "Information on the classification of this domain"
   },
 
   "URLnachErmittelnButton2Infotext": {
-    "message": "The referred URL:\n<URL>\n From the structure of the referred URL TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.\n\nFrom the structure of the target URL TORPEDO recognizes that this is the domain of a short URL service.To detect the actual target URL, it is necessary to call up the short URL service. This would let the service provider know that you are potentially interested in this URL. Therefore, tasking TORPEDO with detecting the target URL would put your privacy at risk (even if you call up the short URL service yourself to detect the target URL). You can avoid this by asking the sender to send the target URL to you directly.",
+    "message": "The referred URL:<br><URL><br> From the structure of the referred URL TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>From the structure of the target URL TORPEDO recognizes that this is the domain of a short URL service.To detect the actual target URL, it is necessary to call up the short URL service. This would let the service provider know that you are potentially interested in this URL. Therefore, tasking TORPEDO with detecting the target URL would put your privacy at risk (even if you call up the short URL service yourself to detect the target URL). You can avoid this by asking the sender to send the target URL to you directly.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -306,7 +326,8 @@
   },
 
   "URLnachErmittelnButton2LinkDeaktivierung": {
-    "message": "TORPEDO has deactivated the link to give you time to consider whether you want TORPEDO to determine the target URL.",
+    "message": "TORPEDO has deactivated the link to give you time to consider whether you want TORPEDO to determine the target URL.
+",
     "description": "Text for Deactivation of the link"
   },
 
@@ -321,12 +342,12 @@
   },
 
   "WarnungPhishInfotext": {
-    "message": "This means that the specific cases (mismatch, short URL or redirection) appear in an unusual constellation. This constellation strongly indicates fraud attempt, as this is how fraudsters typically operate.\n\nThe referred URL may potentially not be the target URL either. Therefore, clicking the link would also put your privacy at risk.",
+    "message": "This means that the specific cases (mismatch, short URL or redirection) appear in an unusual constellation. This constellation strongly indicates fraud attempt, as this is how fraudsters typically operate.<br>The referred URL may potentially not be the target URL either. Therefore, clicking the link would also put your privacy at risk.",
     "description": "More information on the evaluation of this domain"
   },
 
   "WarnungPhishGluehbirneText": {
-    "message": "Please make sure that the e-mail has actually been sent by a sender known to you. Do not use any information from the e-mail, but known information or a search engine. Alternatively, draw attention to the problem and ask for the target URL being provided in the e-mail.\n\nIn case the e-mail has been sent by a sender unknown to you, delete this e-mail.",
+    "message": "Please make sure that the e-mail has actually been sent by a sender known to you. Do not use any information from the e-mail, but known information or a search engine. Alternatively, draw attention to the problem and ask for the target URL being provided in the e-mail.<br>In case the e-mail has been sent by a sender unknown to you, delete this e-mail.",
     "description": "Advice for the user"
   },
 
@@ -346,12 +367,12 @@
   },
 
   "T1THInfotext": {
-    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.\nTORPEDO anticipates that this case is rather a fraud attempt, because the domain (highlighted part) of the referred URL is unknown to TORPEDO. The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).\n\nThunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
+    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a fraud attempt, because the domain (highlighted part) of the referred URL is unknown to TORPEDO. The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).<br>Thunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
     "description": "More information on the evaluation of this domain"
   },
 
   "T1THGluehbirneText": {
-    "message": "<label class='highlight'>Please check the domain carefully.</label>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
+    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
     "description": "Advice for the user"
   },
 
@@ -371,7 +392,7 @@
   },
 
   "T2THInfotext": {
-    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.\nTORPEDO anticipates that this case is rather a mistake, because the domain (highlighted part) of the referred URL is classified as low-risk by TORPEDO, because this domain belongs to the 100 most frequented websites in Germany. \n\nThunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
+    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a mistake, because the domain (highlighted part) of the referred URL is classified as low-risk by TORPEDO, because this domain belongs to the 100 most frequented websites in Germany. <br>Thunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -396,7 +417,7 @@
   },
 
   "T3THInfotext": {
-    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.\nTORPEDO anticipates that this case is rather a mistake, because you have classified this domain (highlighted part) as low-risk. This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).\n\nThunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
+    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a mistake, because you have classified this domain (highlighted part) as low-risk. This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).<br>Thunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -421,12 +442,12 @@
   },
 
   "T1PHTHInfotext": {
-    "message": "The referred URL:\n<URL>\nFrom the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.\n\nThe mismatch between displayed and referred URL resp. target URL means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.\nTORPEDO anticipates that this case is rather a fraud attempt, because the domain (highlighted part) of the target URL is unknown to TORPEDO, because the domain is unknown to TORPEDO: The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).\n\nThunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
+    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>The mismatch between displayed and referred URL resp. target URL means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a fraud attempt, because the domain (highlighted part) of the target URL is unknown to TORPEDO, because the domain is unknown to TORPEDO: The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).<br>Thunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
     "description": "More information on the evaluation of this domain"
   },
 
   "T1PHTHGluehbirneText": {
-    "message": "<label class='highlight'>Please check the domain carefully.</label>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
+    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
     "description": "Advice for the user"
   },
 
@@ -434,6 +455,57 @@
     "message": "TORPEDO has deactivated the link to give you time to check the domain carefully.",
     "description": "Text for Deactivation of the link"
   },
+
+  "T2PHTHUeberschrift": {
+    "message": "The referred URL redirects you to the following URL:",
+    "description": "Header for tooltip"
+  },
+
+  "T2PHTHErklaerung": {
+    "message": "TORPEDO classified this domain (highlighted part) as low-risk (green frame).<br>The use of a redirection puts your privacy at risk.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T2PHTHInfotext": {
+    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here. The mismatch between displayed and referred URL resp. target URL means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a mistake, because the domain (highlighted part) of the referred URL is classified as low-risk by TORPEDO, because this domain belongs to the 100 most frequented websites in Germany.<br>Thunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T2PHTHGluehbirneText": {
+    "message": "",
+    "description": "Advice for the user"
+  },
+
+  "T2PHTHLinkDeaktivierung": {
+    "message": "",
+    "description": "Text for Deactivation of the link"
+  },
+
+  "T3PHUeberschrift": {
+    "message": "The referred URL redirects you to the following URL:",
+    "description": "Header for tooltip"
+  },
+
+  "T3PHTHErklaerung": {
+    "message": "You have classified his domain (highlighted part) as low-risk (blue frame).<br>The use of a redirection puts your privacy at risk.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T3PHTHInfotext": {
+    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here. The mismatch between displayed and referred URL resp. target URL means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a mistake, because you have classified this domain (highlighted part) as low-risk. This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).<br>Thunderbird might possibly display a phishing alert, because Thunderbird has recognized this mismatch.",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T3PHTHGluehbirneText": {
+    "message": "",
+    "description": "Advice for the user"
+  },
+
+  "T3PHTHLinkDeaktivierung": {
+    "message": "",
+    "description": "Text for Deactivation of the link"
+  },
+
 
   "infoImage":{
     "message": "img/info_en.png",

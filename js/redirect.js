@@ -6,10 +6,10 @@ function resolveRedirect(event){
     torpedo.api.set("hide.event","unfocus");
     torpedo.api.set("hide.delay",0);
     try{
-      const href = new URL(r.url);
+      const href = new URL(r);
       setNewUrl(href);
       updateTooltip();
-    }catch(e){}
+    }catch(e){console.log(e)}
   });
 };
 

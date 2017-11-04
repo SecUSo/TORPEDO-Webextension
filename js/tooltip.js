@@ -5,27 +5,59 @@ torpedo.tooltip;
 * fill tooltip with html structure
 */
 function tooltipText(){
-  var text = "<div id='torpedoWarning' class='torpedoBlock'> \
+  var text = "<div id='torpedoWarning'> \
                 <img id='torpedoWarningImage' src='"+chrome.extension.getURL("img/warning.png")+"'> \
                 <p id='torpedoWarningText'></p>\
               </div>\
-              <a href='"+torpedo.url+"' id='torpedoURL''></a> \
-              <p id='torpedoSecurityStatus' class='torpedoBlock'></p> \
-              <div id='torpedoAdvice' class='torpedoBlock'> \
+              <div><a href='"+torpedo.url+"' id='torpedoURL''></a></div> \
+              <div style='display:none' id='torpedoContextMenu'>\
+                  <ul>\
+                      <li id='torpedoMarkTrusted'></li>\
+                      <li id='torpedoGoogle'></li>\
+                      <li id='torpedoOpenSettings'></li>\
+                      <li id='torpedoOpenTutorial'></li>\
+                  </ul>\
+              </div>\
+              <div><p id='torpedoSecurityStatus'></p></div> \
+              <div id='torpedoAdvice'> \
                 <img id='torpedoAdviceImage' src='"+chrome.extension.getURL("img/advice.png")+"'> \
                 <p id='torpedoAdviceText'></p> \
               </div> \
-              <div id='torpedoInfo' class='torpedoBlock'>  \
+              <div id='torpedoInfo'>  \
                 <img id='torpedoInfoImage' src='"+chrome.extension.getURL("img/info.png")+"'> \
                 <p id='torpedoInfoText'></p> \
               </div>\
-              <p id='torpedoMoreInfo' class='torpedoBlock'></p> \
-              <button id='torpedoMoreInfoButton' type='button' class='torpedoBlock'></button> \
-              <button id='torpedoRedirectButton' type='button' class='torpedoBlock''></button> \
-              <p id='torpedoLinkDelay' class='torpedoBlock'></p> \
-              <p id='torpedoTimer' class='torpedoBlock'></p>";
+              <div id='torpedoInfoDiv'><p id='torpedoMoreInfo'></p></div> \
+              <div><button id='torpedoMoreInfoButton' type='button'></button></div> \
+              <div><button id='torpedoRedirectButton' type='button''></button></div> \
+              <div><p id='torpedoLinkDelay'></p></div> \
+              <p id='torpedoTimer'></p>";
   return text;
 };
+
+function initTooltip(){
+  // context menu
+  var t = torpedo.tooltip;
+  $(t).contextmenu(function(event) {
+    $(t.find("#torpedoContextMenu")[0]).toggle();
+    $(t.find("#torpedoContextMenu")[0]).css({position: "absolute"});
+    event.preventDefault();
+  });
+  $(t).on("click", "div:not(.torpedoContextMenu)", function(e){
+    if(!$(t.find("#torpedoContextMenu")[0]).is(':hidden')){
+      $(t.find("#torpedoContextMenu")[0]).toggle();
+    }
+  });
+
+  $(t.find("#torpedoMarkTrusted")[0]).click( function(event){ chrome.runtime.sendMessage({name: "addUserDefined", url: torpedo.url} ); } );
+  $(t.find("#torpedoGoogle")[0]).click( function(event){ chrome.runtime.sendMessage({name: "google", url: torpedo.url}); } );
+  $(t.find("#torpedoOpenSettings")[0]).click( function(event){ chrome.runtime.sendMessage({name: "settings"}); } );
+  $(t.find("#torpedoOpenTutorial")[0]).click( function(event){ chrome.runtime.sendMessage({name: "tutorial"}); } );
+
+  $(t.find("#torpedoInfoText")[0]).click( function(event){ $(t.find("#torpedoInfoDiv")[0]).toggle() } );
+  $(t.find("#torpedoMoreInfoButton")[0]).click( function(event){ openInfoImage(event) } );
+  $(t.find("#torpedoRedirectButton")[0]).click( function(event){ resolveRedirect(event); torpedo.api.get("hide.event","onfocus") } );
+}
 
 /**
 * fill the basic tooltip structure with corresponding texts
@@ -34,7 +66,6 @@ function updateTooltip(){
   chrome.storage.sync.get(null,function(r) {
       getSecurityStatus(r);
       var state = torpedo.state;
-      console.log(state);
 
       var t = torpedo.tooltip;
       var url = torpedo.url;
@@ -44,13 +75,6 @@ function updateTooltip(){
         url = url.replace(pathname, replace);
       }
       $(t.find("#torpedoURL")[0]).html(url.replace(torpedo.domain, '<span id="torpedoDomain">' + torpedo.domain + '</span>'));
-      $(t.find("#torpedoWarningImage")[0]).hide();
-      $(t.find("#torpedoMoreInfo")[0]).hide();
-      $(t.find("#torpedoMoreInfoButton")[0]).hide();
-      $(t.find("#torpedoRedirectButton")[0]).hide();
-      $(t.find("#torpedoInfoText")[0]).click( function(event){ $(t.find("#torpedoMoreInfo")[0]).toggle() } );
-      $(t.find("#torpedoMoreInfoButton")[0]).click( function(event){ openInfoImage(event) } );
-      $(t.find("#torpedoRedirectButton")[0]).click( function(event){ resolveRedirect(event) } );
 
       // get texts from textfile
       var button = chrome.i18n.getMessage('ButtonWeiterleitung');
@@ -63,36 +87,56 @@ function updateTooltip(){
       var linkDeaktivierung = chrome.i18n.getMessage(state+"LinkDeaktivierung");
 
       // assign texts
-      $("#torpedoWarningText").html(ueberschrift);
-      $("#torpedoSecurityStatus").html(erklaerung);
-      $("#torpedoAdviceText").html(gluehbirneText);
-      $("#torpedoInfoText").html(mehrInfo);
-      $("#torpedoMoreInfo").html(infotext);
-      $("#torpedoRedirectButton").html(button);
-      $("#torpedoLinkDelay").html(linkDeaktivierung);
-      $("#torpedoMoreInfoButton").html(infoCheck);
+      $(t.find("#torpedoWarningText")[0]).html(ueberschrift);
+      $(t.find("#torpedoSecurityStatus")[0]).html(erklaerung);
+      $(t.find("#torpedoAdviceText")[0]).html(gluehbirneText);
+      $(t.find("#torpedoInfoText")[0]).html(mehrInfo);
+      $(t.find("#torpedoMoreInfo")[0]).html(infotext);
+      $(t.find("#torpedoRedirectButton")[0]).html(button);
+      $(t.find("#torpedoLinkDelay")[0]).html(linkDeaktivierung);
+      $(t.find("#torpedoMoreInfoButton")[0]).html(infoCheck);
 
-      console.log(ueberschrift);
-      console.log(erklaerung);
-      console.log(gluehbirneText);
-      console.log(mehrInfo);
-      console.log(infotext);
-      console.log(linkDeaktivierung);
-      console.log(infoCheck);
+      // hide certain elements
+      $(t.find("#torpedoWarningImage")[0]).hide();
+      $(t.find("#torpedoTimer")[0]).hide();
+      $(t.find("#torpedoInfoDiv")[0]).hide();
+      $(t.find("#torpedoLinkDelay")[0]).hide();
+      $(t.find("#torpedoAdvice")[0]).hide();
+      $(t.find("#torpedoMoreInfoButton")[0]).hide();
+      $(t.find("#torpedoRedirectButton")[0]).hide();
 
+      if(r.referrerPart1.indexOf(torpedo.domain)  > -1 || r.userDefinedDomains.indexOf(torpedo.domain)  > -1 || r.trustedDomains.indexOf(torpedo.domain)  > -1 || r.redirectDomains.indexOf(torpedo.domain)  > -1 ){
+        $(t.find("#torpedoMarkTrusted")[0]).hide();
+      }
+      else $(t.find("#torpedoMarkTrusted")[0]).show();
+
+      if(isRedirect(torpedo.domain)){
+        $(torpedo.tooltip.find("#torpedoRedirectButton")[0]).show();
+      }
       // hide light bulb if no text is there
-      if(gluehbirneText) $("#torpedoAdvice").show();
-      else $("#torpedoAdvice").hide();
+      if(gluehbirneText) $(t.find("#torpedoAdvice")[0]).show();
+      if(linkDeaktivierung) $(t.find("#torpedoLinkDelay")[0]).show();
+      else{
+        $(t.find("#torpedoInfo")[0]).css("margin-bottom","0");
+        $(t.find("#torpedoInfo")[0]).css("padding-bottom","0");
+      }
+      $(t.find("#torpedoMarkTrusted")[0]).html(chrome.i18n.getMessage('markAsTrusted'));
+      $(t.find("#torpedoGoogle")[0]).html(chrome.i18n.getMessage('googleCheck'));
+      $(t.find("#torpedoOpenSettings")[0]).html(chrome.i18n.getMessage('openSettings'));
+      $(t.find("#torpedoOpenTutorial")[0]).html(chrome.i18n.getMessage('openTutorial'));
+      $(".torpedoTooltip").removeClass("torpedoUserDefined torpedoTrusted torpedoPhish");
 
       switch(torpedo.state){
         case "T3":
+        case "T3Stern":
         case "T3TH":
         case "T3PH":
-        case "T3PH":
+        case "T3PHTH":
           $(".torpedoTooltip").addClass("torpedoUserDefined");
           if(r.userTimerActivated=="true") countdown(r.timer);
           break;
         case "T2":
+        case "T2Stern":
         case "T2TH":
         case "T2PH":
         case "T2PHTH":
@@ -100,29 +144,29 @@ function updateTooltip(){
           if(r.trustedTimerActivated=="true") countdown(r.timer);
           break;
         case "ShortURL":
-          $(t.find("#torpedoRedirectButton")[0]).show();
           countdown(r.timer);
           break;
         case "T1TH":
-          $(t.find("#torpedoRedirectButton")[0]).show();
-          countdown(r.timer);
-          break;
-        case "URLnachErmittelnButton2":
-          $(t.find("#torpedoRedirectButton")[0]).show();
+          $(".torpedoTooltip").addClass("torpedoPhish");
           countdown(r.timer);
           break;
         case "T1":
+        case "T1Stern":
         case "T1PH":
-          $(".torpedoTooltip").addClass("torpedoUnknown");
+          $(t.find("#torpedoMarkTrusted")[0]).show();
           countdown(r.timer);
           break;
         case "T1TH":
         case "T1PHTH":
         case "WarnungPhish":
           $(".torpedoTooltip").addClass("torpedoPhish");
+          $(t.find("#torpedoMarkTrusted")[0]).show();
           $(t.find("#torpedoWarningImage")[0]).show();
           $(t.find("#torpedoWarningText")[0]).show();
           countdown(r.timer+2);
+          break;
+        default:
+          countdown(r.timer);
           break;
         }
     });
