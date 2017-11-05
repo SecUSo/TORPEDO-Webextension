@@ -480,11 +480,6 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T3PHUeberschrift": {
-    "message": "The referred URL redirects you to the following URL:",
-    "description": "Header for tooltip"
-  },
-
   "T3PHTHErklaerung": {
     "message": "You have classified his domain (highlighted part) as low-risk (blue frame).<br>The use of a redirection puts your privacy at risk.",
     "description": "Information on the classification of this domain"
