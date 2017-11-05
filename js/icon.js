@@ -21,14 +21,12 @@ function init() {
   torpedoPage.innerHTML = chrome.i18n.getMessage("extensionName");
   options.innerHTML = chrome.i18n.getMessage("options");
   var loc = chrome.extension.getBackgroundPage().getStatus();
-  console.log(loc);
+  $(error).removeClass();
   if(loc.works){
-    $(error).removeClass();
     $(error).addClass("working");
     error.innerHTML = chrome.i18n.getMessage("OK");
   }
   else{
-    $(error).removeClass();
     $(error).addClass("error");
     error.innerHTML = chrome.i18n.getMessage("error");
   }

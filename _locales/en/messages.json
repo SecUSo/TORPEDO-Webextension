@@ -522,21 +522,10 @@
     "description": "Status:OK"
   },
 
-  "none":{
-    "message": "Status: TORPEDO is not active on this page",
-    "description": "Status:None"
-  },
-
   "error":{
     "message": "Status: TORPEDO can't display a tooltip on this page, because the mail panel element cannot be detected on this page. Click here to inform the developers.",
     "description": "Status:Error"
   },
-
-  "disable":{
-    "message": "Hide tooltip temporarily",
-    "description": "Disable tooltip on this page"
-  },
-
 
   "timerActivated":{
     "message": "Link deactivation delay timer activated",

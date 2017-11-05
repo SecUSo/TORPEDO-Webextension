@@ -522,19 +522,9 @@
     "description": "Status:OK"
   },
 
-  "none":{
-    "message": "Status: TORPEDO wird auf dieser Seite nicht ausgeführt",
-    "description": "Status:None"
-  },
-
   "error":{
     "message": "Status: Der TORPEDO Tooltip kann nicht angezeigt werden, da das Mail-Panel-Element auf dieser Seite nicht erkannt werden kann. Klicken Sie hier, um die Entwickler zu benachrichtigen.",
     "description": "Status:Error"
-  },
-
-  "disable":{
-    "message": "Tooltip vorübergehend ausblenden",
-    "description": "Disable tooltip on this page"
   },
 
   "timerActivated":{
