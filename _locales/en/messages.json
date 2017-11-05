@@ -326,8 +326,7 @@
   },
 
   "URLnachErmittelnButton2LinkDeaktivierung": {
-    "message": "TORPEDO has deactivated the link to give you time to consider whether you want TORPEDO to determine the target URL.
-",
+    "message": "TORPEDO has deactivated the link to give you time to consider whether you want TORPEDO to determine the target URL.",
     "description": "Text for Deactivation of the link"
   },
 
