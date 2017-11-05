@@ -2,9 +2,9 @@ body {
   width: 250px;
 }
 button {
-    background-color: #0040ff;
-    border: 1px solid blue;
-    color: white;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
     padding: 5px 12px;
     cursor: pointer;
     display: block;
@@ -16,13 +16,13 @@ button:not(:last-child) {
 }
 
 button:hover {
-  background-color: #0033cc;
+  background-color: #e6e6e6;
 }
 .working{
-  background: #00e673;
+  background: #99ff99;
   cursor: pointer;
 }
 .error{
-  background: red;
+  background: #ff8566;
   cursor: help;
 }

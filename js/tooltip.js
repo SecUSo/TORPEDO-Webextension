@@ -49,7 +49,15 @@ function initTooltip(){
     }
   });
 
-  $(t.find("#torpedoMarkTrusted")[0]).click( function(event){ chrome.runtime.sendMessage({name: "addUserDefined", url: torpedo.url} ); } );
+  $(t.find("#torpedoMarkTrusted")[0]).click( function(event){
+    chrome.storage.sync.get(null,function(r) {
+      var arr = r.userDefinedDomains;
+      arr.push(torpedo.domain);
+      chrome.storage.sync.set({ 'userDefinedDomains': arr }, function() {
+         updateTooltip();
+      });
+    });
+  });
   $(t.find("#torpedoGoogle")[0]).click( function(event){ chrome.runtime.sendMessage({name: "google", url: torpedo.url}); } );
   $(t.find("#torpedoOpenSettings")[0]).click( function(event){ chrome.runtime.sendMessage({name: "settings"}); } );
   $(t.find("#torpedoOpenTutorial")[0]).click( function(event){ chrome.runtime.sendMessage({name: "tutorial"}); } );

@@ -532,6 +532,12 @@
     "description": "Status:Error"
   },
 
+  "disable":{
+    "message": "Hide tooltip temporarily",
+    "description": "Disable tooltip on this page"
+  },
+
+
   "timerActivated":{
     "message": "Link deactivation delay timer activated",
     "description": "Timer activated"

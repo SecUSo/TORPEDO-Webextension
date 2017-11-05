@@ -15,6 +15,7 @@
 	},
 	"permissions":[
 		"<all_urls>",
+		"activeTab",
 		"tabs",
 		"storage"
 	],
@@ -44,6 +45,7 @@
 				"https://mail.aol.com/*",
 				"https://navigator.web.de/*",
 				"https://bap.navigator.web.de/*",
+				"https://3c-bap.web.de/*",
 				"https://3c.web.de/*",
 				"https://navigator.gmx.net/*",
 				"https://3c.gmx.net/*",

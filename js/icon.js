@@ -14,19 +14,21 @@ document.addEventListener("click", (e) => {
   }
 });
 
-function init(e) {
+function init() {
   var torpedoPage = $(document.body).find("#torpedoPage").get(0);
   var options = $(document.body).find("#options").get(0);
   var error = $(document.body).find("#error").get(0);
   torpedoPage.innerHTML = chrome.i18n.getMessage("extensionName");
   options.innerHTML = chrome.i18n.getMessage("options");
-  var status = chrome.extension.getBackgroundPage().getStatus();
-  $(error).removeClass();
-  if(status.err == ""){
+  var loc = chrome.extension.getBackgroundPage().getStatus();
+  console.log(loc);
+  if(loc.works){
+    $(error).removeClass();
     $(error).addClass("working");
     error.innerHTML = chrome.i18n.getMessage("OK");
   }
-  else {
+  else{
+    $(error).removeClass();
     $(error).addClass("error");
     error.innerHTML = chrome.i18n.getMessage("error");
   }
