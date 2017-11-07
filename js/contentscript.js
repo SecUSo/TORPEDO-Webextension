@@ -5,13 +5,13 @@ torpedo.uri = "";
 torpedo.url = "";
 torpedo.domain = "";
 torpedo.pathname = "";
+torpedo.publicsuffixlist = "";
 torpedo.event;
 torpedo.location;
-disabled = false;
+
 $(document).ready(function(){
-  if(disabled) return;
   chrome.runtime.sendMessage({"name":"TLD"}, function(r){
-      window.publicSuffixList.parse(r, punycode.toASCII);
+    torpedo.publicSuffixList.parse(r, punycode.toASCII);
   });
   torpedo.location = window.location.host;
   var mouseenter = "";
@@ -20,19 +20,17 @@ $(document).ready(function(){
 
   switch( torpedo.location ){
     case "mg.mail.yahoo.com":
-      outer = "#shellinner";
       mouseenter = ".email-wrapped";
       break;
     case "mail.google.com":
       mouseenter=".adn";
-      outer = ".nH"
       break;
     case "outlook.live.com":
       mouseenter = ".conductorContent";
       break;
     case "mail.aol.com":
       mouseenter="#displayMessage";
-      outer = "#appContent"
+      //outer = "#appContent"
       break;
     case "email.t-online.de":
       iframe = "mailreadview";
@@ -129,6 +127,7 @@ function openTooltip(e){
         }
       });
     }catch(err){
+      console.log(err);
       // set the icon to "ERROR" because TORPEDO doesn't work on this page
       chrome.runtime.sendMessage({"name": "error"});
     }

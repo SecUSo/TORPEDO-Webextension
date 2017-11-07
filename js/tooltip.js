@@ -213,7 +213,7 @@ function openInfoImage(event){
 * get domain out of hostname
 */
 function extractDomain(url){
-  var psl = window.publicSuffixList.getDomain(url);
+  var psl = torpedo.publicSuffixList.getDomain(url);
   // psl empty -> url is already a valid domain
   return psl != ""? psl : url;
 };

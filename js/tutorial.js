@@ -9,8 +9,10 @@ $(document).ready(function() {
 
   $("#prev").on("click", function(e){ if(slideIndex > 1) show(--slideIndex) } );
   $("#next").on("click", function(e){ if(slideIndex < 13) show(++slideIndex) } );
-  $("#finish").on("click", function(e){ window.close() } );
-
+  $("#finish").on("click", function(e){  window.close();  } );
+  
+  // workaround for firefox
+  if(window.origin.indexOf("moz-extension://") > -1) $("#finish").hide();
   show(slideIndex);
 });
 

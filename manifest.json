@@ -9,7 +9,6 @@
 		"scripts":[
 			"js/jquery-2.1.1.min.js",
 			"js/punycode.min.js",
-			"js/publicsuffixlist.min.js",
 			"background.js"
 		]
 	},
@@ -57,9 +56,9 @@
 		  "js": [
 		  	"js/jquery-2.1.1.min.js",
 		  	"js/jquery.qtip.min.js",
-		  	"js/publicsuffixlist.min.js",
 		  	"js/punycode.min.js",
 		  	"js/contentscript.js",
+				"js/publicsuffixlist.min.js",
 		  	"js/timer.js",
 				"js/tooltip.js",
 		  	"js/status.js",

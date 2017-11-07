@@ -356,7 +356,7 @@ function addUserDefined(){
     var input = $("#userDefinedInput").val().replace(" ","");
     $("#errorAddUserDefined").html("");
     chrome.runtime.sendMessage({"name":'TLD'}, function(tld){
-      window.publicSuffixList.parse(tld, punycode.toASCII);
+      torpedo.publicSuffixList.parse(tld, punycode.toASCII);
       try{
         const href = new URL(input);
         input = extractDomain(href.hostname);
