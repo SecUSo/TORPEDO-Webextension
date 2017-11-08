@@ -573,7 +573,7 @@
   },
 
   "userList":{
-    "message": "Liste der von Ihnen als 'niedriges Risiko' eingestuften Domains",
+    "message": "Liste der von Ihnen als 'geringes Risiko' eingestuften Domains",
     "description": "User risk domains."
   },
 

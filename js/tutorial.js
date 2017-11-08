@@ -23,9 +23,11 @@ function show(n) {
   $("#firefoxFinish").hide();
   $("#prev").prop( "disabled", false );
   $("#next").prop( "disabled", false );
+  $("#finish").prop( "disabled", true );
   document.getElementsByTagName("img")[0].src = "img/tutorial"+n+"_" + lang +".png";
   if(n==13){
     $("#next").prop( "disabled", true );
+    $("#finish").prop( "disabled", false );
     if(window.origin.indexOf("moz-extension://") > -1){
       $("#firefoxFinish").show();
     }

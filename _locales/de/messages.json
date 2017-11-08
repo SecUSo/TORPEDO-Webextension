@@ -26,7 +26,7 @@
   },
 
   "markAsTrusted": {
-    "message": "Domain als niedriges Risiko einstufen",
+    "message": "Domain als geringes Risiko einstufen",
     "description": "Add domain to list of trusted domains"
   },
 
@@ -543,7 +543,7 @@
   },
 
   "lowRiskDomains":{
-    "message": "Domains, die von den Entwicklern als 'niedriges Risiko' eingestuft wurden (grün)",
+    "message": "Domains, die von den Entwicklern als 'geringes Risiko' eingestuft wurden (grün)",
     "description": "List of trusted domains."
   },
 
@@ -568,12 +568,12 @@
   },
 
   "userDomains":{
-    "message": "Domains, die von Ihnen als 'niedriges Risiko' eingestuft wurden (blau)",
+    "message": "Domains, die von Ihnen als 'geringes Risiko' eingestuft wurden (blau)",
     "description": "List of user risk domains."
   },
 
   "userList":{
-    "message": "Liste der von Ihnen als 'niedriges Risiko' eingestuften Domains",
+    "message": "Liste der von Ihnen als 'geringes Risiko' eingestuften Domains",
     "description": "User risk domains."
   },
 
