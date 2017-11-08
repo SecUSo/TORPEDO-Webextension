@@ -18,13 +18,11 @@
 		"storage"
 	],
 	"page_action": {
-		"browser_style": true,
 	  "default_title": "__MSG_extensionName__",
 		"default_popup": "icon.html"
   },
 	"options_ui":{
-		"page": "options.html",
-		"browser_style": true
+		"page": "options.html"
 	},
 	"icons":{
 		"38":"img/icon38.png",
@@ -65,7 +63,7 @@
 		  	"js/redirect.js"
 		  ],
 		  "run_at": "document_idle",
-			"all_frames": true
+		  "all_frames": true
 		}
 	]
 }

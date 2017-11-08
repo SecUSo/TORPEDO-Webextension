@@ -61,7 +61,7 @@
   },
 
   "T1SternErklaerung": {
-    "message": "Diese Domain (fett hervorgehobener Bereich) wird von TORPEDO als ungewisses Risiko eingestuft (grauer Rahmen). Sie müssen, das Risiko hier selbst einstufen.",
+    "message": "Diese Domain (fett hervorgehobener Bereich) wird von TORPEDO als ungewisses Risiko eingestuft (grauer Rahmen). Sie müssen das Risiko hier selbst einstufen.",
     "description": "Information on the classification of this domain"
   },
 
@@ -136,7 +136,7 @@
   },
 
   "T1Erklaerung": {
-    "message": "Diese Domain (fett hervorgehobener Bereich) wird von TORPEDO als ungewisses Risiko eingestuft (grauer Rahmen). Sie müssen, das Risiko hier selbst einstufen.",
+    "message": "Diese Domain (fett hervorgehobener Bereich) wird von TORPEDO als ungewisses Risiko eingestuft (grauer Rahmen). Sie müssen das Risiko hier selbst einstufen.",
     "description": "Information on the classification of this domain"
   },
 
@@ -366,7 +366,7 @@
   },
 
   "T1THInfotext": {
-    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um einen Betrugsversuch handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL TORPEDO nicht bekannt ist. Die Domain ist nicht Teil der 100 meistbesuchten Webseiten in Deutschland. Außerdem wurde ein Link mit dieser Domain von Ihnen nicht mindestens zweimal angeklickt oder manuell hinzugefügt (entweder durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).<br>Es kann sein, dass Thunderbird eine Phishing-Warnung anzeigt, weil diese Unstimmigkeit auch von Thunderbird erkannt wird.",
+    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um einen Betrugsversuch handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL TORPEDO nicht bekannt ist. Die Domain ist nicht Teil der 100 meistbesuchten Webseiten in Deutschland. Außerdem wurde ein Link mit dieser Domain von Ihnen nicht mindestens zweimal angeklickt oder manuell hinzugefügt (entweder durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen)..",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -391,7 +391,7 @@
   },
 
   "T2THInfotext": {
-    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird, da diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.<br>Es kann sein, dass Thunderbird eine Phishing Warnung anzeigt, weil diese Unstimmigkeit auch von Thunderbird erkannt wird.",
+    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird, da diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist. die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird, da diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -416,7 +416,7 @@
   },
 
   "T3THInfotext": {
-    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein. <br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von Ihnen als geringes Risiko eingestuft wurde. D.h., Sie haben diese Domain mindestens zweimal angeklickt oder Sie haben die Domain manuell hinzugefügt (entweder durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).<br>Es kann sein, dass Thunderbird eine Phishing Warnung anzeigt, weil diese Unstimmigkeit auch von Thunderbird erkannt wird.",
+    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein. <br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von Ihnen als geringes Risiko eingestuft wurde. D.h., Sie haben diese Domain mindestens zweimal angeklickt oder Sie haben die Domain manuell hinzugefügt (entweder durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -441,7 +441,7 @@
   },
 
   "T1PHTHInfotext": {
-    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Betrugsversuch ist, da die Domain (fett hervorgehobener Bereiech) der Ziel-URL TORPEDO nicht bekannt ist. Dies bedeutet, dass die Domain TORPEDO nicht bekannt ist. Die Domain ist nicht Teil der 100 meistbesuchten Webseiten in Deutschland. Außerdem wurde die Domain von Ihnen nicht zwei Mal angeklickt oder manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).<br>Es kann sein, dass Thunderbird eine Phishing Warnung anzeigt, weil diese Unstimmigkeit auch von Thunderbird erkannt wird.",
+    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Betrugsversuch ist, da die Domain (fett hervorgehobener Bereiech) der Ziel-URL TORPEDO nicht bekannt ist. Dies bedeutet, dass die Domain TORPEDO nicht bekannt ist. Die Domain ist nicht Teil der 100 meistbesuchten Webseiten in Deutschland. Außerdem wurde die Domain von Ihnen nicht zwei Mal angeklickt oder manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -466,7 +466,7 @@
   },
 
   "T2PHTHInfotext": {
-    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw,. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Versehen war, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird. Dies bedeutet wiederum, dass diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.<br>Es kann sein, dass Thunderbird eine Phishing Warnung anzeigt, weil diese Unstimmigkeit auch von Thunderbird erkannt wird.",
+    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw,. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Versehen war, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird. Dies bedeutet wiederum, dass diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -491,7 +491,7 @@
   },
 
   "T3PHTHInfotext": {
-    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw,. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Versehen war, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von Ihnen als geringes Risiko eingestuft wurde. Dies wiederum bedeutet, Sie haben diese Domain mindestens zwei Mal angeklickt oder Sie haben die Domain manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).<br>Es kann sein, dass Thunderbird eine Phishing Warnung anzeigt, weil diese Unstimmigkeit auch von Thunderbird erkannt wird.",
+    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw,. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Versehen war, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von Ihnen als geringes Risiko eingestuft wurde. Dies wiederum bedeutet, Sie haben diese Domain mindestens zwei Mal angeklickt oder Sie haben die Domain manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -513,7 +513,7 @@
 
 
   "options":{
-    "message": "TORPEDO Options",
+    "message": "TORPEDO Einstellungen",
     "description": "Options"
   },
 
@@ -695,6 +695,11 @@
 
   "finish":{
     "message": "Tutorial beenden ❯❯",
-    "description": "Finish tutorial"
+    "description": "Finish tutorial, message for Chrome"
+  },
+
+  "firefoxFinish":{
+    "message": "Tutorial beendet: Sie können den Tab jetzt schließen.",
+    "description": "Finish tutorial, message for Firefox"
   }
 }

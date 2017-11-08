@@ -37,18 +37,22 @@
 div.torpedoTooltip
 
 div.torpedoTooltip div, div.torpedoTooltip span, div.torpedoTooltip applet, div.torpedoTooltip object, div.torpedoTooltip iframe,
-h1, div.torpedoTooltip h2, div.torpedoTooltip h3, div.torpedoTooltip h4, div.torpedoTooltip h5, div.torpedoTooltip h6, div.torpedoTooltip p, div.torpedoTooltip blockquote, div.torpedoTooltip pre,
-a, div.torpedoTooltip abbr, div.torpedoTooltip acronym, div.torpedoTooltip address, div.torpedoTooltip big, div.torpedoTooltip cite, div.torpedoTooltip code,
-del, div.torpedoTooltip dfn, div.torpedoTooltip em, div.torpedoTooltip img, div.torpedoTooltip ins, div.torpedoTooltip kbd, div.torpedoTooltip q, div.torpedoTooltip s, div.torpedoTooltip samp,
-small, div.torpedoTooltip strike, div.torpedoTooltip strong, div.torpedoTooltip sub, div.torpedoTooltip sup, div.torpedoTooltip tt, div.torpedoTooltip var,
-b, div.torpedoTooltip u, div.torpedoTooltip i, div.torpedoTooltip center,
-dl, div.torpedoTooltip dt, div.torpedoTooltip dd, div.torpedoTooltip ol, div.torpedoTooltip ul, div.torpedoTooltip li,
-fieldset, div.torpedoTooltip form, div.torpedoTooltip label, div.torpedoTooltip legend,
-table, div.torpedoTooltip caption, div.torpedoTooltip tbody, div.torpedoTooltip tfoot, div.torpedoTooltip thead, div.torpedoTooltip tr, div.torpedoTooltip th, div.torpedoTooltip td,
-article, div.torpedoTooltip aside, div.torpedoTooltip canvas, div.torpedoTooltip details, div.torpedoTooltip embed, div.torpedoTooltip
-figure, div.torpedoTooltip figcaption, div.torpedoTooltip footer, div.torpedoTooltip header, div.torpedoTooltip hgroup, div.torpedoTooltip
-menu, div.torpedoTooltip nav, div.torpedoTooltip output, div.torpedoTooltip ruby, div.torpedoTooltip section, div.torpedoTooltip summary,
-time, div.torpedoTooltip mark, div.torpedoTooltip audio, div.torpedoTooltip video {
+div.torpedoTooltip h1, div.torpedoTooltip h2, div.torpedoTooltip h3, div.torpedoTooltip h4, div.torpedoTooltip h5, div.torpedoTooltip h6,
+div.torpedoTooltip p, div.torpedoTooltip blockquote, div.torpedoTooltip pre,
+div.torpedoTooltip a, div.torpedoTooltip abbr, div.torpedoTooltip acronym, div.torpedoTooltip address, div.torpedoTooltip big, 
+div.torpedoTooltip cite, div.torpedoTooltip code,div.torpedoTooltip del, div.torpedoTooltip dfn, div.torpedoTooltip em, 
+div.torpedoTooltip img, div.torpedoTooltip ins, div.torpedoTooltip kbd, 
+div.torpedoTooltip q, div.torpedoTooltip s, div.torpedoTooltip samp,div.torpedoTooltip small, div.torpedoTooltip strike, 
+div.torpedoTooltip strong, div.torpedoTooltip sub, div.torpedoTooltip sup, div.torpedoTooltip tt, 
+div.torpedoTooltip var, div.torpedoTooltip b, div.torpedoTooltip u, div.torpedoTooltip i, div.torpedoTooltip center,
+div.torpedoTooltip dl, div.torpedoTooltip dt, div.torpedoTooltip dd, div.torpedoTooltip ol, div.torpedoTooltip ul, div.torpedoTooltip li,
+div.torpedoTooltip fieldset, div.torpedoTooltip form, div.torpedoTooltip label, div.torpedoTooltip legend,
+div.torpedoTooltip table, div.torpedoTooltip caption, div.torpedoTooltip tbody, div.torpedoTooltip tfoot, div.torpedoTooltip thead, 
+div.torpedoTooltip tr, div.torpedoTooltip th, div.torpedoTooltip td,div.torpedoTooltip article, div.torpedoTooltip aside, 
+div.torpedoTooltip canvas, div.torpedoTooltip details, div.torpedoTooltip embed, div.torpedoTooltip figure, 
+div.torpedoTooltip figcaption, div.torpedoTooltip footer, div.torpedoTooltip header, div.torpedoTooltip hgroup, div.torpedoTooltip menu, 
+div.torpedoTooltip nav, div.torpedoTooltip output, div.torpedoTooltip ruby, div.torpedoTooltip section, div.torpedoTooltip summary,
+div.torpedoTooltip time, div.torpedoTooltip mark, div.torpedoTooltip audio, div.torpedoTooltip video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -114,7 +118,6 @@ div.torpedoTooltip table {
 }
 .torpedoPhish{
   border: 2px solid red !important;
-  background-color: #feffcc !important;
 }
 #torpedoDomain{
   font-weight: bold !important;
@@ -124,10 +127,15 @@ div.torpedoTooltip table {
 #torpedoInfoImage,#torpedoAdviceImage,#torpedoWarningImage{
   padding-right: 10px;
 }
-#torpedoInfoText:hover{
+#torpedoInfoText{
   text-decoration: underline;
+  cursor: help;
+  font-weight: normal;
 }
-
+#torpedoInfoText:hover{
+  font-weight: bold;
+  cursor: pointer;
+}
 #torpedoInfoDiv{
   overflow-y: scroll;
   height: 60px;

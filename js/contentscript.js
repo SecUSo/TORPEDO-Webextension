@@ -15,7 +15,6 @@ $(document).ready(function(){
   });
   torpedo.location = window.location.host;
   var mouseenter = "";
-  var outer = "";
   var iframe = "";
 
   switch( torpedo.location ){
@@ -30,7 +29,6 @@ $(document).ready(function(){
       break;
     case "mail.aol.com":
       mouseenter="#displayMessage";
-      //outer = "#appContent"
       break;
     case "email.t-online.de":
       iframe = "mailreadview";
@@ -101,16 +99,15 @@ function openTooltip(e){
           at: 'center bottom',
           my: 'top left',
           viewport: $(window),
+          target: 'mouse',
           adjust: {
             mouse: false,
-            method: 'flipinvert flipinvert',
-            scroll: false
+            method: 'flip flip'
           }
         },
         style: {
           tip:false,
-          classes: 'torpedoTooltip',
-          def: false
+          classes: 'torpedoTooltip'
         },
         events: {
           render: function(event, api) {
