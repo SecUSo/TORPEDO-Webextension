@@ -58,7 +58,7 @@ function initTooltip(){
       });
     });
   });
-  $(t.find("#torpedoGoogle")[0]).click( function(event){ chrome.runtime.sendMessage({name: "google", url: torpedo.url}); } );
+  $(t.find("#torpedoGoogle")[0]).click( function(event){ chrome.runtime.sendMessage({name: "google", url: torpedo.domain}); } );
   $(t.find("#torpedoOpenSettings")[0]).click( function(event){ chrome.runtime.sendMessage({name: "settings"}); } );
   $(t.find("#torpedoOpenTutorial")[0]).click( function(event){ chrome.runtime.sendMessage({name: "tutorial"}); } );
 

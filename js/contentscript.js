@@ -8,6 +8,7 @@ torpedo.pathname = "";
 torpedo.publicsuffixlist = "";
 torpedo.event;
 torpedo.location;
+torpedo.opened = false;
 
 $(document).ready(function(){
   chrome.runtime.sendMessage({"name":"TLD"}, function(r){
@@ -16,6 +17,7 @@ $(document).ready(function(){
   torpedo.location = window.location.host;
   var mouseenter = "";
   var iframe = "";
+  torpedo.opened = false;
 
   switch( torpedo.location ){
     case "mg.mail.yahoo.com":
@@ -64,6 +66,12 @@ $(document).ready(function(){
 
 function openTooltip(e){
   torpedo.target = e.currentTarget;
+  if(torpedo.opened || $(torpedo.target).hasClass("qtip-close")) return;
+  if(torpedo.target.href == ""){
+    try{
+      $(torpedo.target).attr("href", e.relatedTarget.href);
+    }catch(e){}
+  }
   torpedo.state = "unknown";
   chrome.storage.sync.get(null,function(r) {
     try{
@@ -98,7 +106,7 @@ function openTooltip(e){
         position: {
           at: 'center bottom',
           my: 'top left',
-          viewport: $(window),
+          viewport: $(window.parent),
           target: 'mouse',
           adjust: {
             mouse: false,
@@ -114,6 +122,9 @@ function openTooltip(e){
             torpedo.api = api;
             torpedo.tooltip = api.elements.content;
 
+            $(torpedo.tooltip).on("mouseover", function(){torpedo.opened = true;});
+            $(torpedo.tooltip).on("mouseleave", function(){torpedo.opened = false;});
+
             // set the icon to "OK", because TORPEDO works on this page
             chrome.runtime.sendMessage({"name": "ok"});
 
@@ -124,6 +135,7 @@ function openTooltip(e){
         }
       });
     }catch(err){
+      console.log(torpedo.target.href);
       console.log(err);
       // set the icon to "ERROR" because TORPEDO doesn't work on this page
       chrome.runtime.sendMessage({"name": "error"});
