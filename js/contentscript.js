@@ -66,7 +66,7 @@ $(document).ready(function(){
 
 function openTooltip(e){
   torpedo.target = e.currentTarget;
-  if(torpedo.opened || $(torpedo.target).hasClass("qtip-close")) return;
+  if(torpedo.target.href.indexOf("mailto:") > -1 || torpedo.opened || $(torpedo.target).hasClass("qtip-close")) return;
   if(torpedo.target.href == ""){
     try{
       $(torpedo.target).attr("href", e.relatedTarget.href);

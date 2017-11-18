@@ -62,7 +62,6 @@
 		  	"js/status.js",
 		  	"js/redirect.js"
 		  ],
-		  "run_at": "document_idle",
 		  "all_frames": true
 		}
 	]
