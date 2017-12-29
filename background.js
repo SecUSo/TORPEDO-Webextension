@@ -27,7 +27,7 @@ loc = "";
 works = false;
 
 function sendEmail() {
-    var emailUrl = 'mailto:betty.ballin@secuso.org?subject='
+    var emailUrl = 'mailto:addons@secuso.org?subject='
                            + encodeURIComponent("Error with TORPEDO Webextension")
                            + "&body="
                            + encodeURIComponent("Mail panel could not be found in page: " + loc);

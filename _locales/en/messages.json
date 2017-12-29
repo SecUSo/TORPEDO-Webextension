@@ -682,7 +682,6 @@
     "description": "Entered URL is already in list of referrer URLs"
   },
 
-
   "back":{
     "message": "❮ Back",
     "description": "Go back (for tutorial)"
@@ -701,5 +700,219 @@
   "firefoxFinish":{
     "message": "Tutorial finished: You can close this tab now.",
     "description": "Finish tutorial, message for Firefox"
+  },
+  
+  "guide_basic":{
+    "message": "Basic Information",
+    "description": "Tutorial side bar: Chapter 1"
+  },
+
+  "guide_tooltips":{
+    "message": "Tooltip Types",
+    "description": "Tutorial side bar: Chapter 2"
+  },
+
+  "guide_extras":{
+    "message": "Checking the URL",
+    "description": "Tutorial side bar: Chapter 3"
+  },
+  
+  "guide_specialcases":{
+    "message": "Special Cases",
+    "description": "Tutorial side bar: Chapter 4"
+  },
+  
+  "guide_menu":{
+    "message": "Menu",
+    "description": "Tutorial side bar: Chapter 5"
+  },
+
+  "guide_settings":{
+    "message": "Settings",
+    "description": "Tutorial side bar: Chapter 6"
+  },
+  
+  "guide_welcome_title":{
+    "message": "A warm welcome!",
+    "description": "Tutorial page 1: title"
+  },
+  
+  "guide_welcome_intro1":{
+    "message": "The TORPEDO add-on has been installed successfully. Next you can find out how to detect phishing e-mails with the help of this add-on.",
+    "description": "Tutorial page 1: intro1"
+  },
+  
+  "guide_welcome_intro2":{
+    "message": "We recommend that you watch the tutorial even if you already use TORPEDO, because there are a number of new features in this new version.",
+    "description": "Tutorial page 1: intro2"
+  },
+  
+  "guide_welcome_footnote":{
+    "message": "This add-on was developed in collaboration with the research group SECUSO - Security, Usability and Society at the TU Darmstadt, the Abertay University's Division of Cybersecurity and the Privacy and Security Group at the University of Karlstad.",
+    "description": "Tutorial page 1: footnote"
+  },
+  
+  "guide_why_title":{
+    "message": "Why you should use TORPEDO?",
+    "description": "Tutorial page 2: title"
+  },
+  
+  "guide_why_description1":{
+    "message": "TORPEDO helps you to detect phishing e-mails, i.e. dangerous links in e-mails.",
+    "description": "Tutorial page 2: title"
+  },
+  
+  "guide_why_description2":{
+    "message": "'Dangerous links' means...",
+    "description": "Tutorial page 2: title"
+  },
+  
+  "guide_why_description3":{
+    "message": "...downloading malware when clicking or",
+    "description": "Tutorial page 2: title"
+  },
+  
+  "guide_why_description4":{
+    "message": "...entering credentials at fake websites (that look legitimate) that open when clicking. When doing so the ID theft was successful.",
+    "description": "Tutorial page 2: title"
+  },
+  
+  "guide_why_usage_title":{
+    "message": "How to use TORPEDO",
+    "description": "Tutorial page 2: usage title"
+  },
+  
+  "guide_why_usage_list":{
+    "message": "<li>Hover over the link with the mouse, so that TORPEDO displays the tooltip with the actual URL.</li><li>Pay attention to the tooltip frame colour, the information and instructions provided in the tooltip.</li>",
+    "description": "Tutorial page 2: usage list"
+  },
+  
+  "guide_tooltips_case1_title":{
+    "message": "Explanations of the most recurrent tooltip types (1 of 3):",
+    "description": "Tutorial page 3: title"
+  },
+  
+  "guide_tooltips_case1_description":{
+    "message": "A <strong>green frame</strong> means the domain (highlighted part of the URL) is classified as low-risk by the developers of TORPEDO (i.e. employees of TU Darmstadt) because it belongs to the 100 most frequented websites in Germany.",
+    "description": "Tutorial page 3: description"
+  },
+  
+  "guide_tooltips_case2_title":{
+    "message": "Explanations of the most recurrent tooltip types (2 of 3):",
+    "description": "Tutorial page 4: title"
+  },
+  
+  "guide_tooltips_case2_description1":{
+    "message": "A <strong>blue frame</strong> means that you <strong>previously indicated that the domain (highlighted part of the URL) is low-risk</strong>, i.e. ...",
+    "description": "Tutorial page 4: description 1"
+  },
+  
+  "guide_tooltips_case2_description2":{
+    "message": "...you have clicked a link with the same domain at least twice since you installed TORPEDO or",
+    "description": "Tutorial page 4: description 2"
+  },
+  
+  "guide_tooltips_case2_description3":{
+    "message": "...you have whitelisted the domain (either by using the right-click option 'classify domain as low-risk' or by changing the TORPEDO settings).",
+    "description": "Tutorial page 4: description 3"
+  },
+
+  "guide_tooltips_case3_title":{
+    "message": "Explanations of the most recurrent tooltip types (3 of 3):",
+    "description": "Tutorial page 5: description 1"
+  },
+  
+  "guide_tooltips_case3_description":{
+    "message": "A <strong>grey frame</strong> means that this domain is unknown to TORPEDO. You should <strong>check the URL yourself very carefully and particularly focus on the domain.</strong> If you do not trust the domain, delete this e-mail. If you do trust the domain, you can use the menu to classify it as low-risk. Because you are supposed to check this case carefully, the possibility to click it is delayed (you can change the delay time in the settings). That is to prevent unintentional link activation.",
+    "description": "Tutorial page 5: description 1"
+  },
+
+  "guide_extras_URL_title":{
+    "message": "Explanations how to check URLs (in particular relevant for the grey case and special cases explained later on):",
+    "description": "Tutorial page 6: title"
+  }, 
+
+  "guide_extras_URL_description":{
+    "message": "<li><strong>Check whether the brand name</strong> (e.g. PayPal) <strong>is highlighted in bold.</strong>Consider only the highlighted part in order to detect deception attempts e.g. https://paypal.com. <strong>p a y - m e . c o m</strong> or https://www. <strong>p a y – s e c u r e . c o m</strong> /www.paypal.com .These are not PayPal URLs, but actually fake sites. Paypal.com is put in the URL to trick you.</li><li><strong>Check letter by letter</strong> to make sure it is really the brand name (e.g. Apple) that is highlighted in bold in order not to allow criminals to make you believe that e.g. https:// <strong>a p p e l . c o m</strong>/ is an Apple URL whereas it is actually a dangerous link. Criminals typically replace letters (e.g. m by r n) or swap letters. </li><li><strong>Be aware of extensions to the brand name:</strong> e.g. https://www. <strong>p a y p a l - s e c u r e . c o m</strong> / is not necessarily a PayPal URL. If you are unsure, you can use TORPEDO’s integrated search engine, i.e. right-click on the tooltip and then press „search engine“  in the menu. Check whether the highlighted part matches the search engine’s first suggestion. </li>",
+    "description": "Tutorial page 6: description"
+  },
+
+  "guide_extras_URL_tooltipinfo":{
+    "message": "If you want to read this information again when actually using TORPEDO, click on ‘More information on this classification‘ in the corresponding tooltips.",
+    "description": "Tutorial page 6: tooltipinfo"
+  },
+
+  "guide_tooltips_specialcase1_title":{
+    "message": "Explanations of special cases (1 of 3):",
+    "description": "Tutorial page 7: title"
+  },
+  
+  "guide_tooltips_specialcase1_description":{
+    "message": "The first special case is the so-called <strong>mismatch case</strong>. The mismatch case means that the URL displayed in the e-mail and the actual URL (the one displayed in the tooltip) do not match. Furthermore, the domain (highlighted part of the URL in the tooltip) is not yet known by TORPEDO. While this can happen by accident, criminals do so to obscure malicious links as they assume that people only consider the URL in the e-mail rather than the actual URL. In this case, the same recommendations for checking the URL apply as in the grey case.",
+    "description": "Tutorial page 7: description"
+  },
+  
+  "guide_tooltips_specialcase2_title":{
+    "message": "Further explanations of special cases (2 of 3):",
+    "description": "Tutorial page 8: title"
+  },
+  
+  "guide_tooltips_specialcase2_description":{
+    "message": "The second special case is the so-called <strong>short URL case</strong>. The short URL case means that the URL behind this link is not the actual URL, but that it will redirect to the actual, intended URL. In order to decide whether the link is dangerous it is important to know the actual, intended URL. TORPEDO can deduce this information using a web service (see button). While short URLs may also be used in trustworthy e-mails, criminals do often use this technique, because they assume that people do not know how to get the information about the actual, intended URL without clicking on the link.",
+    "description": "Tutorial page 8: description"
+  },
+  
+  "guide_tooltips_specialcase3_title":{
+    "message": "Further explanations of special cases (3 of 3):",
+    "description": "Tutorial page 9: title"
+  },
+
+  "guide_tooltips_specialcase3_description":{
+    "message": "The third special case is the so-called <strong>redirection case</strong>. The redirection case also means that this link is not the actual URL but it will redirect to another URL. Some e-mail providers use redirections for various reasons: e.g. to know whether you are interested in this information or to do some checks of the content of the webpage behind this URL. In this case, TORPEDO can deduce the actual URL without asking an external service, because this information is coded in the URL. Therefore, TORPEDO displays the information about the actual URL.",
+    "description": "Tutorial page 9: description"
+  },
+
+  "guide_tooltips_menu_title":{
+    "message": "You can activate the TORPEDO menu with a right-click of your mouse on the tooltip:",
+    "description": "Tutorial page 10: title"
+  },
+  "guide_tooltips_menu_description1":{
+    "message": "As of now you have the option either to...",
+    "description": "Tutorial page 10: description 1"
+  },
+
+  "guide_tooltips_menu_description2":{
+    "message": "<li>Whitelist the current domain to your personal low-risk list.</li><li>Use the integrated search engine to check a URL.</li><li>Open the TORPEDO settings window.</li><li>Open the tutorial.</li>",
+    "description": "Tutorial page 10: description 2"
+  },
+
+  "guide_tooltips_settings_delay_title":{
+    "message": "In the settings you have three different tabs (Link delay, Domains, Referrer):",
+    "description": "Tutorial page 11: title"
+  },
+  
+  "guide_tooltips_settings_delay_description":{
+    "message": "1) Activate or deactivate the link delay or change the link activation delay. Additionally you can activate the timer for the green and/or blue cases, too.",
+    "description": "Tutorial page 11: description"
+  },
+
+  "guide_tooltips_settings_domains_title":{
+    "message": "Settings: List of domains",
+    "description": "Tutorial page 12: title"
+  },
+  
+  "guide_tooltips_settings_domains_description":{
+    "message": "2) View the low-risk domains provided by the developers or modify the list to reflect your preferences. You can add or delete single domains to your own list of low-risk considered domains, delete single domains or delete your complete list.",
+    "description": "Tutorial page 12: description"
+  },
+
+  "guide_tooltips_settings_referrer_title":{
+    "message": "Settings: List of referrers",
+    "description": "Tutorial page 13: title"
+  },
+  
+  "guide_tooltips_settings_referrer_description":{
+    "message": "3) Referrers redirect to another URL (just like short URLs, see special case 3). TORPEDO lists web.de and gmx.net as default referrers. You can add your own referrers, which TORPEDO can then deduce automatically in the future.",
+    "description": "Tutorial page 13: description"
   }
 }

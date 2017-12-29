@@ -60,7 +60,7 @@
 		  	"js/timer.js",
 				"js/tooltip.js",
 		  	"js/status.js",
-		  	"js/redirect.js"
+			  "js/redirect.js"
 		  ],
 		  "all_frames": true
 		}

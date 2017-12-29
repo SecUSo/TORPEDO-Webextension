@@ -83,7 +83,7 @@ function updateTooltip(){
         url = url.replace(pathname, replace);
       }
       $(t.find("#torpedoURL")[0]).html(url.replace(torpedo.domain, '<span id="torpedoDomain">' + torpedo.domain + '</span>'));
-
+      
       // get texts from textfile
       var button = chrome.i18n.getMessage('ButtonWeiterleitung');
       var ueberschrift = chrome.i18n.getMessage(state+"Ueberschrift");

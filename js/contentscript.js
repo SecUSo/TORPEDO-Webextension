@@ -14,6 +14,7 @@ $(document).ready(function(){
   chrome.runtime.sendMessage({"name":"TLD"}, function(r){
     torpedo.publicSuffixList.parse(r, punycode.toASCII);
   });
+  getTexts();
   torpedo.location = window.location.host;
   var mouseenter = "";
   var iframe = "";
@@ -21,7 +22,8 @@ $(document).ready(function(){
 
   switch( torpedo.location ){
     case "mg.mail.yahoo.com":
-      mouseenter = ".email-wrapped";
+    case "mail.yahoo.com":
+      mouseenter = ".thread-body";
       break;
     case "mail.google.com":
       mouseenter=".adn";
@@ -53,6 +55,7 @@ $(document).ready(function(){
   else {
     $("body").on("mouseenter", "a", function(e){
       var location = e.view.location.href;
+      console.log(location);
       if(location.indexOf(iframe) > -1) {openTooltip(e);}
     });
     // open tooltip in iframe mail panel
@@ -109,6 +112,7 @@ function openTooltip(e){
           viewport: $(window.parent),
           target: 'mouse',
           adjust: {
+            y: 10,
             mouse: false,
             method: 'flip flip'
           }
