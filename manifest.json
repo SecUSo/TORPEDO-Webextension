@@ -2,7 +2,7 @@
 	"manifest_version":2,
 	"author":"Betty Ballin",
 	"name":"__MSG_extensionName__",
-	"version":"1.0.4",
+	"version":"1.0.5",
 	"default_locale": "de",
 	"description":"__MSG_extensionDescription__",
 	"background":{
