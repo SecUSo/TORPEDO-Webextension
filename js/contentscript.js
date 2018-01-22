@@ -14,7 +14,6 @@ $(document).ready(function(){
   chrome.runtime.sendMessage({"name":"TLD"}, function(r){
     torpedo.publicSuffixList.parse(r, punycode.toASCII);
   });
-  getTexts();
   torpedo.location = window.location.host;
   var mouseenter = "";
   var iframe = "";
