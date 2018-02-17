@@ -56,7 +56,7 @@
 		  	"js/jquery.qtip.min.js",
 		  	"js/punycode.min.js",
 		  	"js/contentscript.js",
-				"js/publicsuffixlist.min.js",
+				"js/publicsuffixlist.js",
 		  	"js/timer.js",
 				"js/tooltip.js",
 		  	"js/status.js",
