@@ -15,18 +15,16 @@ document.addEventListener("click", (e) => {
 });
 
 function init() {
-  var error = $(document.body).find("#error").get(0);
-  $("#torpedoPage").html(chrome.i18n.getMessage("extensionName"));
-  $("#options").html(chrome.i18n.getMessage("options"));
+  document.getElementById("torpedoPage").childNodes[0].nodeValue = chrome.i18n.getMessage("extensionName");
+  document.getElementById("options").childNodes[0].nodeValue = chrome.i18n.getMessage("options");
   var loc = chrome.extension.getBackgroundPage().getStatus();
-  $(error).removeClass();
   if(loc.works){
-    $(error).addClass("working");
-    $(error).html(chrome.i18n.getMessage("OK"));
+    document.getElementById("error").setAttribute("class","working");
+    document.getElementById("error").childNodes[0].nodeValue = chrome.i18n.getMessage("OK");
   }
   else{
-    $(error).addClass("error");
-    $(error).html(chrome.i18n.getMessage("error"));
+    document.getElementById("error").setAttribute("class","error");
+    document.getElementById("error").childNodes[0].nodeValue = chrome.i18n.getMessage("error");
   }
 }
 

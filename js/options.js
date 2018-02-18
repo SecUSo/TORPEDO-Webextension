@@ -169,7 +169,7 @@ function addEvents(){
       save("referrerPart1", r.referrerPart1);
       save("referrerPart2", r.referrerPart2);
       var table = document.getElementById("referrerList");
-      table.getElementsByTagName("tbody")[0].innerHTML = table.rows[0].innerHTML;
+      $(table.getElementsByTagName("tbody")[0]).text(chrome.i18n.getMessage("referrerList"));
       var arr1 = [];
       var arr2 = [];
       chrome.storage.sync.set({ 'referrerPart1': arr1 });
@@ -248,7 +248,7 @@ function save(list,value){
 function fillReferrerList(){
   chrome.storage.sync.get(null,function(r) {
     var table = document.getElementById("referrerList");
-    table.getElementsByTagName("tbody")[0].innerHTML = table.rows[0].innerHTML;
+    $(table.getElementsByTagName("tbody")[0]).text(chrome.i18n.getMessage("referrerList"));
     var arr1 = r.referrerPart1;
     var arr2 = r.referrerPart2;
     for(i=0; i<arr1.length;i++){
@@ -285,7 +285,7 @@ function fillTrustedList(){
   chrome.storage.sync.get(null,function(r) {
     var i = 0;
     var table = document.getElementById("trustedList");
-    table.getElementsByTagName("tbody")[0].innerHTML = table.rows[0].innerHTML;
+    $(table.getElementsByTagName("tbody")[0]).text(chrome.i18n.getMessage("trustedList"));
     for(i=0; i<r.trustedDomains.length;i++){
       var row = table.insertRow(table.rows.length);
       var cell = row.insertCell(0);
@@ -301,7 +301,7 @@ function fillUserList(){
   chrome.storage.sync.get(null,function(r) {
     var userDomains = r.userDefinedDomains;
     var table = document.getElementById("userList");
-    table.getElementsByTagName("tbody")[0].innerHTML = table.rows[0].innerHTML;
+    $(table.getElementsByTagName("tbody")[0]).text(chrome.i18n.getMessage("userList"));
     for(i=0; i<userDomains.length;i++){
       var row = table.insertRow(table.rows.length);
       var cell = row.insertCell(0);
