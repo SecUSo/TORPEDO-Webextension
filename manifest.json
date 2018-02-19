@@ -1,6 +1,11 @@
 {
 	"manifest_version":2,
 	"author":"Betty Ballin",
+	"applications": {
+		"gecko": {
+		"id": "torpedobrowser@secuso.org",
+	}
+	}
 	"name":"__MSG_extensionName__",
 	"version":"1.0.7",
 	"default_locale": "de",
