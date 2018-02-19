@@ -3,9 +3,9 @@
 	"author":"Betty Ballin",
 	"applications": {
 		"gecko": {
-		"id": "torpedobrowser@secuso.org",
+		"id": "{53319828-3750-4619-836e-10f3c736a61f}"
 	}
-	}
+	},
 	"name":"__MSG_extensionName__",
 	"version":"1.0.7",
 	"default_locale": "de",
