@@ -54,7 +54,7 @@ $(document).ready(function(){
   else {
     $("body").on("mouseenter", "a", function(e){
       var location = e.view.location.href;
-      console.log(location);
+      //console.log(location);
       if(location.indexOf(iframe) > -1) {openTooltip(e);}
     });
     // open tooltip in iframe mail panel
@@ -108,7 +108,7 @@ function openTooltip(e){
         position: {
           at: 'center bottom',
           my: 'top left',
-          viewport: $(window.parent),
+          viewport: true,
           target: 'mouse',
           adjust: {
             y: 10,

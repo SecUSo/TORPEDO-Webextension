@@ -1,18 +1,18 @@
 {
 	"manifest_version":2,
-	"author":"Betty Ballin",
+	"author":"SECUSO",
 	"applications": {
 		"gecko": {
 		"id": "{53319828-3750-4619-836e-10f3c736a61f}"
 	}
 	},
 	"name":"__MSG_extensionName__",
-	"version":"1.0.7",
+	"version":"1.0.8",
 	"default_locale": "de",
 	"description":"__MSG_extensionDescription__",
 	"background":{
 		"scripts":[
-			"js/jquery-2.1.1.min.js",
+			"js/jquery-3.3.1.min.js",
 			"js/punycode.min.js",
 			"background.js"
 		]
@@ -57,7 +57,7 @@
 				"css/tooltip.css"
 		  ],
 		  "js": [
-		  	"js/jquery-2.1.1.min.js",
+		  	"js/jquery-3.3.1.min.js",
 		  	"js/jquery.qtip.min.js",
 		  	"js/punycode.min.js",
 		  	"js/contentscript.js",

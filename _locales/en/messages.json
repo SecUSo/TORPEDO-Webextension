@@ -5,7 +5,7 @@
   },
 
   "extensionDescription": {
-    "message": "Show URLs and their security status when you move your mouse over links in a webpage which belongs to an e-mail provider.",
+    "message": "Shows URLs and their security status when moving over links in a webmail applications. This browser addon is based on the bachelor thesis of Bettina Ballin.",
     "description": "Description of the extension."
   },
 
