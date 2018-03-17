@@ -794,7 +794,7 @@
   },
   
   "guide_tooltips_case1_description":{
-    "message": "Ein <strong>grüner Rahmen</strong> bedeutet, dass die Domain (d.h. der fett hervorgehobene Bereich der URL) von den TORPEDO-Entwicklern (d.h. Mitarbeitern der TU Darmstadt) in die Kategorie <strong>geringes Risiko</strong> eingestuft wurde, weil sie zu den 100 meistbesuchten Webseiten in Deutschland gehört.",
+    "message": "Ein <strong>grüner Rahmen</strong> bedeutet, dass die Domain (d.h. der fett hervorgehobene Bereich der URL) von den TORPEDO-Entwicklern in die Kategorie <strong>geringes Risiko</strong> eingestuft wurde, weil sie zu den 100 meistbesuchten Webseiten in Deutschland gehört.",
     "description": "Tutorial page 3: description"
   },
   
