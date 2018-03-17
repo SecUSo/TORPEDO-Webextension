@@ -793,7 +793,7 @@
   },
   
   "guide_tooltips_case1_description":{
-    "message": "A <strong>green frame</strong> means the domain (highlighted part of the URL) is classified as low-risk by the developers of TORPEDO (i.e. employees of TU Darmstadt) because it belongs to the 100 most frequented websites in Germany.",
+    "message": "A <strong>green frame</strong> means the domain (highlighted part of the URL) is classified as low-risk by the developers of TORPEDO because it belongs to the 100 most frequented websites in Germany.",
     "description": "Tutorial page 3: description"
   },
   
