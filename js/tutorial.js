@@ -8,13 +8,15 @@ var pages = {
   4: ['guide-page-tooltips-case2', 'tooltips'],
   5: ['guide-page-tooltips-case3', 'tooltips'],
   6: ['guide-page-tooltips-URL', 'extras'],
-  7: ['guide-page-tooltips-specialcase1', 'specialcases'],
-  8: ['guide-page-tooltips-specialcase2', 'specialcases'],
-  9: ['guide-page-tooltips-specialcase3', 'specialcases'],
-  10: ['guide-page-tooltips-menu', 'menu'],
-  11: ['guide-page-settings-delay', 'settings'],
-  12: ['guide-page-settings-domains', 'settings'],
-  13: ['guide-page-settings-referrer', 'settings'],
+  7: ['guide-page-tooltips-specialcase', 'specialcases'],
+  8: ['guide-page-tooltips-specialcase1', 'specialcases'],
+  9: ['guide-page-tooltips-specialcase2', 'specialcases'],
+  10: ['guide-page-tooltips-specialcase3', 'specialcases'],
+  11: ['guide-page-tooltips-menu', 'menu'],
+  12: ['guide-page-tooltips-menu1', 'menu'],
+  13: ['guide-page-settings-delay', 'settings'],
+  14: ['guide-page-settings-domains', 'settings'],
+  15: ['guide-page-settings-referrer', 'settings'],
 };
 
 $(document).ready(function() {
@@ -25,7 +27,7 @@ $(document).ready(function() {
   $("#finish").html(chrome.i18n.getMessage("finish"));
 
   $("#prev").on("click", function(e){ if(slideIndex > 1) show(--slideIndex) } );
-  $("#next").on("click", function(e){ if(slideIndex < 13) show(++slideIndex) } );
+  $("#next").on("click", function(e){ if(slideIndex < 15) show(++slideIndex) } );
   $("#finish").on("click", function(e){ chrome.runtime.sendMessage({"name":"close"}); } );
   
   init();
@@ -47,7 +49,7 @@ function show(n) {
   if(pages[prev][1] != pages[n][1]) document.getElementById("section-" + pages[prev][1] + "-item").classList.remove("active");
   prev = n;
 
-  if(n==13){
+  if(n==15){
     $("#next").prop( "disabled", true );
     $("#finish").prop( "disabled", false );
   }
@@ -107,35 +109,44 @@ function init(){
  
   // page 6
   $("#torpedo-guide-extras-URL-title").html(chrome.i18n.getMessage("guide_extras_URL_title"));
+  $("#torpedo-guide-extras-URL-title1").html(chrome.i18n.getMessage("guide_extras_URL_title1"));
   $("#torpedo-guide-extras-URL-description").html(chrome.i18n.getMessage("guide_extras_URL_description"));
   $("#torpedo-guide-extras-URL-tooltipinfo").html(chrome.i18n.getMessage("guide_extras_URL_tooltipinfo"));
   
   // page 7
+  $("#torpedo-guide-tooltips-specialcase-title").html(chrome.i18n.getMessage("guide_tooltips_specialcase_title"));
+  $("#torpedo-guide-tooltips-specialcase-description").html(chrome.i18n.getMessage("guide_tooltips_specialcase_description"));
+  
+  // page 8
   $("#torpedo-guide-tooltips-specialcase1-title").html(chrome.i18n.getMessage("guide_tooltips_specialcase1_title"));
   $("#torpedo-guide-tooltips-specialcase1-description").html(chrome.i18n.getMessage("guide_tooltips_specialcase1_description"));
   
-  // page 8
+  // page 9
   $("#torpedo-guide-tooltips-specialcase2-title").html(chrome.i18n.getMessage("guide_tooltips_specialcase2_title"));
   $("#torpedo-guide-tooltips-specialcase2-description").html(chrome.i18n.getMessage("guide_tooltips_specialcase2_description"));
  
-  // page 9
+  // page 10
   $("#torpedo-guide-tooltips-specialcase3-title").html(chrome.i18n.getMessage("guide_tooltips_specialcase3_title"));
   $("#torpedo-guide-tooltips-specialcase3-description").html(chrome.i18n.getMessage("guide_tooltips_specialcase3_description"));
  
-  // page 10
+  // page 11
   $("#torpedo-guide-tooltips-menu-title").html(chrome.i18n.getMessage("guide_tooltips_menu_title"));
   $("#torpedo-guide-tooltips-menu-description1").html(chrome.i18n.getMessage("guide_tooltips_menu_description1"));
   $("#torpedo-guide-tooltips-menu-description2").html(chrome.i18n.getMessage("guide_tooltips_menu_description2"));
   
-  // page 11
+  // page 12
+  $("#torpedo-guide-tooltips-menu1-title").html(chrome.i18n.getMessage("guide_tooltips_menu1_title"));
+  $("#torpedo-guide-tooltips-menu1-description1").html(chrome.i18n.getMessage("guide_tooltips_menu1_description1"));
+  
+  // page 13
   $("#torpedo-guide-settings-delay-title").html(chrome.i18n.getMessage("guide_settings_delay_title"));
   $("#torpedo-guide-settings-delay-description").html(chrome.i18n.getMessage("guide_settings_delay_description"));
 
-  // page 12
+  // page 14
   $("#torpedo-guide-settings-domains-title").html(chrome.i18n.getMessage("guide_settings_domains_title"));
   $("#torpedo-guide-settings-domains-description").html(chrome.i18n.getMessage("guide_settings_domains_description"));
   
-  // page 13
+  // page 15
   $("#torpedo-guide-settings-referrer-title").html(chrome.i18n.getMessage("guide_settings_referrer_title"));
   $("#torpedo-guide-settings-referrer-description").html(chrome.i18n.getMessage("guide_settings_referrer_description"));
 }

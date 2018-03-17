@@ -828,9 +828,14 @@
   },
 
   "guide_extras_URL_title":{
-    "message": "Explanations how to check URLs (in particular relevant for the grey case and special cases explained later on):",
+    "message": "Explanations how to check URLs:",
     "description": "Tutorial page 6: title"
   }, 
+  
+  "guide_extras_URL_title1":{
+    "message": "In particular this is relevant for the grey case and special cases explained later on.",
+    "description": "Tutorial page 6: title 1"
+  },
 
   "guide_extras_URL_description":{
     "message": "<li><strong>Check whether the brand name</strong> (e.g. PayPal) <strong>is highlighted in bold.</strong>Consider only the highlighted part in order to detect deception attempts e.g. https://paypal.com. <strong>p a y - m e . c o m</strong> or https://www. <strong>p a y – s e c u r e . c o m</strong> /www.paypal.com .These are not PayPal URLs, but actually fake sites. Paypal.com is put in the URL to trick you.</li><li><strong>Check letter by letter</strong> to make sure it is really the brand name (e.g. Apple) that is highlighted in bold in order not to allow criminals to make you believe that e.g. https:// <strong>a p p e l . c o m</strong>/ is an Apple URL whereas it is actually a dangerous link. Criminals typically replace letters (e.g. m by r n) or swap letters. </li><li><strong>Be aware of extensions to the brand name:</strong> e.g. https://www. <strong>p a y p a l - s e c u r e . c o m</strong> / is not necessarily a PayPal URL. If you are unsure, you can use TORPEDO’s integrated search engine, i.e. right-click on the tooltip and then press „search engine“  in the menu. Check whether the highlighted part matches the search engine’s first suggestion. </li>",
@@ -842,77 +847,97 @@
     "description": "Tutorial page 6: tooltipinfo"
   },
 
-  "guide_tooltips_specialcase1_title":{
-    "message": "Explanations of special cases (1 of 3):",
+ "guide_tooltips_specialcase_title":{
+    "message": "Explanations of special cases:",
     "description": "Tutorial page 7: title"
+  },
+  
+  "guide_tooltips_specialcase_description":{
+    "message": "TORPEDO differentiates in special cases. The most important cases are explained in the following pages.",
+    "description": "Tutorial page 7: description"
+  },
+
+  "guide_tooltips_specialcase1_title":{
+    "message": "Special case: Mismatch",
+    "description": "Tutorial page 8: title"
   },
   
   "guide_tooltips_specialcase1_description":{
     "message": "The first special case is the so-called <strong>mismatch case</strong>. The mismatch case means that the URL displayed in the e-mail and the actual URL (the one displayed in the tooltip) do not match. Furthermore, the domain (highlighted part of the URL in the tooltip) is not yet known by TORPEDO. While this can happen by accident, criminals do so to obscure malicious links as they assume that people only consider the URL in the e-mail rather than the actual URL. In this case, the same recommendations for checking the URL apply as in the grey case.",
-    "description": "Tutorial page 7: description"
+    "description": "Tutorial page 8: description"
   },
   
   "guide_tooltips_specialcase2_title":{
-    "message": "Further explanations of special cases (2 of 3):",
-    "description": "Tutorial page 8: title"
+    "message": "Special case: Short URL",
+    "description": "Tutorial page 9: title"
   },
   
   "guide_tooltips_specialcase2_description":{
     "message": "The second special case is the so-called <strong>short URL case</strong>. The short URL case means that the URL behind this link is not the actual URL, but that it will redirect to the actual, intended URL. In order to decide whether the link is dangerous it is important to know the actual, intended URL. TORPEDO can deduce this information using a web service (see button). While short URLs may also be used in trustworthy e-mails, criminals do often use this technique, because they assume that people do not know how to get the information about the actual, intended URL without clicking on the link.",
-    "description": "Tutorial page 8: description"
+    "description": "Tutorial page 9: description"
   },
   
   "guide_tooltips_specialcase3_title":{
-    "message": "Further explanations of special cases (3 of 3):",
-    "description": "Tutorial page 9: title"
+    "message": "Special case: Redirection",
+    "description": "Tutorial page 10: title"
   },
 
   "guide_tooltips_specialcase3_description":{
     "message": "The third special case is the so-called <strong>redirection case</strong>. The redirection case also means that this link is not the actual URL but it will redirect to another URL. Some e-mail providers use redirections for various reasons: e.g. to know whether you are interested in this information or to do some checks of the content of the webpage behind this URL. In this case, TORPEDO can deduce the actual URL without asking an external service, because this information is coded in the URL. Therefore, TORPEDO displays the information about the actual URL.",
-    "description": "Tutorial page 9: description"
+    "description": "Tutorial page 10: description"
   },
 
   "guide_tooltips_menu_title":{
     "message": "You can activate the TORPEDO menu with a right-click of your mouse on the tooltip:",
-    "description": "Tutorial page 10: title"
+    "description": "Tutorial page 11: title"
   },
   "guide_tooltips_menu_description1":{
     "message": "As of now you have the option either to...",
-    "description": "Tutorial page 10: description 1"
+    "description": "Tutorial page 11: description 1"
   },
 
   "guide_tooltips_menu_description2":{
     "message": "<li>Whitelist the current domain to your personal low-risk list.</li><li>Use the integrated search engine to check a URL.</li><li>Open the TORPEDO settings window.</li><li>Open the tutorial.</li>",
-    "description": "Tutorial page 10: description 2"
-  },
-
-  "guide_tooltips_settings_delay_title":{
-    "message": "In the settings you have three different tabs (Link delay, Domains, Referrer):",
-    "description": "Tutorial page 11: title"
+    "description": "Tutorial page 11: description 2"
   },
   
-  "guide_tooltips_settings_delay_description":{
-    "message": "1) Activate or deactivate the link delay or change the link activation delay. Additionally you can activate the timer for the green and/or blue cases, too.",
-    "description": "Tutorial page 11: description"
-  },
-
-  "guide_tooltips_settings_domains_title":{
-    "message": "Settings: List of domains",
+   "guide_tooltips_menu1_title":{
+    "message": "Explanations of settings",
     "description": "Tutorial page 12: title"
   },
   
-  "guide_tooltips_settings_domains_description":{
-    "message": "2) View the low-risk domains provided by the developers or modify the list to reflect your preferences. You can add or delete single domains to your own list of low-risk considered domains, delete single domains or delete your complete list.",
-    "description": "Tutorial page 12: description"
+  "guide_tooltips_menu1_description1":{
+    "message": "In the settings you have three different tabs (Link delay, Domains, Referrer) which are explained on the following pages.",
+    "description": "Tutorial page 12: description 1"
   },
 
-  "guide_tooltips_settings_referrer_title":{
-    "message": "Settings: List of referrers",
+  "guide_settings_delay_title":{
+    "message": "Settings: Link delay",
     "description": "Tutorial page 13: title"
   },
   
-  "guide_tooltips_settings_referrer_description":{
-    "message": "3) Referrers redirect to another URL (just like short URLs, see special case 3). TORPEDO lists web.de and gmx.net as default referrers. You can add your own referrers, which TORPEDO can then deduce automatically in the future.",
+  "guide_settings_delay_description":{
+    "message": "1) Activate or deactivate the link delay or change the link activation delay. Additionally you can activate the timer for the green and/or blue cases, too.",
     "description": "Tutorial page 13: description"
+  },
+
+  "guide_settings_domains_title":{
+    "message": "Settings: List of domains",
+    "description": "Tutorial page 14: title"
+  },
+  
+  "guide_settings_domains_description":{
+    "message": "2) View the low-risk domains provided by the developers or modify the list to reflect your preferences. You can add or delete single domains to your own list of low-risk considered domains, delete single domains or delete your complete list.",
+    "description": "Tutorial page 14: description"
+  },
+
+  "guide_settings_referrer_title":{
+    "message": "Settings: List of referrers",
+    "description": "Tutorial page 15: title"
+  },
+  
+  "guide_settings_referrer_description":{
+    "message": "3) Referrers redirect to another URL (just like short URLs, see special case 3). TORPEDO lists web.de and gmx.net as default referrers. You can add your own referrers, which TORPEDO can then deduce automatically in the future.",
+    "description": "Tutorial page 15: description"
   }
 }

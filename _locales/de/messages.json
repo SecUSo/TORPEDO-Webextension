@@ -55,7 +55,7 @@
     "description": "Button text for deducing the target URL if the URL is a redirect"
   },
 
-  "T1SternUeberschrift": {
+ "T1SternUeberschrift": {
     "message": "Die ermittelte Ziel-URL ist:",
     "description": "Header for tooltip"
   },
@@ -91,7 +91,7 @@
   },
 
   "T2SternInfotext": {
-    "message": "Das bedeutet, dass Sie einen Link mit dieser Domain mindestens zweimal angeklickt oder die Domain manuell hinzugefügt haben(entweder durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
+    "message": "Das bedeutet, dass diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -116,7 +116,7 @@
   },
 
   "T3SternInfotext": {
-    "message": "Dies bedeutet, Sie haben einen Link mit dieser Domain mindestens zwei Mal angeklickt oder Sie haben die Domain manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
+    "message": "Das bedeutet, dass Sie einen Link mit dieser Domain mindestens zweimal angeklickt oder die Domain manuell hinzugefügt haben(entweder durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -136,7 +136,7 @@
   },
 
   "T1Erklaerung": {
-    "message": "Diese Domain (fett hervorgehobener Bereich) wird von TORPEDO als ungewisses Risiko eingestuft (grauer Rahmen). Sie müssen das Risiko hier selbst einstufen.",
+    "message": "Diese Domain (fett hervorgehobener Bereich) wird von TORPEDO als ungewisses Risiko eingestuft (grauer Rahmen). Sie müssen hier das Risiko selbst einstufen.",
     "description": "Information on the classification of this domain"
   },
 
@@ -146,7 +146,7 @@
   },
 
   "T1GluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain sorgfältig.</div> Nur wenn Sie dieser Domain vertrauen, klicken Sie auf den Link. Sonst löschen Sie diese E-Mail.",
+    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain sorgfältig.</div> Klicken Sie nur dann auf den Link, wenn Sie dieser Domain vertrauen. Andernfalls löschen Sie diese E-Mail.",
     "description": "Advice for the user"
   },
 
@@ -323,7 +323,7 @@
   "URLnachErmittelnButton2GluehbirneText": {
     "message": "Beauftragen Sie TORPEDO die Ziel-URL zu ermitteln.",
     "description": "Advice for the user"
-  },
+    },
 
   "URLnachErmittelnButton2LinkDeaktivierung": {
     "message": "TORPEDO hat den Link deaktiviert, damit Sie in Ruhe überlegen, ob Sie TORPEDO die Ziel-URL ermitteln lassen.",
@@ -346,7 +346,7 @@
   },
 
   "WarnungPhishGluehbirneText": {
-    "message": "Stellen Sie sicher, dass die E-Mail wirklich von einem Ihnen bekannten Absender kommt. Nutzen Sie dazu keine Informationen aus der E-Mail sondern, bekannte Informationen oder eine Suchmaschine. Alternativ weisen Sie auf das Problem hin und bitten darum, die Ziel-URL in der E-Mail zu anzugeben.<br>Kommt die E-Mail nicht von einem Ihnen bekannten Absender, löschen Sie diese E-Mail.",
+    "message": "Stellen Sie sicher, dass die E-Mail wirklich von einem Ihnen bekannten Absender kommt. Nutzen Sie dazu keine Informationen aus der E-Mail,sondern, bekannte Informationen oder eine Suchmaschine. Alternativ weisen Sie auf das Problem hin und bitten darum, die Ziel-URL in der E-Mail anzugeben.<br>Kommt die E-Mail nicht von einem Ihnen bekannten Absender, löschen Sie diese E-Mail.",
     "description": "Advice for the user"
   },
 
@@ -366,7 +366,7 @@
   },
 
   "T1THInfotext": {
-    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um einen Betrugsversuch handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL TORPEDO nicht bekannt ist. Die Domain ist nicht Teil der 100 meistbesuchten Webseiten in Deutschland. Außerdem wurde ein Link mit dieser Domain von Ihnen nicht mindestens zweimal angeklickt oder manuell hinzugefügt (entweder durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen)..",
+    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um einen Betrugsversuch handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL TORPEDO nicht bekannt ist. Die Domain ist nicht Teil der 100 meistbesuchten Webseiten in Deutschland. Außerdem wurde ein Link mit dieser Domain von Ihnen nicht mindestens zweimal angeklickt oder manuell hinzugefügt (entweder durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -391,7 +391,7 @@
   },
 
   "T2THInfotext": {
-    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird, da diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist. die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird, da diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.",
+    "message": "Das bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird, da diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -431,22 +431,22 @@
   },
 
   "T1PHTHUeberschrift": {
-    "message": "Die hinterlegte URL <div class='torpedoHighlight'> leitet Sie weiter </div> zu der folgenden URL:",
+    "message": "Die hinterlegte URL <div class='torpedoHighlight'> leitet Sie </div> zu der folgenden URL weiter:",
     "description": "Header for tooltip"
   },
 
   "T1PHTHErklaerung": {
-    "message": "Die hinterlegte URL und die in der E-Mail angezeigte URL stimmen nicht überein. Auch die Ziel-URL und die in der E-Mail angezeigte URL stimmen nicht überein.  Die Domain (fett hervorgehobener Bereich) der hinterlegten URL ist TORPEDO außerdem nicht bekannt. Sie müssen das Risiko hier selbst einstufen. Wegen der speziellen Situation sollten Sie bei der Einstufung besonders vorsichtig sein.<br>Die Tatsache, dass hier eine Weiterleitung verwendet wird, gefährdet Ihre <div class='torpedoHighlight'>Privatsphäre.</div>",
+    "message": "Die hinterlegte URL und die in der E-Mail angezeigte URL stimmen nicht überein. Auch die Ziel-URL und die in der E-Mail angezeigte URL stimmen nicht überein.  Die Domain (fett hervorgehobener Bereich) der hinterlegten URL ist TORPEDO außerdem nicht bekannt. Sie müssen hier das Risiko selbst einstufen. Wegen der speziellen Situation sollten Sie bei der Einstufung besonders vorsichtig sein.<br>Die Tatsache, dass hier eine Weiterleitung verwendet wird, gefährdet Ihre <div class='torpedoHighlight'>Privatsphäre.</div>",
     "description": "Information on the classification of this domain"
   },
 
   "T1PHTHInfotext": {
-    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Betrugsversuch ist, da die Domain (fett hervorgehobener Bereiech) der Ziel-URL TORPEDO nicht bekannt ist. Dies bedeutet, dass die Domain TORPEDO nicht bekannt ist. Die Domain ist nicht Teil der 100 meistbesuchten Webseiten in Deutschland. Außerdem wurde die Domain von Ihnen nicht zwei Mal angeklickt oder manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
+    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus der hinterlegten URL erkennt TORPEDO, dass Sie von dieser URL aus zu obiger Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der Domain der hinterlegten URL, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw. Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher  um ein Betrugsversuch handelt, da die Domain (fett hervorgehobener Bereiech) der Ziel-URL TORPEDO nicht bekannt ist, da die Domain TORPEDO nicht bekannt ist. Die Domain ist nicht Teil der 100 meistbesuchten Webseiten in Deutschland. Außerdem wurde die Domain von Ihnen nicht zweimal angeklickt oder manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
     "description": "More information on the evaluation of this domain"
   },
 
   "T1PHTHGluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain der Ziel-URL sorgfältig.</div> Nur wenn dieser vertraut werden kann, klicken Sie auf den Link. Sonst löschen Sie diese E-Mail.",
+    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain der Ziel-URL sorgfältig.</div> Klicken Sie nur dann auf den Link, wenn Sie dieser Domain vertrauen. Sonst löschen Sie diese E-Mail.",
     "description": "Advice for the user"
   },
 
@@ -456,7 +456,7 @@
   },
 
   "T2PHTHUeberschrift": {
-    "message": "Die hinterlegte URL <div class='torpedoHighlight'> leitet Sie weiter </div> zu der folgenden URL:",
+    "message": "Die hinterlegte URL <div class='torpedoHighlight'> leitet Sie </div> zu der folgenden URL weiter:",
     "description": "Header for tooltip"
   },
 
@@ -466,7 +466,7 @@
   },
 
   "T2PHTHInfotext": {
-    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw,. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Versehen war, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird. Dies bedeutet wiederum, dass diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.",
+    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus der hinterlegten URL erkennt TORPEDO, dass Sie von dieser URL aus zu obiger Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der Domain der hinterlegten URL, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw. Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher um ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von TORPEDO als geringes Risiko eingestuft wird, da diese Domain Teil der 100 meistbesuchten Webseiten in Deutschland ist.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -481,7 +481,7 @@
   },
 
   "T3PHTHUeberschrift": {
-    "message": "Die hinterlegte URL <div class='torpedoHighlight'> leitet Sie weiter </div> zu der folgenden URL:",
+    "message": "Die hinterlegte URL <div class='torpedoHighlight'> leitet Sie </div> zu der folgenden URL weiter:",
     "description": "Header for tooltip"
   },
 
@@ -491,7 +491,7 @@
   },
 
   "T3PHTHInfotext": {
-    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus des Pfades der hinterlegten URL erkennt TORPEDO, dass Sie von dieser Domain aus zur Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der obigen Domain, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw,. zwischen angezeigter und Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass dies eher ein Versehen war, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von Ihnen als geringes Risiko eingestuft wurde. Dies wiederum bedeutet, Sie haben diese Domain mindestens zwei Mal angeklickt oder Sie haben die Domain manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
+    "message": "Die hinterlegte URL:<br><URL><br>Anhand des Aufbaus der hinterlegten URL erkennt TORPEDO, dass Sie von dieser URL aus zu obiger Ziel-URL weitergeleitet werden. Dies kann verschiedene Gründe haben. In jedem Fall, weiß der Betreiber der Domain der hinterlegten URL, dass Sie auf den Link geklickt haben. Daher ist hier Ihre Privatsphäre gefährdet.<br>Die Unstimmigkeit zwischen angezeigter und hinterlegter URL bzw. Ziel-URL bedeutet, dass der Absender nicht einfach eine URL in die E-Mail kopiert hat, sondern explizit angegeben hat, dass die hinterlegte URL eine andere sein soll als die dargestellte. Dies kann auf einen Betrugsversuch hinweisen. Es kann aber auch ein Versehen sein.<br>TORPEDO geht hier davon aus, dass es sich eher ein Versehen handelt, da die Domain (fett hervorgehobener Bereich) der hinterlegten URL von Ihnen als geringes Risiko eingestuft wurde. D.h., Sie haben einen Link mit dieser Domain mindestens zweimal angeklickt oder Sie haben die Domain manuell hinzugefügt (durch die Rechtsklick-Option 'Domain als geringes Risiko einstufen' oder über die Einstellungen).",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -828,10 +828,15 @@
     "description": "Tutorial page 5: description 1"
   },
   
-  "guide_extras_URL_title":{
-    "message": "Erklärungen zur Prüfung der URL (auch Web-Adresse genannt) hinter dem Link. Dies ist insbesondere für den grauen Fall und die Spezialfälle, die später erklärt werden, wichtig zu wissen.",
+ "guide_extras_URL_title":{
+    "message": "Erklärungen zur Prüfung der URL (auch Web-Adresse genannt) hinter dem Link:",
     "description": "Tutorial page 6: title"
-  }, 
+  },
+
+  "guide_extras_URL_title1":{
+    "message": "Für den grauen Fall ist es wichtig zu wissen, wie Sie die URL prüfen müssen, um das Risiko einstufen zu können.",
+    "description": "Tutorial page 6: title 1"
+  },   
 
   "guide_extras_URL_description":{
     "message": "<li><strong>Prüfen Sie, ob der Anbietername</strong> (z.B. PayPal) <strong>in der URL im Tooltip fett hervorgehoben ist.</strong> Betrachten Sie ausschließlich den hervorgehobenen Bereich, um zu verhindern, dass Kriminelle Ihnen weismachen wollen, dass z.B. https://paypal.com. <strong>p a y - m e . c o m</strong> oder https://www. <strong>p a y – s e c u r e . c o m</strong> /www.paypal.com eine PayPal URL ist, es sich aber tatsächlich um einen gefährlichen Link handelt.</li><li><strong>Prüfen Sie jeden Buchstaben in dem hervorgehobenen Bereich einzeln.</strong> Damit stellen Sie sicher, dass tatsächlich der Anbietername (z.B. Apple) im hervorgehobenen Bereich steht und Kriminelle Ih­nen nicht weismachen, dass z.B. https:// <strong>a p p e l . c o m</strong> / eine Apple URL ist, es sich aber tatsächlich um einen gefährlichen Link handelt. Vorsicht: Kriminelle ersetzen typischerweise Buchstaben (z.B. m durch r n) oder vertauschen Buch­staben.</li><li><strong>Achten Sie auf Erweiterungen zum Anbieternamen in dem hervorgehobenen Bereich:</strong> z.B. ist https://www. <strong>p a y p a l - s e c u r e . c o m</strong>/ nicht zwangsläufig eine PayPal-URL. Wenn Sie unsicher sind, können Sie die im Menü von TORPEDO eingebaute Anfrage bei einer Suchmaschine nutzen. Prüfen Sie, ob der hervorgehobene Bereich mit einem der ersten Vorschläge der Suchmaschine übereinstimmt.</li>",
@@ -842,78 +847,99 @@
     "message": "Wenn Sie diese Informationen später erneut ansehen möchten, so können Sie dies über die weiter­führenden Informationen in den entsprechenden Tooltips tun.",
     "description": "Tutorial page 6: description"
   },
+  
+  "guide_tooltips_specialcase_title":{
+    "message": " Erläuterungen zu einigen Spezialfällen:",
+    "description": "Tutorial page 7: title"
+  },
+  
+  "guide_tooltips_specialcase_description":{
+    "message": "TORPEDO unterscheiden eine Reihe von Spezialfällen. Die wichtigsten werden Ihnen auf den nächsten Seiten erklärt.",
+    "description": "Tutorial page 7: description"
+  },
 
   "guide_tooltips_specialcase1_title":{
-    "message": "Erklärungen zu den Spezialfällen (1 von 3):",
-    "description": "Tutorial page 7: title"
+    "message": "Spezialfall: Unstimmigkeit",
+    "description": "Tutorial page 8: title"
   },
   
   "guide_tooltips_specialcase1_description":{
     "message": "Der erste Spezialfall ist der Fall <strong>„Unstimmigkeit“</strong>. Dies bedeutet, dass der tatsächliche Link und der Link, der im E-Mail Text dargestellt ist, nicht übereinstimmen und darüber hinaus die Do­main (hervorgehobener Bereich) der tatsächlichen URL TORPEDO nicht bekannt ist (wie im grauen Fall). Obwohl das auch versehentlich vom Absender verursacht worden sein kann, wird dies von Kriminellen oft genutzt, um gefährliche Links zu verstecken. Kriminelle gehen davon aus, dass man normalerweise ausschließlich die URL im Text und nicht die tatsächliche URL betrachtet. Hier gel­ten die gleichen Empfehlungen zur Prüfung wie im grauen Fall.",
-    "description": "Tutorial page 7: description"
+    "description": "Tutorial page 8: description"
   },
   
   "guide_tooltips_specialcase2_title":{
-    "message": "Erklärungen zu den Spezialfällen (2 von 3):",
-    "description": "Tutorial page 8: title"
+    "message": "Spezialfall: Kurz-URL",
+    "description": "Tutorial page 9: title"
   },
   
   "guide_tooltips_specialcase2_description":{
     "message": "Der zweite Spezialfall ist der Fall <strong>„Kurz-URL“</strong>. Dies bedeutet, dass die URL hinter dem Link nicht die Ziel URL ist, sondern erst einmal ein sogenannter Kurz-URL-Dienst. Von dieser URL werden Sie automatisch zum tatsächlichen, vorgesehenen Ziel weitergeleitet. Relevant für die Frage, ob der Link gefährlich ist, ist die Beurteilung der tatsächlichen Ziel-URL. TORPEDO kann die Informationen über die tatsächliche Ziel-URL mit Hilfe eines webbasierten Services ermitteln (siehe Button) und dann anzeigen. Obwohl Kurz-URLs auch für vertrauenswürdige E-Mails genutzt werden, ist dies eine Technik, die oft von Kriminellen genutzt wird. Sie gehen davon aus, dass man nicht weiß, wie man die tatsächliche Ziel-URL ermittelt, ohne auf den Link zu klicken.",
-    "description": "Tutorial page 8: description"
+    "description": "Tutorial page 9: description"
   },
   
   "guide_tooltips_specialcase3_title":{
-    "message": "Erklärungen zu den Spezialfällen (3 von 3):",
-    "description": "Tutorial page 9: title"
+    "message": "Spezialfall: Weiterleitung ",
+    "description": "Tutorial page 10: title"
   },
   
   "guide_tooltips_specialcase3_description":{
     "message": "Der dritte Spezialfall ist der Fall <strong>„Weiterleitung“</strong>. Dies bedeutet ebenfalls, dass die URL hinter dem Link nicht die Ziel-URL ist, sondern dass Sie von dieser URL automatisch auf die tatsächliche URL weitergeleitet werden. Manche E-Mail-Anbieter nutzen Weiterleitungen aus verschiedenen Gründen, z.B. um herauszufinden, ob Sie an einer Information interessiert waren oder um den Inhalt der Webseiten zu überprüfen. Relevant für die Frage, ob der Link gefährlich ist, ist auch hier die Beurteilung der tatsächlichen Ziel-URL. In diesem Fall kann TORPEDO die tatsächliche Ziel-URL selbstständig ableiten und zeigt Ihnen daher direkt die Informationen zur tatsächlichen Ziel-URL an.",
-    "description": "Tutorial page 9: description"
+    "description": "Tutorial page 10: description"
   },
 
   "guide_tooltips_menu_title":{
     "message": "Sie können das TORPEDO Menü mit einem rechten Mausklick auf den Tooltip öffnen:",
-    "description": "Tutorial page 10: title"
+    "description": "Tutorial page 11: title"
   },
+  
   "guide_tooltips_menu_description1":{
     "message": "Derzeit haben Sie die folgenden Optionen:",
-    "description": "Tutorial page 10: description 1"
+    "description": "Tutorial page 11: description 1"
   },
-
+  
   "guide_tooltips_menu_description2":{
     "message": "<li>Die derzeitige Domain als geringes Risiko einzustufen.</li><li>Die integrierte Suchmaschine zu nutzen, um die Ziel-URL zu ermitteln.</li><li>Die TORPEDO Einstellungen zu öffnen.</li><li>Das Tutorial zu öffnen.</li>",
-    "description": "Tutorial page 10: description 2"
+    "description": "Tutorial page 11: description 2"
+  },
+  
+  "guide_tooltips_menu1_title":{
+    "message": "Erläuterungen zu den Einstellungen",
+    "description": "Tutorial page 12: title"
+  },
+  
+  "guide_tooltips_menu1_description1":{
+    "message": "In den Einstellungen finden Sie drei Reiter (Link-Verzögerung, Domains, Referrer). Diese werden Ihnen auf den nächsten Seiten ausführlicher beschrieben.",
+    "description": "Tutorial page 12: description 1"
   },
 
   "guide_settings_delay_title":{
-    "message": "In den Einstellungen finden Sie drei Reiter (Link-Verzögerung, Domains, Referrer):",
-    "description": "Tutorial page 11: title"
+    "message": "Einstellungen: Verzögerung",
+    "description": "Tutorial page 13: title"
   },
   
   "guide_settings_delay_description":{
     "message": "1) Aktivieren oder deaktivieren Sie die Verzögerung beim Klicken auf den Link oder ändern Sie die Zeit für die Verzögerung. Zusätzlich können Sie die Verzögerung auch für den grünen und/oder den blauen Fall aktivieren.",
-    "description": "Tutorial page 11: description"
+    "description": "Tutorial page 13: description"
   },
 
   "guide_settings_domains_title":{
     "message": "Einstellungen: Liste der Domains",
-    "description": "Tutorial page 12: title"
+    "description": "Tutorial page 14: title"
   },
   
   "guide_settings_domains_description":{
     "message": "2) Schauen Sie sich die Liste der Domains an, die die Entwickler als ‚geringes Risiko‘ hinterlegt haben sowie die Liste der Domains, die Sie so klassifiziert haben. Erstere können Sie auch deaktivieren und die zweite Liste können Sie bearbeiten.",
-    "description": "Tutorial page 12: description"
+    "description": "Tutorial page 14: description"
   },
 
   "guide_settings_referrer_title":{
     "message": "Einstellungen: Liste der Referrer",
-    "description": "Tutorial page 13: title"
+    "description": "Tutorial page 15: title"
   },
   
   "guide_settings_referrer_description":{
     "message": "3) Referrer leiten, ähnlich wie Kurz-URLs, auf eine andere Seite weiter (siehe Spezialfall 3). Bei TORPEDO sind web.de und gmx.net als Standard-Referrer eingetragen. Sie können bei den Einstellungen auch eigene Referrer hinzufügen, welche TORPEDO dann automatisch für Sie auflöst.",
-    "description": "Tutorial page 13: description"
+    "description": "Tutorial page 15: description"
   }
 }
