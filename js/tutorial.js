@@ -1,6 +1,6 @@
 var slideIndex = 1;
 var lang = "en";
-var prev = 13;
+var prev = 15;
 var pages = {
   1: ['guide-page-welcome', 'basic'],
   2: ['guide-page-why', 'basic'],
