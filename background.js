@@ -21,7 +21,12 @@ function showTutorial(){
 	    url: chrome.runtime.getURL('tutorial.html')
 	});
 };
-chrome.runtime.onInstalled.addListener(showTutorial);
+
+chrome.runtime.onInstalled.addListener(function(details){
+    if(details.reason == "install"){
+        showTutorial();
+    }
+});
 
 loc = "";
 works = false;
