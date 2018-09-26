@@ -5,7 +5,7 @@
   },
 
   "extensionDescription": {
-    "message": "Zeigt URLs und deren Sicherheitsstatus, sobald mit der Maus über einen Link auf einer Website eines E-Mail-Providers gefahren wird. Dieses Browser-Addon basiert auf der Bachelorarbeit von Bettina Ballin.",
+    "message": "Zeigt URLs und deren Sicherheitsstatus, sobald mit der Maus über einen Link auf einer Website eines E-Mail-Providers gefahren wird.",
     "description": "Description of the extension."
   },
 
