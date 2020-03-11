@@ -116,9 +116,7 @@ div.torpedoTooltip table {
 .torpedoUserDefined{
   border: 2px solid #1a509d !important;
 }
-.torpedoPhish{
-  border: 2px solid red !important;
-}
+
 #torpedoDomain{
   font-weight: bold !important;
   letter-spacing: 3px !important;
@@ -127,6 +125,18 @@ div.torpedoTooltip table {
 #torpedoInfoImage,#torpedoAdviceImage,#torpedoWarningImage{
   padding-right: 10px;
 }
+
+#torpedoAdviceText{
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+#torpedoAdviceText:hover{
+  font-weight: bold;
+  cursor: pointer;
+}
+
 #torpedoInfoText{
   text-decoration: underline;
   cursor: help;
@@ -136,10 +146,10 @@ div.torpedoTooltip table {
   font-weight: bold;
   cursor: pointer;
 }
-#torpedoInfoDiv{
+/*#torpedoInfoDiv{
   overflow-y: scroll;
   height: 60px;
-}
+}*/
 #torpedoInfoDiv, #torpedoLinkDelay, #torpedoURL, #torpedoMoreInfoButton, #torpedoRedirectButton{
   clear: both;
   width: 100%;

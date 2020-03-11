@@ -7,12 +7,12 @@
 	}
 	},
 	"name":"__MSG_extensionName__",
-	"version":"1.0.9",
+	"version":"1.2",
 	"default_locale": "de",
 	"description":"__MSG_extensionDescription__",
 	"background":{
 		"scripts":[
-			"js/jquery-3.3.1.min.js",
+			"js/jquery-3.4.1.min.js",
 			"js/punycode.min.js",
 			"background.js"
 		]
@@ -22,10 +22,7 @@
 		"tabs",
 		"storage"
 	],
-	"page_action": {
-	  "default_title": "__MSG_extensionName__",
-		"default_popup": "icon.html"
-  },
+	
 	"options_ui":{
 		"page": "options.html"
 	},
@@ -57,7 +54,7 @@
 				"css/tooltip.css"
 		  ],
 		  "js": [
-		  	"js/jquery-3.3.1.min.js",
+		  	"js/jquery-3.4.1.min.js",
 		  	"js/jquery.qtip.min.js",
 		  	"js/punycode.min.js",
 		  	"js/contentscript.js",
