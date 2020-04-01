@@ -32,7 +32,7 @@ $(document).ready(function () {
       mouseenter = ".adn";
       break;
     case "outlook.live.com":
-      mouseenter = ".conductorContent";
+      mouseenter = "#app";
       break;
     case "mail.aol.com":
       mouseenter = "#displayMessage";

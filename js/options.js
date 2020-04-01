@@ -46,6 +46,8 @@ function addTexts() {
   $("#redirectModeActivated").html(chrome.i18n.getMessage("activateRedirectMode"));
 
   // Domains tab
+  $("#blackListText").html(chrome.i18n.getMessage("highRiskDomains"));
+  $("#activateBlackList").html(chrome.i18n.getMessage("activateHighRiskList"));
   $("#trustedListText").html(chrome.i18n.getMessage("lowRiskDomains"));
   $("#activateTrustedList").html(chrome.i18n.getMessage("activateLowRiskList"));
   $("#showTrustedDomains").html(chrome.i18n.getMessage("showLowRiskList"));
@@ -106,6 +108,7 @@ function init() {
 
 
     // Domains tab
+    $("#blackListActivated").prop("checked", r.blackListActivated);
     $("#trustedListActivated").prop("checked", r.trustedListActivated);
     $("#showTrustedDomains").prop("disabled", !r.trustedListActivated);
 
@@ -192,6 +195,11 @@ function addEvents() {
     });
 
     // Domains tab
+    $("#blackListActivated").on('change', function (e) {
+      save("blackListActivated", r.blackListActivated);
+      var checked = $(this).prop("checked");
+      chrome.storage.sync.set({ 'blackListActivated': checked });
+    });
     $("#trustedListActivated").on('change', function (e) {
       save("trustedListActivated", r.trustedListActivated);
       var checked = $(this).prop("checked");
@@ -270,6 +278,8 @@ function addEvents() {
           chrome.storage.sync.set({ 'trustedTimerActivated': changes[i][1] });
         else if (changes[i][0] == "userTimerActivated")
           chrome.storage.sync.set({ 'userTimerActivated': changes[i][1] });
+        else if (changes[i][0] == "blackListActivated")
+          chrome.storage.sync.set({ 'blackListActivated': changes[i][1] });
         else if (changes[i][0] == "trustedListActivated")
           chrome.storage.sync.set({ 'trustedListActivated': changes[i][1] });
         else if (changes[i][0] == "referrerPart1")
@@ -289,6 +299,7 @@ function addEvents() {
         'timer': 3,
         'trustedTimerActivated': false,
         'userTimerActivated': false,
+        'blackListActivated': true,
         'trustedListActivated': true,
         'referrerPart1': ["deref-gmx.net", "deref-web-02.de/", "google.*", "google.*"],
         'referrerPart2': ["/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/url?", "/url?"],

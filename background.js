@@ -4,16 +4,18 @@ chrome.runtime.onInstalled.addListener(function () {
     'onceClickedDomains': [],
     'userDefinedDomains': [],
     'timer': 3,
-    'tooltipTextCounter': [0, 0, 0, 0, 0], // T1=0, T2=1, T31=2, T32=3, T33=4
+    'tooltipTextCounter': [0, 0, 0, 0, 0, 0], // T1=0, T2=1, T31=2, T32=3, T33=4, T4=5
     'trustedTimerActivated': false,
     'userTimerActivated': false,
     'privacyModeActivated': true,
     'securityModeActivated': false,
     'redirectModeActivated': false,
+    'blackListActivated': true,
     'trustedListActivated': true,
     'referrerPart1': ["deref-gmx.net", "deref-web-02.de", "google.*", "google.*"],
     'referrerPart2': ["/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/url?", "/url?"],
     'referrerPart3': ["redirectUrl=", "redirectUrl=", "url=", "q="],
+    'dangerousDomains': [],
     'trustedDomains': ["amazon.com", "amazon.de", "aliexpress.com", "bahn.de", "bild.de", "bing.com", "blogspot.com", "booking.com", "chip.de", "deutsche-bank.de", "dhl.de", "ebay.de", "ebay-kleinanzeigen.de", "facebook.com", "fandom.com", "gmx.net", "google.com", "google.de", "google.ru", "idealo.de", "imdb.com", "immobilienscout24.de", "instagram.com", "live.com", "mail.ru", "microsoft.com", "mobile.de", "netflix.com", "ok.ru", "otto.de", "paypal.com", "postbank.de", "reddit.com", "shop-apotheke.com", "spiegel.de", "telekom.com", "t-online", "twitch.tv", "vk.com", "web.de", "wetter.com", "wikipedia.org", "yahoo.com", "yandex.ru", "youtube.com",
       "adobe.com", "apple.com", "baidu.com", "chase.com", "cnn.com", "craigslist.org", "dropbox.com", "ebay.com", "espn.com", "force.com", "imdb.com", "imgur.com", "indeed.com", "jd.com", "linkedin.com", "login.tmall.com", "microsoftonline.com", "msn.com", "myshopify.com", "nytimes.com", "office.com", "qq.com", "salesforce.com", "sohu.com", "spotify.com", "stackoverflow.com", "taobao.com", "tmall.com", "tumblr.com", "twitter.com", "walmart.com", "wellsfargo.com", "yelp.com", "zillow.com"],
     'similiarTrustedDomains': ["amazon.com", "amazon.de", "aliexpress.com", "bahn.de", "bild.de", "bing.com", "blogspot.com", "booking.com", "chip.de", "deutschebank.de", "dhl.de", "ebay.de", "ebaykleinanzeigen.de", "facebook.com", "fandom.com", "gmx.net", "google.com", "google.de", "google.ru", "idealo.de", "imdb.com", "immobilienscout.de", "instagram.com", "live.com", "mail.ru", "microsoft.com", "mobile.de", "netflix.com", "ok.ru", "otto.de", "paypal.com", "postbank.de", "reddit.com", "shopapotheke.com", "spiegel.de", "telekom.com", "tonline", "twitch.tv", "vk.com", "web.de", "wetter.com", "wikipedia.org", "yahoo.com", "yandex.ru", "youtube.com", "adobe.com", "apple.com", "baidu.com", "chase.com", "cnn.com", "craigslist.org", "dropbox.com", "ebay.com", "espn.com", "force.com", "imdb.com", "imgur.com", "indeed.com", "jd.com", "linkedin.com", "login.tmall.com", "microsoftonline.com", "msn.com", "myshopify.com", "nytimes.com", "office.com", "qq.com", "salesforce.com", "sohu.com", "spotify.com", "stackoverflow.com", "taobao.com", "tmall.com", "tumblr.com", "twitter.com", "walmart.com", "wellsfargo.com", "yelp.com", "zillow.com"],
@@ -22,6 +24,34 @@ chrome.runtime.onInstalled.addListener(function () {
     "publicSuffixList": {}
   });
 })
+
+
+chrome.runtime.onStartup.addListener(function () {
+  readInBlacklist();
+});
+
+
+function readInBlacklist() {
+  var dangerousDomains = [];
+  var ctcBlacklistRequest = new XMLHttpRequest();
+  ctcBlacklistRequest.open('GET', 'https://blacklist.cyberthreatcoalition.org/vetted/domain.txt', true);
+  ctcBlacklistRequest.send(null);
+  ctcBlacklistRequest.onreadystatechange = function () {
+    if (ctcBlacklistRequest.readyState === 4 && ctcBlacklistRequest.status === 200) {
+      var contentType = ctcBlacklistRequest.getResponseHeader('Content-Type');
+      if (contentType.indexOf("plain") !== 1) {
+        var extractedLines = ctcBlacklistRequest.responseText.split('\n');
+        for (var i = 1; i < extractedLines.length - 1; i++) {
+          dangerousDomains.push(extractedLines[i]);
+        }
+        dangerousDomains.push("jonas-pfrang.com");
+        chrome.storage.sync.set({
+          'dangerousDomains': dangerousDomains,
+        })
+      }
+    }
+  }
+}
 
 function showTutorial() {
   chrome.tabs.create({
@@ -32,11 +62,15 @@ function showTutorial() {
 chrome.runtime.onInstalled.addListener(function (details) {
   if (details.reason == "install") {
     showTutorial();
+    readInBlacklist();
   }
 });
 
 loc = "";
 works = false;
+
+
+
 
 function sendEmail() {
   var emailUrl = 'mailto:addons@secuso.org?subject='
@@ -59,6 +93,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, status, info) {
     if (info.url.match(websites[i]) != null) showIcon = true;
   }
   if (showIcon) {
+    //readInBlacklist();
     chrome.pageAction.show(tabId);
   }
 });

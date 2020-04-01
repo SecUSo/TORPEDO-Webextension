@@ -186,6 +186,31 @@
     "description": "Text for Deactivation of the link"
   },
 
+  "T4Ueberschrift": {
+    "message": "Hinterlegte URL (auch Webadresse genannt):",
+    "description": "Header for tooltip"
+  },
+
+  "T4Erklaerung": {
+    "message": "Das Risiko für das Klicken auf diesen Link wird von TORPEDO als hoch eingestuft, da diese auf einer Blacklist enthalten ist. Es wird nicht empfohlen, auf diesen Link zu klicken.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T4Infotext": {
+    "message": "Die Domain befindet sich auf einer Blackliste von Domains, die oft in betrügerischen E-Mails verwendet wird, um Sie zu täuschen.</div>",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T4GluehbirneText": {
+    "message": "<div class='torpedoHighlight'>Sollten Sie dennoch der Ansicht sein, dass es sich um eine valide Domain handelt, überprüfen Sie die Domain nochmals besonders sorgfältig.</div> Passt die Domain (und nicht andere Teile der URL) zum Inhalt der Nachricht? Ist der Name der Domain richtig geschrieben? Wenn Sie dies nicht eindeutig beurteilen können, sollten Sie weitere Informationen einholen. Wenn die Domain nicht vertrauenswürdig ist, löschen Sie diese E-Mail und/oder informieren den Support.",
+    "description": "Advice for the user"
+  },
+
+  "T4LinkDeaktivierung": {
+    "message": "TORPEDO hat den Link deaktiviert, damit Sie die Domain in Ruhe prüfen.",
+    "description": "Text for Deactivation of the link"
+  },
+
   
   "ShortURLUeberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
@@ -322,6 +347,11 @@
     "description": "Seconds"
   },
 
+  "highRiskDomains":{
+    "message": "Domains, die auf einer Blacklist (Corona-Blacklist der Cyber Threat Coalition) stehen",
+    "description": "List of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
+  },
+
   "lowRiskDomains":{
     "message": "Domains, die von den Entwicklern als 'geringes Risiko' eingestuft wurden (grün)",
     "description": "List of trusted domains."
@@ -330,6 +360,11 @@
   "activateTimerOnLowRisk":{
     "message": "Aktiviert Verzögerung auf Domains, die vom Entwickler als niedrig riskant eingestuft wurden.",
     "description": "Activate timer on list of trusted domains."
+  },
+
+  "activateHighRiskList":{
+    "message": "Blacklist (Corona-Blacklist der Cyber Threat Coalition) aktivieren",
+    "description": "Activate list of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
   },
 
   "activateLowRiskList":{

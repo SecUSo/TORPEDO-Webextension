@@ -186,6 +186,31 @@
     "description": "Text for Deactivation of the link"
   },
 
+    "T4Ueberschrift": {
+    "message": "Hinterlegte URL (auch Webadresse genannt):",
+    "description": "Header for tooltip"
+  },
+
+  "T4Erklaerung": {
+    "message": "The risk of clicking on the link is classified as high by TORPEDO because the domain is part of a blacklist. It is not recommended to click on this link.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T4Infotext": {
+    "message": "The domain is listed on a blacklist which contains domains that are often used in malicious messages.</div>",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T4GluehbirneText": {
+    "message": "<div class='torpedoHighlight'>If you think that the domain is valid anyway, check the domain very carefully again.</div> Does the domain (and not other parts of the URL) match the content of the message? Is the name of the domain spelled correctly? If you can not clearly review this, you should get more information. If the domain is not trustable, delete this email and / or contact support.",
+    "description": "Advice for the user"
+  },
+
+  "T4LinkDeaktivierung": {
+    "message": "TORPEDO has disabled the link so you can check the domain carefully.",
+    "description": "Text for Deactivation of the link"
+  },
+
   
   "ShortURLUeberschrift": {
     "message": "Referred URL (also known as web address):",
@@ -329,6 +354,11 @@
     "description": "Seconds"
   },
 
+  "highRiskDomains":{
+    "message": "Domains which are listed as dangerous (Corona-Blacklist of the Cyber Threat Coalition is used)",
+    "description": "List of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
+  },
+
   "lowRiskDomains":{
     "message": "Domains the developer considered as 'low-risk' (green)",
     "description": "Activate timer on list of trusted domains."
@@ -337,6 +367,11 @@
   "activateTimerOnLowRisk":{
     "message": "Activate timer on domains the developer considered as 'low-risk' (green border).",
     "description": "Activate timer on list of trusted domains."
+  },
+
+  "activateHighRiskList":{
+    "message": "Activate Blacklist (Corona-Blacklist of Cyber Threat Coalition)",
+    "description": "Activate list of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
   },
 
   "activateLowRiskList":{

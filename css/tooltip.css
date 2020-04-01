@@ -117,6 +117,10 @@ div.torpedoTooltip table {
   border: 2px solid #1a509d !important;
 }
 
+.torpedoPhish{
+  border: 2px solid red !important;
+}
+
 #torpedoDomain{
   font-weight: bold !important;
   letter-spacing: 3px !important;

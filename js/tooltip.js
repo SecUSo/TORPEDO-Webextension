@@ -175,11 +175,14 @@ function updateTooltip() {
         countdown(r.timer);
         break;
       case "T32":
-
         $(t.find("#torpedoMarkTrusted")[0]).show();
         $(t.find("#torpedoWarningImage2")[0]).show();
         $(t.find("#torpedoWarningText")[0]).show();
         countdown(r.timer + 2);
+        break;
+      case "T4":
+        console.log("T4");
+        $(".torpedoTooltip").addClass("torpedoPhish");
         break;
       default:
         countdown(r.timer);

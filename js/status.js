@@ -34,6 +34,8 @@ function getSecurityStatus(storage) {
 			resolveRedirect(event);
 			torpedo.state = "URLnachErmittelnButtonPrivacyMode";
 		}
+	} else if (inBlacklist(torpedo.domain)) {
+		torpedo.state = "T4";
 	} else if (inTrusted(torpedo.domain)) {
 		torpedo.state = "T1";
 	} else if (inUserList(torpedo.domain)) {
@@ -109,6 +111,16 @@ function isTooltipMismatch(tooltipURL, hrefURL) {
 	var tooltipDomain = extractDomain(tooltipURL);
 	return (tooltipDomain != hrefDomain);
 };
+
+function inBlacklist(url) {
+	if (r.blackListActivated) {
+		var lst = r.dangerousDomains;
+		for (var i = 0; i < lst.length; i++) {
+			if (lst[i].indexOf(url) > -1) return true;
+		}
+	}
+	return false;
+}
 
 function inTrusted(url) {
 	if (r.trustedListActivated) {
