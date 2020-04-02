@@ -12,7 +12,7 @@ torpedo.oldUrl = "";
 function tooltipText() {
   var text = "<div id='torpedoWarning'> \
                 <img id='torpedoWarningImage' src='"+ chrome.extension.getURL("img/warning.png") + "'> \
-				<img id='torpedoWarningImage2' src='"+ chrome.extension.getURL("img/warning2.png") + "'> \
+				        <img id='torpedoWarningImage2' src='"+ chrome.extension.getURL("img/warning2.png") + "'> \
                 <p id='torpedoWarningText'></p>\
               </div>\
               <div><a href='"+ torpedo.url + "' id='torpedoURL''></a></div> \
@@ -29,7 +29,7 @@ function tooltipText() {
                 <img id='torpedoAdviceImage' src='"+ chrome.extension.getURL("img/advice.png") + "'> \
                 <p id='torpedoAdviceText'></p> \
               </div> \
-			  <div id='torpedoAdviceDiv'><p id='torpedoMoreAdvice'></p></div> \
+			        <div id='torpedoAdviceDiv'><p id='torpedoMoreAdvice'></p></div> \
               <div id='torpedoInfo'>  \
                 <img id='torpedoInfoImage' src='"+ chrome.extension.getURL("img/info.png") + "'> \
                 <p id='torpedoInfoText'></p> \

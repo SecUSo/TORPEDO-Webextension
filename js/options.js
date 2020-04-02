@@ -444,7 +444,7 @@ function addUserDefined() {
         $("#errorAddUserDefined").html(chrome.i18n.getMessage("nonValidUrl"));
         return;
       }
-      if (r.trustedDomains.indexOf(input) > -1 && r.trustedListActivated == "true") {
+      if (r.trustedDomains.indexOf(input) > -1 && r.trustedListActivated) {
         $("#errorAddUserDefined").html(chrome.i18n.getMessage("alreadyInTrustedUrls"));
         return;
       }

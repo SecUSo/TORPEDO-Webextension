@@ -146,10 +146,10 @@ div.torpedoTooltip table {
   font-weight: bold;
   cursor: pointer;
 }
-/*#torpedoInfoDiv{
+#torpedoInfoDiv{
   overflow-y: scroll;
-  height: 60px;
-}*/
+  height: 90px;
+}
 #torpedoInfoDiv, #torpedoLinkDelay, #torpedoURL, #torpedoMoreInfoButton, #torpedoRedirectButton{
   clear: both;
   width: 100%;
