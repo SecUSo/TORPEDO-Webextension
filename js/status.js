@@ -8,8 +8,9 @@ r = null;
 * determine security status of domain by
 * looking up trusted, redirect, and user defined domains
 */
-function getSecurityStatus(storage) {
+function getSecurityStatus(storage, storage_local) {
 	r = storage;
+	re = storage_local;
 
 	var referrerURL = matchReferrer(torpedo.url);
 
@@ -114,7 +115,7 @@ function isTooltipMismatch(tooltipURL, hrefURL) {
 
 function inBlacklist(url) {
 	if (r.blackListActivated) {
-		var lst = r.dangerousDomains;
+		var lst = re.dangerousDomains;
 		for (var i = 0; i < lst.length; i++) {
 			if (lst[i].indexOf(url) > -1) return true;
 		}
