@@ -25,7 +25,7 @@ chrome.runtime.onInstalled.addListener(function () {
   });
  // Initialize local storage
  chrome.storage.local.set({
- 	'dangerousDomains': {},
+ 	'dangerousDomains': [],
  	'lastCtcBlacklistRequest': 0,
  	'currentCtcBlacklistVersion': 0
  });
@@ -35,7 +35,7 @@ function readInBlacklist() {
 	chrome.storage.sync.get('blackListActivated', function(result_sync) {
 		if(result_sync.blackListActivated == true) {
 		  chrome.storage.local.get(['lastCtcBlacklistRequest', 'currentCtcBlacklistVersion'], function(result_local) {
-			  var dangerousDomains = {};
+			  var dangerousDomains = [];
 			  var currentTime = new Date().getTime();
 		      var lastCtcBlacklistRequest = result_local.lastCtcBlacklistRequest;
 		      var currentCtcBlacklistVersion = result_local.currentCtcBlacklistVersion;
@@ -55,12 +55,10 @@ function readInBlacklist() {
 					  				var extractedLines = ctcBlacklistRequest.responseText.split('\n');
 					    			for (var i = 1; i < extractedLines.length - 1; i++) {
 					    				if(extractedLines[i].length <= 255) {
-					    					if(!dangerousDomains[extractedLines[i]] == true) {
-					    						dangerousDomains[extractedLines[i]] = true;
-					    					}
+					    					dangerousDomains.push(extractedLines[i]);
 					    				}
 					  				}
-					  				dangerousDomains["jonas-pfrang.com"] = true;
+					  				dangerousDomains.push("jonas-pfrang.com");
 					  				var readInStopTime = new Date().getTime();
 					  				console.log("Einlesezeit:");
 					  				console.log(readInStopTime-readInStartTime);

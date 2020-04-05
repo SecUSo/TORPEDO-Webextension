@@ -118,10 +118,12 @@ function inBlacklist(url) {
 		var checkDomainStartTime = new Date().getTime();
 		var checkDomainStopTime = null;
 		var lst = re.dangerousDomains;
-		if(lst[url] == true) {
-			checkDomainStopTime = new Date().getTime();
-			alert(checkDomainStopTime - checkDomainStartTime);
-			return true;
+		for (var i = 0; i < lst.length; i++) {
+			if (lst[i].indexOf(url) > -1) {
+				checkDomainStopTime = new Date().getTime();
+				alert(checkDomainStopTime - checkDomainStartTime);
+				return true;
+			}
 		}
 		checkDomainStopTime = new Date().getTime();
 		alert(checkDomainStopTime - checkDomainStartTime);
