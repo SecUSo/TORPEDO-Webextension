@@ -25,44 +25,57 @@ chrome.runtime.onInstalled.addListener(function () {
   });
  // Initialize local storage
  chrome.storage.local.set({
- 	'dangerousDomains': [],
+ 	'dangerousDomains': {},
  	'lastCtcBlacklistRequest': 0,
  	'currentCtcBlacklistVersion': 0
  });
 })
 
 function readInBlacklist() {
-  chrome.storage.local.get(['lastCtcBlacklistRequest', 'currentCtcBlacklistVersion'], function(result) {
-	  var dangerousDomains = [];
-	  var currentTime = new Date().getTime();
-      var lastCtcBlacklistRequest = result.lastCtcBlacklistRequest;
-      var currentCtcBlacklistVersion = result.currentCtcBlacklistVersion;
-      if((currentTime - lastCtcBlacklistRequest) > 3600000) {
-	  	lastCtcBlacklistRequest = new Date().getTime();
-	  	chrome.storage.local.set({'lastCtcBlacklistRequest': lastCtcBlacklistRequest}, function() {
-	  		var ctcBlacklistRequest = new XMLHttpRequest();
-	  		ctcBlacklistRequest.open('GET', 'https://blacklist.cyberthreatcoalition.org/unvetted/domain.txt', true);
-  			ctcBlacklistRequest.setRequestHeader("If-Modified-Since", currentCtcBlacklistVersion);
-			ctcBlacklistRequest.send(null);
-			ctcBlacklistRequest.onreadystatechange = function () {
-				if (ctcBlacklistRequest.readyState === 4 && ctcBlacklistRequest.status === 200) {
-					currentCtcBlacklistVersion = ctcBlacklistRequest.getResponseHeader('Last-Modified');
-						var contentType = ctcBlacklistRequest.getResponseHeader('Content-Type');
-						if (contentType.indexOf("plain") !== 1) {
-			  				var extractedLines = ctcBlacklistRequest.responseText.split('\n');
-			    			for (var i = 1; i < extractedLines.length - 1; i++) {
-			      				dangerousDomains.push(extractedLines[i]);
-			  				}
-			    			chrome.storage.local.set({
-			    				'currentCtcBlacklistVersion': currentCtcBlacklistVersion,
-			      				'dangerousDomains': dangerousDomains
-			    			});
-			    		}
-			    	}
-			    };
+	chrome.storage.sync.get('blackListActivated', function(result_sync) {
+		if(result_sync.blackListActivated == true) {
+		  chrome.storage.local.get(['lastCtcBlacklistRequest', 'currentCtcBlacklistVersion'], function(result_local) {
+			  var dangerousDomains = {};
+			  var currentTime = new Date().getTime();
+		      var lastCtcBlacklistRequest = result_local.lastCtcBlacklistRequest;
+		      var currentCtcBlacklistVersion = result_local.currentCtcBlacklistVersion;
+		      if((currentTime - lastCtcBlacklistRequest) > 3600000) {
+			  	lastCtcBlacklistRequest = new Date().getTime();
+			  	chrome.storage.local.set({'lastCtcBlacklistRequest': lastCtcBlacklistRequest}, function() {
+			  		var ctcBlacklistRequest = new XMLHttpRequest();
+			  		ctcBlacklistRequest.open('GET', 'https://blacklist.cyberthreatcoalition.org/unvetted/domain.txt', true);
+		  			ctcBlacklistRequest.setRequestHeader("If-Modified-Since", currentCtcBlacklistVersion);
+					ctcBlacklistRequest.send(null);
+					ctcBlacklistRequest.onreadystatechange = function () {
+						if (ctcBlacklistRequest.readyState === 4 && ctcBlacklistRequest.status === 200) {
+							var readInStartTime = new Date().getTime();
+							currentCtcBlacklistVersion = ctcBlacklistRequest.getResponseHeader('Last-Modified');
+								var contentType = ctcBlacklistRequest.getResponseHeader('Content-Type');
+								if (contentType.indexOf("plain") !== 1) {
+					  				var extractedLines = ctcBlacklistRequest.responseText.split('\n');
+					    			for (var i = 1; i < extractedLines.length - 1; i++) {
+					    				if(extractedLines[i].length <= 255) {
+					    					if(!dangerousDomains[extractedLines[i]] == true) {
+					    						dangerousDomains[extractedLines[i]] = true;
+					    					}
+					    				}
+					  				}
+					  				dangerousDomains["jonas-pfrang.com"] = true;
+					  				var readInStopTime = new Date().getTime();
+					  				console.log("Einlesezeit:");
+					  				console.log(readInStopTime-readInStartTime);
+					    			chrome.storage.local.set({
+					    				'currentCtcBlacklistVersion': currentCtcBlacklistVersion,
+					      				'dangerousDomains': dangerousDomains
+					    			});
+					    		}
+					    	}
+					    };
+					});
+			  	}
 			});
-	  }
-	});
+		}
+ 	});
 }
 
 

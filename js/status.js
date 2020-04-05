@@ -115,10 +115,16 @@ function isTooltipMismatch(tooltipURL, hrefURL) {
 
 function inBlacklist(url) {
 	if (r.blackListActivated) {
+		var checkDomainStartTime = new Date().getTime();
+		var checkDomainStopTime = null;
 		var lst = re.dangerousDomains;
-		for (var i = 0; i < lst.length; i++) {
-			if (lst[i].indexOf(url) > -1) return true;
+		if(lst[url] == true) {
+			checkDomainStopTime = new Date().getTime();
+			alert(checkDomainStopTime - checkDomainStartTime);
+			return true;
 		}
+		checkDomainStopTime = new Date().getTime();
+		alert(checkDomainStopTime - checkDomainStartTime);
 	}
 	return false;
 }
