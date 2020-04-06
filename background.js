@@ -24,6 +24,7 @@ chrome.runtime.onInstalled.addListener(function () {
     "publicSuffixList": {}
   });
  // Initialize local storage
+ // Local storage is used because of higher storage volume
  chrome.storage.local.set({
  	'dangerousDomains': [],
  	'lastCtcBlacklistRequest': 0,
@@ -31,46 +32,52 @@ chrome.runtime.onInstalled.addListener(function () {
  });
 })
 
+// Method for reading in the blacklist
 function readInBlacklist() {
+	// Check whether blacklist is enabled
 	chrome.storage.sync.get('blackListActivated', function(result_sync) {
 		if(result_sync.blackListActivated == true) {
-		  chrome.storage.local.get(['lastCtcBlacklistRequest', 'currentCtcBlacklistVersion'], function(result_local) {
-			  var dangerousDomains = [];
-			  var currentTime = new Date().getTime();
-		      var lastCtcBlacklistRequest = result_local.lastCtcBlacklistRequest;
-		      var currentCtcBlacklistVersion = result_local.currentCtcBlacklistVersion;
-		      if((currentTime - lastCtcBlacklistRequest) > 3600000) {
-			  	lastCtcBlacklistRequest = new Date().getTime();
-			  	chrome.storage.local.set({'lastCtcBlacklistRequest': lastCtcBlacklistRequest}, function() {
-			  		var ctcBlacklistRequest = new XMLHttpRequest();
-			  		ctcBlacklistRequest.open('GET', 'https://blacklist.cyberthreatcoalition.org/unvetted/domain.txt', true);
-		  			ctcBlacklistRequest.setRequestHeader("If-Modified-Since", currentCtcBlacklistVersion);
-					ctcBlacklistRequest.send(null);
-					ctcBlacklistRequest.onreadystatechange = function () {
-						if (ctcBlacklistRequest.readyState === 4 && ctcBlacklistRequest.status === 200) {
-							var readInStartTime = new Date().getTime();
-							currentCtcBlacklistVersion = ctcBlacklistRequest.getResponseHeader('Last-Modified');
+			// Read in timestamp of current version of blacklist, read in timestamp of last request to CTC server
+		  	chrome.storage.local.get(['lastCtcBlacklistRequest', 'currentCtcBlacklistVersion'], function(result_local) { 
+				  var currentTime = new Date().getTime();
+			      var lastCtcBlacklistRequest = result_local.lastCtcBlacklistRequest;
+			      var currentCtcBlacklistVersion = result_local.currentCtcBlacklistVersion;
+			      // Send only one request per hour to the CTC server => Avoids blocking of user IPs by the server firewall
+			      if((currentTime - lastCtcBlacklistRequest) > 3600000) {
+			      	// Send request to CTC server, HTTP request with "If-Modified-Since" header makes sure that only if the blacklist has changed the whole blacklist will be sent by the server => Reduction of required bandwith
+				  	lastCtcBlacklistRequest = new Date().getTime();
+				  	chrome.storage.local.set({'lastCtcBlacklistRequest': lastCtcBlacklistRequest}, function() {
+				  		var ctcBlacklistRequest = new XMLHttpRequest();
+				  		ctcBlacklistRequest.open('GET', 'https://blacklist.cyberthreatcoalition.org/unvetted/domain.txt', true);
+			  			ctcBlacklistRequest.setRequestHeader("If-Modified-Since", currentCtcBlacklistVersion);
+						ctcBlacklistRequest.send(null);
+						ctcBlacklistRequest.onreadystatechange = function () {
+							// Blacklist has changed
+							if (ctcBlacklistRequest.readyState === 4 && ctcBlacklistRequest.status === 200) {
+								// Read in new blacklist version
+								currentCtcBlacklistVersion = ctcBlacklistRequest.getResponseHeader('Last-Modified');
+								// Check content type whether it is suitable for further processing
 								var contentType = ctcBlacklistRequest.getResponseHeader('Content-Type');
-								if (contentType.indexOf("plain") !== 1) {
+								if (contentType == "text/plain") {
+									var dangerousDomains = [];
+									// Read in text line by line (each line is one domain in file) and create array
 					  				var extractedLines = ctcBlacklistRequest.responseText.split('\n');
+					  				// Investigate each line whether it is a well formed domain and if yes, put it into array dangerousDomains
 					    			for (var i = 1; i < extractedLines.length - 1; i++) {
-					    				if(extractedLines[i].length <= 255) {
+					    				if(extractedLines[i].length <= 253) {
 					    					dangerousDomains.push(extractedLines[i]);
 					    				}
 					  				}
-					  				dangerousDomains.push("jonas-pfrang.com");
-					  				var readInStopTime = new Date().getTime();
-					  				console.log("Einlesezeit:");
-					  				console.log(readInStopTime-readInStartTime);
+					  				// Save dangerousDomains and timestamp of current version of the CTC blacklist in chrome local storage
 					    			chrome.storage.local.set({
 					    				'currentCtcBlacklistVersion': currentCtcBlacklistVersion,
 					      				'dangerousDomains': dangerousDomains
 					    			});
 					    		}
 					    	}
-					    };
+						};
 					});
-			  	}
+				}
 			});
 		}
  	});
@@ -117,10 +124,11 @@ chrome.tabs.onUpdated.addListener(function (tabId, status, info) {
   var websites = manifest.content_scripts[0].matches;
   var showIcon = false;
   for (var i = 0; i < websites.length; i++) {
-    if (info.url.match(websites[i]) != null && status.status == 'loading') showIcon = true;
+    if (info.url.match(websites[i]) != null) showIcon = true;
   }
   if (showIcon) {
-    readInBlacklist();
+  	// Makes sure that readInBlacklist() is only called one time if the user accesses a webmailer
+  	if(status.status == 'loading') readInBlacklist();
     chrome.pageAction.show(tabId);
   }
 });

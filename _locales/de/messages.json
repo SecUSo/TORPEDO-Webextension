@@ -192,21 +192,46 @@
   },
 
   "T4Erklaerung": {
-    "message": "Das Risiko für das Klicken auf diesen Link wird von TORPEDO als hoch eingestuft, da diese auf einer Blacklist enthalten ist. Es wird nicht empfohlen, auf diesen Link zu klicken.",
+    "message": "Diese URL wurde bereits mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht. TORPEDO schätzt das Risiko als <div class='torpedoHighlight'>hoch</div> ein.<br>Sollten Sie dennoch der Ansicht sein, dass es sich hier um eine legitime URL handelt, dann können Sie unten auf „Link aktivieren“ klicken. Danach sollten Sie die URL nochmal sorgfältig prüfen.",
     "description": "Information on the classification of this domain"
   },
 
   "T4Infotext": {
-    "message": "Die Domain befindet sich auf einer Blackliste von Domains, die oft in betrügerischen E-Mails verwendet wird, um Sie zu täuschen.</div>",
+    "message": "Die Cyber Threat Coalition hat sich zum Ziel gemacht eine Liste von betrügerischen URLs zu sammeln, die im Zusammenhang mit Phishing und Corona bzw. Covid-19 aufgetaucht sind in einer Blacklist zu sammeln. Dies geschieht aus dem Grund, da diese URLs aktuell in einer großen Menge und in sich schnell wandelnden Varianten auftreten. Wir wollen dazu einen Beitrag leisten und vorübergehend auch eine Blacklist in TORPEDO integrieren, damit Sie gegen diese URLs geschützt sind.</div>",
     "description": "More information on the evaluation of this domain"
   },
 
   "T4GluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Sollten Sie dennoch der Ansicht sein, dass es sich um eine valide Domain handelt, überprüfen Sie die Domain nochmals besonders sorgfältig.</div> Passt die Domain (und nicht andere Teile der URL) zum Inhalt der Nachricht? Ist der Name der Domain richtig geschrieben? Wenn Sie dies nicht eindeutig beurteilen können, sollten Sie weitere Informationen einholen. Wenn die Domain nicht vertrauenswürdig ist, löschen Sie diese E-Mail und/oder informieren den Support.",
+    "message": "",
     "description": "Advice for the user"
   },
 
   "T4LinkDeaktivierung": {
+    "message": "TORPEDO hat den Link deaktiviert, damit Sie in Ruhe überlegen können, ob Sie ihn aktivieren wollen.",
+    "description": "Text for Deactivation of the link"
+  },
+
+  "T4aUeberschrift": {
+    "message": "Hinterlegte URL (auch Webadresse genannt):",
+    "description": "Header for tooltip"
+  },
+
+  "T4aErklaerung": {
+    "message": "Sie haben diese URL aktiviert, obwohl Sie in der Vergangenheit mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht wurde. Bitte überprüfen Sie die Domain (<div class='torpedoHighlight'>fett</div> markierter Bereich) nochmal besonders sorgfältig.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T4aInfotext": {
+    "message": "Die Cyber Threat Coalition hat sich zum Ziel gemacht eine Liste von betrügerischen URLs zu sammeln, die im Zusammenhang mit Phishing und Corona bzw. Covid-19 aufgetaucht sind in einer Blacklist zu sammeln. Dies geschieht aus dem Grund, da diese URLs aktuell in einer großen Menge und in sich schnell wandelnden Varianten auftreten. Wir wollen dazu einen Beitrag leisten und vorübergehend auch eine Blacklist in TORPEDO integrieren, damit Sie gegen diese URLs geschützt sind.</div>",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T4aGluehbirneText": {
+    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain besonders sorgfältig.</div> Passt die Domain (und nicht andere Teile der URL) zum Inhalt der Nachricht? Ist der Name der Domain richtig geschrieben? Wenn Sie dies nicht eindeutig beurteilen können, sollten Sie weitere Informationen einholen. Wenn die Domain nicht vertrauenswürdig ist, löschen Sie diese E-Mail und/oder informieren den Support.",
+    "description": "Advice for the user"
+  },
+
+  "T4aLinkDeaktivierung": {
     "message": "TORPEDO hat den Link deaktiviert, damit Sie die Domain in Ruhe prüfen.",
     "description": "Text for Deactivation of the link"
   },

@@ -85,8 +85,9 @@ function initTooltip() {
 * fill the basic tooltip structure with corresponding texts
 */
 function updateTooltip() {
+  // Values of sync storage and local storage are relevant for further processing
   chrome.storage.sync.get(null, function (r) {
-    chrome.storage.local.get(null, function(re) {
+    chrome.storage.local.get('dangerousDomains', function(re) {
       getSecurityStatus(r, re);
       var state = torpedo.state;
 

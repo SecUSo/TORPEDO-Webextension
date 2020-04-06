@@ -35,6 +35,7 @@ function getSecurityStatus(storage, storage_local) {
 			resolveRedirect(event);
 			torpedo.state = "URLnachErmittelnButtonPrivacyMode";
 		}
+		// Check whether domain is part of blacklist => If yes, status T4
 	} else if (inBlacklist(torpedo.domain)) {
 		torpedo.state = "T4";
 	} else if (inTrusted(torpedo.domain)) {
@@ -113,21 +114,19 @@ function isTooltipMismatch(tooltipURL, hrefURL) {
 	return (tooltipDomain != hrefDomain);
 };
 
+// Method for checking whether domain is part of blacklist
 function inBlacklist(url) {
+	// Only relevant if blacklist is enabled => otherwise return false
 	if (r.blackListActivated) {
-		var checkDomainStartTime = new Date().getTime();
-		var checkDomainStopTime = null;
 		var lst = re.dangerousDomains;
+		// Iterate through array and determine whether domain is part of array entry => If yes, return true
 		for (var i = 0; i < lst.length; i++) {
 			if (lst[i].indexOf(url) > -1) {
-				checkDomainStopTime = new Date().getTime();
-				alert(checkDomainStopTime - checkDomainStartTime);
 				return true;
 			}
 		}
-		checkDomainStopTime = new Date().getTime();
-		alert(checkDomainStopTime - checkDomainStartTime);
 	}
+	// Domain is not part of blacklist or blacklist is not enabled
 	return false;
 }
 
