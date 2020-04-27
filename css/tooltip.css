@@ -154,7 +154,7 @@ div.torpedoTooltip table {
   overflow-y: scroll;
   height: 90px;
 }
-#torpedoInfoDiv, #torpedoLinkDelay, #torpedoURL, #torpedoMoreInfoButton, #torpedoRedirectButton{
+#torpedoInfoDiv, #torpedoLinkDelay, #torpedoURL, #torpedoMoreInfoButton, #torpedoRedirectButton, #torpedoActivateLinkButton{
   clear: both;
   width: 100%;
   margin-top: 5px;

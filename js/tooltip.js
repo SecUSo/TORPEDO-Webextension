@@ -37,6 +37,7 @@ function tooltipText() {
               <div id='torpedoInfoDiv'><p id='torpedoMoreInfo'></p></div> \
               <div><button id='torpedoMoreInfoButton' type='button'></button></div> \
               <div><button id='torpedoRedirectButton' type='button''></button></div> \
+              <div><button id='torpedoActivateLinkButton' type='button''></button></div> \
               <div><p id='torpedoLinkDelay'></p></div> \
               <p id='torpedoTimer'></p>";
   return text;
@@ -44,25 +45,25 @@ function tooltipText() {
 
 function initTooltip() {
   // context menu
-  var t = torpedo.tooltip;
+  var tooltip = torpedo.tooltip;
   torpedo.countRedirect = 0;
   torpedo.countShortURL = 0;
   torpedo.redirectMatching = false;
   torpedo.oldDomain = torpedo.domain;
   torpedo.oldUrl = torpedo.url;
 
-  $(t).contextmenu(function (event) {
-    $(t.find("#torpedoContextMenu")[0]).toggle();
-    $(t.find("#torpedoContextMenu")[0]).css({ position: "absolute" });
+  $(tooltip).contextmenu(function (event) {
+    $(tooltip.find("#torpedoContextMenu")[0]).toggle();
+    $(tooltip.find("#torpedoContextMenu")[0]).css({ position: "absolute" });
     event.preventDefault();
   });
-  $(t).on("click", "div:not(.torpedoContextMenu)", function (e) {
-    if (!$(t.find("#torpedoContextMenu")[0]).is(':hidden')) {
-      $(t.find("#torpedoContextMenu")[0]).toggle();
+  $(tooltip).on("click", "div:not(.torpedoContextMenu)", function (e) {
+    if (!$(tooltip.find("#torpedoContextMenu")[0]).is(':hidden')) {
+      $(tooltip.find("#torpedoContextMenu")[0]).toggle();
     }
   });
 
-  $(t.find("#torpedoMarkTrusted")[0]).click(function (event) {
+  $(tooltip.find("#torpedoMarkTrusted")[0]).click(function (event) {
     chrome.storage.sync.get(null, function (r) {
       var arr = r.userDefinedDomains;
       arr.push(torpedo.domain);
@@ -71,14 +72,63 @@ function initTooltip() {
       });
     });
   });
-  $(t.find("#torpedoGoogle")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "google", url: torpedo.domain }); });
-  $(t.find("#torpedoOpenSettings")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "settings" }); });
-  $(t.find("#torpedoOpenTutorial")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "tutorial" }); });
+  $(tooltip.find("#torpedoGoogle")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "google", url: torpedo.domain }); });
+  $(tooltip.find("#torpedoOpenSettings")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "settings" }); });
+  $(tooltip.find("#torpedoOpenTutorial")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "tutorial" }); });
 
-  $(t.find("#torpedoInfoText")[0]).click(function (event) { $(t.find("#torpedoInfoDiv")[0]).toggle() });
-  $(t.find("#torpedoAdviceText")[0]).click(function (event) { $(t.find("#torpedoAdviceDiv")[0]).toggle() });
-  $(t.find("#torpedoMoreInfoButton")[0]).click(function (event) { openInfoImage(event) });
-  $(t.find("#torpedoRedirectButton")[0]).click(function (event) { resolveRedirect(event); torpedo.api.get("hide.event", "onfocus") });
+  $(tooltip.find("#torpedoInfoText")[0]).click(function (event) { $(tooltip.find("#torpedoInfoDiv")[0]).toggle() });
+  $(tooltip.find("#torpedoAdviceText")[0]).click(function (event) { $(tooltip.find("#torpedoAdviceDiv")[0]).toggle() });
+  $(tooltip.find("#torpedoMoreInfoButton")[0]).click(function (event) { openInfoImage(event) });
+  $(tooltip.find("#torpedoRedirectButton")[0]).click(function (event) { resolveRedirect(event); torpedo.api.get("hide.event", "onfocus") });
+
+  $(tooltip.find("#torpedoActivateLinkButton")[0]).prop("disabled", true);
+
+}
+
+function assignText(state, url, tooltip) {
+  // get texts from textfile
+  var button = chrome.i18n.getMessage('ButtonWeiterleitung');
+  var activateLinkButton = chrome.i18n.getMessage('LinkAktivierung');
+  var ueberschrift = chrome.i18n.getMessage(state + "Ueberschrift");
+  var erklaerung = chrome.i18n.getMessage(state + "Erklaerung");
+  var mehrInfo = chrome.i18n.getMessage("MehrInfo");
+  var infotext = chrome.i18n.getMessage(state + "Infotext").replace("<URL>", url);
+  var infoCheck = chrome.i18n.getMessage("Info");
+  var gluehbirneText = chrome.i18n.getMessage(state + "GluehbirneText");
+  var gluehbirneInfo = chrome.i18n.getMessage("mehrInfoGluehbirne");
+  var linkDeaktivierung = chrome.i18n.getMessage(state + "LinkDeaktivierung");
+
+  // assign texts
+  $(tooltip.find("#torpedoWarningText")[0]).html(ueberschrift);
+  $(tooltip.find("#torpedoSecurityStatus")[0]).html(erklaerung);
+  $(tooltip.find("#torpedoAdviceText")[0]).html(gluehbirneInfo);
+  $(tooltip.find("#torpedoMoreAdvice")[0]).html(gluehbirneText);
+  $(tooltip.find("#torpedoInfoText")[0]).html(mehrInfo);
+  $(tooltip.find("#torpedoMoreInfo")[0]).html(infotext);
+  $(tooltip.find("#torpedoRedirectButton")[0]).html(button);
+  $(tooltip.find("#torpedoActivateLinkButton")[0]).html(activateLinkButton);
+  $(tooltip.find("#torpedoLinkDelay")[0]).html(linkDeaktivierung);
+  $(tooltip.find("#torpedoMoreInfoButton")[0]).html(infoCheck);
+
+  // hide certain elements
+  $(tooltip.find("#torpedoWarningImage")[0]).hide();
+  $(tooltip.find("#torpedoWarningImage2")[0]).hide();
+  $(tooltip.find("#torpedoTimer")[0]).hide();
+  $(tooltip.find("#torpedoInfoDiv")[0]).hide();
+  $(tooltip.find("#torpedoLinkDelay")[0]).hide();
+  $(tooltip.find("#torpedoAdvice")[0]).hide();
+  $(tooltip.find("#torpedoAdviceDiv")[0]).hide();
+  $(tooltip.find("#torpedoMoreInfoButton")[0]).hide();
+  $(tooltip.find("#torpedoRedirectButton")[0]).hide();
+  $(tooltip.find("#torpedoActivateLinkButton")[0]).hide();
+
+  // hide light bulb if no text is there
+  if (gluehbirneText) $(tooltip.find("#torpedoAdvice")[0]).show();
+  if (linkDeaktivierung) $(tooltip.find("#torpedoLinkDelay")[0]).show();
+  else {
+    $(tooltip.find("#torpedoInfo")[0]).css("margin-bottom", "0");
+    $(tooltip.find("#torpedoInfo")[0]).css("padding-bottom", "0");
+  }
 }
 
 /**
@@ -87,10 +137,8 @@ function initTooltip() {
 function updateTooltip() {
   // Values of sync storage and local storage are relevant for further processing
   chrome.storage.sync.get(null, function (r) {
-    chrome.storage.local.get('dangerousDomains', function(re) {
-      getSecurityStatus(r, re);
-      var state = torpedo.state;
-
+    chrome.storage.local.get('dangerousDomains', function (re) {
+      var state = getSecurityStatus(r, re);
       var t = torpedo.tooltip;
       var url = torpedo.url;
       var pathname = torpedo.pathname;
@@ -100,38 +148,7 @@ function updateTooltip() {
       }
       $(t.find("#torpedoURL")[0]).html(url.replace(torpedo.domain, '<span id="torpedoDomain">' + torpedo.domain + '</span>'));
 
-      // get texts from textfile
-      var button = chrome.i18n.getMessage('ButtonWeiterleitung');
-      var ueberschrift = chrome.i18n.getMessage(state + "Ueberschrift");
-      var erklaerung = chrome.i18n.getMessage(state + "Erklaerung");
-      var mehrInfo = chrome.i18n.getMessage("MehrInfo");
-      var infotext = chrome.i18n.getMessage(state + "Infotext").replace("<URL>", url);
-      var infoCheck = chrome.i18n.getMessage("Info");
-      var gluehbirneText = chrome.i18n.getMessage(state + "GluehbirneText");
-      var gluehbirneInfo = chrome.i18n.getMessage("mehrInfoGluehbirne");
-      var linkDeaktivierung = chrome.i18n.getMessage(state + "LinkDeaktivierung");
-
-      // assign texts
-      $(t.find("#torpedoWarningText")[0]).html(ueberschrift);
-      $(t.find("#torpedoSecurityStatus")[0]).html(erklaerung);
-      $(t.find("#torpedoAdviceText")[0]).html(gluehbirneInfo);
-      $(t.find("#torpedoMoreAdvice")[0]).html(gluehbirneText);
-      $(t.find("#torpedoInfoText")[0]).html(mehrInfo);
-      $(t.find("#torpedoMoreInfo")[0]).html(infotext);
-      $(t.find("#torpedoRedirectButton")[0]).html(button);
-      $(t.find("#torpedoLinkDelay")[0]).html(linkDeaktivierung);
-      $(t.find("#torpedoMoreInfoButton")[0]).html(infoCheck);
-
-      // hide certain elements
-      $(t.find("#torpedoWarningImage")[0]).hide();
-      $(t.find("#torpedoWarningImage2")[0]).hide();
-      $(t.find("#torpedoTimer")[0]).hide();
-      $(t.find("#torpedoInfoDiv")[0]).hide();
-      $(t.find("#torpedoLinkDelay")[0]).hide();
-      $(t.find("#torpedoAdvice")[0]).hide();
-      $(t.find("#torpedoAdviceDiv")[0]).hide();
-      $(t.find("#torpedoMoreInfoButton")[0]).hide();
-      $(t.find("#torpedoRedirectButton")[0]).hide();
+      assignText(state, url, t);
 
       if (r.referrerPart1.indexOf(torpedo.domain) > -1 || r.userDefinedDomains.indexOf(torpedo.domain) > -1 || r.trustedDomains.indexOf(torpedo.domain) > -1 || r.redirectDomains.indexOf(torpedo.domain) > -1) {
         $(t.find("#torpedoMarkTrusted")[0]).hide();
@@ -141,53 +158,53 @@ function updateTooltip() {
       if (isRedirect(torpedo.domain) && r.privacyModeActivated) {
         $(torpedo.tooltip.find("#torpedoRedirectButton")[0]).show();
       }
-      // hide light bulb if no text is there
-      if (gluehbirneText) $(t.find("#torpedoAdvice")[0]).show();
-      if (linkDeaktivierung) $(t.find("#torpedoLinkDelay")[0]).show();
-      else {
-        $(t.find("#torpedoInfo")[0]).css("margin-bottom", "0");
-        $(t.find("#torpedoInfo")[0]).css("padding-bottom", "0");
+
+      if (state == "T4") {
+        $(torpedo.tooltip.find("#torpedoActivateLinkButton")[0]).show();
       }
+
+
       $(t.find("#torpedoMarkTrusted")[0]).html(chrome.i18n.getMessage('markAsTrusted'));
       $(t.find("#torpedoGoogle")[0]).html(chrome.i18n.getMessage('googleCheck'));
       $(t.find("#torpedoOpenSettings")[0]).html(chrome.i18n.getMessage('openSettings'));
       $(t.find("#torpedoOpenTutorial")[0]).html(chrome.i18n.getMessage('openTutorial'));
+
       $(".torpedoTooltip").removeClass("torpedoUserDefined torpedoTrusted torpedoPhish");
 
-      switch (torpedo.state) {
+      switch (state) {
         case "T2":
           $(".torpedoTooltip").addClass("torpedoUserDefined");
-          if (r.userTimerActivated == "true") countdown(r.timer);
+          if (r.userTimerActivated == "true") countdown(r.timer, state);
           break;
         case "T1":
           $(".torpedoTooltip").addClass("torpedoTrusted");
-          if (r.trustedTimerActivated == "true") countdown(r.timer);
+          if (r.trustedTimerActivated == "true") countdown(r.timer, state);
           break;
         case "ShortURL":
-          countdown(r.timer);
+          countdown(r.timer, state);
           break;
         case "T33":
           $(t.find("#torpedoMarkTrusted")[0]).show();
           $(t.find("#torpedoWarningImage")[0]).show();
           $(t.find("#torpedoWarningText")[0]).show();
-          countdown(r.timer + 2);
+          countdown(r.timer, state);
           break;
         case "T1":
           $(t.find("#torpedoMarkTrusted")[0]).show();
-          countdown(r.timer);
+          countdown(r.timer, state);
           break;
         case "T32":
           $(t.find("#torpedoMarkTrusted")[0]).show();
           $(t.find("#torpedoWarningImage2")[0]).show();
           $(t.find("#torpedoWarningText")[0]).show();
-          countdown(r.timer + 2);
+          countdown(r.timer, state);
           break;
         case "T4":
-          console.log("T4");
           $(".torpedoTooltip").addClass("torpedoPhish");
+          countdown(r.timer, state);
           break;
         default:
-          countdown(r.timer);
+          countdown(r.timer, state);
           break;
       }
     });

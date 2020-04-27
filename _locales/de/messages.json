@@ -60,6 +60,11 @@
     "description": "Button text for deducing the target URL if the URL is a redirect"
   },
 
+  "LinkAktivierung":{
+    "message": "Link aktivieren",
+    "description": "Button text for activating a link"
+  },
+
  
   "T1Ueberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
@@ -227,7 +232,7 @@
   },
 
   "T4aGluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain besonders sorgfältig.</div> Passt die Domain (und nicht andere Teile der URL) zum Inhalt der Nachricht? Ist der Name der Domain richtig geschrieben? Wenn Sie dies nicht eindeutig beurteilen können, sollten Sie weitere Informationen einholen. Wenn die Domain nicht vertrauenswürdig ist, löschen Sie diese E-Mail und/oder informieren den Support.",
+    "message": "",
     "description": "Advice for the user"
   },
 
@@ -611,6 +616,11 @@
   "guide_settings":{
     "message": "Einstellungen",
     "description": "Tutorial side bar: Chapter 6"
+  },
+
+  "guide_intro_blacklist":{
+    "message": "Aus aktuellem Anlass haben wir uns dazu entschieden eine zentrale Änderung an TORPEDO vorzunehmen. Da aktuell sehr viele betrügerische Nachrichten mit Links zum Thema Covid-19 unterwegs sind, haben wir eine Blacklist integriert. Diese Blacklist wird von der Cyber Threat Coalition gepflegt (https://www.cyberthreatcoalition.org). Aus diesem Grund gibt es aktuell einen neuen Fall. Wenn eine Domain aus der Liste der Cyber Threat Coalition erkannt wird, wird das Anklicken des Links komplett verhindert. Sie können mit dem Klicken auf 'Link aktivieren' den Link freischalten. Anschließend bekommen Sie nochmal einen zweiten Tooltip angezeigt mit unseren üblichen Tipps zum Prüfen von Domains.",
+    "description": "Tutorial page 0: intro blacklist"
   },
   
   "guide_welcome_intro1":{
