@@ -619,7 +619,7 @@
   },
 
   "guide_intro_blacklist":{
-    "message": "Aus aktuellem Anlass haben wir uns dazu entschieden eine zentrale Änderung an TORPEDO vorzunehmen. Da aktuell sehr viele betrügerische Nachrichten mit Links zum Thema Covid-19 unterwegs sind, haben wir eine Blacklist integriert. Diese Blacklist wird von der Cyber Threat Coalition gepflegt (https://www.cyberthreatcoalition.org). Aus diesem Grund gibt es aktuell einen neuen Fall. Wenn eine Domain aus der Liste der Cyber Threat Coalition erkannt wird, wird das Anklicken des Links komplett verhindert. Sie können mit dem Klicken auf 'Link aktivieren' den Link freischalten. Anschließend bekommen Sie nochmal einen zweiten Tooltip angezeigt mit unseren üblichen Tipps zum Prüfen von Domains.",
+    "message": "Aus aktuellem Anlass haben wir uns dazu entschieden eine zentrale Änderung an TORPEDO vorzunehmen. Da aktuell sehr viele betrügerische Nachrichten mit Links zum Thema Covid-19 unterwegs sind, haben wir eine Blacklist integriert. Diese Blacklist wird von der Cyber Threat Coalition gepflegt (https://www.cyberthreatcoalition.org). Aus diesem Grund gibt es aktuell einen neuen Fall. Wenn eine Domain aus der Liste der Cyber Threat Coalition erkannt wird, wird das Anklicken des Links komplett verhindert. Sie können mit dem Klicken auf 'Link aktivieren' den Link freischalten. Anschließend bekommen Sie nochmal einen zweiten Tooltip angezeigt mit unseren üblichen Tipps zum Prüfen von Domains. Bei Domains die als Teil der aktiven Blacklist erkannt werden, kann der Link aktuell nur über den TORPEDO Tooltip aufgerufen werden. Ein Aufrufen über den eigentlich Link ist blockiert.",
     "description": "Tutorial page 0: intro blacklist"
   },
   

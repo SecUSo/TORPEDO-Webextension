@@ -69,7 +69,8 @@ function readInBlacklist() {
                   // Investigate each line whether it is a well formed domain and if yes, put it into array dangerousDomains
                   for (var i = 1; i < extractedLines.length - 1; i++) {
                     if (extractedLines[i].length <= 253) {
-                      dangerousDomains.push(extractedLines[i]);
+                      var domainWithoutSpaces = extractedLines[i].replace(/(\r\n|\n|\r)/gm,"");;
+                      dangerousDomains.push(domainWithoutSpaces);
                     }
                   }
                   // Save dangerousDomains and timestamp of current version of the CTC blacklist in chrome local storage

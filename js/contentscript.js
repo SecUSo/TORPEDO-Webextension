@@ -156,26 +156,27 @@ function openTooltip(e, type) {
           button: true
         },
         show: {
-          event: "mouseenter",
+          event: e.type,
           ready: true,
           solo: true,
-          delay: 150
+          delay: 250
         },
         hide: {
           fixed: true,
           event: "mouseleave",
-          delay: 100
+          delay: 200
         },
         position: {
           my: 'top left',
           at: 'bottom left',
           viewport: true,
-          target: [e.pageX, $(torpedo.target).offset().top],
+          target: $(torpedo.target), 
           adjust: {
-            y: 14,
-            x: -10,
+            y: 0,
+            x: 0,
             mouse: false,
-            method: 'flip flip'
+            method: 'flip flip',
+            resize: true
           }
         },
         style: {

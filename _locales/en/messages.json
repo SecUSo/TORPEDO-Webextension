@@ -626,7 +626,7 @@
   },
 
   "guide_intro_blacklist":{
-    "message": "Due to recent events we have decided to make a central change to TORPEDO. Since there are currently a lot of fraudulent messages with links to Covid-19, we have integrated a blacklist. This blacklist is maintained by the Cyber Threat Coalition (https://www.cyberthreatcoalition.org). For this reason there is currently a new case. If a domain is detected from the Cyber Threat Coalition's list, clicking on the link will be completely prevented. You can unlock the link by clicking on 'Activate Link'. You will then be shown a second tooltip with our usual tips for checking domains.",
+    "message": "Due to recent events we have decided to make a central change to TORPEDO. Since there are currently a lot of fraudulent messages with links to Covid-19, we have integrated a blacklist. This blacklist is maintained by the Cyber Threat Coalition (https://www.cyberthreatcoalition.org). For this reason there is currently a new case. If a domain is detected from the Cyber Threat Coalition's list, clicking on the link will be completely prevented. You can unlock the link by clicking on 'Activate Link'. You will then be shown a second tooltip with our usual tips for checking domains.For domains that are recognized as part of the active blacklist, the link can currently only be accessed via the TORPEDO tooltip. Calling via the actual link is blocked.",
     "description": "Tutorial page 0: intro blacklist"
   },
  
