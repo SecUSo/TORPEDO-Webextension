@@ -1,133 +1,55 @@
 <!doctype html>
 <html>
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title>TORPEDO Tutorial</title>
   <link href="css/torpedo-guide.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/tutorial.js"></script>
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/tutorial.js"></script>
 </head>
+
 <body id="torpedo-guide">
-    <div id="guide-wrapper">
-      <div>
-          <div id="guide-section-list-wrapper">
-              <ul id="guide-section-list">
-                  <li id="section-basic-item" class="section" />
-                  <li id="section-tooltips-item" class="section" />
-                  <li id="section-extras-item" class="section" />
-                  <li id="section-specialcases-item" class="section" />
-                  <li id="section-menu-item" class="section" />
-                  <li id="section-settings-item" class="section" />
-              </ul>
-            </div>
-          <div id="guide-content-wrapper-holder">
-              <div class="guide-content-wrapper guide-logo" id="guide-page-welcome">
-                  <h1 id="torpedo-guide-basic-welcome-title"></h1> 
-                  <p id="torpedo-guide-basic-welcome-intro1"></p>
-                  <p id="torpedo-guide-basic-welcome-intro2"></p>
-                  <p class="footnote" id="torpedo-guide-basic-welcome-footnote"></p>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-why">
-                  <h2 id="torpedo-guide-basic-why-title"></h2>
-                  <h3 id="torpedo-guide-basic-why-description1"></h3>
-                  <h4 id="torpedo-guide-basic-why-description2"></h4>
-                  <p id="torpedo-guide-basic-why-description3"></p>
-                  <p id="torpedo-guide-basic-why-description4"></p>
-                  <h3 id="torpedo-guide-basic-why-usage-title"></h3>
-                  <ol id="torpedo-guide-basic-why-usage-list"></ol>
-                  <img id="guide-page-why-img"/>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-tooltips-case1">
-                  <h2 id="torpedo-guide-tooltips-case1-title"></h2>
-                  <p id="torpedo-guide-tooltips-case1-description"></p>
-                  <div>
-                    <p class="guide-link">https://www.google.de/</p>
-                    <img id="guide-page-tooltips-case1-img"/>
-                  </div>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-tooltips-case2">
-                  <h2 id="torpedo-guide-tooltips-case2-title"></h2>
-                  <p id="torpedo-guide-tooltips-case2-description1"></p>
-                  <p id="torpedo-guide-tooltips-case2-description2"></p>
-                  <p id="torpedo-guide-tooltips-case2-description3"></p>
-                  <div>
-                    <p class="guide-link">https://www.secuso.org/</p>
-                    <img id="guide-page-tooltips-case2-img"/>
-                  </div>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-tooltips-case3">
-                  <h2 id="torpedo-guide-tooltips-case3-title"></h2>
-                  <p id="torpedo-guide-tooltips-case3-description"></p>
-                  <div>
-                    <p class="guide-link">https://www.iconfinder.com/</p>
-                    <img id="guide-page-tooltips-case3-img"/>  
-                  </div>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-tooltips-URL">
-                  <h2 id="torpedo-guide-extras-URL-title"></h2>
-				  <p  id="torpedo-guide-extras-URL-title1"></p>
-                  <ol id="torpedo-guide-extras-URL-description"></ol>
-                  <p  id="torpedo-guide-extras-URL-tooltipinfo"></p>
-              </div>
-			  <div class="guide-content-wrapper" id="guide-page-tooltips-specialcase">
-                  <h2 id="torpedo-guide-tooltips-specialcase-title"></h2>
-                  <p id="torpedo-guide-tooltips-specialcase-description"></p>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-tooltips-specialcase1">
-                  <h2 id="torpedo-guide-tooltips-specialcase1-title"></h2>
-                  <p id="torpedo-guide-tooltips-specialcase1-description"></p>
-                  <div>
-                    <p class="guide-link">https://www.google.de/</p>
-                    <img id="guide-page-tooltips-specialcase1-img"/>
-                  </div>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-tooltips-specialcase2">
-                  <h2 id="torpedo-guide-tooltips-specialcase2-title"></h2>
-                  <p id="torpedo-guide-tooltips-specialcase2-description"></p>
-                  <div>
-                    <p class="guide-link">http://www.tinyurl.com/21342/</p>
-                    <img id="guide-page-tooltips-specialcase2-img"/>
-                  </div>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-tooltips-specialcase3">
-                  <h2 id="torpedo-guide-tooltips-specialcase3-title"></h2>
-                  <p id="torpedo-guide-tooltips-specialcase3-description"></p>
-                  <div>
-                    <p class="guide-link">https://deref-web-02.de/mail/client/beHwAYUTrMc/dereferrer/?redirectUrl=https%3A%2F%2Fgoogle.de%2F/</p>
-                    <img id="guide-page-tooltips-specialcase3-img"/>
-                  </div>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-tooltips-menu">
-                  <h2 id="torpedo-guide-tooltips-menu-title"></h2>
-                  <p id="torpedo-guide-tooltips-menu-description1"></p>
-                  <ol id="torpedo-guide-tooltips-menu-description2"></ol>
-                  <img id="guide-page-tooltips-menu-img"/>
-              </div>
-			  <div class="guide-content-wrapper" id="guide-page-tooltips-menu1">
-                  <h2 id="torpedo-guide-tooltips-menu1-title"></h2>
-                  <p id="torpedo-guide-tooltips-menu1-description1"></p>
-			  </div>
-              <div class="guide-content-wrapper" id="guide-page-settings-delay">
-                <h2 id="torpedo-guide-settings-delay-title"></h2>
-                <p id="torpedo-guide-settings-delay-description"></p>
-                <img id="guide-page-settings-delay-img"/>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-settings-domains">
-                  <h2 id="torpedo-guide-settings-domains-title"></h2>
-                  <p id="torpedo-guide-settings-domains-description"></p>
-                  <img id="guide-page-settings-domains-img"/>
-              </div>
-              <div class="guide-content-wrapper" id="guide-page-settings-referrer">
-                  <h2 id="torpedo-guide-settings-referrer-title"></h2>
-                  <p id="torpedo-guide-settings-referrer-description"></p>
-                  <img id="guide-page-settings-referrer-img"/>
-              </div>
+  <div id="guide-wrapper">
+    <div>
+      <div id="guide-section-list-wrapper">
+        <!--<ul id="guide-section-list">
+                <li id="section-basic-item" class="section" />
+                <li id="section-tooltips-item" class="section" />
+                <li id="section-tooltips-item" class="section" />
+              </ul>-->
+      </div>
+      <div id="guide-content-wrapper-holder">
+        <div class="guide-content-wrapper guide-logo" id="guide-page-welcome">
+          <p id="torpedo-guide-basic-welcome-intro1"></p>
+          <p id="torpedo-guide-basic-welcome-intro2"></p>
         </div>
-    <div id="guide-buttons">
+        <div class="guide-content-wrapper" id="guide-page-why">
+          <h2 id="torpedo-guide-basic-why-description1"></h2>
+          <p id="torpedo-guide-basic-why-description2"></p>
+          <p id="torpedo-guide-basic-why-description3"></p>
+          <p id="torpedo-guide-basic-why-description4"></p>
+          <p id="torpedo-guide-basic-why-usage-title"></p>
+        </div>
+        <div class="guide-content-wrapper" id="guide_page_settings">
+          <p id="torpedo_guide_settings_description1"></p>
+          <p id="torpedo_guide_settings_description2"></p>
+          <div>
+            <img id="guide_page_settings_1-img" />
+          </div>
+          <p id="torpedo_guide_settings_description3"></p>
+          <div>
+            <img id="guide_page_settings_2-img" alt="" style="margin:5px" align="left" />
+            <img id="guide_page_settings_3-img" alt="" style="margin:5px" align="right" />
+          </div>
+        </div>
+      </div>
+      <div id="guide-buttons">
         <button id="prev" />
         <button id="next" />
         <button id="finish" />
+      </div>
     </div>
-  </div>
 </body>
+
 </html>

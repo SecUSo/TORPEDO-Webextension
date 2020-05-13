@@ -49,124 +49,55 @@
     "message": "More information on this classification",
     "description": "More information for the evaluation of this domain"
   },
+  
+  "mehrInfoGluehbirne": {
+    "message": "More information on examining the URL",
+    "description": "More information on how to check the URL"
+  },
 
   "ButtonWeiterleitung":{
     "message": "Determine target URL",
     "description": "Button text for deducing the target URL if the URL is a redirect"
   },
 
-  "T1SternUeberschrift": {
-    "message": "The detected target URL is:",
-    "description": "Header for tooltip"
-  },
-
-  "T1SternErklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as uncertain risk (grey frame). You have to assess the risk yourself in this case.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T1SternInfotext": {
-    "message": "This means that the domain is unknown to TORPEDO. The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T1SternGluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
-    "description": "Advice for the user"
-  },
-
-  "T1SternLinkDeaktivierung": {
-    "message": "TORPEDO has deactivated the link to give you time to check the domain carefully.",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T2SternUeberschrift": {
-    "message": "The detected target URL is:",
-    "description": "Header for tooltip"
-  },
-
-  "T2SternErklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as low-risk (green frame).",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T2SternInfotext": {
-    "message": "This means that this domain belongs to the 100 most frequented websites in Germany.",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T2SternGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T2SternLinkDeaktivierung": {
-    "message": "",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T3SternUeberschrift": {
-    "message": "The detected target URL is:",
-    "description": "Header for tooltip"
-  },
-
-  "T3SternErklaerung": {
-    "message": "You have classified his domain (highlighted part) as low-risk (blue frame).",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T3SternInfotext": {
-    "message": "This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T3SternGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T3SternLinkDeaktivierung": {
-    "message": "",
-    "description": "Text for Deactivation of the link"
-  },
 
   "T1Ueberschrift": {
-    "message": "Referred URL (also known as web address):",
+    "message": "Deposited URL (also called web address):",
     "description": "Header for tooltip"
   },
 
   "T1Erklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as uncertain risk (grey frame). You have to assess the risk yourself in this case.",
+    "message": "The risk of clicking this link is considered to be low by TORPEDO because of the the trustworthiness of the domain (bold area) of this URL.",
     "description": "Information on the classification of this domain"
   },
 
   "T1Infotext": {
-    "message": "This means that the domain is unknown to TORPEDO. The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
+    "message": "This means that this domain was classified as trustworthy by the developers of TORPEDO because it is among the most visited domains in Germany.",
     "description": "More information on the evaluation of this domain"
   },
 
   "T1GluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
+    "message": "",
     "description": "Advice for the user"
   },
 
   "T1LinkDeaktivierung": {
-    "message": "TORPEDO has deactivated the link to give you time to check the domain carefully.",
+    "message": "",
     "description": "Text for Deactivation of the link"
   },
 
   "T2Ueberschrift": {
-    "message": "Referred URL (also known as web address):",
+    "message": "Deposited URL (also called web address):",
     "description": "Header for tooltip"
   },
 
   "T2Erklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as low-risk (green frame).",
+    "message": "The risk of clicking this link is considered to be low because of your previous statements concerning the trustworthiness of the domain (bold area) of this URL.",
     "description": "Information on the classification of this domain"
   },
 
   "T2Infotext": {
-    "message": "This means that this domain belongs to the 100 most frequented websites in Germany.",
+    "message": "This means that you have called up URLs with this domain at least twice in the past by clicking on the link, or added this domain manually - e.g. via the TORPEDO settings -  to the list of trustworthy domains.",
     "description": "More information on the evaluation of this domain"
   },
 
@@ -180,106 +111,82 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T3Ueberschrift": {
-    "message": "Referred URL (also known as web address):",
+  "T31Ueberschrift": {
+    "message": "Deposited URL (also called web address):",
     "description": "Header for tooltip"
   },
 
-  "T3Erklaerung": {
-    "message": "You classified  this domain (highlighted part) as low-risk (blue frame).",
+  "T31Erklaerung": {
+    "message": "TORPEDO can not classify the risk of clicking on this link.  You have to classify the risk yourself by checking the domain (bold area) of the URL carefully.",
     "description": "Information on the classification of this domain"
   },
 
-  "T3Infotext": {
-    "message": "This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
+  "T31Infotext": {
+    "message": "This means that the domain (bold area) of the URL and thus its trustworthiness is not known to TORPEDO. It is not among the most frequently visited domains in Germany. Also, URLs with this domain have not been visited many times by you in the past or have been identified as trustable by you in the past.",
     "description": "More information on the evaluation of this domain"
   },
 
-  "T3GluehbirneText": {
-    "message": "",
+  "T31GluehbirneText": {
+    "message": "<div class='torpedoHighlight'>Check the domain carefully.</div> Does the domain (and not other parts of the URL) match the content of the message? Is the name of the domain spelled correctly? If you can not clearly review this, you should get more information. If the domain is not trustable, delete this email and / or contact support.",
     "description": "Advice for the user"
   },
 
-  "T3LinkDeaktivierung": {
+  "T31LinkDeaktivierung": {
     "message": "",
     "description": "Text for Deactivation of the link"
   },
-
-  "T1PHUeberschrift": {
-    "message": "The referred URL redirects you to the following URL:",
+  
+  "T32Ueberschrift": {
+    "message": "Deposited URL (also called web address):",
     "description": "Header for tooltip"
   },
 
-  "T1PHErklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as uncertain risk (grey frame). You have to assess the risk yourself in this case.<br>The use of a redirection puts your privacy at risk.",
+  "T32Erklaerung": {
+    "message": "TORPEDO can not finally classify the risk of clicking on this link. <div class='torpedoHighlight'>At least one indicator that is often used in fraudulent e-mails to fool you was discovered.</div>You have to classify the risk yourself by checking the domain (bold area) of the URL very carefully.",
     "description": "Information on the classification of this domain"
   },
 
-  "T1PHInfotext": {
-    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>TORPEDO classified the domain (highlighted part) of the target URL as uncertain risk (grey frame). You have to assess the risk yourself in this case. This means that the domain of the target URL is unknown to TORPEDO. The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
+  "T32Infotext": {
+    "message": "This means that the domain (bold area) of the URL and thus its trustworthiness is not known to TORPEDO. It is not among the most frequently visited domains in Germany. Also, URLs with this domain have not been visited many times by you in the past or have been identified as trustable by you in the past. In addition, TORPEDO has discovered at least one indicator that is often used in fraudulent e-mails to fool you. The indicators include e.g. 1) a difference between the displayed URL in the text and the deposited URL; 2) the fact that the domain of the URL behind this link is very similar to the ones identified as trustable by you or by TORPEDO; 3) if a URL is additionally displayed in the tooltip and it differs from the actual URL after the link.",
     "description": "More information on the evaluation of this domain"
   },
 
-  "T1PHGluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
+  "T32GluehbirneText": {
+    "message": "<div class='torpedoHighlight'>Check the domain very carefully.</div> Does the domain (and not other parts of the URL) match the content of the message? Is the name of the domain spelled correctly? If you can not clearly review this, you should get more information. If the domain is not trustable, delete this email and / or contact support.",
     "description": "Advice for the user"
   },
 
-  "T1PHLinkDeaktivierung": {
-    "message": "TORPEDO has deactivated the link to give you time to check the domain carefully.",
+  "T32LinkDeaktivierung": {
+    "message": "TORPEDO has disabled the link so you can check the domain carefully.",
     "description": "Text for Deactivation of the link"
   },
-
-  "T2PHUeberschrift": {
-    "message": "The referred URL redirects you to the following URL:",
+  
+  "T33Ueberschrift": {
+    "message": "Deposited URL (also called web address):",
     "description": "Header for tooltip"
   },
 
-  "T2PHErklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as low-risk (green frame).<br>The use of a redirection puts your privacy at risk.",
+  "T33Erklaerung": {
+    "message": "TORPEDO can not finally classify the risk of clicking on this link. <div class='torpedoHighlight'>At least one indicator that is often used in fraudulent e-mails to fool you was discovered.</div>You have to classify the risk yourself by checking the domain (bold area) of the URL very carefully.",
     "description": "Information on the classification of this domain"
   },
 
-  "T2PHInfotext": {
-    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>TORPEDO classified the domain (highlighted part) of the target URL as low-risk (green frame). This means that this domain belongs to the 100 most frequented websites in Germany.",
+  "T33Infotext": {
+    "message": "This means that the domain (bold area) of the URL and thus its trustworthiness is not known to TORPEDO. It is not among the most frequently visited domains in Germany. Also, URLs with this domain have not been visited many times by you in the past or have been identified as trustable by you in the past. In addition, TORPEDO has discovered at least one indicator that is often used in fraudulent e-mails to fool you. The indicators include e.g. 1) a difference between the displayed URL in the text and the deposited URL; 2) the fact that the domain of the URL behind this link is very similar to the ones identified as trustable by you or by TORPEDO; 3) if a URL is additionally displayed in the tooltip and it differs from the actual URL after the link.",
     "description": "More information on the evaluation of this domain"
   },
 
-  "T2PHGluehbirneText": {
-    "message": "",
+  "T33GluehbirneText": {
+    "message": "<div class='torpedoHighlight'>Check the domain very carefully.</div> Does the domain (and not other parts of the URL) match the content of the message? Is the name of the domain spelled correctly? If you can not clearly review this, you should get more information. If the domain is not trustable, delete this email and / or contact support.",
     "description": "Advice for the user"
   },
 
-  "T2PHLinkDeaktivierung": {
-    "message": "",
+  "T33LinkDeaktivierung": {
+    "message": "TORPEDO has disabled the link so you can check the domain carefully.",
     "description": "Text for Deactivation of the link"
   },
 
-  "T3PHUeberschrift": {
-    "message": "The referred URL redirects you to the following URL:",
-    "description": "Header for tooltip"
-  },
-
-  "T3PHErklaerung": {
-    "message": "You have classified his domain (highlighted part) as low-risk (blue frame).<br>The use of a redirection puts your privacy at risk.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T3PHInfotext": {
-    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>You classified the domain (highlighted part) of the target URL as low-risk (blue frame). This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T3PHGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T3PHLinkDeaktivierung": {
-    "message": "",
-    "description": "Text for Deactivation of the link"
-  },
-
+  
   "ShortURLUeberschrift": {
     "message": "Referred URL (also known as web address):",
     "description": "Header for tooltip"
@@ -296,7 +203,7 @@
   },
 
   "ShortURLGluehbirneText": {
-    "message": "Task TORPEDO to detect the target URL.",
+    "message": "Let TORPEDO identify the target domain. Then you will see another tooltip with information about the target URL and the target domain.",
     "description": "Advice for the user"
   },
 
@@ -329,6 +236,31 @@
     "message": "TORPEDO has deactivated the link to give you time to consider whether you want TORPEDO to determine the target URL.",
     "description": "Text for Deactivation of the link"
   },
+  
+  "URLnachErmittelnButtonPrivacyModeUeberschrift": {
+    "message": "The referred URL redirects you to the following URL:",
+    "description": "Header for tooltip"
+  },
+
+  "URLnachErmittelnButtonPrivacyModeErklaerung": {
+    "message": "This URL is going to be validated. Please wait...",
+    "description": "Information on the classification of this domain"
+  },
+
+  "URLnachErmittelnButtonPrivacyModeInfotext": {
+    "message": "The referred URL:<br><URL><br> From the structure of the referred URL TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>From the structure of the target URL TORPEDO recognizes that this is the domain of a short URL service.To detect the actual target URL, it is necessary to call up the short URL service. This would let the service provider know that you are potentially interested in this URL. Therefore, tasking TORPEDO with detecting the target URL would put your privacy at risk (even if you call up the short URL service yourself to detect the target URL). You can avoid this by asking the sender to send the target URL to you directly.",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "URLnachErmittelnButtonPrivacyModeGluehbirneText": {
+    "message": "",
+    "description": "Advice for the user"
+    },
+
+  "URLnachErmittelnButtonPrivacyModeLinkDeaktivierung": {
+    "message": "TORPEDO has deactivated the link to give you time to consider whether you want TORPEDO to determine the target URL.",
+    "description": "Text for Deactivation of the link"
+  },
 
   "WarnungPhishUeberschrift": {
     "message": "Referred URL (also known as web address):",
@@ -355,152 +287,7 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T1THUeberschrift": {
-    "message": "Referred URL (also known as web address):",
-    "description": "Header for tooltip"
-  },
-
-  "T1THErklaerung": {
-    "message": "The referred URL and the URL displayed in the e-mail do not match. Besides, the domain (highlighted part) of the referred URL is unknown to TORPEDO. You have to assess the risk yourself in this case.Due to the specific situation you should be especially careful when assessing the risk.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T1THInfotext": {
-    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a fraud attempt, because the domain (highlighted part) of the referred URL is unknown to TORPEDO. The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T1THGluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
-    "description": "Advice for the user"
-  },
-
-  "T1THLinkDeaktivierung": {
-    "message": "TORPEDO has deactivated the link to give you time to check the domain carefully.",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T2THUeberschrift": {
-    "message": "Referred URL (also known as web address):",
-    "description": "Header for tooltip"
-  },
-
-  "T2THErklaerung": {
-    "message": "The referred URL and the URL displayed in the e-mail do not match.However, TORPEDO classified the domain (highlighted part) of the referred URL as low-risk (green frame). Therefore, the mismatch of this link is classified as non-critical.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T2THInfotext": {
-    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a mistake, because the domain (highlighted part) of the referred URL is classified as low-risk by TORPEDO, because this domain belongs to the 100 most frequented websites in Germany.",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T2THGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T2THLinkDeaktivierung": {
-    "message": "",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T3THUeberschrift": {
-    "message": "Referred URL (also known as web address):",
-    "description": "Header for tooltip"
-  },
-
-  "T3THErklaerung": {
-    "message": "The referred URL and the URL displayed in the e-mail do not match.However, you have classified the domain (highlighted part) of the referred URL as low-risk (blue frame).Therefore, the mismatch of this link is classified as non-critical.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T3THInfotext": {
-    "message": "This means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a mistake, because you have classified this domain (highlighted part) as low-risk. This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T3THGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T3THLinkDeaktivierung": {
-    "message": "",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T1PHTHUeberschrift": {
-    "message": "The referred URL redirects you to the following URL:",
-    "description": "Header for tooltip"
-  },
-
-  "T1PHTHErklaerung": {
-    "message": "The referred URL and the URL displayed in the e-mail do not match. The target URL and the URL displayed in the e-mail do not match, either. Besides, the domain (highlighted part) of the referred URL is unknown to TORPEDO. You have to assess the risk yourself in this case.Due to the specific situation you should be especially careful when classifying the domain.The use of a redirection puts your privacy at risk.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T1PHTHInfotext": {
-    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here.<br>The mismatch between displayed and referred URL resp. target URL means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a fraud attempt, because the domain (highlighted part) of the target URL is unknown to TORPEDO, because the domain is unknown to TORPEDO: The domain does not belong to the 100 most frequented websites in Germany. Moreover, a link with this domain has neither been clicked at least twice by you, nor have you added the link manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T1PHTHGluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Please check the domain carefully. </div>Do not click the link unless you trust this domain. Otherwise, delete this e-mail.",
-    "description": "Advice for the user"
-  },
-
-  "T1PHTHLinkDeaktivierung": {
-    "message": "TORPEDO has deactivated the link to give you time to check the domain carefully.",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T2PHTHUeberschrift": {
-    "message": "The referred URL redirects you to the following URL:",
-    "description": "Header for tooltip"
-  },
-
-  "T2PHTHErklaerung": {
-    "message": "TORPEDO classified this domain (highlighted part) as low-risk (green frame).<br>The use of a redirection puts your privacy at risk.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T2PHTHInfotext": {
-    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here. The mismatch between displayed and referred URL resp. target URL means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a mistake, because the domain (highlighted part) of the referred URL is classified as low-risk by TORPEDO, because this domain belongs to the 100 most frequented websites in Germany.",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T2PHTHGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T2PHTHLinkDeaktivierung": {
-    "message": "",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "T3PHTHErklaerung": {
-    "message": "You have classified his domain (highlighted part) as low-risk (blue frame).<br>The use of a redirection puts your privacy at risk.",
-    "description": "Information on the classification of this domain"
-  },
-
-  "T3PHTHInfotext": {
-    "message": "The referred URL:<br><URL><br>From the structure of the URL stored TORPEDO recognizes that this URL will redirect you to the above target URL. This could be for several reasons. In any case the operator of the domain of the URL stored knows that you have clicked on the link. Therefore, your privacy is at risk here. The mismatch between displayed and referred URL resp. target URL means that the sender does not simply copy a URL into the e-mail, but has indicated explicitly that the referred URL should be a different URL than the one shown. This might be an indication for a fraud attempt, but it might also be a mistake.<br>TORPEDO anticipates that this case is rather a mistake, because you have classified this domain (highlighted part) as low-risk. This means that you have clicked a link with this domain at least twice, or that you have added the domain manually (either by the right-click option 'classify domain as low-risk' or by changing the settings).",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T3PHTHGluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T3PHTHLinkDeaktivierung": {
-    "message": "",
-    "description": "Text for Deactivation of the link"
-  },
-
-
+  
   "infoImage":{
     "message": "img/info_en.png",
     "description": "Address of info image"
@@ -556,11 +343,27 @@
     "message": "Activate list of domains the developers consider as 'low-risk'",
     "description": "Activate list of trusted domains."
   },
-
+  
   "showLowRiskList":{
     "message": "Toggle entries",
     "description": "Toggle list of trusted domains."
   },
+  
+  "activatePrivacyMode":{
+    "message": "Privacy Mode",
+    "description": "Activate privacy mode."
+  },
+  
+  "activateSecurityMode":{
+    "message": "Security Mode",
+    "description": "Activate security mode."
+  },
+  
+  "activateRedirectMode":{
+    "message": "Redirect Mode",
+    "description": "Activate redirect mode."
+  },
+  
 
   "trustedList":{
     "message": "Liste der Entwickler",
@@ -611,6 +414,16 @@
     "message": "List of referrer domains",
     "description": "List of referrer domains"
   },
+  
+  "shortURLInfo":{
+    "message": "Kurz-URL bedeutet, dass die URL hinter dem Link nicht die Ziel URL ist, sondern erst einmal ein sogenannter Kurz-URL-Dienst. Von dieser URL werden Sie automatisch zum tatsächlichen, vorgesehenen Ziel weitergeleitet.",
+    "description": "Short URL description"
+  },
+  
+  "shortURLListText":{
+    "message": "Liste der Kurz-URL-Dienste.",
+    "description": "Short URL description"
+  },
 
   "defaultSettings":{
     "message": "Default settings",
@@ -645,6 +458,21 @@
   "insertRandom":{
     "message": "Insert [...]",
     "description": "Insert sign for random generated code."
+  },
+  
+   "exampleReferrerHost":{
+    "message": "Host (e.g. 'deref-gmx.net')",
+    "description": "Example for Input Host"
+  },
+  
+   "exampleReferrerPath":{
+    "message": "Path (e.g. '/mail/client/[...]/dereferrer/')",
+    "description": "Example for Input Path"
+  },
+  
+   "exampleReferrerAttribute":{
+    "message": "Attribute (e.g. 'redirectUrl=')",
+    "description": "Example for Input Attribute"
   },
 
   "savedChanges":{
@@ -706,7 +534,7 @@
     "message": "Basic Information",
     "description": "Tutorial side bar: Chapter 1"
   },
-
+ 
   "guide_tooltips":{
     "message": "Tooltip Types",
     "description": "Tutorial side bar: Chapter 2"
@@ -726,218 +554,59 @@
     "message": "Menu",
     "description": "Tutorial side bar: Chapter 5"
   },
-
+ 
   "guide_settings":{
     "message": "Settings",
     "description": "Tutorial side bar: Chapter 6"
   },
-  
-  "guide_welcome_title":{
-    "message": "A warm welcome!",
-    "description": "Tutorial page 1: title"
-  },
-  
+ 
   "guide_welcome_intro1":{
-    "message": "The TORPEDO add-on has been installed successfully. Next you can find out how to detect phishing e-mails with the help of this add-on.",
+    "message": "TORPEDO is an add-on for user support in the detection of fraudulent emails with dangerous links (often referred to as phishing emails). It is based on the NoPhish concept from SECUSO. It can also be used as a supplement to the NoPhish concept.",
     "description": "Tutorial page 1: intro1"
   },
   
   "guide_welcome_intro2":{
-    "message": "We recommend that you watch the tutorial even if you already use TORPEDO, because there are a number of new features in this new version.",
+    "message": "Background: Unfortunately, technically it is nowadays not possible that no phishing emails end up in the email inboxes. Well-made phishing emails can only be recognized as recipients if you check the web address behind the links before clicking on them. It is important to create awareness for this - including knowing how to check web addresses - and this is done through the measures in the NoPhish concept. At the same time, it is also clear that email recipients do not check every web address (in the status bar after touching the link) as precisely as it would be necessary to reliably identify phishing emails as such. With the mass of emails, the recipients simply lack the time and often the knowledge.",
     "description": "Tutorial page 1: intro2"
   },
   
-  "guide_welcome_footnote":{
-    "message": "This add-on was developed in collaboration with the research group SECUSO - Security, Usability and Society at the TU Darmstadt, the Abertay University's Division of Cybersecurity and the Privacy and Security Group at the University of Karlstad.",
-    "description": "Tutorial page 1: footnote"
+  "guide_why_description":{
+    "message": "This is where TORPEDO comes in. TORPEDO shows the information relevant for the check directly at the link in a tooltip, so that it is easier with TORPEDO to carry out the checks. TORPEDO also differentiates between different risk levels of links and shows you when it is important to check the web address behind the link before actually clicking the link. A distinction is made between the following risk levels:",
+    "description": "Tutorial page 2: description"
   },
   
-  "guide_why_title":{
-    "message": "Why you should use TORPEDO?",
-    "description": "Tutorial page 2: title"
+  "guide_tooltips_case1":{
+    "message": "<strong>“Green”</strong> - the web address leads to a web server that TORPEDO has classified as trustworthy. Websites listed by Alexa (an overview of the most viewed websites) as top websites are used as the basis.",
+    "description": "Tutorial page 2: tooltip case"
   },
   
-  "guide_why_description1":{
-    "message": "TORPEDO helps you to detect phishing e-mails, i.e. dangerous links in e-mails.",
-    "description": "Tutorial page 2: title"
+  "guide_tooltips_case2":{
+    "message": "<strong>“Blue”</strong> - the web address leads to a web server that you have classified as trustworthy in the past - i. e. because you have already clicked on web addresses for this web server.",
+    "description": "Tutorial page 2: tooltip case"
   },
   
-  "guide_why_description2":{
-    "message": "'Dangerous links' means...",
-    "description": "Tutorial page 2: title"
+  "guide_tooltips_case3":{
+    "message": "<strong>“Gray”</strong> -  the web address leads to a web server that TORPEDO does not know. Here you have to check on your own whether it is a website that you trust or whether it is a phishing attack. TORPEDO explains to you how you can check the web address. By default, so that you don't click the link accidently, the click is disabled for three seconds.",
+    "description": "Tutorial page 2: tooltip case"
   },
   
-  "guide_why_description3":{
-    "message": "...downloading malware when clicking or",
-    "description": "Tutorial page 2: title"
+  "guide_tooltips_case4":{
+    "message": "<strong>“Gray with warning symbol”</strong> - here too the web address leads to a web server that TORPEDO does not know. The warning symbol is used because TORPEDO has found indicators in the email and / or in the web address that are also used in phishing attacks. You should therefore check this web address very carefully in this case. Examples of such indicators are e.g. For example: (1) the fact that the web server name in the web address is similar to a web server name in the green or blue list; (2) the link is a web address and it is different from the web address that is stored behind this link",
+    "description": "Tutorial page 2: tooltip case"
   },
   
-  "guide_why_description4":{
-    "message": "...entering credentials at fake websites (that look legitimate) that open when clicking. When doing so the ID theft was successful.",
-    "description": "Tutorial page 2: title"
-  },
-  
-  "guide_why_usage_title":{
-    "message": "How to use TORPEDO",
-    "description": "Tutorial page 2: usage title"
-  },
-  
-  "guide_why_usage_list":{
-    "message": "<li>Hover over the link with the mouse, so that TORPEDO displays the tooltip with the actual URL.</li><li>Pay attention to the tooltip frame colour, the information and instructions provided in the tooltip.</li>",
-    "description": "Tutorial page 2: usage list"
-  },
-  
-  "guide_tooltips_case1_title":{
-    "message": "Explanations of the most recurrent tooltip types (1 of 3):",
-    "description": "Tutorial page 3: title"
-  },
-  
-  "guide_tooltips_case1_description":{
-    "message": "A <strong>green frame</strong> means the domain (highlighted part of the URL) is classified as low-risk by the developers of TORPEDO because it belongs to the 100 most frequented websites in Germany.",
+  "guide_settings_description1":{
+    "message": "TORPEDO supports a number of special cases, such as Short URLs and redirects. To ensure that these are configured according to your needs, we recommend that you take a look at the settings.",
     "description": "Tutorial page 3: description"
   },
   
-  "guide_tooltips_case2_title":{
-    "message": "Explanations of the most recurrent tooltip types (2 of 3):",
-    "description": "Tutorial page 4: title"
+  "guide_settings_description2":{
+    "message": "Either via ...",
+    "description": "Tutorial page 3: description"
   },
   
-  "guide_tooltips_case2_description1":{
-    "message": "A <strong>blue frame</strong> means that you <strong>previously indicated that the domain (highlighted part of the URL) is low-risk</strong>, i.e. ...",
-    "description": "Tutorial page 4: description 1"
-  },
-  
-  "guide_tooltips_case2_description2":{
-    "message": "...you have clicked a link with the same domain at least twice since you installed TORPEDO or",
-    "description": "Tutorial page 4: description 2"
-  },
-  
-  "guide_tooltips_case2_description3":{
-    "message": "...you have whitelisted the domain (either by using the right-click option 'classify domain as low-risk' or by changing the TORPEDO settings).",
-    "description": "Tutorial page 4: description 3"
-  },
-
-  "guide_tooltips_case3_title":{
-    "message": "Explanations of the most recurrent tooltip types (3 of 3):",
-    "description": "Tutorial page 5: description 1"
-  },
-  
-  "guide_tooltips_case3_description":{
-    "message": "A <strong>grey frame</strong> means that this domain is unknown to TORPEDO. You should <strong>check the URL yourself very carefully and particularly focus on the domain.</strong> If you do not trust the domain, delete this e-mail. If you do trust the domain, you can use the menu to classify it as low-risk. Because you are supposed to check this case carefully, the possibility to click it is delayed (you can change the delay time in the settings). That is to prevent unintentional link activation.",
-    "description": "Tutorial page 5: description 1"
-  },
-
-  "guide_extras_URL_title":{
-    "message": "Explanations how to check URLs:",
-    "description": "Tutorial page 6: title"
-  }, 
-  
-  "guide_extras_URL_title1":{
-    "message": "In particular this is relevant for the grey case and special cases explained later on.",
-    "description": "Tutorial page 6: title 1"
-  },
-
-  "guide_extras_URL_description":{
-    "message": "<li><strong>Check whether the brand name</strong> (e.g. PayPal) <strong>is highlighted in bold.</strong>Consider only the highlighted part in order to detect deception attempts e.g. https://paypal.com. <strong>p a y - m e . c o m</strong> or https://www. <strong>p a y – s e c u r e . c o m</strong> /www.paypal.com .These are not PayPal URLs, but actually fake sites. Paypal.com is put in the URL to trick you.</li><li><strong>Check letter by letter</strong> to make sure it is really the brand name (e.g. Apple) that is highlighted in bold in order not to allow criminals to make you believe that e.g. https:// <strong>a p p e l . c o m</strong>/ is an Apple URL whereas it is actually a dangerous link. Criminals typically replace letters (e.g. m by r n) or swap letters. </li><li><strong>Be aware of extensions to the brand name:</strong> e.g. https://www. <strong>p a y p a l - s e c u r e . c o m</strong> / is not necessarily a PayPal URL. If you are unsure, you can use TORPEDO’s integrated search engine, i.e. right-click on the tooltip and then press „search engine“  in the menu. Check whether the highlighted part matches the search engine’s first suggestion. </li>",
-    "description": "Tutorial page 6: description"
-  },
-
-  "guide_extras_URL_tooltipinfo":{
-    "message": "If you want to read this information again when actually using TORPEDO, click on ‘More information on this classification‘ in the corresponding tooltips.",
-    "description": "Tutorial page 6: tooltipinfo"
-  },
-
- "guide_tooltips_specialcase_title":{
-    "message": "Explanations of special cases:",
-    "description": "Tutorial page 7: title"
-  },
-  
-  "guide_tooltips_specialcase_description":{
-    "message": "TORPEDO differentiates in special cases. The most important cases are explained in the following pages.",
-    "description": "Tutorial page 7: description"
-  },
-
-  "guide_tooltips_specialcase1_title":{
-    "message": "Special case: Mismatch",
-    "description": "Tutorial page 8: title"
-  },
-  
-  "guide_tooltips_specialcase1_description":{
-    "message": "The first special case is the so-called <strong>mismatch case</strong>. The mismatch case means that the URL displayed in the e-mail and the actual URL (the one displayed in the tooltip) do not match. Furthermore, the domain (highlighted part of the URL in the tooltip) is not yet known by TORPEDO. While this can happen by accident, criminals do so to obscure malicious links as they assume that people only consider the URL in the e-mail rather than the actual URL. In this case, the same recommendations for checking the URL apply as in the grey case.",
-    "description": "Tutorial page 8: description"
-  },
-  
-  "guide_tooltips_specialcase2_title":{
-    "message": "Special case: Short URL",
-    "description": "Tutorial page 9: title"
-  },
-  
-  "guide_tooltips_specialcase2_description":{
-    "message": "The second special case is the so-called <strong>short URL case</strong>. The short URL case means that the URL behind this link is not the actual URL, but that it will redirect to the actual, intended URL. In order to decide whether the link is dangerous it is important to know the actual, intended URL. TORPEDO can deduce this information using a web service (see button). While short URLs may also be used in trustworthy e-mails, criminals do often use this technique, because they assume that people do not know how to get the information about the actual, intended URL without clicking on the link.",
-    "description": "Tutorial page 9: description"
-  },
-  
-  "guide_tooltips_specialcase3_title":{
-    "message": "Special case: Redirection",
-    "description": "Tutorial page 10: title"
-  },
-
-  "guide_tooltips_specialcase3_description":{
-    "message": "The third special case is the so-called <strong>redirection case</strong>. The redirection case also means that this link is not the actual URL but it will redirect to another URL. Some e-mail providers use redirections for various reasons: e.g. to know whether you are interested in this information or to do some checks of the content of the webpage behind this URL. In this case, TORPEDO can deduce the actual URL without asking an external service, because this information is coded in the URL. Therefore, TORPEDO displays the information about the actual URL.",
-    "description": "Tutorial page 10: description"
-  },
-
-  "guide_tooltips_menu_title":{
-    "message": "You can activate the TORPEDO menu with a right-click of your mouse on the tooltip:",
-    "description": "Tutorial page 11: title"
-  },
-  "guide_tooltips_menu_description1":{
-    "message": "As of now you have the option either to...",
-    "description": "Tutorial page 11: description 1"
-  },
-
-  "guide_tooltips_menu_description2":{
-    "message": "<li>Whitelist the current domain to your personal low-risk list.</li><li>Use the integrated search engine to check a URL.</li><li>Open the TORPEDO settings window.</li><li>Open the tutorial.</li>",
-    "description": "Tutorial page 11: description 2"
-  },
-  
-   "guide_tooltips_menu1_title":{
-    "message": "Explanations of settings",
-    "description": "Tutorial page 12: title"
-  },
-  
-  "guide_tooltips_menu1_description1":{
-    "message": "In the settings you have three different tabs (Link delay, Domains, Referrer) which are explained on the following pages.",
-    "description": "Tutorial page 12: description 1"
-  },
-
-  "guide_settings_delay_title":{
-    "message": "Settings: Link delay",
-    "description": "Tutorial page 13: title"
-  },
-  
-  "guide_settings_delay_description":{
-    "message": "1) Activate or deactivate the link delay or change the link activation delay. Additionally you can activate the timer for the green and/or blue cases, too.",
-    "description": "Tutorial page 13: description"
-  },
-
-  "guide_settings_domains_title":{
-    "message": "Settings: List of domains",
-    "description": "Tutorial page 14: title"
-  },
-  
-  "guide_settings_domains_description":{
-    "message": "2) View the low-risk domains provided by the developers or modify the list to reflect your preferences. You can add or delete single domains to your own list of low-risk considered domains, delete single domains or delete your complete list.",
-    "description": "Tutorial page 14: description"
-  },
-
-  "guide_settings_referrer_title":{
-    "message": "Settings: List of referrers",
-    "description": "Tutorial page 15: title"
-  },
-  
-  "guide_settings_referrer_description":{
-    "message": "3) Referrers redirect to another URL (just like short URLs, see special case 3). TORPEDO lists web.de and gmx.net as default referrers. You can add your own referrers, which TORPEDO can then deduce automatically in the future.",
-    "description": "Tutorial page 15: description"
+  "guide_settings_description3":{
+    "message": "... or via ...",
+    "description": "Tutorial page 3: description"
   }
 }

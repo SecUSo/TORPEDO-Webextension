@@ -1,7 +1,7 @@
 document.addEventListener("click", (e) => {
   switch($(e.target).attr('id')){
     case "torpedoPage":
-      chrome.tabs.create({ url: "https://www.secuso.informatik.tu-darmstadt.de/de/secuso/forschung/ergebnisse/torpedo/" });
+      chrome.tabs.create({ url: "https://secuso.aifb.kit.edu/TORPEDO.php" });
       break;
     case "options":
       chrome.runtime.openOptionsPage();
