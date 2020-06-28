@@ -64,7 +64,7 @@ function initTooltip() {
   torpedo.oldUrl = torpedo.url;
 
   $(tooltip).contextmenu(function (event) {
-    $(tooltip.find("#torpedoContextMenu")[0]).toggle();
+    $(tooltip.find("#torpedoContextMenu")[0]).toggle(); // .toggle() switches between displaying and hiding items
     $(tooltip.find("#torpedoContextMenu")[0]).css({ position: "absolute" });
     event.preventDefault();
   });
@@ -162,14 +162,16 @@ function assignText(state, url, tooltip) {
  * fill the basic tooltip structure with corresponding texts
  */
 function updateTooltip() {
-  // Values of sync storage and local storage are relevant for further processing
+  // Values of sync storage (r) and local storage (re) are relevant for further processing
   chrome.storage.sync.get(null, function (r) {
     chrome.storage.local.get("dangerousDomains", function (re) {
+      // check for security level
       var state = getSecurityStatus(r, re);
-      console.log(state);
+
       var t = torpedo.tooltip;
       var url = torpedo.url;
       var pathname = torpedo.pathname;
+
       if (pathname.length > 100) {
         var replace = pathname.substring(0, 100) + "...";
         url = url.replace(pathname, replace);
@@ -216,7 +218,6 @@ function updateTooltip() {
       $(".torpedoTooltip").removeClass(
         "torpedoUserDefined torpedoTrusted torpedoPhish"
       );
-
       switch (state) {
         case "T2":
           $(".torpedoTooltip").addClass("torpedoUserDefined");
