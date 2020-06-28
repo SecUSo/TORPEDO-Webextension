@@ -7,15 +7,22 @@ torpedo.oldDomain = "";
 torpedo.oldUrl = "";
 
 /**
-* fill tooltip with html structure
-*/
+ * fill tooltip with html structure
+ */
 function tooltipText() {
-  var text = "<div id='torpedoWarning'> \
-                <img id='torpedoWarningImage' src='"+ chrome.extension.getURL("img/warning.png") + "'> \
-				        <img id='torpedoWarningImage2' src='"+ chrome.extension.getURL("img/warning2.png") + "'> \
+  var text =
+    "<div id='torpedoWarning'> \
+                <img id='torpedoWarningImage' src='" +
+    chrome.extension.getURL("img/warning.png") +
+    "'> \
+				        <img id='torpedoWarningImage2' src='" +
+    chrome.extension.getURL("img/warning2.png") +
+    "'> \
                 <p id='torpedoWarningText'></p>\
               </div>\
-              <div><a href='"+ torpedo.url + "' id='torpedoURL''></a></div> \
+              <div><a href='" +
+    torpedo.url +
+    "' id='torpedoURL''></a></div> \
               <div style='display:none' id='torpedoContextMenu'>\
                   <ul>\
                       <li id='torpedoMarkTrusted'></li>\
@@ -26,12 +33,16 @@ function tooltipText() {
               </div>\
               <div><p id='torpedoSecurityStatus'></p></div> \
               <div id='torpedoAdvice'> \
-                <img id='torpedoAdviceImage' src='"+ chrome.extension.getURL("img/advice.png") + "'> \
+                <img id='torpedoAdviceImage' src='" +
+    chrome.extension.getURL("img/advice.png") +
+    "'> \
                 <p id='torpedoAdviceText'></p> \
               </div> \
 			        <div id='torpedoAdviceDiv'><p id='torpedoMoreAdvice'></p></div> \
               <div id='torpedoInfo'>  \
-                <img id='torpedoInfoImage' src='"+ chrome.extension.getURL("img/info.png") + "'> \
+                <img id='torpedoInfoImage' src='" +
+    chrome.extension.getURL("img/info.png") +
+    "'> \
                 <p id='torpedoInfoText'></p> \
               </div>\
               <div id='torpedoInfoDiv'><p id='torpedoMoreInfo'></p></div> \
@@ -41,7 +52,7 @@ function tooltipText() {
               <div><p id='torpedoLinkDelay'></p></div> \
               <p id='torpedoTimer'></p>";
   return text;
-};
+}
 
 function initTooltip() {
   // context menu
@@ -53,12 +64,12 @@ function initTooltip() {
   torpedo.oldUrl = torpedo.url;
 
   $(tooltip).contextmenu(function (event) {
-    $(tooltip.find("#torpedoContextMenu")[0]).toggle();
+    $(tooltip.find("#torpedoContextMenu")[0]).toggle(); // .toggle() switches between displaying and hiding items
     $(tooltip.find("#torpedoContextMenu")[0]).css({ position: "absolute" });
     event.preventDefault();
   });
   $(tooltip).on("click", "div:not(.torpedoContextMenu)", function (e) {
-    if (!$(tooltip.find("#torpedoContextMenu")[0]).is(':hidden')) {
+    if (!$(tooltip.find("#torpedoContextMenu")[0]).is(":hidden")) {
       $(tooltip.find("#torpedoContextMenu")[0]).toggle();
     }
   });
@@ -67,32 +78,48 @@ function initTooltip() {
     chrome.storage.sync.get(null, function (r) {
       var arr = r.userDefinedDomains;
       arr.push(torpedo.domain);
-      chrome.storage.sync.set({ 'userDefinedDomains': arr }, function () {
+      chrome.storage.sync.set({ userDefinedDomains: arr }, function () {
         updateTooltip();
       });
     });
   });
-  $(tooltip.find("#torpedoGoogle")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "google", url: torpedo.domain }); });
-  $(tooltip.find("#torpedoOpenSettings")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "settings" }); });
-  $(tooltip.find("#torpedoOpenTutorial")[0]).click(function (event) { chrome.runtime.sendMessage({ name: "tutorial" }); });
+  $(tooltip.find("#torpedoGoogle")[0]).click(function (event) {
+    chrome.runtime.sendMessage({ name: "google", url: torpedo.domain });
+  });
+  $(tooltip.find("#torpedoOpenSettings")[0]).click(function (event) {
+    chrome.runtime.sendMessage({ name: "settings" });
+  });
+  $(tooltip.find("#torpedoOpenTutorial")[0]).click(function (event) {
+    chrome.runtime.sendMessage({ name: "tutorial" });
+  });
 
-  $(tooltip.find("#torpedoInfoText")[0]).click(function (event) { $(tooltip.find("#torpedoInfoDiv")[0]).toggle() });
-  $(tooltip.find("#torpedoAdviceText")[0]).click(function (event) { $(tooltip.find("#torpedoAdviceDiv")[0]).toggle() });
-  $(tooltip.find("#torpedoMoreInfoButton")[0]).click(function (event) { openInfoImage(event) });
-  $(tooltip.find("#torpedoRedirectButton")[0]).click(function (event) { resolveRedirect(event); torpedo.api.get("hide.event", "onfocus") });
+  $(tooltip.find("#torpedoInfoText")[0]).click(function (event) {
+    $(tooltip.find("#torpedoInfoDiv")[0]).toggle();
+  });
+  $(tooltip.find("#torpedoAdviceText")[0]).click(function (event) {
+    $(tooltip.find("#torpedoAdviceDiv")[0]).toggle();
+  });
+  $(tooltip.find("#torpedoMoreInfoButton")[0]).click(function (event) {
+    openInfoImage(event);
+  });
+  $(tooltip.find("#torpedoRedirectButton")[0]).click(function (event) {
+    resolveRedirect(event);
+    torpedo.api.get("hide.event", "onfocus");
+  });
 
   $(tooltip.find("#torpedoActivateLinkButton")[0]).prop("disabled", true);
-
 }
 
 function assignText(state, url, tooltip) {
   // get texts from textfile
-  var button = chrome.i18n.getMessage('ButtonWeiterleitung');
-  var activateLinkButton = chrome.i18n.getMessage('LinkAktivierung');
+  var button = chrome.i18n.getMessage("ButtonWeiterleitung");
+  var activateLinkButton = chrome.i18n.getMessage("LinkAktivierung");
   var ueberschrift = chrome.i18n.getMessage(state + "Ueberschrift");
   var erklaerung = chrome.i18n.getMessage(state + "Erklaerung");
   var mehrInfo = chrome.i18n.getMessage("MehrInfo");
-  var infotext = chrome.i18n.getMessage(state + "Infotext").replace("<URL>", url);
+  var infotext = chrome.i18n
+    .getMessage(state + "Infotext")
+    .replace("<URL>", url);
   var infoCheck = chrome.i18n.getMessage("Info");
   var gluehbirneText = chrome.i18n.getMessage(state + "GluehbirneText");
   var gluehbirneInfo = chrome.i18n.getMessage("mehrInfoGluehbirne");
@@ -132,28 +159,40 @@ function assignText(state, url, tooltip) {
 }
 
 /**
-* fill the basic tooltip structure with corresponding texts
-*/
+ * fill the basic tooltip structure with corresponding texts
+ */
 function updateTooltip() {
-  // Values of sync storage and local storage are relevant for further processing
+  // Values of sync storage (r) and local storage (re) are relevant for further processing
   chrome.storage.sync.get(null, function (r) {
-    chrome.storage.local.get('dangerousDomains', function (re) {
+    chrome.storage.local.get("dangerousDomains", function (re) {
+      // check for security level
       var state = getSecurityStatus(r, re);
+
       var t = torpedo.tooltip;
       var url = torpedo.url;
       var pathname = torpedo.pathname;
+
       if (pathname.length > 100) {
         var replace = pathname.substring(0, 100) + "...";
         url = url.replace(pathname, replace);
       }
-      $(t.find("#torpedoURL")[0]).html(url.replace(torpedo.domain, '<span id="torpedoDomain">' + torpedo.domain + '</span>'));
+      $(t.find("#torpedoURL")[0]).html(
+        url.replace(
+          torpedo.domain,
+          '<span id="torpedoDomain">' + torpedo.domain + "</span>"
+        )
+      );
 
       assignText(state, url, t);
 
-      if (r.referrerPart1.indexOf(torpedo.domain) > -1 || r.userDefinedDomains.indexOf(torpedo.domain) > -1 || r.trustedDomains.indexOf(torpedo.domain) > -1 || r.redirectDomains.indexOf(torpedo.domain) > -1) {
+      if (
+        r.referrerPart1.indexOf(torpedo.domain) > -1 ||
+        r.userDefinedDomains.indexOf(torpedo.domain) > -1 ||
+        r.trustedDomains.indexOf(torpedo.domain) > -1 ||
+        r.redirectDomains.indexOf(torpedo.domain) > -1
+      ) {
         $(t.find("#torpedoMarkTrusted")[0]).hide();
-      }
-      else $(t.find("#torpedoMarkTrusted")[0]).show();
+      } else $(t.find("#torpedoMarkTrusted")[0]).show();
 
       if (isRedirect(torpedo.domain) && r.privacyModeActivated) {
         $(torpedo.tooltip.find("#torpedoRedirectButton")[0]).show();
@@ -163,14 +202,22 @@ function updateTooltip() {
         $(torpedo.tooltip.find("#torpedoActivateLinkButton")[0]).show();
       }
 
+      $(t.find("#torpedoMarkTrusted")[0]).html(
+        chrome.i18n.getMessage("markAsTrusted")
+      );
+      $(t.find("#torpedoGoogle")[0]).html(
+        chrome.i18n.getMessage("googleCheck")
+      );
+      $(t.find("#torpedoOpenSettings")[0]).html(
+        chrome.i18n.getMessage("openSettings")
+      );
+      $(t.find("#torpedoOpenTutorial")[0]).html(
+        chrome.i18n.getMessage("openTutorial")
+      );
 
-      $(t.find("#torpedoMarkTrusted")[0]).html(chrome.i18n.getMessage('markAsTrusted'));
-      $(t.find("#torpedoGoogle")[0]).html(chrome.i18n.getMessage('googleCheck'));
-      $(t.find("#torpedoOpenSettings")[0]).html(chrome.i18n.getMessage('openSettings'));
-      $(t.find("#torpedoOpenTutorial")[0]).html(chrome.i18n.getMessage('openTutorial'));
-
-      $(".torpedoTooltip").removeClass("torpedoUserDefined torpedoTrusted torpedoPhish");
-
+      $(".torpedoTooltip").removeClass(
+        "torpedoUserDefined torpedoTrusted torpedoPhish"
+      );
       switch (state) {
         case "T2":
           $(".torpedoTooltip").addClass("torpedoUserDefined");
@@ -209,66 +256,71 @@ function updateTooltip() {
       }
     });
   });
-};
+}
 
 /**
-* opens an image containing information on URL checking
-*/
+ * opens an image containing information on URL checking
+ */
 function openInfoImage(event) {
   var t = torpedo.tooltip;
   $(t.find("#torpedoInfoImage")[0]).qtip({
     overwrite: false,
     content: {
-      text: "<img id='torpedoPopupImage' src='" + chrome.extension.getURL(chrome.i18n.getMessage("infoImage")) + "'> ",
-      button: true
+      text:
+        "<img id='torpedoPopupImage' src='" +
+        chrome.extension.getURL(chrome.i18n.getMessage("infoImage")) +
+        "'> ",
+      button: true,
     },
     show: {
       event: event.type,
-      ready: true
+      ready: true,
     },
     hide: {
-      event: 'unfocus'
+      event: "unfocus",
     },
     position: {
-      at: 'center',
-      my: 'center',
-      target: jQuery(window)
+      at: "center",
+      my: "center",
+      target: jQuery(window),
     },
     style: {
-      classes: "torpedoPopup"
-    }
+      classes: "torpedoPopup",
+    },
   });
-};
+}
 
 function extractTLDfromDomain(domain) {
   var domainTLD = torpedo.publicSuffixList.getPublicSuffix(domain);
   return domainTLD;
-};
+}
 
 /**
-* get domain out of hostname
-*/
+ * get domain out of hostname
+ */
 function extractDomain(url) {
   var psl = torpedo.publicSuffixList.getDomain(url);
   // psl empty -> url is already a valid domain
   return psl != "" ? psl : url;
-};
+}
 
 /**
-* set given url as new global torpedo url
-*/
+ * set given url as new global torpedo url
+ */
 function setNewUrl(uri) {
   torpedo.uri = uri;
   torpedo.url = uri.href;
   torpedo.domain = extractDomain(uri.hostname);
   var index = torpedo.url.indexOf(torpedo.domain);
-  torpedo.pathname = torpedo.url.substring(index + torpedo.domain.length, torpedo.url.length);
+  torpedo.pathname = torpedo.url.substring(
+    index + torpedo.domain.length,
+    torpedo.url.length
+  );
 }
 
-
 /**
-* user has clicked on a link via the tooltip
-*/
+ * user has clicked on a link via the tooltip
+ */
 function processClick() {
   chrome.storage.sync.get(null, function (r) {
     var domains = r.onceClickedDomains;
@@ -277,16 +329,16 @@ function processClick() {
       // remove domain from once clicked domains
       var index = domains.indexOf(torpedo.domain);
       domains.splice(index, 1);
-      chrome.storage.sync.set({ 'onceClickedDomains': domains });
+      chrome.storage.sync.set({ onceClickedDomains: domains });
       // add domain to user defined domains
       domains = r.userDefinedDomains;
       domains[domains.length] = torpedo.domain;
-      chrome.storage.sync.set({ 'userDefinedDomains': domains });
+      chrome.storage.sync.set({ userDefinedDomains: domains });
     }
     // add domain to once clicked domains
     else {
       domains[domains.length] = torpedo.domain;
-      chrome.storage.sync.set({ 'onceClickedDomains': domains });
+      chrome.storage.sync.set({ onceClickedDomains: domains });
     }
   });
-};
+}

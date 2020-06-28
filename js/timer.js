@@ -1,8 +1,8 @@
 torpedo.timerInterval = null;
 
 /**
-* countdown function for the temporal deactivation of URLs
-*/
+ * countdown function for the temporal deactivation of URLs
+ */
 
 function countdown(time, state) {
   if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
@@ -12,23 +12,58 @@ function countdown(time, state) {
   $(tooltip.find("#torpedoTimer")[0]).show();
 
   /**
-  * assert time to tooltip text
-  */
+   * assert time to tooltip text
+   */
   function showTime() {
     try {
       tooltip.find("#torpedoTimer")[0].remove();
-      $('<p id="torpedoTimer">' + chrome.i18n.getMessage("verbleibendeZeit", "" + time) + '</p>').appendTo(tooltip);
-    } catch (e) { }
+      $(
+        '<p id="torpedoTimer">' +
+          chrome.i18n.getMessage("verbleibendeZeit", "" + time) +
+          "</p>"
+      ).appendTo(tooltip);
+    } catch (e) {}
   }
 
-  // deactivate link
+  // deactivate link (on page and on tooltip)
+  const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
   $(torpedo.target).addClass("torpedoTimerShowing");
-  $(torpedo.target).unbind("click");
-  $(torpedo.target).bind("click", function (event) { event.preventDefault(); });
+  eventTypes.forEach(function (eventType) {
+    $(torpedo.target).unbind(eventType);
+  });
+  eventTypes.forEach(function (eventType) {
+    $(torpedo.target).on(eventType, function (event) {
+      console.log("This is the target of the suppression of clicks:");
+      console.log(event.currentTarget); // = torpedo.target
+      event.preventDefault();
+      let mouseBtn = "unknown";
+      switch (event.button) {
+        case 0:
+          mouseBtn = "left mouse btn";
+          break;
+        case 1:
+          mouseBtn = "middle mouse btn";
+          break;
+        case 2:
+          mouseBtn = "right mouse btn";
+          break;
+        default:
+          break;
+      }
+      console.log(
+        `${
+          event.type
+        }, ${mouseBtn}, preventedDefault: ${event.isDefaultPrevented()}`
+      );
+    });
+  });
+
   try {
     $(tooltip.find("#torpedoURL")[0]).unbind("click");
-    $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) { event.preventDefault(); });
-  } catch (e) { }
+    $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
+      event.preventDefault();
+    });
+  } catch (e) {}
 
   showTime();
   if (time > 0) time--;
@@ -42,15 +77,24 @@ function countdown(time, state) {
       }
       // reactivate link
       if (state != "T4") {
-        $(torpedo.target).unbind("click");
-        $(torpedo.target).bind("click", function (event) { processClick(); });
+        eventTypes.forEach(function (eventType) {
+          $(torpedo.target).unbind(eventType);
+        });
+        eventTypes.forEach(function (eventType) {
+          $(torpedo.target).bind(eventType, function (event) {
+            processClick();
+          });
+        });
         try {
           $(tooltip.find("#torpedoURL")[0]).unbind("click");
           $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
             event.preventDefault();
             chrome.storage.sync.get(null, function (r) {
               if (r.privacyModeActivated) {
-                chrome.runtime.sendMessage({ name: "open", url: torpedo.oldUrl });
+                chrome.runtime.sendMessage({
+                  name: "open",
+                  url: torpedo.oldUrl,
+                });
               } else {
                 chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
               }
@@ -58,14 +102,19 @@ function countdown(time, state) {
             processClick();
             return false;
           });
-        } catch (e) { }
+        } catch (e) {}
       } else {
-        $(tooltip.find("#torpedoActivateLinkButton")[0]).prop("disabled", false);
+        $(tooltip.find("#torpedoActivateLinkButton")[0]).prop(
+          "disabled",
+          false
+        );
         $(tooltip.find("#torpedoActivateLinkButton")[0]).click(function () {
           var ueberschrift = chrome.i18n.getMessage("T4aUeberschrift");
           var erklaerung = chrome.i18n.getMessage("T4aErklaerung");
           var gluehbirneText = chrome.i18n.getMessage("T4aGluehbirneText");
-          var linkDeaktivierung = chrome.i18n.getMessage("T4aLinkDeaktivierung");
+          var linkDeaktivierung = chrome.i18n.getMessage(
+            "T4aLinkDeaktivierung"
+          );
 
           // assign texts
           $(tooltip.find("#torpedoWarningText")[0]).html(ueberschrift);
@@ -77,12 +126,10 @@ function countdown(time, state) {
           countdown(r.timer, "T4a");
         });
       }
-    }
-    else {
+    } else {
       --time;
     }
   }, 1000);
 
   torpedo.timerInterval = timerInterval;
-  
 }
