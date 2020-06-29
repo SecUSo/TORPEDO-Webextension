@@ -97,7 +97,7 @@ function isRedirect(url) {
 
 function isMismatch(url) {
   try {
-    const uri = new URL(torpedo.target.innerHTML.replace(" ", ""));
+    const uri = new URL(torpedo.target.innerText.replace(" ", ""));
     var linkTextDomain = extractDomain(uri.hostname);
     if (linkTextDomain != torpedo.oldDomain && linkTextDomain != url) {
       return true;
