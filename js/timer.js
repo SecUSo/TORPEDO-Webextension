@@ -33,8 +33,6 @@ function countdown(time, state) {
   });
   eventTypes.forEach(function (eventType) {
     $(torpedo.target).on(eventType, function (event) {
-      console.log("This is the target of the suppression of clicks:");
-      console.log(event.currentTarget); // = torpedo.target
       event.preventDefault();
       let mouseBtn = "unknown";
       switch (event.button) {
@@ -50,11 +48,6 @@ function countdown(time, state) {
         default:
           break;
       }
-      console.log(
-        `${
-          event.type
-        }, ${mouseBtn}, preventedDefault: ${event.isDefaultPrevented()}`
-      );
     });
   });
 
