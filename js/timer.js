@@ -31,10 +31,18 @@ function countdown(time, state) {
   eventTypes.forEach(function (eventType) {
     $(torpedo.target).unbind(eventType);
   });
+  const onWebsite = new URL(window.location.href);
+  if (onWebsite.hostname === "owa.kit.edu") {
+    $(
+      "div._rp_U4.ms-font-weight-regular.ms-font-color-neutralDark.rpHighlightAllClass.rpHighlightBodyClass"
+    ).unbind("click");
+    // document.removeEventListener('click', getEventListeners(document).click[0].listener)
+    /* 
+      once script from owa can be used to remove eventlistener properly - insert here
+    */
+  }
   eventTypes.forEach(function (eventType) {
     $(torpedo.target).on(eventType, function (event) {
-      console.log("This is the target of the suppression of clicks:");
-      console.log(event.currentTarget); // = torpedo.target
       event.preventDefault();
       let mouseBtn = "unknown";
       switch (event.button) {
@@ -50,11 +58,6 @@ function countdown(time, state) {
         default:
           break;
       }
-      console.log(
-        `${
-          event.type
-        }, ${mouseBtn}, preventedDefault: ${event.isDefaultPrevented()}`
-      );
     });
   });
 
