@@ -73,7 +73,7 @@ chrome.runtime.onInstalled.addListener(function () {
       "shop-apotheke.com",
       "spiegel.de",
       "telekom.com",
-      "t-online",
+      "t-online.de",
       "twitch.tv",
       "vk.com",
       "web.de",
@@ -98,7 +98,6 @@ chrome.runtime.onInstalled.addListener(function () {
       "jd.com",
       "linkedin.com",
       "login.tmall.com",
-      "microsoftonline.com",
       "msn.com",
       "myshopify.com",
       "nytimes.com",
@@ -154,7 +153,7 @@ chrome.runtime.onInstalled.addListener(function () {
       "shopapotheke.com",
       "spiegel.de",
       "telekom.com",
-      "tonline",
+      "tonline.de",
       "twitch.tv",
       "vk.com",
       "web.de",
@@ -179,7 +178,6 @@ chrome.runtime.onInstalled.addListener(function () {
       "jd.com",
       "linkedin.com",
       "login.tmall.com",
-      "microsoftonline.com",
       "msn.com",
       "myshopify.com",
       "nytimes.com",
@@ -605,7 +603,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         try {
           chrome.pageAction.setIcon({
             tabId: tabs[0].id,
-            path: { "38": "img/error38.png" },
+            path: { 38: "img/error38.png" },
           });
         } catch (e) {}
       });
@@ -617,7 +615,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         try {
           chrome.pageAction.setIcon({
             tabId: tabs[0].id,
-            path: { "38": "img/icon38.png" },
+            path: { 38: "img/icon38.png" },
           });
         } catch (e) {}
       });
