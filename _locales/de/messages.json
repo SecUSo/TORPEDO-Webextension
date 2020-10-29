@@ -60,6 +60,11 @@
     "description": "Button text for deducing the target URL if the URL is a redirect"
   },
 
+  "LinkAktivierung":{
+    "message": "Link aktivieren",
+    "description": "Button text for activating a link"
+  },
+
  
   "T1Ueberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
@@ -182,6 +187,56 @@
   },
 
   "T33LinkDeaktivierung": {
+    "message": "TORPEDO hat den Link deaktiviert, damit Sie die Domain in Ruhe prüfen.",
+    "description": "Text for Deactivation of the link"
+  },
+
+  "T4Ueberschrift": {
+    "message": "Hinterlegte URL (auch Webadresse genannt):",
+    "description": "Header for tooltip"
+  },
+
+  "T4Erklaerung": {
+    "message": "Diese URL wurde bereits mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht. TORPEDO schätzt das Risiko als <div class='torpedoHighlight'>hoch</div> ein.<br>Sollten Sie dennoch der Ansicht sein, dass es sich hier um eine legitime URL handelt, dann können Sie unten auf „Link aktivieren“ klicken. Danach sollten Sie die URL nochmal sorgfältig prüfen.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T4Infotext": {
+    "message": "Die Cyber Threat Coalition hat sich zum Ziel gemacht eine Liste von betrügerischen URLs zu sammeln, die im Zusammenhang mit Phishing und Corona bzw. Covid-19 aufgetaucht sind in einer Blacklist zu sammeln. Dies geschieht aus dem Grund, da diese URLs aktuell in einer großen Menge und in sich schnell wandelnden Varianten auftreten. Wir wollen dazu einen Beitrag leisten und vorübergehend auch eine Blacklist in TORPEDO integrieren, damit Sie gegen diese URLs geschützt sind.</div>",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T4GluehbirneText": {
+    "message": "",
+    "description": "Advice for the user"
+  },
+
+  "T4LinkDeaktivierung": {
+    "message": "TORPEDO hat den Link deaktiviert, damit Sie in Ruhe überlegen können, ob Sie ihn aktivieren wollen.",
+    "description": "Text for Deactivation of the link"
+  },
+
+  "T4aUeberschrift": {
+    "message": "Hinterlegte URL (auch Webadresse genannt):",
+    "description": "Header for tooltip"
+  },
+
+  "T4aErklaerung": {
+    "message": "Sie haben diese URL aktiviert, obwohl Sie in der Vergangenheit mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht wurde. Bitte überprüfen Sie die Domain (<div class='torpedoHighlight'>fett</div> markierter Bereich) nochmal besonders sorgfältig.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T4aInfotext": {
+    "message": "Die Cyber Threat Coalition hat sich zum Ziel gemacht eine Liste von betrügerischen URLs zu sammeln, die im Zusammenhang mit Phishing und Corona bzw. Covid-19 aufgetaucht sind in einer Blacklist zu sammeln. Dies geschieht aus dem Grund, da diese URLs aktuell in einer großen Menge und in sich schnell wandelnden Varianten auftreten. Wir wollen dazu einen Beitrag leisten und vorübergehend auch eine Blacklist in TORPEDO integrieren, damit Sie gegen diese URLs geschützt sind.</div>",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T4aGluehbirneText": {
+    "message": "",
+    "description": "Advice for the user"
+  },
+
+  "T4aLinkDeaktivierung": {
     "message": "TORPEDO hat den Link deaktiviert, damit Sie die Domain in Ruhe prüfen.",
     "description": "Text for Deactivation of the link"
   },
@@ -322,6 +377,11 @@
     "description": "Seconds"
   },
 
+  "highRiskDomains":{
+    "message": "Domains, die auf einer Blacklist (Corona-Blacklist der Cyber Threat Coalition) stehen",
+    "description": "List of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
+  },
+
   "lowRiskDomains":{
     "message": "Domains, die von den Entwicklern als 'geringes Risiko' eingestuft wurden (grün)",
     "description": "List of trusted domains."
@@ -330,6 +390,11 @@
   "activateTimerOnLowRisk":{
     "message": "Aktiviert Verzögerung auf Domains, die vom Entwickler als niedrig riskant eingestuft wurden.",
     "description": "Activate timer on list of trusted domains."
+  },
+
+  "activateHighRiskList":{
+    "message": "Blacklist (Corona-Blacklist der Cyber Threat Coalition) aktivieren",
+    "description": "Activate list of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
   },
 
   "activateLowRiskList":{
@@ -551,6 +616,11 @@
   "guide_settings":{
     "message": "Einstellungen",
     "description": "Tutorial side bar: Chapter 6"
+  },
+
+  "guide_intro_blacklist":{
+    "message": "Aus aktuellem Anlass haben wir uns dazu entschieden eine zentrale Änderung an TORPEDO vorzunehmen. Da aktuell sehr viele betrügerische Nachrichten mit Links zum Thema Covid-19 unterwegs sind, haben wir eine Blacklist integriert. Diese Blacklist wird von der Cyber Threat Coalition gepflegt (https://www.cyberthreatcoalition.org). Aus diesem Grund gibt es aktuell einen neuen Fall. Wenn eine Domain aus der Liste der Cyber Threat Coalition erkannt wird, wird das Anklicken des Links komplett verhindert. Sie können mit dem Klicken auf 'Link aktivieren' den Link freischalten. Anschließend bekommen Sie nochmal einen zweiten Tooltip angezeigt mit unseren üblichen Tipps zum Prüfen von Domains. Bei Domains die als Teil der aktiven Blacklist erkannt werden, kann der Link aktuell nur über den TORPEDO Tooltip aufgerufen werden. Ein Aufrufen über den eigentlich Link ist blockiert.",
+    "description": "Tutorial page 0: intro blacklist"
   },
   
   "guide_welcome_intro1":{

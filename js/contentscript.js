@@ -13,9 +13,31 @@ torpedo.progUrl = false;
 torpedo.hasTooltip = false;
 
 $(document).ready(function () {
-  chrome.runtime.sendMessage({ "name": "TLD" }, function (r) {
+  chrome.runtime.sendMessage({ name: "TLD" }, function (r) {
     torpedo.publicSuffixList.parse(r, punycode.toASCII);
   });
+
+  chrome.storage.local.get(
+    ["dangerousDomains", "blacklistWasUpdated"],
+    function (re) {
+      //extract the domains from the blacklist entries only if the blacklist has been updated
+      if (re.blacklistWasUpdated) {
+        var lst = re.dangerousDomains;
+        var dangerousDomains = [];
+
+        for (var i = 0; i < lst.length; i++) {
+          var dom = extractDomain(lst[i]);
+          dangerousDomains.push(dom);
+        }
+
+        chrome.storage.local.set({
+          dangerousDomains: dangerousDomains,
+          blacklistWasUpdated: false,
+        });
+      }
+    }
+  );
+
   torpedo.location = window.location.host;
   var mouseenter = "";
   var iframe = "";
@@ -24,15 +46,18 @@ $(document).ready(function () {
   torpedo.hasTooltip = false;
 
   switch (torpedo.location) {
-    case "mg.mail.yahoo.com":
     case "mail.yahoo.com":
-      mouseenter = ".thread-body";
+      mouseenter = 'div[data-test-id="message-view"]';
       break;
     case "mail.google.com":
       mouseenter = ".adn";
       break;
+    case "owa.kit.edu":
+      mouseenter = 'div[role="list"]';
+      break;
+    // not yet active due to issues with click handling
     case "outlook.live.com":
-      mouseenter = "#app";
+      mouseenter = 'div[role="main"]';
       break;
     case "mail.aol.com":
       mouseenter = "#displayMessage";
@@ -47,30 +72,32 @@ $(document).ready(function () {
   $("body").unbind();
 
   if (iframe == "") {
-
-
-    $("body").on('mouseenter', mouseenter + " a", function (e) { openTooltip(e, "a") });
-    $("body").on('mouseenter', mouseenter + " form", function (e) {
+    $("body").on("mouseenter", mouseenter + " a", function (e) {
+      openTooltip(e, "a");
+    });
+    $("body").on("mouseenter", mouseenter + " form", function (e) {
       openTooltip(e, "form");
       torpedo.progUrl = true;
     });
+    // adding corresponding icon for working or error
     if ($("body").find(mouseenter)[0]) {
-      chrome.runtime.sendMessage({ "name": "ok", "location": torpedo.location });
+      chrome.runtime.sendMessage({ name: "ok", location: torpedo.location });
+    } else {
+      // set icon to ERROR
+      chrome.runtime.sendMessage({ name: "error", location: torpedo.location });
     }
-    else {// set icon to ERROR
-      chrome.runtime.sendMessage({ "name": "error", "location": torpedo.location });
-    }
-  }
-  else {
+  } else {
     $("body").on("mouseenter", "a", function (e) {
       var location = e.view.location.href;
-      if (location.indexOf(iframe) > -1) { openTooltip(e, "a"); }
+      if (location.indexOf(iframe) > -1) {
+        openTooltip(e, "a");
+      }
     });
     // open tooltip in iframe mail panel
     if (window.location.href.indexOf(iframe) > -1) {
-      chrome.runtime.sendMessage({ "name": "ok", "location": torpedo.location });
+      chrome.runtime.sendMessage({ name: "ok", location: torpedo.location });
     } else {
-      chrome.runtime.sendMessage({ "name": "error", "location": torpedo.location });
+      chrome.runtime.sendMessage({ name: "error", location: torpedo.location });
     }
   }
 });
@@ -81,13 +108,19 @@ function openTooltip(e, type) {
   torpedo.hasTooltip = false;
 
   if (type == "a") {
-    if (torpedo.target.href.indexOf("mailto:") > -1 || torpedo.opened || $(torpedo.target).hasClass("qtip-close")) return;
+    if (
+      torpedo.target.href.indexOf("mailto:") > -1 ||
+      torpedo.opened ||
+      $(torpedo.target).hasClass("qtip-close")
+    )
+      return;
     if (torpedo.target.href == "") {
       try {
         $(torpedo.target).attr("href", e.relatedTarget.href);
-      } catch (e) { }
+      } catch (err) {}
     }
   }
+
   torpedo.state = "unknown";
   chrome.storage.sync.get(null, function (r) {
     try {
@@ -101,13 +134,12 @@ function openTooltip(e, type) {
 
       setNewUrl(url);
 
+      // checks for programmed tooltip (if there, then assigned to tooltipURL)
       var tooltipURL = hasTooltip(torpedo.target);
- 
+
       if (tooltipURL != "<HAS_NO_TOOLTIP>") {
         torpedo.hasTooltip = isTooltipMismatch(tooltipURL, torpedo.url);
       }
-
-
 
       // if we are on a site that automatically redirects over its own servers
       if (r.referrerSites.indexOf(torpedo.location) > -1) {
@@ -116,60 +148,79 @@ function openTooltip(e, type) {
         torpedo.target.href = torpedo.url;
       }
 
+      $(torpedo.target).on("mouseenter", function (event) {
+        if (torpedo.timerInterval != null) {
+          clearInterval(torpedo.timerInterval);
+        }
+      });
+
       // open the qTip
       $(torpedo.target).qtip({
         id: "torpedo",
         content: {
           text: tooltipText(url),
-          button: true
+          button: true,
         },
         show: {
           event: e.type,
           ready: true,
-          solo: true
+          solo: true,
+          delay: 20,
         },
         hide: {
           fixed: true,
           event: "mouseleave",
-          delay: 600
+          delay: 200,
         },
         position: {
-          at: 'center bottom',
-          my: 'top left',
+          my: "top left",
+          at: "bottom left",
           viewport: true,
-          target: 'mouse',
+          target: $(torpedo.target),
           adjust: {
-            y: 10,
+            y: 0,
+            x: 0,
             mouse: false,
-            method: 'flip flip'
-          }
+            method: "flip flip",
+            resize: true,
+          },
         },
         style: {
           tip: false,
-          classes: 'torpedoTooltip'
+          classes: "torpedoTooltip",
         },
         events: {
           render: function (event, api) {
             torpedo.api = api;
             torpedo.tooltip = api.elements.content;
 
-            $(torpedo.tooltip).on("mouseover", function () { torpedo.opened = true; });
-            $(torpedo.tooltip).on("mouseleave", function () { torpedo.opened = false; });
+            $(torpedo.tooltip).on("mouseenter", function () {
+              torpedo.opened = true;
+            });
+
+            $(torpedo.tooltip).on("mouseleave", function () {
+              torpedo.opened = false;
+            });
 
             // set the icon to "OK", because TORPEDO works on this page
-            chrome.runtime.sendMessage({ "name": "ok" });
+            chrome.runtime.sendMessage({ name: "ok" });
 
             // init the tooltip elements and texts
             initTooltip();
             updateTooltip();
-          }
-        }
+          },
+          hide: function () {
+            if (torpedo.timerInterval != null) {
+              clearInterval(torpedo.timerInterval);
+            }
+          },
+        },
       });
     } catch (err) {
       console.log(torpedo.target.href);
       console.log(err);
       // set the icon to "ERROR" because TORPEDO doesn't work on this page
-      chrome.runtime.sendMessage({ "name": "error" });
+      chrome.runtime.sendMessage({ name: "error" });
     }
   });
 }

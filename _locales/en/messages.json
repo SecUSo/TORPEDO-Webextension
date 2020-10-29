@@ -60,6 +60,11 @@
     "description": "Button text for deducing the target URL if the URL is a redirect"
   },
 
+  "LinkAktivierung":{
+    "message": "activate link",
+    "description": "Button text for activating a link"
+  },
+
 
   "T1Ueberschrift": {
     "message": "Deposited URL (also called web address):",
@@ -182,6 +187,56 @@
   },
 
   "T33LinkDeaktivierung": {
+    "message": "TORPEDO has disabled the link so you can check the domain carefully.",
+    "description": "Text for Deactivation of the link"
+  },
+
+    "T4Ueberschrift": {
+    "message": "Referred URL (also known as web address):",
+    "description": "Header for tooltip"
+  },
+
+  "T4Erklaerung": {
+    "message": "This URL has already been associated with phishing about Corona or Covid-19. TORPEDO estimates the risk as high. However, if you believe that this is a legitimate URL, you can click on 'Activate link' below. You should then check the URL again carefully.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T4Infotext": {
+    "message": "The Cyber Threat Coalition aims to collect a list of fraudulent URLs that have appeared in connection with phishing and Corona or Covid-19 in a blacklist. This is because these URLs are currently appearing in a large number and in rapidly changing variants. We want to contribute to this and temporarily integrate a blacklist into TORPEDO so that you are protected against these URLs.",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T4GluehbirneText": {
+    "message": "",
+    "description": "Advice for the user"
+  },
+
+  "T4LinkDeaktivierung": {
+    "message": "TORPEDO has deactivated the link so that you can take your time to consider whether you want to activate it.",
+    "description": "Text for Deactivation of the link"
+  },
+
+  "T4aUeberschrift": {
+    "message": "Referred URL (also known as web address):",
+    "description": "Header for tooltip"
+  },
+
+  "T4aErklaerung": {
+    "message": "You have activated this URL, although it has been associated with phishing in the past on the subject of Corona or Covid-19. Please check the domain (bold area) again very carefully.",
+    "description": "Information on the classification of this domain"
+  },
+
+  "T4aInfotext": {
+    "message": "The Cyber Threat Coalition aims to collect a list of fraudulent URLs that have appeared in connection with phishing and Corona or Covid-19 in a blacklist. This is because these URLs are currently appearing in a large number and in rapidly changing variants. We want to contribute to this and temporarily integrate a blacklist into TORPEDO so that you are protected against these URLs.",
+    "description": "More information on the evaluation of this domain"
+  },
+
+  "T4aGluehbirneText": {
+    "message": "",
+    "description": "Advice for the user"
+  },
+
+  "T4aLinkDeaktivierung": {
     "message": "TORPEDO has disabled the link so you can check the domain carefully.",
     "description": "Text for Deactivation of the link"
   },
@@ -329,6 +384,11 @@
     "description": "Seconds"
   },
 
+  "highRiskDomains":{
+    "message": "Domains which are listed as dangerous (Corona-Blacklist of the Cyber Threat Coalition is used)",
+    "description": "List of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
+  },
+
   "lowRiskDomains":{
     "message": "Domains the developer considered as 'low-risk' (green)",
     "description": "Activate timer on list of trusted domains."
@@ -337,6 +397,11 @@
   "activateTimerOnLowRisk":{
     "message": "Activate timer on domains the developer considered as 'low-risk' (green border).",
     "description": "Activate timer on list of trusted domains."
+  },
+
+  "activateHighRiskList":{
+    "message": "Activate Blacklist (Corona-Blacklist of Cyber Threat Coalition)",
+    "description": "Activate list of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
   },
 
   "activateLowRiskList":{
@@ -558,6 +623,11 @@
   "guide_settings":{
     "message": "Settings",
     "description": "Tutorial side bar: Chapter 6"
+  },
+
+  "guide_intro_blacklist":{
+    "message": "Due to recent events we have decided to make a central change to TORPEDO. Since there are currently a lot of fraudulent messages with links to Covid-19, we have integrated a blacklist. This blacklist is maintained by the Cyber Threat Coalition (https://www.cyberthreatcoalition.org). For this reason there is currently a new case. If a domain is detected from the Cyber Threat Coalition's list, clicking on the link will be completely prevented. You can unlock the link by clicking on 'Activate Link'. You will then be shown a second tooltip with our usual tips for checking domains.For domains that are recognized as part of the active blacklist, the link can currently only be accessed via the TORPEDO tooltip. Calling via the actual link is blocked.",
+    "description": "Tutorial page 0: intro blacklist"
   },
  
   "guide_welcome_intro1":{

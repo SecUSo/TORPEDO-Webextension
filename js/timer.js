@@ -1,64 +1,128 @@
-torpedo.time = 0;
+torpedo.timerInterval = null;
+
 /**
-* countdown function for the temporal deactivation of URLs
-*/
-function countdown(startTime) {
-  if (torpedo.target.classList.contains("torpedoTimerFinished")) startTime = 0;
-  if (torpedo.target.classList.contains("torpedoTimerShowing")) startTime = torpedo.time;
+ * countdown function for the temporal deactivation of URLs
+ */
 
-  var time = startTime
-  torpedo.time = time;
-  var t = torpedo.tooltip;
+function countdown(time, state) {
+  if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
 
-  $(t.find("#torpedoTimer")[0]).show();
+  var tooltip = torpedo.tooltip;
+
+  $(tooltip.find("#torpedoTimer")[0]).show();
+
   /**
-  * assert time to tooltip text
-  */
+   * assert time to tooltip text
+   */
   function showTime() {
     try {
-      t.find("#torpedoTimer")[0].remove();
-      $('<p id="torpedoTimer">' + chrome.i18n.getMessage("verbleibendeZeit", "" + time) + '</p>').appendTo(t);
-    } catch (e) { }
+      tooltip.find("#torpedoTimer")[0].remove();
+      $(
+        '<p id="torpedoTimer">' +
+          chrome.i18n.getMessage("verbleibendeZeit", "" + time) +
+          "</p>"
+      ).appendTo(tooltip);
+    } catch (e) {}
   }
 
-  // deactivate link
+  // deactivate link (on page and on tooltip)
+  const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
   $(torpedo.target).addClass("torpedoTimerShowing");
-  $(torpedo.target).unbind("click");
-  $(torpedo.target).bind("click", function (event) { event.preventDefault(); });
+  eventTypes.forEach(function (eventType) {
+    $(torpedo.target).unbind(eventType);
+  });
+  eventTypes.forEach(function (eventType) {
+    $(torpedo.target).on(eventType, function (event) {
+      event.preventDefault();
+      let mouseBtn = "unknown";
+      switch (event.button) {
+        case 0:
+          mouseBtn = "left mouse btn";
+          break;
+        case 1:
+          mouseBtn = "middle mouse btn";
+          break;
+        case 2:
+          mouseBtn = "right mouse btn";
+          break;
+        default:
+          break;
+      }
+    });
+  });
+
   try {
-    $(t.find("#torpedoURL")[0]).unbind("click");
-    $(t.find("#torpedoURL")[0]).bind("click", function (event) { event.preventDefault(); });
-  } catch (e) { }
+    $(tooltip.find("#torpedoURL")[0]).unbind("click");
+    $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
+      event.preventDefault();
+    });
+  } catch (e) {}
 
   showTime();
   if (time > 0) time--;
-  torpedo.time = time;
+
   var timerInterval = setInterval(function timer() {
     showTime();
     if (time == 0) {
       clearInterval(timerInterval);
-      $(torpedo.target).addClass("torpedoTimerFinished");
+      if (!isRedirect(torpedo.domain) && state != "T4" && state != "T4a") {
+        $(torpedo.target).addClass("torpedoTimerFinished");
+      }
       // reactivate link
-      $(torpedo.target).unbind("click");
-      $(torpedo.target).bind("click", function (event) { processClick(); });
-      try {
-        $(t.find("#torpedoURL")[0]).unbind("click");
-        $(t.find("#torpedoURL")[0]).bind("click", function (event) {
-          event.preventDefault();
-          chrome.storage.sync.get(null, function (r) {
-            if (r.privacyModeActivated) {
-              chrome.runtime.sendMessage({ name: "open", url: torpedo.oldUrl });
-            } else {
-              chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
-            }
-          });
-          processClick();
-          return false;
+      if (state != "T4") {
+        eventTypes.forEach(function (eventType) {
+          $(torpedo.target).unbind(eventType);
         });
-      } catch (e) { }
-    }
-    else {
+        eventTypes.forEach(function (eventType) {
+          $(torpedo.target).bind(eventType, function (event) {
+            processClick();
+          });
+        });
+        try {
+          $(tooltip.find("#torpedoURL")[0]).unbind("click");
+          $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
+            event.preventDefault();
+            chrome.storage.sync.get(null, function (r) {
+              if (r.privacyModeActivated) {
+                chrome.runtime.sendMessage({
+                  name: "open",
+                  url: torpedo.oldUrl,
+                });
+              } else {
+                chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
+              }
+            });
+            processClick();
+            return false;
+          });
+        } catch (e) {}
+      } else {
+        $(tooltip.find("#torpedoActivateLinkButton")[0]).prop(
+          "disabled",
+          false
+        );
+        $(tooltip.find("#torpedoActivateLinkButton")[0]).click(function () {
+          var ueberschrift = chrome.i18n.getMessage("T4aUeberschrift");
+          var erklaerung = chrome.i18n.getMessage("T4aErklaerung");
+          var gluehbirneText = chrome.i18n.getMessage("T4aGluehbirneText");
+          var linkDeaktivierung = chrome.i18n.getMessage(
+            "T4aLinkDeaktivierung"
+          );
+
+          // assign texts
+          $(tooltip.find("#torpedoWarningText")[0]).html(ueberschrift);
+          $(tooltip.find("#torpedoSecurityStatus")[0]).html(erklaerung);
+          $(tooltip.find("#torpedoMoreAdvice")[0]).html(gluehbirneText);
+          $(tooltip.find("#torpedoLinkDelay")[0]).html(linkDeaktivierung);
+
+          $(tooltip.find("#torpedoActivateLinkButton")[0]).hide();
+          countdown(r.timer, "T4a");
+        });
+      }
+    } else {
       --time;
     }
   }, 1000);
+
+  torpedo.timerInterval = timerInterval;
 }
