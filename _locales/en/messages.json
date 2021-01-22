@@ -576,17 +576,17 @@
   },
 
   "back":{
-    "message": "❮ Back",
+    "message": "Back",
     "description": "Go back (for tutorial)"
   },
 
   "next":{
-    "message": "Next ❯",
+    "message": "Next",
     "description": "Go next (for tutorial)"
   },
 
   "finish":{
-    "message": "Close tutorial ❯❯",
+    "message": "Close tutorial",
     "description": "Finish tutorial, message for Chrome"
   },
 
@@ -678,5 +678,203 @@
   "guide_settings_description3":{
     "message": "... or via ...",
     "description": "Tutorial page 3: description"
+  },
+
+
+  
+  "welcome_title":{
+    "message": "Welcome!",
+    "description": "welcome-title tutorial on page 1"
+  },
+  "introduction_txt": {
+    "message": "TORPEDO is an add-on to help users detect fraudulent emails with dangerous links (often called phishing emails). <br/>It is based on SECUSO's NoPhish concept or can also be used as a supplement to it.",
+    "description": "Short introduction in tool, tutorial for page 1 "
+  },
+  "technical_background_title":{
+    "message": "Technical Background",
+    "description": "technical-bg-title tutorial on page 1"
+  },
+  "technical_background_txt": {
+    "message": "Unfortunately, it is not technically possible at present to prevent phishing e-mails from landing in e-mail inboxes. Well-made phishing e-mails can only be recognized by the recipient if the web address behind the link is checked before clicking on it. Creating awareness for this - right down to knowing how to check web addresses - is important and clever via the measures in the NoPhish concept. At the same time, it is also clear that recipients of e-mails do not check every web address (in the status bar or the tooltip after touching the link) as closely as would be necessary to reliably recognize phishing e-mails as such. In view of the mass of e-mails, recipients simply do not have the time or the knowledge to do this.",
+    "description": "technical-bg-txt tutorial on page 1"
+  },
+  "functionality_title":{
+    "message": "Functionality of TORPEDO",
+    "description": "functionality-title tutorial on page 1"
+  },
+  "functionality_txt": {
+    "message": "This is where TORPEDO comes in. TORPEDO displays the relevant information for the check directly next to the link in a tooltip(-overlay), so that it is easier to perform the check with TORPEDO. In addition, TORPEDO distinguishes different risk levels of links and thus shows you when it is important to check the web address behind the link before clicking the link. The following risk levels are distinguished.",
+    "description": "functionality-txt tutorial on page 1"
+  },
+  
+  "functionality_explanation_title":{
+    "message": "This is how TORPEDO works",
+    "description": "functionality-explanation-title tutorial on page 2"
+  },
+  "functionality_explanation_txt_1": {
+    "message": "As soon as you hover over a link within an email, one of five dialogs will appear.",
+    "description": "functionality-explanation-txt tutorial on page 2"
+  },
+  "functionality_explanation_txt_2": {
+    "message": "Every dialog contains the ",
+    "description": "functionality-explanation-txt tutorial on page 2"
+  },
+  "domain_translation": {
+    "message": "domain",
+    "description": "Wer-Bereich Uebersetzung tutorial on page 2"
+  },
+  "functionality_explanation_txt_3": {
+    "message": ". <br/>The domain is the most important part of a URL (aka. web address) when it comes to the recognition of phishing emails.",
+    "description": "functionality-explanation-txt tutorial on page 2"
+  },
+  "functionality_explanation_txt_4": {
+    "message": "The domain is marked in <span class='fat'>bold</span> below:",
+    "description": "functionality-explanation-txt tutorial on page 2"
+  },
+  "functionality_explanation_txt_5": {
+    "message": "Within the dialog the URL would be shown with the domain ",
+    "description": "functionality-explanation-txt tutorial on page 2"
+  },
+  "functionality_explanation_txt_6": {
+    "message": " being displayed in bold.",
+    "description": "functionality-explanation-txt tutorial on page 2"
+  },
+  "functionality_explanation_txt_7": {
+    "message": "Which of the five dialogs is displayed depends on the risk level:",
+    "description": "functionality-explanation-txt tutorial on page 2"
+  },
+
+  "green_case_title": {
+    "message": "Green case",
+    "description": "Title for the first case (green) tutorial"
+  },
+  "green_case_category": {
+    "message": "<span class='green fat'>Green</span> - the risk of clicking the link <span class='green'>is rated as low</span>. The reason is that the domain is part of a list of most visited websites of all internet users in Germany.",
+    "description": "Category explanation for the first case (green) tutorial"
+  },
+  "green_case_specific_link_explanation": {
+    "message": "In the following example “<span style='color: #00A8F3;'>Click here</span>” is the link.",
+    "description": "Explains the image specifically for the green-case"
+  },
+  "blue_case_title": {
+    "message": "Blue case",
+    "description": "Title for the blue_case tutorial"
+  },
+  "blue_case_category": {
+    "message": "<span class='blue fat'>Blue</span> - the risk of clicking the link <span class='blue'>is rated as low</span>. The reason is that you either already clicked the domain twice or manually added it to the list of trusted domains.",
+    "description": "Category explanation for the blue_case tutorial"
+  },
+  "blue_case_specific_link_explanation": {
+    "message": "In the following example <span class='link-like'>https://www.paypal.com/de/home</span> is the link.",
+    "description": "Explains the image specifically for the blue-case"
+  },
+  "simple_grey_case_title": {
+    "message": "Grey case",
+    "description": "Title for the simple_grey_case tutorial"
+  },
+  "simple_grey_case_category": {
+    "message": "<span class='grey fat'>Grey</span> - the risk of clicking the link <span class='grey'>is rated as unknown</span>. In these cases, you must check the domain yourself to find out whether the link will lead to a phish-attack or not. To avoid rash clicking, the link is deactivated for <span class='fat'>three seconds</span>.",
+    "description": "Category explanation for the simple_grey_case tutorial"
+  },
+  "simple_grey_case_more_than_one": {
+    "message": "The following section contains one <span class='fat'>phishing</span> and one <span class='fat'>legitimate</span> example.",
+    "description": "Note, that there is more than one example."
+  },
+  "simple_grey_case_phish_context": {
+    "message": "Imagine you open an email. The design of the email and the sender make it look like clicking the link will open a New York Times website on the subject \"Covid-19\".",
+    "description": "Context which will draw the scenario simulated by the screenshot."
+  },
+  "simple_grey_case_phish_specific_link_explanation": {
+    "message": "In this example “<span style='color:#00A8F3;'>Here</span>” is the phishing link since you are not forwarded to the New York Times website. ",
+    "description": "Explains the image specifically for the simple_grey-case"
+  },
+  "simple_grey_case_no_phish_context": {
+    "message": "Imagine you open an email. The design and the sender suggest that clicking the link would lead to a website of YouTube.",
+    "description": "Context which will draw the scenario simulated by the screenshot."
+  },
+  "simple_grey_case_no_phish_specific_link_explanation": {
+    "message": "In this case <span class='link-like'>https://www.youtube.com/feed/subscriptions</span> is the <span class='fat'>legitimate</span> link because the domain belongs to YouTube.",
+    "description": "Explains the image specifically for the simple_grey-case"
+  },
+  "warning_grey_case_title": {
+    "message": "Grey case with warning symbol",
+    "description": "Title for the warning_grey_case tutorial"
+  },
+  "warning_grey_case_category": {
+    "message": "<span class='grey fat'>Grey</span> - the risk of clicking this link <span class='grey'>is rated as unknown</span>. The warning symbol is displayed since at least one indicator that is often used in phishing attacks was found. However, it does not necessarily mean that it is a phishing URL. Legitimate emails may contain these indicators as well. You must check yourself whether the link leads to a website that might perform a phishing attack or not. As in case 3 clicking is deactivated for <span class='fat'>3 seconds</span> to avoid rash clicking of the link.",
+    "description": "Category explanation for the warning_grey_case tutorial"
+  },
+  "warning_grey_case_more_than_one": {
+    "message": "The following examples will show one <span class='fat'>phishing</span> and one <span class='fat'>legitimate</span> link with a warning symbol due to an identified indicator. The indicators are that the link text does not match the domain of the link.",
+    "description": "Note, that there is more than one example."
+  },
+  "warning_grey_case_phish_context": {
+    "message": "Imagine you open an email. The email looks like it came from amazon and contains links to the website of amazon.",
+    "description": "Context which will draw the scenario simulated by the screenshot."
+  },
+  "warning_grey_case_phish_specific_link_explanation": {
+    "message": "In this example <span class='link-like'>www.amazon.com</span> is the <span class='fat'>phishing</span> link. The dialogue shows that the link does not lead to the domain amazon.com. The warning symbol appears because the domain of the link text does not match the domain of the legitimate deposited link.",
+    "description": "Explains the image specifically for the warning_grey-case"
+  },
+  "warning_grey_case_no_phish_context": {
+    "message": "Imagine you open an email. The design and the sender suggest that clicking the link would lead to a website of YouTube.",
+    "description": "Context which will draw the scenario simulated by the screenshot."
+  },
+  "warning_grey_case_no_phish_specific_link_explanation": {
+    "message": "In this example <span class='link-like'>www.youtubee.com</span> is a <span class='fat'>legitimate</span> link. The warning symbol is displayed since the link text does not match the domain of the deposited link: the link text contains a typo. YouTube is spelled with two “e” instead of just one. Typos happen in emails. Since the domain of the deposited link is from YouTube this is <span class='italic'>not</span> a phishing attack.",
+    "description": "Explains the image specifically for the warning_grey-case"
+  },
+  "red_case_title": {
+    "message": "Red Case",
+    "description": "Title for the red_case tutorial"
+  },
+  "red_case_category": {
+    "message": "<span class='red fat'>Red</span> – the risk of clicking the link <span class='red'>is rated as high</span>. This website is listed as a phishing website by the Cyber Threat Coalition. This means that the website has been associated with phishing in the context of Covid-19. The blacklist is administered by the Cyber Threat Coalition (https://www.cyberthreatcoalition.org). To avoid unintentional security breaches/problems, clicking the link is not possible. You may activate the link manually by clicking the button “activate link”.",
+    "description": "Category explanation for the red_case tutorial"
+  },
+  "red_case_context": {
+    "message": "Imagine you open an email. The email looks like it came from amazon and contains links to the website of amazon.",
+    "description": "Context which will draw the scenario simulated by the screenshot."
+  },
+  "red_case_specific_link_explanation": {
+    "message": "In this example ”<span style='color:#00A8F3;'>Click here</span>“ is a phishing link. The red case is active because this domain has been associated with phishing in the past and is therefore known to Google.",
+    "description": "Explains the image specifically for the red-case"
+  },
+  "example": {
+    "message": "Example",
+    "description": "translation of example for dynamic use"
+  },
+  "special_cases_title": {
+    "message": "Special cases",
+    "description": "translations for tut on configurations page"
+  },
+  "special_cases_txt": {
+    "message": "TORPEDO supports a number of special cases, such as short URLs and redirects. To ensure that these are configured according to your needs, we recommend that you take a look at the settings. The settings can be opened by right clicking on the tooltip.",
+    "description": "translations for tut on configurations page"
+  },
+  "settings_title": {
+    "message": "Settings",
+    "description": "translations for tut on configurations page"
+  },
+  "settings_subtitle": {
+    "message": "In the settings there are 4 different options.",
+    "description": "translations for tut on configurations page"
+  },
+  "settings_option_0": {
+    "message": "\"Timer\" lets you change the settings of the timer e.g., you can increase or decrease the time or deactivate the timer completely. You can also activate and deactivate the different modes. <br/>If the privacy mode is activated, links are always opened via the resolved domain and not via the origin link. Also, short URLs are not resolved directly, but only after your confirmation. <br/>If Security Mode is enabled, you will see the gray case with a warning icon only after the second referrer. Otherwise, this already happens with the first one.",
+    "description": "translations for tut on configurations page"
+  },
+  "settings_option_1": {
+    "message": "\"Domains\" lets you deactivate both the integrated blacklist and the list of most visited websites for the green case. You can also add your own cases to the Blue Case list here.",
+    "description": "translations for tut on configurations page"
+  },
+  "settings_option_2": {
+    "message": "\"Referrer\" lets you view the currently integrated referrers and add your own.",
+    "description": "translations for tut on configurations page"
+  },
+  "settings_option_3": {
+    "message": "\"Short URL\" lets you view the currently integrated short URLs and add your own.",
+    "description": "translations for tut on configurations page"
   }
+
 }
