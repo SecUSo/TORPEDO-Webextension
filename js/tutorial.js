@@ -1,120 +1,367 @@
-var slideIndex = 1;
-var lang = "en";
-var prev = 3;
-var pages = {
-  1: ["guide-page-blacklist", "basic"],
-  2: ["guide-page-welcome", "basic"],
-  3: ["guide-page-why", "basic"],
-  4: ["guide_page_settings", "tooltips"],
+let activePageContent = 0;
+let lang = "en";
+let overviewVisible = true;
+/* 
+  FOR EASY PLUG AND PLAY OF PAGES:
+  If you want to add more than one page of a specific type
+  than add "_case" and a specific term behind it (see below).
+  This will allow to have different pictures within one general 
+  category of cases. F.e. simple-grey_case is one category with the
+  sub-pages _no-phish and _phish.
+  Naming-convention for all before green_case is
+   same name as css class "-" in css, "_" in js
+*/
+const pages = {
+  0: "welcome",
+  1: "explanation",
+  2: "green_case",
+  3: "blue_case",
+  4: "simple-grey_case_phish",
+  5: "simple-grey_case_no-phish",
+  6: "warning-grey_case_phish",
+  7: "warning-grey_case_no-phish",
+  8: "red_case",
+  9: "configurations",
 };
+const lastPage = Object.keys(pages).reduce((a, b) => {
+  return a > b ? a : b;
+});
+let overviewCircles;
 
+// TESTING STUFF
+nrInCategory("warning-grey_case_no-phish", pages);
+
+// STARTING WHEN CONTENT IS LOADED ON PAGE
 $(document).ready(function () {
+  // get language details
   lang = chrome.i18n.getUILanguage().substr(0, 2);
 
-  $("#prev").html(chrome.i18n.getMessage("back"));
-  $("#next").html(chrome.i18n.getMessage("next"));
-  $("#finish").html(chrome.i18n.getMessage("finish"));
+  overviewCircles = document.querySelectorAll(".overview-case");
 
+  // add eventlisteners
+  // to overview for interactive clicking (since css and JS names differ there might be some adaptations)
+  overviewCircles.forEach((circle) => {
+    circle.addEventListener("click", (e) => {
+      activePageContent = Object.entries(pages)
+        .sort((a, b) => {
+          a[0] - b[0];
+        })
+        .find((page) => {
+          return circle.classList.contains(page[1].replace(/_/g, "-"))
+            ? page
+            : null;
+        })[0];
+      show();
+    });
+  });
+  // to nav-buttons
   $("#prev").on("click", function (e) {
-    if (slideIndex > 1) show(--slideIndex);
+    if (activePageContent > 0) show(--activePageContent);
   });
   $("#next").on("click", function (e) {
-    if (slideIndex < 4) show(++slideIndex);
+    if (activePageContent < lastPage) show(++activePageContent);
   });
   $("#finish").on("click", function (e) {
-    chrome.runtime.sendMessage({ name: "close" });
+    e.target.classList.contains("disabled")
+      ? false
+      : chrome.runtime.sendMessage({ name: "close" });
   });
 
   init();
-  show(slideIndex);
+  // show(activePageContent);
 });
 
-function show(n) {
-  $("#prev").prop("disabled", false);
-  $("#next").prop("disabled", false);
-  $("#finish").prop("disabled", true);
-
-  var node = document.getElementById(pages[n][0]);
-  var section = document.getElementById("section-" + pages[n][1] + "-item");
-  node.classList.add("active");
-  //section.classList.add("active");
-  document.getElementById(pages[prev][0]).classList.remove("active");
-  //if(pages[prev][1] != pages[n][1]) document.getElementById("section-" + pages[prev][1] + "-item").classList.remove("active");
-  prev = n;
-
-  if (n == 4) {
-    $("#next").prop("disabled", true);
-    $("#finish").prop("disabled", false);
-  }
-  if (n == 1) $("#prev").prop("disabled", true);
+function show() {
+  console.log(`We are currently on page: ${activePageContent}`);
+  activateCurrentPageElements();
+  showPageContent();
 }
 
-function init() {
-  // images
-  document.getElementById(
-    "guide_page_settings_1-img"
-  ).src = chrome.extension.getURL(
-    "img/open_settings_rightclick_" + lang + ".png"
-  );
-  document.getElementById(
-    "guide_page_settings_2-img"
-  ).src = chrome.extension.getURL("img/open_settings_1_" + lang + ".png");
-  document.getElementById(
-    "guide_page_settings_3-img"
-  ).src = chrome.extension.getURL("img/open_settings_2_" + lang + ".png");
+function activateCurrentPageElements() {
+  // possibility to adapt the visibility of overview-bubbles
+  if (overviewVisible) {
+    document.querySelector(".overview").style.display = "flex";
+    // remove selected from all and then assign selected to the active circle
+    overviewCircles.forEach((circle) => {
+      circle.classList.remove("selected");
+      circle.classList.contains(pages[activePageContent].replace(/_/g, "-"))
+        ? circle.classList.add("selected")
+        : null;
+    });
+  } else {
+    document.querySelector(".overview").style.display = "none";
+  }
 
-  // side bar
-  /*$("#section-basic-item").html(chrome.i18n.getMessage("guide_basic"));
-  $("#section-tooltips-item").html(chrome.i18n.getMessage("guide_tooltips"));
-  $("#section-settings-item").html(chrome.i18n.getMessage("guide_settings"));*/
+  // logic for buttons (which are active/deactivated)
+  activePageContent == Object.keys(pages).length - 1
+    ? document.querySelector("#finish").classList.remove("disabled")
+    : document.querySelector("#finish").classList.add("disabled");
+}
+
+function showPageContent() {
+  // not displaying anything
+  $(".tut-content > div").addClass("off");
+
+  pages[activePageContent].includes("_case")
+    ? // if it's an example
+      prepExample()
+    : // if it's a different page
+      prepNoExamplePage();
+}
+/**
+ * Initialize the entire tutorial with correct lang
+ */
+function init() {
+  // see if we want overview or not
+  activateCurrentPageElements();
+  // at beginning for language´
+  // page 0
+  $("#welcome-title").html(getMsg("welcome_title"));
+  $("#introduction-txt").html(getMsg("introduction_txt"));
+  $("#technical-bg-title").html(getMsg("technical_background_title"));
+  $("#technical-bg-txt").html(getMsg("technical_background_txt"));
+  $("#functionality-title").html(getMsg("functionality_title"));
+  $("#functionality-txt").html(getMsg("functionality_txt"));
+  $(".welcome").removeClass("off");
 
   // page 1
-  $("#torpedo-guide-intro-blacklist").html(
-    chrome.i18n.getMessage("guide_intro_blacklist")
+  $("#functionality-explanation-title").text(
+    getMsg("functionality_explanation_title")
+  );
+  for (let i = 1; i < 8; i++) {
+    $(`#functionality-explanation-txt-${i}`).html(
+      getMsg(`functionality_explanation_txt_${i}`)
+    );
+  }
+  $(`#domain-explain`).text(getMsg(`domain_translation`));
+  $("#green-case-showcase-title").text(getMsg("green_case_title"));
+  $("#blue-case-showcase-title").text(getMsg("blue_case_title"));
+  $("#simple-grey-case-showcase-title").text(getMsg("simple_grey_case_title"));
+  $("#warning-grey-case-showcase-title").text(
+    getMsg("warning_grey_case_title")
+  );
+  $("#red-case-showcase-title").text(getMsg("red_case_title"));
+  $("#green-case-showcase-img").attr(
+    "src",
+    `/img/examples/${lang}/green_case_${lang}.svg`
+  );
+  $("#blue-case-showcase-img").attr(
+    "src",
+    `/img/examples/${lang}/blue_case_${lang}.svg`
+  );
+  $("#simple-grey-case-showcase-img").attr(
+    "src",
+    `/img/examples/${lang}/simple-grey_case_no-phish_${lang}.svg`
+  );
+  $("#warning-grey-case-showcase-img").attr(
+    "src",
+    `/img/examples/${lang}/warning-grey_case_no-phish_${lang}.svg`
+  );
+  $("#red-case-showcase-img").attr(
+    "src",
+    `/img/examples/${lang}/red_case_${lang}.svg`
+  );
+  // making examples clickable by binding them to pages depending on first word of css selector
+  let showcases = Array.from(document.querySelectorAll(".show-case-card.card"));
+  showcases.forEach((showcase) => {
+    showcase.addEventListener("click", (e) => {
+      let keyword = showcase.classList[0].split("-")[0];
+      activePageContent = findFirstByIndex(pages, keyword);
+      show();
+    });
+  });
+
+  // page configurations
+  $("#contextmenu-img").attr(
+    "src",
+    `/img/examples/${lang}/simple-grey_case_contextmenu_${lang}.svg`
+  );
+  $("#special-cases-title").text(getMsg("special_cases_title"));
+  $("#special-cases-txt").text(getMsg("special_cases_txt"));
+
+  $("#settings-title").text(getMsg("settings_title"));
+  $("#settings-subtitle").text(getMsg("settings_subtitle"));
+  $("#settings-img").attr("src", `/img/examples/${lang}/settings_${lang}.png`);
+  Array.from(document.querySelectorAll(".settings-option")).forEach(
+    (option, index) => {
+      $(`#settings-option-${index + 1}`).html(
+        getMsg(`settings_option_${index}`)
+      );
+    }
+  );
+}
+
+// HELPER FUNCTIONS
+
+// ANALYZING PAGES
+/**
+ *
+ * @param {*} object object containing all pages
+ *
+ *  reads out all the names of pages and concatenating those to selector to
+ *  easily display none all pages and activate the appropriate one.
+ */
+function readOutCSSClassesConcatenatedNotExamples(object) {
+  let results = Object.values(object).filter((entry) => {
+    return !entry.match(/_case/g) ? entry : null;
+  });
+  return results;
+}
+/**
+ *
+ * @param {*} obj object to go through
+ * @param {*} firstExampleValue RegEx to look for, if none is specified first value containing the RegEx "_case" is chosen
+ *
+ *  @returns first match containing firstExampleValue, if none matches returns null
+ */
+function findFirstByIndex(obj, firstExampleValue = null) {
+  let result = firstExampleValue
+    ? Object.entries(obj)
+        .sort((a, b) => a[0] - b[0])
+        .filter((entry) => entry[1].match(firstExampleValue))
+    : Object.entries(obj)
+        .sort((a, b) => a[0] - b[0])
+        .filter((entry) => entry[1].match(/_case/g));
+  return result.length ? result[0][0] : null;
+}
+/**
+ *
+ * @param {*} obj object to go through
+ * @param {*} firstExampleValue RegEx to look for, if none is specified first value containing the RegEx "_case" is used
+ *
+ *  @returns first match containing lastExampleValue, if none matches returns null
+ */
+function findLastByIndex(obj, lastExampleValue = null) {
+  let result = lastExampleValue
+    ? Object.entries(obj)
+        .sort((b, a) => a[0] - b[0])
+        .filter((entry) => entry[1].match(lastExampleValue))
+    : Object.entries(obj)
+        .sort((b, a) => a[0] - b[0])
+        .filter((entry) => entry[1].match(/_case/g));
+  return result.length ? result[0][0] : null;
+}
+/**
+ *
+ * @param {*} string word that shall be cut off at stopper
+ * @param {*} stopper last part in word
+ */
+function wordStopper(string, stopper) {
+  return string.includes(stopper)
+    ? string.substring(0, string.indexOf(stopper)).concat(stopper)
+    : string;
+}
+/**
+ *
+ * @param {*} string word where the last part shall be "_case"
+ *
+ *  special case of wordStopper, stopper is "_case"
+ */
+function caseStopper(string) {
+  return wordStopper(string, "_case");
+}
+
+/**
+ *
+ * @param {*} object object/array from which to id the key/index
+ * @param {*} value value of the object of which the key ought to be found
+ * @param {*} first determines whether to output first or last instance of matches. Defaults to first.
+ */
+function keyByValue(object, value, first = true) {
+  if (first) return Object.keys(object).find((key) => object[key] === value);
+  else {
+    let result = Object.keys(object)
+      .filter((key) => object[key] === value)
+      .sort((b, a) => a[0] - b[0])[0];
+    return result;
+  }
+}
+/**
+ *
+ * @param {*} category category that is searched for (naming convention, _case as indicator of a category)
+ * @param {*} obj obj to go through
+ */
+function findAmountOfExamplesOfCategory(category, obj) {
+  let amount = 0;
+  amount = Object.values(obj).filter((page) => {
+    return page.includes(caseStopper(category));
+  }).length;
+  return amount;
+}
+/**
+ *
+ * @param {*} category page to be analyzed
+ * @param {*} obj object to go through
+ *
+ *  Because objects do not grant order, the index has to be analyzed to tell which nr it takes
+ */
+function nrInCategory(category, obj) {
+  let sortedCats = Object.entries(obj).filter((page) => {
+    return page[1].includes(caseStopper(category));
+  });
+  let nrOfCat = 0;
+  for (el of sortedCats) keyByValue(pages, category) > el[0] ? nrOfCat++ : null;
+  return nrOfCat;
+}
+
+// PAGE PREPARATION
+/**
+ *
+ * @param {*} msg msg to be caught in ling
+ *
+ *  This function is shorter but works like chrome.i18n.getMessage(msg);
+ */
+function getMsg(msg) {
+  return chrome.i18n.getMessage(msg.replace(/-/g, "_"));
+}
+
+function prepExample() {
+  // showing image
+  $(".svg-in-img").attr(
+    "src",
+    `./img/examples/${lang}/${pages[activePageContent]}_${lang}.svg`
   );
 
-  // page 2
-  $("#torpedo-guide-basic-welcome-title").html(
-    chrome.i18n.getMessage("guide_welcome_title")
+  // filling card
+  // starting with content each example has
+  $("#example-title").html(
+    getMsg(`${caseStopper(pages[activePageContent])}_title`)
   );
-  $("#torpedo-guide-basic-welcome-intro1").html(
-    chrome.i18n.getMessage("guide_welcome_intro1")
+  $("#category-explanation").html(
+    getMsg(`${caseStopper(pages[activePageContent])}_category`)
   );
-  $("#torpedo-guide-basic-welcome-intro2").html(
-    chrome.i18n.getMessage("guide_welcome_intro2")
+  $("#explanation-of-specific-link").html(
+    getMsg(`${pages[activePageContent]}_specific_link_explanation`)
   );
+  // THIS SECTION IS ONLY NECESSARY IF A CATEGORY HAS ADDITIONAL INFO OR MORE THAN ONE CASE
+  let amountActiveCat = findAmountOfExamplesOfCategory(
+    pages[activePageContent],
+    pages
+  );
+  let context = getMsg(`${pages[activePageContent]}_context`);
+  context
+    ? ($("#example-context").html(
+        `<span class="underlined">${getMsg("example")}${
+          amountActiveCat > 1
+            ? ` ${nrInCategory(pages[activePageContent], pages) + 1}`
+            : ""
+        }:</span> ` + context
+      ),
+      $("#additional-info").removeClass("off"))
+    : $("#additional-info").addClass("off");
 
-  // page 3
-  $("#torpedo-guide-basic-why-title").html(
-    chrome.i18n.getMessage("guide_why_title")
-  );
-  $("#torpedo-guide-basic-why-description1").html(
-    chrome.i18n.getMessage("guide_why_description")
-  );
-  $("#torpedo-guide-basic-why-description2").html(
-    chrome.i18n.getMessage("guide_tooltips_case1")
-  );
-  $("#torpedo-guide-basic-why-description3").html(
-    chrome.i18n.getMessage("guide_tooltips_case2")
-  );
-  $("#torpedo-guide-basic-why-description4").html(
-    chrome.i18n.getMessage("guide_tooltips_case3")
-  );
-  $("#torpedo-guide-basic-why-usage-title").html(
-    chrome.i18n.getMessage("guide_tooltips_case4")
-  );
-  $("#torpedo-guide-basic-why-usage-list").html(
-    chrome.i18n.getMessage("guide_why_usage_list")
-  );
+  if (amountActiveCat > 1) {
+    $("#more-than-one-example").html(
+      getMsg(`${caseStopper(pages[activePageContent])}_more_than_one`)
+    );
+    $("#more-than-one").removeClass("off");
+  } else {
+    $("#more-than-one").addClass("off");
+  }
+  // making it visible again
+  $(".example-wrapper").removeClass("off");
+}
 
-  // page 4
-  $("#torpedo_guide_settings_description1").html(
-    chrome.i18n.getMessage("guide_settings_description1")
-  );
-  $("#torpedo_guide_settings_description2").html(
-    chrome.i18n.getMessage("guide_settings_description2")
-  );
-  $("#torpedo_guide_settings_description3").html(
-    chrome.i18n.getMessage("guide_settings_description3")
-  );
+function prepNoExamplePage() {
+  $(`.${pages[activePageContent].replace(/_/g, "-")}`).removeClass("off");
 }
