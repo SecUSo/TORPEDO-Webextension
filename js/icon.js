@@ -1,5 +1,5 @@
 document.addEventListener("click", (e) => {
-  switch($(e.target).attr('id')){
+  switch ($(e.target).attr("id")) {
     case "torpedoPage":
       chrome.tabs.create({ url: "https://secuso.aifb.kit.edu/TORPEDO.php" });
       break;
@@ -7,7 +7,7 @@ document.addEventListener("click", (e) => {
       chrome.runtime.openOptionsPage();
       break;
     case "error":
-      if(e.target.classList == "error"){
+      if (e.target.classList == "error") {
         chrome.extension.getBackgroundPage().sendEmail();
       }
       break;
@@ -15,17 +15,18 @@ document.addEventListener("click", (e) => {
 });
 
 function init() {
-  document.getElementById("torpedoPage").childNodes[0].nodeValue = chrome.i18n.getMessage("extensionName");
-  document.getElementById("options").childNodes[0].nodeValue = chrome.i18n.getMessage("options");
-  var loc = chrome.extension.getBackgroundPage().getStatus();
-  if(loc.works){
-    document.getElementById("error").setAttribute("class","working");
-    document.getElementById("error").childNodes[0].nodeValue = chrome.i18n.getMessage("OK");
-  }
-  else{
-    document.getElementById("error").setAttribute("class","error");
-    document.getElementById("error").childNodes[0].nodeValue = chrome.i18n.getMessage("error");
+  console.log("loading-icon.js");
+  console.log($("#torpedoPage"));
+  $("#torpedoPage").text(chrome.i18n.getMessage("extensionName"));
+  $("#options").text(chrome.i18n.getMessage("options"));
+  let loc = chrome.extension.getBackgroundPage().getStatus();
+  if (loc.works) {
+    $("#error").attr("class", "working");
+    $("#error").text(chrome.i18n.getMessage("OK"));
+  } else {
+    $("#error").attr("class", "error");
+    $("#error").text(chrome.i18n.getMessage("error"));
   }
 }
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener("DOMContentLoaded", init);
