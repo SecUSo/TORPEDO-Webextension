@@ -24,7 +24,7 @@ function getSecurityStatus(storage, storage_local) {
     try {
       const href = new URL(referrerURL);
       setNewUrl(href);
-    } catch (e) {}
+    } catch (e) { }
 
     referrerURL = matchReferrer(torpedo.url);
     torpedo.countRedirect++;
@@ -95,34 +95,51 @@ function isRedirect(url) {
   return false;
 }
 
-function isMismatch(url) {
-  try {
-    const uri = new URL(torpedo.target.innerText.replace(" ", ""));
-    var linkTextDomain = extractDomain(uri.hostname);
-    if (linkTextDomain != torpedo.oldDomain && linkTextDomain != url) {
+function isURLwithoutProtocol(string) {
+  var isURLorDomainRegEx = /^(https?:\/\/)|^(www.)/;
+  var matchesURLorDomain = string.match(isURLorDomainRegEx);
+
+  if (matchesURLorDomain.length > 0) {
+    if (matchesURLorDomain[0] == "www.") {
       return true;
     }
-  } catch (e) {}
+  }
+  return false;
+}
+
+function isMismatch(domain) {
+  try {
+    var displayedLinkText = torpedo.target.innerText;
+    if (isURLwithoutProtocol(displayedLinkText)) {
+      displayedLinkText = "http://" + displayedLinkText;
+    }
+
+    const uri = new URL(displayedLinkText);
+    var displayedLinkTextDom = extractDomain(uri.hostname);
+
+    if (displayedLinkTextDom != torpedo.oldDomain && displayedLinkTextDom != domain) {
+      return true;
+    }
+  } catch (e) {
+    return false;
+  }
   return false;
 }
 
 function isTooltipMismatch(tooltipURL, hrefURL) {
-  if (
-    tooltipURL == "" ||
-    tooltipURL == undefined ||
-    hrefURL == "" ||
-    hrefURL == undefined
-  )
+  if (tooltipURL == "" || tooltipURL == undefined || hrefURL == "" || hrefURL == undefined) {
     return false;
-  if (
-    !tooltipURL.startsWith("https") &&
-    !tooltipURL.startsWith("http") &&
-    !tooltipURL.startsWith("www")
-  )
+  }
+  try {
+    if (isURLwithoutProtocol(tooltipURL)) {
+      tooltipURL = "http://" + tooltipURL;
+    }
+    var hrefDomain = extractDomain(hrefURL);
+    var tooltipDomain = extractDomain(tooltipURL);
+    return tooltipDomain != hrefDomain;
+  } catch (e) {
     return false;
-  var hrefDomain = extractDomain(hrefURL);
-  var tooltipDomain = extractDomain(tooltipURL);
-  return tooltipDomain != hrefDomain;
+  }
 }
 
 // Method for checking whether domain is part of blacklist

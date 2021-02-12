@@ -13,9 +13,9 @@
     "message": "Verbleibende Zeit: $TIME$ Sekunde(n).",
     "description": "Remaining time until link is activated.",
     "placeholders": {
-      "time" : {
-        "content" : "$1",
-        "example" : "3"
+      "time": {
+        "content": "$1",
+        "example": "3"
       }
     }
   },
@@ -49,30 +49,29 @@
     "message": "Mehr Informationen zu dieser Einstufung",
     "description": "More information for the evaluation of this domain"
   },
-  
+
   "mehrInfoGluehbirne": {
     "message": "Mehr Informationen, wie Sie die Domain prüfen können",
     "description": "More information on how to check the URL"
   },
 
-  "ButtonWeiterleitung":{
+  "ButtonWeiterleitung": {
     "message": "Beim Kurz-URL Dienst hinterlegte URL ermitteln",
     "description": "Button text for deducing the target URL if the URL is a redirect"
   },
 
-  "LinkAktivierung":{
+  "LinkAktivierung": {
     "message": "Link aktivieren",
     "description": "Button text for activating a link"
   },
 
- 
   "T1Ueberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
     "description": "Header for tooltip"
   },
 
   "T1Erklaerung": {
-    "message": "Das Risiko für das Klicken auf diesen Link wird wegen der Vertrauenswürdigkeit der Domain (fett hervorgehobener Bereich) der URL von TORPEDO als gering eingestuft.",
+    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
 
@@ -97,7 +96,7 @@
   },
 
   "T2Erklaerung": {
-    "message": "Das Risiko für das Klicken auf diesen Link wird wegen Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain (fett hervorgehobener Bereich) der URL als gering eingestuft.",
+    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
 
@@ -122,7 +121,7 @@
   },
 
   "T31Erklaerung": {
-    "message": "Das Risiko für das Klicken auf diesen Link kann von TORPEDO nicht eingestuft werden. Sie müssen hier das Risiko selbst einstufen, in dem Sie die Domain (fett hervorgehobener Bereich) der URL genau prüfen.",
+    "message": "<div class='torpedoHighlight'>Unbekanntes Risiko:</div> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>).",
     "description": "Information on the classification of this domain"
   },
 
@@ -132,22 +131,22 @@
   },
 
   "T31GluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain sorgfältig.</div> Passt die Domain (und nicht andere Teile der URL) zum Inhalt der Nachricht? Ist der Name der Domain richtig geschrieben? Wenn Sie dies nicht eindeutig beurteilen können, sollten Sie weitere Informationen einholen. Wenn die Domain nicht vertrauenswürdig ist, löschen Sie diese E-Mail und/oder informieren den Support.",
+    "message": "",
     "description": "Advice for the user"
   },
 
   "T31LinkDeaktivierung": {
-    "message": "TORPEDO hat den Link deaktiviert, damit Sie die Domain in Ruhe prüfen.",
+    "message": "Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.",
     "description": "Text for Deactivation of the link"
   },
-  
+
   "T32Ueberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
     "description": "Header for tooltip"
   },
 
   "T32Erklaerung": {
-    "message": "Das Risiko für das Klicken auf diesen Link kann von TORPEDO nicht final eingestuft werden. <div class='torpedoHighlight'>Es wurde aber mindestens ein Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen.</div> Sie müssen hier das Risiko selbst einstufen, in dem Sie die Domain (fett hervorgehobener Bereich) der URL besonders genau prüfen.",
+    "message": "<div class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</div> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) prüfen.",
     "description": "Information on the classification of this domain"
   },
 
@@ -157,22 +156,22 @@
   },
 
   "T32GluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain besonders sorgfältig.</div> Passt die Domain (und nicht andere Teile der URL) zum Inhalt der Nachricht? Ist der Name der Domain richtig geschrieben? Wenn Sie dies nicht eindeutig beurteilen können, sollten Sie weitere Informationen einholen. Wenn die Domain nicht vertrauenswürdig ist, löschen Sie diese E-Mail und/oder informieren den Support.",
+    "message": "",
     "description": "Advice for the user"
   },
 
   "T32LinkDeaktivierung": {
-    "message": "TORPEDO hat den Link deaktiviert, damit Sie die Domain in Ruhe prüfen.",
+    "message": "Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.",
     "description": "Text for Deactivation of the link"
   },
-  
+
   "T33Ueberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
     "description": "Header for tooltip"
   },
 
   "T33Erklaerung": {
-    "message": "Das Risiko für das Klicken auf diesen Link kann von TORPEDO nicht final eingestuft werden. <div class='torpedoHighlight'>Es wurde aber mindestens ein Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen.</div> Sie müssen hier das Risiko selbst einstufen, in dem Sie die Domain (fett hervorgehobener Bereich) der URL besonders genau prüfen.",
+    "message": "<div class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</div> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein gravierender Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) prüfen.",
     "description": "Information on the classification of this domain"
   },
 
@@ -182,12 +181,12 @@
   },
 
   "T33GluehbirneText": {
-    "message": "<div class='torpedoHighlight'>Überprüfen Sie die Domain besonders sorgfältig.</div> Passt die Domain (und nicht andere Teile der URL) zum Inhalt der Nachricht? Ist der Name der Domain richtig geschrieben? Wenn Sie dies nicht eindeutig beurteilen können, sollten Sie weitere Informationen einholen. Wenn die Domain nicht vertrauenswürdig ist, löschen Sie diese E-Mail und/oder informieren den Support.",
+    "message": "",
     "description": "Advice for the user"
   },
 
   "T33LinkDeaktivierung": {
-    "message": "TORPEDO hat den Link deaktiviert, damit Sie die Domain in Ruhe prüfen.",
+    "message": "Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.",
     "description": "Text for Deactivation of the link"
   },
 
@@ -197,7 +196,7 @@
   },
 
   "T4Erklaerung": {
-    "message": "Diese URL wurde bereits mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht. TORPEDO schätzt das Risiko als <div class='torpedoHighlight'>hoch</div> ein.<br>Sollten Sie dennoch der Ansicht sein, dass es sich hier um eine legitime URL handelt, dann können Sie unten auf „Link aktivieren“ klicken. Danach sollten Sie die URL nochmal sorgfältig prüfen.",
+    "message": "<span class='torpedoHighlight'>Hohes Risiko:</span> Diese Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) wurde bereits mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht. Sollten Sie dennoch der Ansicht sein, dass es sich hier um eine legitime URL handelt, dann können Sie unten auf 'Link aktivieren' klicken. Danach sollten Sie die URL nochmal sorgfältig prüfen.",
     "description": "Information on the classification of this domain"
   },
 
@@ -212,7 +211,7 @@
   },
 
   "T4LinkDeaktivierung": {
-    "message": "TORPEDO hat den Link deaktiviert, damit Sie in Ruhe überlegen können, ob Sie ihn aktivieren wollen.",
+    "message": "Der Link wurde deaktiviert, damit Sie in Ruhe überlegen können, ob Sie ihn aktivieren wollen.",
     "description": "Text for Deactivation of the link"
   },
 
@@ -222,7 +221,7 @@
   },
 
   "T4aErklaerung": {
-    "message": "Sie haben diese URL aktiviert, obwohl Sie in der Vergangenheit mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht wurde. Bitte überprüfen Sie die Domain (<div class='torpedoHighlight'>fett</div> markierter Bereich) nochmal besonders sorgfältig.",
+    "message": "Sie haben diese URL aktiviert, obwohl Sie in der Vergangenheit mit Phishing zum Thema Corona bzw. Covid-19 in Verbindung gebracht wurde. Bitte überprüfen Sie die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) nochmal besonders sorgfältig.",
     "description": "Information on the classification of this domain"
   },
 
@@ -237,11 +236,10 @@
   },
 
   "T4aLinkDeaktivierung": {
-    "message": "TORPEDO hat den Link deaktiviert, damit Sie die Domain in Ruhe prüfen.",
+    "message": "Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.",
     "description": "Text for Deactivation of the link"
   },
 
-  
   "ShortURLUeberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
     "description": "Header for tooltip"
@@ -258,7 +256,7 @@
   },
 
   "ShortURLGluehbirneText": {
-    "message": "Beauftragen Sie TORPEDO die Ziel-URL zu ermitteln.",
+    "message": "",
     "description": "Advice for the user"
   },
 
@@ -268,12 +266,12 @@
   },
 
   "URLnachErmittelnButton2Ueberschrift": {
-    "message": "Die hinterlegte URL <div class='torpedoHighlight'> leitet Sie weiter </div> zu der folgenden URL:",
+    "message": "Hinterlegte URL (auch Webadresse genannt):",
     "description": "Header for tooltip"
   },
 
   "URLnachErmittelnButton2Erklaerung": {
-    "message": "Diese Domain (fett hervorgehobener Bereich) ist allerdings auch nicht die Ziel-URL. Sie werden von dort ebenfalls weitergeleitet. Um das Risiko der Ziel-URL einstufen zu können, müsste TORPEDO die Ziel-URL ermitteln.<br>Dies geschieht nicht automatisch, da eine Ermittlung Ihre Privatsphäre gefährdet.",
+    "message": "<div class='torpedoHighlight'>Unbekanntes Risiko:</div> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) ist nicht die Ziel-Domain. Wenn Sie auf den Link klicken, werden Sie auf eine andere Domain weitergeleitet. Um die Ziel-Domain zu überprüfen, muss TORPEDO diese ermitteln. Dies geschieht nicht automatisch, da eine Ermittlung Ihre Privatsphäre gefährdet.",
     "description": "Information on the classification of this domain"
   },
 
@@ -283,17 +281,17 @@
   },
 
   "URLnachErmittelnButton2GluehbirneText": {
-    "message": "Beauftragen Sie TORPEDO die Ziel-URL zu ermitteln.",
+    "message": "",
     "description": "Advice for the user"
-    },
+  },
 
   "URLnachErmittelnButton2LinkDeaktivierung": {
-    "message": "TORPEDO hat den Link deaktiviert, damit Sie in Ruhe überlegen, ob Sie TORPEDO die Ziel-URL ermitteln lassen.",
+    "message": "Der Link wurde deaktiviert, damit Sie in Ruhe überlegen, ob Sie die Ziel-Domain ermitteln lassen wollen.",
     "description": "Text for Deactivation of the link"
   },
-  
+
   "URLnachErmittelnButtonPrivacyModeUeberschrift": {
-    "message": "Die hinterlegte URL <div class='torpedoHighlight'> leitet Sie weiter </div> zu der folgenden URL:",
+    "message": "Hinterlegte URL (auch Webadresse genannt):",
     "description": "Header for tooltip"
   },
 
@@ -310,265 +308,239 @@
   "URLnachErmittelnButtonPrivacyModeGluehbirneText": {
     "message": "",
     "description": "Advice for the user"
-    },
+  },
 
   "URLnachErmittelnButtonPrivacyModeLinkDeaktivierung": {
-    "message": "TORPEDO hat den Link deaktiviert, damit Sie in Ruhe überlegen, ob Sie TORPEDO die Ziel-URL ermitteln lassen.",
+    "message": "",
     "description": "Text for Deactivation of the link"
   },
 
-  "WarnungPhishUeberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
-  },
-
-  "WarnungPhishErklaerung": {
-    "message": "Die Webadresse wird von TORPEDO als kritisches Risiko eingestuft (roter Rahmen).",
-    "description": "Information on the classification of this domain"
-  },
-
-  "WarnungPhishInfotext": {
-    "message": "Das bedeutet, dass die Sonderfälle (Unstimmigkeit, Kurz-URL oder Weiterleitung) in einer ungewöhnlichen Konstellation vorliegen. Diese Konstellation deutet stark auf einen Betrugsversuch hin, da dies ein typisches Vorgehen von Betrügern ist.<br>Die hinterlegte URL ist ggf. auch nicht die Ziel-URL. Daher würde ein Klicken auf den Link auch Ihre Privatsphäre gefährden.",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "WarnungPhishGluehbirneText": {
-    "message": "Stellen Sie sicher, dass die E-Mail wirklich von einem Ihnen bekannten Absender kommt. Nutzen Sie dazu keine Informationen aus der E-Mail,sondern, bekannte Informationen oder eine Suchmaschine. Alternativ weisen Sie auf das Problem hin und bitten darum, die Ziel-URL in der E-Mail anzugeben.<br>Kommt die E-Mail nicht von einem Ihnen bekannten Absender, löschen Sie diese E-Mail.",
-    "description": "Advice for the user"
-  },
-
-  "WarnungPhishLinkDeaktivierung": {
-    "message": "TORPEDO hat den Link deaktiviert, damit Sie in Ruhe überlegen, wie Sie weiter vorgehen.",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "infoImage":{
+  "infoImage": {
     "message": "img/info_de.png",
     "description": "Address of info image"
   },
 
-  "options":{
+  "options": {
     "message": "TORPEDO Einstellungen",
     "description": "Options"
   },
 
-  "OK":{
+  "OK": {
     "message": "Status: TORPEDO wird ausgeführt",
     "description": "Status:OK"
   },
 
-  "error":{
+  "error": {
     "message": "Status: Der TORPEDO Tooltip kann nicht angezeigt werden, da das Mail-Panel-Element auf dieser Seite nicht erkannt werden kann. Klicken Sie hier, um die Entwickler zu benachrichtigen.",
     "description": "Status:Error"
   },
 
-  "timerActivated":{
+  "timerActivated": {
     "message": "Link-Verzögerung aktiviert",
     "description": "Timer activated"
   },
-  
-  "timerAmount":{
+
+  "timerAmount": {
     "message": "Link-Verzögerung Zeit auf:",
     "description": "Timer amount"
   },
 
-  "seconds":{
+  "seconds": {
     "message": "Sekunde(n).",
     "description": "Seconds"
   },
 
-  "highRiskDomains":{
+  "highRiskDomains": {
     "message": "Domains, die auf einer Blacklist (Corona-Blacklist der Cyber Threat Coalition) stehen",
     "description": "List of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
   },
 
-  "lowRiskDomains":{
+  "lowRiskDomains": {
     "message": "Domains, die von den Entwicklern als 'geringes Risiko' eingestuft wurden (grün)",
     "description": "List of trusted domains."
   },
 
-  "activateTimerOnLowRisk":{
+  "activateTimerOnLowRisk": {
     "message": "Aktiviert Verzögerung auf Domains, die vom Entwickler als niedrig riskant eingestuft wurden.",
     "description": "Activate timer on list of trusted domains."
   },
 
-  "activateHighRiskList":{
+  "activateHighRiskList": {
     "message": "Blacklist (Corona-Blacklist der Cyber Threat Coalition) aktivieren",
     "description": "Activate list of dangerous/phishing domains (Corona-Blacklist of the Cyber Threat Coalition)."
   },
 
-  "activateLowRiskList":{
+  "activateLowRiskList": {
     "message": "Liste der Entwickler aktivieren",
     "description": "Activate list of trusted domains."
   },
 
-  "activatePrivacyMode":{
+  "activatePrivacyMode": {
     "message": "Privacy Mode",
     "description": "Activate privacy mode."
   },
-  
-  "activateSecurityMode":{
+
+  "activateSecurityMode": {
     "message": "Security Mode",
     "description": "Activate security mode."
   },
-  
-  "activateRedirectMode":{
+
+  "activateRedirectMode": {
     "message": "Redirect Mode",
     "description": "Activate redirect mode."
   },
-  
-  "trustedList":{
+
+  "trustedList": {
     "message": "Liste der Entwickler",
     "description": "Trusted domains."
   },
 
-  "showLowRiskList":{
+  "showLowRiskList": {
     "message": "Anzeigen der Einträge",
     "description": "Show list of trusted domains."
   },
 
-  "userDomains":{
+  "userDomains": {
     "message": "Domains, die von Ihnen als 'geringes Risiko' eingestuft wurden (blau)",
     "description": "List of user risk domains."
   },
 
-  "userList":{
+  "userList": {
     "message": "Liste der von Ihnen als 'geringes Risiko' eingestuften Domains",
     "description": "User risk domains."
   },
 
-  "activateTimerOnUserList":{
+  "activateTimerOnUserList": {
     "message": "Aktiviert Verzögerung auf Domains, die von Ihnen als niedrig riskant eingestuft wurden.",
     "description": "Activate timer on list of user risk domains."
   },
 
-  "editUserList":{
+  "editUserList": {
     "message": "Einträge anzeigen / bearbeiten",
     "description": "Show and edit list of user risk domains."
   },
 
-  "referrerInfo1":{
+  "referrerInfo1": {
     "message": "Referrer sind Dienste, die die Weiterleitung über den eigenen Server zu einer fremden Webseite anbieten. Die Referrer-URLs sind bei jedem Anbieter nach dem gleichen Schema aufgebaut und können hier voreingestellt werden, sodass TORPEDO diese Weiterleitungen automatisch auflösen kann.",
     "description": "Description of referrers."
   },
 
-  "referrerExample":{
+  "referrerExample": {
     "message": "Zum Beispiel: Die URL https://deref-gmx.net/mail/client/<span style='color:blue'>OcIb3TeWrtE</span>/dereferrer/?redirectUrl=https%3A%2F%2Fwww.google.de/ leitet zu der URL https://www.google.de weiter.",
     "description": "Description of referrers."
   },
 
-  "referrerInfo2":{
+  "referrerInfo2": {
     "message": "Viele Referrer nutzen einen zufallsgenerierten Code in der Weiterleitungs-URL, hier dargestellt mit<span style='color:blue'> [...] </span>. Wenn Sie in der URL, die Sie hinzufügen möchten, einen solchen zufallsgenerierten Code erkennen, ersetzen Sie diesen Teil der URL mit<span style='color:blue'> [...] </span>",
     "description": "How to add referrer to TORPEDO."
   },
 
-  "addDefaultReferrer":{
+  "addDefaultReferrer": {
     "message": "Referrer-Domains für gmx.net und web.de hinzufügen (vom Entwickler-Team empfohlen)",
     "description": "List of referrer domains"
   },
 
-  "referrerList":{
+  "referrerList": {
     "message": "Liste der Referrer-Domains",
     "description": "List of referrer domains"
   },
-  
-  "shortURLInfo":{
+
+  "shortURLInfo": {
     "message": "Kurz-URL bedeutet, dass die URL hinter dem Link nicht die Ziel URL ist, sondern erst einmal ein sogenannter Kurz-URL-Dienst. Von dieser URL werden Sie automatisch zum tatsächlichen, vorgesehenen Ziel weitergeleitet.",
     "description": "Short URL description"
   },
-  
-  "shortURLListText":{
+
+  "shortURLListText": {
     "message": "Liste der Kurz-URL-Dienste.",
     "description": "Short URL description"
   },
 
-  "defaultSettings":{
+  "defaultSettings": {
     "message": "Zurücksetzen auf Standard-Einstellungen",
     "description": "Default settings"
   },
 
-  "saveChanges":{
+  "saveChanges": {
     "message": "Änderungen speichern",
     "description": "Save changes"
   },
 
-  "revertChanges":{
+  "revertChanges": {
     "message": "Abbrechen",
     "description": "Revert changes"
   },
 
-  "addEntries":{
+  "addEntries": {
     "message": "Eintrag hinzufügen",
     "description": "Add entry"
   },
 
-  "clearEntries":{
+  "clearEntries": {
     "message": "Alle Einträge löschen",
     "description": "Delete all entries"
   },
 
-  "deleteEntries":{
+  "deleteEntries": {
     "message": "Eintrag löschen",
     "description": "Delete entry"
   },
 
-  "insertRandom":{
+  "insertRandom": {
     "message": "[...] einfügen",
     "description": "Insert sign for random generated code."
   },
-  
-   "exampleReferrerHost":{
+
+  "exampleReferrerHost": {
     "message": "Host (z.B. 'deref-gmx.net')",
     "description": "Example for Input Host"
   },
-  
-   "exampleReferrerPath":{
+
+  "exampleReferrerPath": {
     "message": "Path (z.B. '/mail/client/[...]/dereferrer/')",
     "description": "Example for Input Path"
   },
-  
-   "exampleReferrerAttribute":{
+
+  "exampleReferrerAttribute": {
     "message": "Attribut (z.B. 'redirectUrl=')",
     "description": "Example for Input Attribute"
   },
-  
-  "savedChanges":{
+
+  "savedChanges": {
     "message": "Änderungen gespeichert! Bitte laden Sie die Seite erneut, auf der Sie TORPEDO nutzen.",
     "description": "Changes saved"
   },
 
-  "reversedChanges":{
+  "reversedChanges": {
     "message": "Änderungen zurückgesetzt! ",
     "description": "Changes reversed"
   },
 
-  "defaultSettingsRestored":{
+  "defaultSettingsRestored": {
     "message": "Ursprungszustand wiederhergestellt! Bitte laden Sie die Seite erneut, auf der Sie TORPEDO nutzen.",
     "description": "Default settings"
   },
 
-  "nonValidUrl":{
+  "nonValidUrl": {
     "message": "Die von Ihnen eingegebene URL ist keine gültige URL. Bitte geben Sie die URL nach dem Schema http://www.example.com/ ein.",
     "description": "Entered URL is not valid"
   },
 
-  "alreadyInTrustedUrls":{
+  "alreadyInTrustedUrls": {
     "message": "Die von Ihnen eingegebene URL befindet sich bereits in der Liste der von den Entwicklern als vertrauenswürdig eingestuften Domains.",
     "description": "Entered URL is already in list of trusted URLs"
   },
 
-  "alreadyInUserDefinedDomains":{
+  "alreadyInUserDefinedDomains": {
     "message": "Die von Ihnen eingegebene URL befindet sich bereits in der Liste der von Ihnen als vertrauenswürdig eingestuften Domains.",
     "description": "Entered URL is already in list of user defined URLs"
   },
 
-  "alreadyInReferrerList":{
+  "alreadyInReferrerList": {
     "message": "Die von Ihnen eingegebene URL befindet sich bereits in der Liste der Weiterleitungs-Domains.",
     "description": "Entered URL is already in list of referrer URLs"
   },
 
-
-  "welcome_title":{
+  "welcome_title": {
     "message": "Willkommen!",
     "description": "welcome-title tutorial on page 1"
   },
@@ -576,7 +548,7 @@
     "message": "TORPEDO ist ein Add-On zur Benutzerunterstützung bei der Erkennung von betrügerischen E-Mails mit gefährlichen Links (oft auch Phishing E-Mails bezeichnet). <br> Es setzt auf dem NoPhish Konzept von SECUSO auf bzw. kann auch als Ergänzung zu diesem eingesetzt werden.",
     "description": "Short introduction in tool, tutorial for page 1 "
   },
-  "technical_background_title":{
+  "technical_background_title": {
     "message": "Technischer Hintergrund",
     "description": "technical-bg-title tutorial on page 1"
   },
@@ -584,7 +556,7 @@
     "message": "Technisch ist es leider derzeit nicht möglich, dass keine Phishing E-Mails in den E-Mail-Posteingängen landen. Gut gemachte Phishing E-Mails erkennt man als Empfänger nur dann, wenn man die Webadresse hinter den Links prüft bevor man auf diese klickt. Die Awareness hierfür – bis hin zum Wissen, wie Webadressen zu prüfen sind – zu schaffen ist wichtig und gescheit über die Maßnahmen im NoPhish-Konzept. Gleichzeitig ist es aber auch klar, dass Empfänger von E-Mails nicht jede Webadresse (in der Statusleiste oder dem Tooltip nach Berühren des Links) so genau prüfen, wie dies notwendig wäre, um Phishing E-Mails zuverlässig als solche zu erkennen. Hier fehlen den Empfängern und Empfängerinnen bei der Masse an E-Mails einfach die Zeit auch oft auch das Wissen.",
     "description": "technical-bg-txt tutorial on page 1"
   },
-  "functionality_title":{
+  "functionality_title": {
     "message": "Funktionalität von TORPEDO",
     "description": "functionality-title tutorial on page 1"
   },
@@ -592,8 +564,8 @@
     "message": "Hier setzt TORPEDO an. TORPEDO zeigt die für die Prüfung relevanten Informationen direkt bei dem Link in einem Tooltip(-overlay) an, so dass es mit TORPEDO einfacher ist, die Prüfung durchzuführen. Außerdem unterscheidet TORPEDO verschiedene Risikostufen von Links und zeigt Ihnen so auf, wann es wichtig ist, die Webadresse hinter dem Link vor dem Klicken des Links zu prüfen. Folgende Risikostufen werden unterschieden.",
     "description": "functionality-txt tutorial on page 1"
   },
-  
-  "functionality_explanation_title":{
+
+  "functionality_explanation_title": {
     "message": "So funktioniert TORPEDO",
     "description": "functionality-explanation-title tutorial on page 2"
   },
@@ -762,5 +734,4 @@
     "message": "Unter „Kurz-URL“ können Sie die aktuell integrierten Kurz-URLs ansehen und eigene ergänzen.",
     "description": "translations for tut on configurations page"
   }
-
 }

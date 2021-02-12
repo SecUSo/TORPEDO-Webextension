@@ -176,9 +176,10 @@ div.torpedoTooltip table {
   padding-bottom: 10px;
   margin-bottom: 5px;
 }
+.torpedoTooltip .torpedoHighlight,
 .torpedoHighlight {
   font-weight: bold;
-  display: inline-block;
+  display: inline;
   margin-bottom: 0px !important;
   margin-right: 2px;
 }
