@@ -23,15 +23,15 @@ $(document).ready(function () {
       //extract the domains from the blacklist entries only if the blacklist has been updated
       if (re.blacklistWasUpdated) {
         var lst = re.dangerousDomains;
-        var dangerousDomains = [];
+        var dangerousDomains = new Set();
 
         for (var i = 0; i < lst.length; i++) {
           var dom = extractDomain(lst[i]);
-          dangerousDomains.push(dom);
+          dangerousDomains.add(dom);
         }
 
         chrome.storage.local.set({
-          dangerousDomains: dangerousDomains,
+          dangerousDomains: Array.from(dangerousDomains),
           blacklistWasUpdated: false,
         });
       }
