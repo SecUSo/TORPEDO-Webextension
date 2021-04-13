@@ -786,7 +786,10 @@ function addReferrer() {
     save("referrerPart2", r.referrerPart2);
     save("referrerPart3", r.referrerPart3);
     var table = document.getElementById("referrerList");
-    var inputHost = $("#referrerInputHost").val().replace(" ", "");
+    var inputHost = $("#referrerInputHost")
+      .val()
+      .replace(" ", "")
+      .toLowerCase();
     var inputPath = $("#referrerInputPath").val().replace(" ", "");
     var inputAttribute = $("#referrerInputAttribute").val().replace(" ", "");
 
@@ -886,7 +889,10 @@ function addShortURL() {
   chrome.storage.sync.get(null, function (r) {
     save("redirectDomains", r.redirectDomains);
     var table = document.getElementById("shortURLList");
-    var input = $("#userDefinedShortURLInput").val().replace(" ", "");
+    var input = $("#userDefinedShortURLInput")
+      .val()
+      .replace(" ", "")
+      .toLowerCase();
 
     var arr1 = r.redirectDomains;
     if (arr1.indexOf(input) > -1) {
