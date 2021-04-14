@@ -312,6 +312,10 @@ function extractDomain(url) {
  * set given url as new global torpedo url
  */
 function setNewUrl(uri) {
+  if (uri.hostname.slice(-1) === ".")
+    uri = new URL(
+      `${uri.href.replace(uri.hostname, uri.hostname.slice(0, -1))}`
+    );
   torpedo.uri = uri;
   torpedo.url = uri.href;
   torpedo.domain = extractDomain(uri.hostname);
