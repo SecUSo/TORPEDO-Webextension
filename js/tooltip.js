@@ -234,19 +234,11 @@ function updateTooltip() {
       switch (state) {
         case "T2":
           $(".torpedoTooltip").addClass("torpedoUserDefined");
-          if (
-            r.userTimerActivated == "true" &&
-            torpedo.location !== "owa.kit.edu"
-          )
-            countdown(r.timer, state);
+          if (r.userTimerActivated) countdown(r.timer, state);
           break;
         case "T1":
           $(".torpedoTooltip").addClass("torpedoTrusted");
-          if (
-            r.trustedTimerActivated == "true" &&
-            torpedo.location !== "owa.kit.edu"
-          )
-            countdown(r.timer, state);
+          if (r.trustedTimerActivated) countdown(r.timer, state);
           break;
         case "ShortURL":
           countdown(r.timer, state);
@@ -259,12 +251,13 @@ function updateTooltip() {
           break;
         case "T1":
           $(t.find("#torpedoMarkTrusted")[0]).show();
-          countdown(r.timer, state);
+          if (r.trustedTimerActivated) countdown(r.timer, state);
           break;
         case "T32":
           $(t.find("#torpedoMarkTrusted")[0]).show();
           $(t.find("#torpedoWarningImage2")[0]).show();
           $(t.find("#torpedoWarningText")[0]).show();
+          countdown(r.timer, state);
           break;
         case "T4":
           $(".torpedoTooltip").addClass("torpedoPhish");

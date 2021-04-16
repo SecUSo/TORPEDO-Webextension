@@ -44,20 +44,7 @@ function countdown(time, state) {
   eventTypes.forEach(function (eventType) {
     $(torpedo.target).on(eventType, function (event) {
       event.preventDefault();
-      let mouseBtn = "unknown";
-      switch (event.button) {
-        case 0:
-          mouseBtn = "left mouse btn";
-          break;
-        case 1:
-          mouseBtn = "middle mouse btn";
-          break;
-        case 2:
-          mouseBtn = "right mouse btn";
-          break;
-        default:
-          break;
-      }
+      return false;
     });
   });
 
