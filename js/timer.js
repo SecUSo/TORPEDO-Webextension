@@ -31,23 +31,20 @@ function countdown(time, state) {
   eventTypes.forEach(function (eventType) {
     $(torpedo.target).unbind(eventType);
   });
+  const onWebsite = new URL(window.location.href);
+  if (onWebsite.hostname === "owa.kit.edu") {
+    $(
+      "div._rp_U4.ms-font-weight-regular.ms-font-color-neutralDark.rpHighlightAllClass.rpHighlightBodyClass"
+    ).unbind("click");
+    // document.removeEventListener('click', getEventListeners(document).click[0].listener)
+    /* 
+      once script from owa can be used to remove eventlistener properly - insert here
+    */
+  }
   eventTypes.forEach(function (eventType) {
     $(torpedo.target).on(eventType, function (event) {
       event.preventDefault();
-      let mouseBtn = "unknown";
-      switch (event.button) {
-        case 0:
-          mouseBtn = "left mouse btn";
-          break;
-        case 1:
-          mouseBtn = "middle mouse btn";
-          break;
-        case 2:
-          mouseBtn = "right mouse btn";
-          break;
-        default:
-          break;
-      }
+      return false;
     });
   });
 
@@ -55,6 +52,7 @@ function countdown(time, state) {
     $(tooltip.find("#torpedoURL")[0]).unbind("click");
     $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
       event.preventDefault();
+      return false;
     });
   } catch (e) {}
 

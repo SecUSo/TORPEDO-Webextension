@@ -541,10 +541,12 @@ works = false;
 
 function sendEmail() {
   var emailUrl =
-    "mailto:addons@secuso.org?subject=" +
+    "mailto:torpedo@secuso.org?subject=" +
     encodeURIComponent("Error with TORPEDO Webextension") +
     "&body=" +
-    encodeURIComponent("Mail panel could not be found in page: " + loc);
+    encodeURIComponent(
+      `Dear TORPEDO-dev-Team,\n\nTORPEDO seems to not properly work in this location: "${loc}"\nHere is additional information that might help you (add information to help resolve the issue here):`
+    );
   chrome.tabs.create({ url: emailUrl });
 }
 
