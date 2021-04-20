@@ -52,6 +52,7 @@ function countdown(time, state) {
     $(tooltip.find("#torpedoURL")[0]).unbind("click");
     $(tooltip.find("#torpedoURL")[0]).bind("click", function (event) {
       event.preventDefault();
+      return false;
     });
   } catch (e) {}
 
