@@ -48,21 +48,9 @@ function tooltipText() {
               <div id='torpedoInfoDiv'><p id='torpedoMoreInfo'></p></div> \
               <div><button id='torpedoMoreInfoButton' type='button'></button></div> \
               <div><button id='torpedoRedirectButton' type='button''></button></div> \
-              ${
-                torpedo.location !== "owa.kit.edu"
-                  ? "<div><button id='torpedoActivateLinkButton' type='button''></button></div> "
-                  : ""
-              } \
-              ${
-                torpedo.location !== "owa.kit.edu"
-                  ? "<div><p id='torpedoLinkDelay'></p></div>"
-                  : ""
-              } \
-              ${
-                torpedo.location !== "owa.kit.edu"
-                  ? "<p id='torpedoTimer'></p>"
-                  : ""
-              }
+              <div><button id='torpedoActivateLinkButton' type='button''></button></div>
+              <div><p id='torpedoLinkDelay'></p></div>
+              <p id='torpedoTimer'></p>
               `;
   return text;
 }
