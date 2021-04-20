@@ -47,40 +47,48 @@ $(document).ready(function () {
 
   switch (torpedo.location) {
     case "mail.yahoo.com":
-      mouseenter = 'div[data-test-id="message-view"]';
+      mouseenter = ['div[data-test-id="message-view"]'];
       break;
     case "mail.google.com":
-      mouseenter = ".adn";
+      mouseenter = [".adn"];
       break;
     case "owa.kit.edu":
-      mouseenter = 'div[role="list"]';
+      mouseenter = ['div[role="list"]', " div.isMessageBodyInPopout"];
       break;
     // not yet active due to issues with click handling
     case "outlook.live.com":
-      mouseenter = 'div[role="main"]';
+      mouseenter = ['div[role="main"]'];
       break;
     case "mail.aol.com":
-      mouseenter = "#displayMessage";
+      mouseenter = ["#displayMessage"];
       break;
     case "email.t-online.de":
-      iframe = "mailreadview";
+      iframe = ["mailreadview"];
       break;
     default:
-      iframe = "mailbody";
+      iframe = ["mailbody"];
       break;
   }
   $("body").unbind();
 
   if (iframe == "") {
-    $("body").on("mouseenter", mouseenter + " a", function (e) {
-      openTooltip(e, "a");
-    });
-    $("body").on("mouseenter", mouseenter + " form", function (e) {
-      openTooltip(e, "form");
-      torpedo.progUrl = true;
-    });
+    $("body").on(
+      "mouseenter",
+      mouseenter.map((selector) => selector + " a").join(),
+      function (e) {
+        openTooltip(e, "a");
+      }
+    );
+    $("body").on(
+      "mouseenter",
+      mouseenter.map((selector) => selector + " form").join(),
+      function (e) {
+        openTooltip(e, "form");
+        torpedo.progUrl = true;
+      }
+    );
     // adding corresponding icon for working or error
-    if ($("body").find(mouseenter)[0]) {
+    if ($("body").find(mouseenter.join())[0]) {
       chrome.runtime.sendMessage({ name: "ok", location: torpedo.location });
     } else {
       // set icon to ERROR
