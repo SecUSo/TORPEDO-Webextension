@@ -42,15 +42,28 @@ function tooltipText() {
               <div id='torpedoInfo'>  \
                 <img id='torpedoInfoImage' src='" +
     chrome.extension.getURL("img/info.png") +
-    "'> \
+    `'> \
                 <p id='torpedoInfoText'></p> \
               </div>\
               <div id='torpedoInfoDiv'><p id='torpedoMoreInfo'></p></div> \
               <div><button id='torpedoMoreInfoButton' type='button'></button></div> \
               <div><button id='torpedoRedirectButton' type='button''></button></div> \
-              <div><button id='torpedoActivateLinkButton' type='button''></button></div> \
-              <div><p id='torpedoLinkDelay'></p></div> \
-              <p id='torpedoTimer'></p>";
+              ${
+                torpedo.location !== "owa.kit.edu"
+                  ? "<div><button id='torpedoActivateLinkButton' type='button''></button></div> "
+                  : ""
+              } \
+              ${
+                torpedo.location !== "owa.kit.edu"
+                  ? "<div><p id='torpedoLinkDelay'></p></div>"
+                  : ""
+              } \
+              ${
+                torpedo.location !== "owa.kit.edu"
+                  ? "<p id='torpedoTimer'></p>"
+                  : ""
+              }
+              `;
   return text;
 }
 
@@ -221,11 +234,11 @@ function updateTooltip() {
       switch (state) {
         case "T2":
           $(".torpedoTooltip").addClass("torpedoUserDefined");
-          if (r.userTimerActivated == "true") countdown(r.timer, state);
+          if (r.userTimerActivated) countdown(r.timer, state);
           break;
         case "T1":
           $(".torpedoTooltip").addClass("torpedoTrusted");
-          if (r.trustedTimerActivated == "true") countdown(r.timer, state);
+          if (r.trustedTimerActivated) countdown(r.timer, state);
           break;
         case "ShortURL":
           countdown(r.timer, state);
@@ -238,7 +251,7 @@ function updateTooltip() {
           break;
         case "T1":
           $(t.find("#torpedoMarkTrusted")[0]).show();
-          countdown(r.timer, state);
+          if (r.trustedTimerActivated) countdown(r.timer, state);
           break;
         case "T32":
           $(t.find("#torpedoMarkTrusted")[0]).show();

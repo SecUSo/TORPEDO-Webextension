@@ -185,7 +185,7 @@ function addEvents() {
     $("#userTimerCheckbox").on("change", function (e) {
       save("userTimerActivated", r.userTimerActivated);
       var checked = $(this).prop("checked");
-      chrome.storage.sync.set({ trustedTimerActivated: checked });
+      chrome.storage.sync.set({ userTimerActivated: checked });
     });
 
     $("#privacyModeCheckbox").on("change", function (e) {
