@@ -3,13 +3,20 @@ let lang = "en";
 let overviewVisible = true;
 /* 
   FOR EASY PLUG AND PLAY OF PAGES:
-  If you want to add more than one page of a specific type
-  than add "_case" and a specific term behind it (see below).
-  This will allow to have different pictures within one general 
-  category of cases. F.e. simple-grey_case is one category with the
-  sub-pages _no-phish and _phish.
-  Naming-convention for all before green_case is
-   same name as css class "-" in css, "_" in js
+  * numbers start from 0
+  * numbers are indicating the placement (order)
+  * if you want an overview bubble you need to edit the tutorial html
+    at the specified position to match the order (page 0 --> first overview) in the
+    section "overview"
+  * the page you insert needs to be implemented in the html in the section "tut-content"
+    and will be flipped on and off as soon as it is called upon (through navigation)
+  * If you want to add more than one page of a specific type
+    than add "_case" and a specific term behind it (see below).
+    This will allow to have different pictures within one general 
+    category of cases. F.e. simple-grey_case is one category with the
+    sub-pages _no-phish and _phish.
+  * Naming-convention for all before green_case is
+    same name as css class; "-" in css, "_" in js
 */
 const pages = {
   0: "welcome",
@@ -23,9 +30,9 @@ const pages = {
   8: "red_case",
   9: "configurations",
 };
-const lastPage = Object.keys(pages).reduce((a, b) => {
-  return a > b ? a : b;
-});
+const lastPage = Object.keys(pages).reduce((a, b) =>
+  parseInt(a) > parseInt(b) ? parseInt(a) : parseInt(b)
+);
 let overviewCircles;
 
 // TESTING STUFF
@@ -68,7 +75,7 @@ $(document).ready(function () {
   });
 
   init();
-  // show(activePageContent);
+  show(activePageContent);
 });
 
 function show() {
@@ -115,7 +122,7 @@ function init() {
   // see if we want overview or not
   activateCurrentPageElements();
   // at beginning for language´
-  // page 0
+  // page 'welcome'
   $("#welcome-title").html(getMsg("welcome_title"));
   $("#introduction-txt").html(getMsg("introduction_txt"));
   $("#technical-bg-title").html(getMsg("technical_background_title"));
@@ -124,7 +131,7 @@ function init() {
   $("#functionality-txt").html(getMsg("functionality_txt"));
   $(".welcome").removeClass("off");
 
-  // page 1
+  // page 'explanation'
   $("#functionality-explanation-title").text(
     getMsg("functionality_explanation_title")
   );
@@ -134,6 +141,7 @@ function init() {
     );
   }
   $(`#domain-explain`).text(getMsg(`domain_translation`));
+  // pages of the cases and their explanations
   $("#green-case-showcase-title").text(getMsg("green_case_title"));
   $("#blue-case-showcase-title").text(getMsg("blue_case_title"));
   $("#simple-grey-case-showcase-title").text(getMsg("simple_grey_case_title"));
