@@ -13,14 +13,6 @@ function getSecurityStatus(storage, storage_local) {
   var referrerURL = matchReferrer(torpedo.url);
 
   while (referrerURL != "<NO_RESOLVED_REFERRER>") {
-    locSecondLevelDomain = window.location.hostname
-      .split(".")
-      .slice(-2)
-      .join(".");
-
-    if (torpedo.domain.includes(locSecondLevelDomain)) {
-      torpedo.redirectMatching = true;
-    }
     try {
       const href = new URL(referrerURL);
       setNewUrl(href);
@@ -52,8 +44,8 @@ function getSecurityStatus(storage, storage_local) {
     } else {
       return "T31";
     }
-  } else if (torpedo.countRedirect == 1) {
-    if (torpedo.redirectMatching) {
+  } else if (torpedo.countRedirect >= 1) {
+    if (r.redirectModeActivated) {
       if (!isMismatch(torpedo.domain)) {
         return "T31";
       } else {
@@ -62,14 +54,6 @@ function getSecurityStatus(storage, storage_local) {
     } else {
       return "T32";
     }
-  } else if (r.redirectModeActivated) {
-    if (!isMismatch(torpedo.domain)) {
-      return "T31";
-    } else {
-      return "T32";
-    }
-  } else {
-    return "T32";
   }
 }
 
