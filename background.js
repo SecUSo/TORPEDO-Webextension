@@ -482,19 +482,16 @@ function readInBlacklist() {
                     ctcBlacklistRequest.status === 200
                   ) {
                     // Read in new blacklist version
-                    currentCtcBlacklistVersion = ctcBlacklistRequest.getResponseHeader(
-                      "Last-Modified"
-                    );
+                    currentCtcBlacklistVersion =
+                      ctcBlacklistRequest.getResponseHeader("Last-Modified");
                     // Check content type whether it is suitable for further processing
-                    var contentType = ctcBlacklistRequest.getResponseHeader(
-                      "Content-Type"
-                    );
+                    var contentType =
+                      ctcBlacklistRequest.getResponseHeader("Content-Type");
                     if (contentType == "text/plain") {
                       var dangerousDomains = [];
                       // Read in text line by line (each line is one domain in file) and create array
-                      var extractedLines = ctcBlacklistRequest.responseText.split(
-                        "\n"
-                      );
+                      var extractedLines =
+                        ctcBlacklistRequest.responseText.split("\n");
                       // Investigate each line whether it is a well formed domain and if yes, put it into array dangerousDomains
                       for (var i = 1; i < extractedLines.length - 1; i++) {
                         if (extractedLines[i].length <= 253) {
@@ -579,8 +576,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           sendResponse(xhttp.responseURL);
         }
       };
-      xhttp.open("GET", request.url, true);
-      xhttp.send(null);
+      xhttp.open("HEAD", request.url, true);
+      xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+      xhttp.send();
       return true;
       break;
     case "TLD":
@@ -595,6 +593,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         "https://publicsuffix.org/list/public_suffix_list.dat",
         true
       );
+      xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
       xhttp.send(null);
       return true;
       break;
