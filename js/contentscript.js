@@ -17,27 +17,6 @@ $(document).ready(function () {
     torpedo.publicSuffixList.parse(r, punycode.toASCII);
   });
 
-  chrome.storage.local.get(
-    ["dangerousDomains", "blacklistWasUpdated"],
-    function (re) {
-      //extract the domains from the blacklist entries only if the blacklist has been updated
-      if (re.blacklistWasUpdated) {
-        var lst = re.dangerousDomains;
-        var dangerousDomains = new Set();
-
-        for (var i = 0; i < lst.length; i++) {
-          var dom = extractDomain(lst[i]);
-          dangerousDomains.add(dom);
-        }
-
-        chrome.storage.local.set({
-          dangerousDomains: Array.from(dangerousDomains),
-          blacklistWasUpdated: false,
-        });
-      }
-    }
-  );
-
   torpedo.location = window.location.host;
   var mouseenter = "";
   var iframe = "";
