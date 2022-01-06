@@ -9,7 +9,7 @@ r = null;
 function getSecurityStatus(storage) {
   r = storage;
 
-  var referrerURL = matchReferrer(torpedo.url);
+  let referrerURL = matchReferrer(torpedo.url);
 
   while (referrerURL != "<NO_RESOLVED_REFERRER>") {
     try {
@@ -40,7 +40,7 @@ function getSecurityStatus(storage) {
     } else {
       return "T31";
     }
-  } else if (torpedo.countRedirect >= 1) {
+  } else {
     if (r.redirectModeActivated) {
       if (!isMismatch(torpedo.domain)) {
         return "T31";
@@ -130,11 +130,11 @@ function isTooltipMismatch(tooltipURL, hrefURL) {
   }
 }
 
-function inTrusted(url) {
+function inTrusted(domain) {
   if (r.trustedListActivated) {
-    var lst = r.trustedDomains;
-    for (var i = 0; i < lst.length; i++) {
-      if (lst[i].indexOf(url) > -1) return true;
+    const lst = r.trustedDomains;
+    for (let i of lst) {
+      if (i.indexOf(domain) > -1) return true;
     }
   }
   return false;
