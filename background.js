@@ -11,6 +11,7 @@ chrome.runtime.onInstalled.addListener(function () {
     privacyModeActivated: true,
     securityModeActivated: false,
     redirectModeActivated: false,
+    trustedListActivated: true,
     referrerPart1: [
       "deref-gmx.net",
       "deref-web-02.de",
