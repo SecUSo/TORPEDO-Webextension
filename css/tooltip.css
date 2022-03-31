@@ -33,6 +33,7 @@
 }
 .qtip-content {
   background-color: white !important;
+  min-height: 100px;
 }
 div.torpedoTooltip div.torpedoTooltip div,
 div.torpedoTooltip span,
@@ -120,6 +121,9 @@ div.torpedoTooltip video {
   background-color: white;
   font: inherit;
   vertical-align: baseline;
+}
+div.torpedoTooltip .loader-active:not(.loader) {
+  display: none;
 }
 /* HTML5 display-role reset for older browsers */
 article,
