@@ -2,7 +2,7 @@
 *   resolve a redirection url, f.e. tinyurl
 */
 function resolveRedirect(event) {
-  onlyShowLoader();
+  showLoaderWithOverlay();
   chrome.runtime.sendMessage({ name: "redirect", url: torpedo.url }, function (r) {
     torpedo.api.set("hide.event", "unfocus");
     torpedo.api.set("hide.delay", 0);

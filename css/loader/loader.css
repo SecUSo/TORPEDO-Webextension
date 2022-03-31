@@ -1,11 +1,37 @@
 div.loader {
   width: 100px;
-  height: 400px;
+  height: 100px;
   position: relative;
   margin: auto;
 }
 
-div.loader:not(.loader-active) {
+.loader-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.loader-bg.transparent-bg {
+  background-color: transparent;
+}
+
+div.loader-card {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 3.75rem;
+  padding-top: 1.75rem;
+  border-radius: 6px;
+}
+
+div.loader:not(.loader-active), div.loader-bg:not(.loader-active) {
   display: none;
 }
 
@@ -148,6 +174,10 @@ div.loader .load-text {
   width: 100%;
   margin: 1rem auto;
   text-align: center;
+}
+div.loader .load-text>p {
+  background: none;
+  background-color: transparent;
 }
 
 @-webkit-keyframes loader {

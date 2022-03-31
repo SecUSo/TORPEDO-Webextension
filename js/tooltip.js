@@ -51,7 +51,9 @@ function tooltipText() {
               <div class='loader-active'><p id='torpedoLinkDelay'></p></div>
               <p class='loader-active' id='torpedoTimer'></p>
               ` +
-    `<div class="loader loader-active"> \
+    `<div class="loader-bg"> \
+    <div class="loader-card"> \
+    <div class="loader loader-active"> \
           <div class="dots"> \
             <div class="dot dot-0"></div> \
             <div class="dot dot-1"></div> \
@@ -73,6 +75,8 @@ function tooltipText() {
             <p>Loading...</p> \
           </div> \
         </div> \
+      </div> \
+    </div> \
               `;
   return text;
 }
@@ -126,7 +130,6 @@ function initTooltip() {
     openInfoImage(event);
   });
   $(tooltip.find("#torpedoRedirectButton")[0]).click(function (event) {
-    // showLoader(); todo() implement loader
     resolveRedirect(event);
     torpedo.api.get("hide.event", "onfocus");
   });
@@ -369,10 +372,17 @@ function onlyShowLoader() {
   const tooltip = torpedo.tooltip[0];
 
   $(".torpedoTooltip>div>*").addClass("loader-active");
+  $(".torpedoTooltip>div>.loader-bg").addClass("transparent-bg");
+  $(".loader").addClass("loader-active");
+}
+
+function showLoaderWithOverlay() {
+  $(".loader-bg").addClass("loader-active");
 }
 
 function deactivateLoader() {
   const tooltip = torpedo.tooltip[0];
 
   $(".torpedoTooltip>div>*").removeClass("loader-active");
+  $(".torpedoTooltip>div>.loader-bg").removeClass("transparent-bg");
 }
