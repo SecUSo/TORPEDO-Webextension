@@ -518,7 +518,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             tabId: tabs[0].id,
             path: { 38: "img/error38.png" },
           });
-        } catch (e) {}
+        } catch (e) { }
       });
       break;
     case "ok":
@@ -530,7 +530,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             tabId: tabs[0].id,
             path: { 38: "img/icon38.png" },
           });
-        } catch (e) {}
+        } catch (e) { }
       });
       break;
     case "settings":
@@ -552,7 +552,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       break;
     case "close":
       chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-        chrome.tabs.remove(tabs[0].id, function () {});
+        chrome.tabs.remove(tabs[0].id, function () { });
       });
       break;
   }
