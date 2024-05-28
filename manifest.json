@@ -14,9 +14,12 @@
     "service_worker": "service_worker.js"
   },
   "permissions": [
-    "<all_urls>",
     "tabs",
-    "storage"
+    "storage",
+    "declarativeContent"
+  ],
+  "host_permissions": [
+    "<all_urls>"
   ],
   "options_ui": {
     "page": "options.html"
@@ -76,7 +79,11 @@
   ],
   "action": {
     "default_title": "__MSG_extensionName__",
-    "default_popup": "icon.html"
+    "default_popup": "icon.html",
+    "default_icon": {
+      "38": "img/none38.png",
+      "32": "img/none64.png"
+    }
   },
   "content_security_policy": {}
 }

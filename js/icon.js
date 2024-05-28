@@ -15,18 +15,18 @@ document.addEventListener("click", (e) => {
 });
 
 function init() {
-  console.log("loading-icon.js");
-  console.log($("#torpedoPage"));
   $("#torpedoPage").text(chrome.i18n.getMessage("extensionName"));
   $("#options").text(chrome.i18n.getMessage("options"));
-  let loc = chrome.extension.getBackgroundPage().getStatus();
-  if (loc.works) {
-    $("#error").attr("class", "working");
-    $("#error").text(chrome.i18n.getMessage("OK"));
-  } else {
-    $("#error").attr("class", "error");
-    $("#error").text(chrome.i18n.getMessage("error"));
-  }
+  chrome.storage.session.get("state").
+    then(object => {
+      if (object.state.works) {
+        $("#error").attr("class", "working");
+        $("#error").text(chrome.i18n.getMessage("OK"));
+      } else {
+        $("#error").attr("class", "error");
+        $("#error").text(chrome.i18n.getMessage("error"));
+      }
+    });
 }
 
 document.addEventListener("DOMContentLoaded", init);
