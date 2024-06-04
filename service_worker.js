@@ -540,7 +540,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       showTutorial();
       break;
     case "google":
-      var website = "http://google.de/#q=" + request.url;
+      var website = "http://google.de/?q=" + request.url;
       chrome.tabs.create({
         url: website,
       });
