@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "author": "SECUSO",
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "{53319828-3750-4619-836e-10f3c736a61f}"
     }
@@ -11,6 +11,7 @@
   "default_locale": "de",
   "description": "__MSG_extensionDescription__",
   "background": {
+    "scripts": ["service_worker.js"],
     "service_worker": "service_worker.js"
   },
   "permissions": [

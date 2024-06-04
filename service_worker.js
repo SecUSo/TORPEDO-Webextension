@@ -437,33 +437,6 @@ chrome.runtime.onInstalled.addListener(function () {
   // Disable page action when not on a supported mail client website
   chrome.action.disable();
 
-
-  // Clear all rules to ensure only our expected rules are set
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
-
-    // Add new rule for each domain defined in manifest
-    var manifest = chrome.runtime.getManifest();
-    var websites = manifest.content_scripts[0].matches;
-    let rules = [];
-
-    for (var i = 0; i < websites.length; i++) {
-      // extract domain from url
-      const domain = new URL(websites[i]);
-      let rule = {
-        conditions: [
-          new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { hostSuffix: domain.host },
-          })
-        ],
-        actions: [new chrome.declarativeContent.ShowAction()],
-      };
-      rules.push(rule);
-    }
-
-    // Finally, apply our new array of rules
-    chrome.declarativeContent.onPageChanged.addRules(rules);
-  });
-
 });
 
 function showTutorial() {
@@ -495,6 +468,23 @@ function sendEmail() {
 function getStatus() {
   return { works: works, location: loc };
 }
+
+// enable action only on email pages -> Firefox does not support declarative content yet
+chrome.tabs.onUpdated.addListener(function (tabId, status, info) {
+  var manifest = chrome.runtime.getManifest();
+  var websites = manifest.content_scripts[0].matches;
+  var showIcon = false;
+  for (var i = 0; i < websites.length; i++) {
+    if (info.url.match(websites[i]) != null) showIcon = true;
+  }
+  console.log(showIcon);
+  if (showIcon) {
+    chrome.action.enable(tabId);
+  } else {
+    chrome.action.disable(tabId);
+  }
+});
+
 
 // message passing with content script
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
