@@ -7,13 +7,21 @@
     }
   },
   "name": "__MSG_extensionName__",
-  "version": "1.8.2",
+  "version": "1.8.4",
   "default_locale": "de",
   "description": "__MSG_extensionDescription__",
   "background": {
-    "scripts": ["js/jquery-3.4.1.min.js", "js/punycode.min.js", "background.js"]
+    "scripts": [
+      "js/jquery.min.js",
+      "js/punycode.js",
+      "background.js"
+    ]
   },
-  "permissions": ["<all_urls>", "tabs", "storage"],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage"
+  ],
   "page_action": {
     "default_title": "__MSG_extensionName__",
     "default_popup": "icon.html"
@@ -25,7 +33,10 @@
     "38": "img/icon38.png",
     "64": "img/icon64.png"
   },
-  "web_accessible_resources": ["img/*.png", "img/*.svg"],
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/*.svg"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -46,14 +57,15 @@
         "https://owa.kit.edu/*"
       ],
       "css": [
+        "css/all.min.css",
         "css/jquery.qtip.min.css",
         "css/tooltip.css",
         "css/loader/loader.css"
       ],
       "js": [
-        "js/jquery-3.4.1.min.js",
-        "js/jquery.qtip.min.js",
-        "js/punycode.min.js",
+        "js/jquery.min.js",
+        "js/jquery.qtip.js",
+        "js/punycode.js",
         "js/contentscript.js",
         "js/publicsuffixlist.js",
         "js/timer.js",
