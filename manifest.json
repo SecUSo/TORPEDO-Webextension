@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "author": "SECUSO",
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "{53319828-3750-4619-836e-10f3c736a61f}"
     }
@@ -12,20 +12,18 @@
   "description": "__MSG_extensionDescription__",
   "background": {
     "scripts": [
-      "js/jquery.min.js",
-      "js/punycode.js",
-      "background.js"
-    ]
+      "service_worker.js"
+    ],
+    "service_worker": "service_worker.js"
   },
   "permissions": [
-    "<all_urls>",
     "tabs",
-    "storage"
+    "storage",
+    "declarativeContent"
   ],
-  "page_action": {
-    "default_title": "__MSG_extensionName__",
-    "default_popup": "icon.html"
-  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "options_ui": {
     "page": "options.html"
   },
@@ -34,8 +32,15 @@
     "64": "img/icon64.png"
   },
   "web_accessible_resources": [
-    "img/*.png",
-    "img/*.svg"
+    {
+      "resources": [
+        "img/*.png",
+        "img/*.svg"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
   ],
   "content_scripts": [
     {
@@ -75,5 +80,14 @@
       ],
       "all_frames": true
     }
-  ]
+  ],
+  "action": {
+    "default_title": "__MSG_extensionName__",
+    "default_popup": "icon.html",
+    "default_icon": {
+      "38": "img/none38.png",
+      "32": "img/none64.png"
+    }
+  },
+  "content_security_policy": {}
 }

@@ -433,6 +433,10 @@ chrome.runtime.onInstalled.addListener(function () {
     referrerSites: ["3c-bap.web.de", "3c.web.de", "3c.gmx.net"],
     publicSuffixList: {},
   });
+
+  // Disable page action when not on a supported mail client website
+  chrome.action.disable();
+
 });
 
 function showTutorial() {
@@ -465,7 +469,7 @@ function getStatus() {
   return { works: works, location: loc };
 }
 
-// enable page action only on email pages
+// enable action only on email pages -> Firefox does not support declarative content yet
 chrome.tabs.onUpdated.addListener(function (tabId, status, info) {
   var manifest = chrome.runtime.getManifest();
   var websites = manifest.content_scripts[0].matches;
@@ -473,64 +477,60 @@ chrome.tabs.onUpdated.addListener(function (tabId, status, info) {
   for (var i = 0; i < websites.length; i++) {
     if (info.url.match(websites[i]) != null) showIcon = true;
   }
+  console.log(showIcon);
   if (showIcon) {
-    chrome.pageAction.show(tabId);
+    chrome.action.enable(tabId);
+  } else {
+    chrome.action.disable(tabId);
   }
 });
+
 
 // message passing with content script
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   switch (request.name) {
-    case "redirect":
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4) {
-          sendResponse(xhttp.responseURL);
-        }
-      };
-      xhttp.open("HEAD", request.url, true);
-      xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-      xhttp.send();
+    case "redirect": {
+      const fetchPromise = fetch(request.url);
+      fetchPromise.then(response => {
+        sendResponse(response.url);
+      });
       return true;
-      break;
-    case "TLD":
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4) {
-          sendResponse(xhttp.response);
+    } break;
+    case "TLD": {
+      const fetchPromise = fetch("https://publicsuffix.org/list/public_suffix_list.dat", {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
         }
-      };
-      xhttp.open(
-        "GET",
-        "https://publicsuffix.org/list/public_suffix_list.dat",
-        true
-      );
-      xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-      xhttp.send(null);
+      });
+      fetchPromise.then(response => {
+        sendResponse(response);
+      });
       return true;
-      break;
+    } break;
     case "error":
       loc = request.location;
+      chrome.storage.session.set({ state: { works: false, location: loc } });
       works = false;
       chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         try {
-          chrome.pageAction.setIcon({
+          chrome.action.setIcon({
             tabId: tabs[0].id,
             path: { 38: "img/error38.png" },
           });
-        } catch (e) {}
+        } catch (e) { }
       });
       break;
     case "ok":
       loc = request.location;
+      chrome.storage.session.set({ state: { works: true, location: loc } });
       works = true;
       chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         try {
-          chrome.pageAction.setIcon({
+          chrome.action.setIcon({
             tabId: tabs[0].id,
             path: { 38: "img/icon38.png" },
           });
-        } catch (e) {}
+        } catch (e) { }
       });
       break;
     case "settings":
@@ -552,7 +552,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       break;
     case "close":
       chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-        chrome.tabs.remove(tabs[0].id, function () {});
+        chrome.tabs.remove(tabs[0].id, function () { });
       });
       break;
   }
