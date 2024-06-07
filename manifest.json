@@ -7,7 +7,7 @@
     }
   },
   "name": "__MSG_extensionName__",
-  "version": "1.9",
+  "version": "1.9.1",
   "default_locale": "de",
   "description": "__MSG_extensionDescription__",
   "background": {
@@ -18,8 +18,7 @@
   },
   "permissions": [
     "tabs",
-    "storage",
-    "declarativeContent"
+    "storage"
   ],
   "host_permissions": [
     "<all_urls>"
