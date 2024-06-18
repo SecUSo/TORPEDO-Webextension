@@ -8,7 +8,7 @@ document.addEventListener("click", (e) => {
       break;
     case "error":
       if (e.target.classList == "error") {
-        chrome.extension.getBackgroundPage().sendEmail();
+        chrome.runtime.sendMessage({ name: "sendMail" });
       }
       break;
   }

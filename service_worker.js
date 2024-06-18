@@ -555,5 +555,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         chrome.tabs.remove(tabs[0].id, function () { });
       });
       break;
+    case "sendMail":
+      sendEmail();
   }
 });
