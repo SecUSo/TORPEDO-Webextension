@@ -1,10 +1,3 @@
-var torpedo = torpedo || {};
-torpedo.tooltip;
-torpedo.countRedirect = 0;
-torpedo.countShortURL;
-torpedo.oldDomain = "";
-torpedo.oldUrl = "";
-
 /**
  * fill tooltip with html structure
  */
@@ -81,197 +74,264 @@ function tooltipText() {
   return text;
 }
 
+function onClick(id, handler) {
+  const el = torpedo.tooltip.querySelector(id);
+  if (el) el.addEventListener("click", handler);
+}
+
 function initTooltip() {
-  // context menu
-  var tooltip = torpedo.tooltip;
+  const tooltip = torpedo.tooltip;
+
   onlyShowLoader();
+
   torpedo.countRedirect = 0;
   torpedo.countShortURL = 0;
   torpedo.oldDomain = torpedo.domain;
   torpedo.oldUrl = torpedo.url;
 
-  $(tooltip).contextmenu(function (event) {
-    $(tooltip.find("#torpedoContextMenu")[0]).toggle(); // .toggle() switches between displaying and hiding items
-    $(tooltip.find("#torpedoContextMenu")[0]).css({ position: "absolute" });
+  const contextMenu = tooltip.querySelector("#torpedoContextMenu");
+
+  // show/hide context menu on right click
+  tooltip.addEventListener("contextmenu", (event) => {
     event.preventDefault();
-  });
-  $(tooltip).on("click", "div:not(.torpedoContextMenu)", function (e) {
-    if (!$(tooltip.find("#torpedoContextMenu")[0]).is(":hidden")) {
-      $(tooltip.find("#torpedoContextMenu")[0]).toggle();
+    if (contextMenu) {
+      const isHidden = getComputedStyle(contextMenu).display === "none";
+      contextMenu.style.position = "absolute";
+      contextMenu.style.display = isHidden ? "block" : "none";
     }
   });
 
-  $(tooltip.find("#torpedoMarkTrusted")[0]).click(function (event) {
-    chrome.storage.sync.get(null, function (r) {
-      var arr = r.userDefinedDomains;
-      arr.push(torpedo.domain);
-      chrome.storage.sync.set({ userDefinedDomains: arr }, function () {
-        updateTooltip();
-      });
-    });
-  });
-  $(tooltip.find("#torpedoGoogle")[0]).click(function (event) {
-    chrome.runtime.sendMessage({ name: "google", url: torpedo.domain });
-  });
-  $(tooltip.find("#torpedoOpenSettings")[0]).click(function (event) {
-    chrome.runtime.sendMessage({ name: "settings" });
-  });
-  $(tooltip.find("#torpedoOpenTutorial")[0]).click(function (event) {
-    chrome.runtime.sendMessage({ name: "tutorial" });
+  // Hide context‐menu when clicking anywhere else inside tooltip
+  tooltip.addEventListener("click", (event) => {
+    if (contextMenu && contextMenu.style.display === "block") {
+      if (!event.target.closest("#torpedoContextMenu")) {
+        contextMenu.style.display = "none";
+      }
+    }
   });
 
-  $(tooltip.find("#torpedoInfoText")[0]).click(function (event) {
-    $(tooltip.find("#torpedoInfoDiv")[0]).toggle();
+  // add torpedo domain to user defined domains
+  onClick("#torpedoMarkTrusted", async () => {
+    const { userDefinedDomains = [] } = await browser.storage.sync.get("userDefinedDomains");
+    const arr = [...userDefinedDomains, torpedo.domain];
+    await browser.storage.sync.set({ userDefinedDomains: arr });
+    updateTooltip();
+  })
+
+  // send message to background script to check domain on google
+  onClick("#torpedoGoogle", () => {
+    browser.runtime.sendMessage({ name: "google", url: torpedo.domain });
+  })
+
+  onClick("#torpedoOpenSettings", () => {
+    browser.runtime.sendMessage({ name: "settings" });
+  })
+
+  onClick("#torpedoOpenTutorial", () => {
+    browser.runtime.sendMessage({ name: "tutorial" });
   });
-  $(tooltip.find("#torpedoAdviceText")[0]).click(function (event) {
-    $(tooltip.find("#torpedoAdviceDiv")[0]).toggle();
-  });
-  $(tooltip.find("#torpedoMoreInfoButton")[0]).click(function (event) {
-    openInfoImage(event);
-  });
-  $(tooltip.find("#torpedoRedirectButton")[0]).click(function (event) {
+
+  // show/hide advice text
+  onClick("#torpedoInfoText", () => {
+    const infoDiv = tooltip.querySelector("#torpedoInfoDiv");
+    if (infoDiv) {
+      infoDiv.style.display = getComputedStyle(infoDiv).display === "none" ? "block" : "none";
+    }
+  })
+
+  onClick("#torpedoAdviceText", () => {
+    const adviceDiv = tooltip.querySelector("#torpedoAdviceDiv");
+    if (adviceDiv) {
+        adviceDiv.style.display = getComputedStyle(adviceDiv).display === "none" ? "block" : "none";
+    }
+  })
+
+  onClick("#torpedoMoreInfoButton", (event) => {openInfoImage(event)})
+
+  onClick("#torpedoRedirectButton", async (event) => {
     resolveRedirect(event);
-    torpedo.api.get("hide.event", "onfocus");
-  });
+    torpedo.api.hide();
+  })
 
-  $(tooltip.find("#torpedoActivateLinkButton")[0]).prop("disabled", true);
+  const activateBtn = tooltip.querySelector("#torpedoActivateLinkButton");
+  if (activateBtn) activateBtn.disabled = true;
+}
+
+function setHTML(selector, hmtl) {
+  const el = torpedo.tooltip.querySelector(selector);
+  if (el) el.innerHTML = hmtl;
+}
+
+function hide(selector) {
+    const el = torpedo.tooltip.querySelector(selector);
+    if (el) el.style.display = "none";
+}
+
+function show(selector) {
+    const el = torpedo.tooltip.querySelector(selector);
+    if (el) el.style.display = "block";
+}
+
+function setStyle(selector, styleObj) {
+  const el = torpedo.tooltip.querySelector(selector);
+  if (el) {
+    Object.assign(el.style, styleObj);
+  }
 }
 
 function assignText(state, url, tooltip) {
   // get texts from textfile
-  var button = chrome.i18n.getMessage("ButtonWeiterleitung");
-  var activateLinkButton = chrome.i18n.getMessage("LinkAktivierung");
-  var ueberschrift = chrome.i18n.getMessage(state + "Ueberschrift");
-  var erklaerung = chrome.i18n.getMessage(state + "Erklaerung");
-  var mehrInfo = chrome.i18n.getMessage("MehrInfo");
-  var infotext = chrome.i18n
-    .getMessage(state + "Infotext")
-    .replace("<URL>", url);
-  var infoCheck = chrome.i18n.getMessage("Info");
-  var gluehbirneText = chrome.i18n.getMessage(state + "GluehbirneText");
-  var gluehbirneInfo = chrome.i18n.getMessage("mehrInfoGluehbirne");
-  var linkDeaktivierung = chrome.i18n.getMessage(state + "LinkDeaktivierung");
+  const button = browser.i18n.getMessage("ButtonWeiterleitung");
+  const activateLinkButton = browser.i18n.getMessage("LinkAktivierung");
+  const ueberschrift = browser.i18n.getMessage(state + "Ueberschrift");
+  const erklaerung = browser.i18n.getMessage(state + "Erklaerung");
+  const mehrInfo = browser.i18n.getMessage("MehrInfo");
+  const infotext = browser.i18n.getMessage(state + "Infotext").replace("<URL>", url);
+  const infoCheck = browser.i18n.getMessage("Info");
+  const gluehbirneText = browser.i18n.getMessage(state + "GluehbirneText");
+  const gluehbirneInfo = browser.i18n.getMessage("mehrInfoGluehbirne");
+  const linkDeaktivierung = browser.i18n.getMessage(state + "LinkDeaktivierung");
 
-  // assign texts
-  $(tooltip.find("#torpedoWarningText")[0]).html(ueberschrift);
-  $(tooltip.find("#torpedoSecurityStatus")[0]).html(erklaerung);
-  $(tooltip.find("#torpedoAdviceText")[0]).html(gluehbirneInfo);
-  $(tooltip.find("#torpedoMoreAdvice")[0]).html(gluehbirneText);
-  $(tooltip.find("#torpedoInfoText")[0]).html(mehrInfo);
-  $(tooltip.find("#torpedoMoreInfo")[0]).html(infotext);
-  $(tooltip.find("#torpedoRedirectButton")[0]).html(button);
-  $(tooltip.find("#torpedoActivateLinkButton")[0]).html(activateLinkButton);
-  $(tooltip.find("#torpedoLinkDelay")[0]).html(linkDeaktivierung);
-  $(tooltip.find("#torpedoMoreInfoButton")[0]).html(infoCheck);
+  setHTML("#torpedoWarningText", ueberschrift);
+  setHTML("#torpedoSecurityStatus", erklaerung);
+  setHTML("#torpedoAdviceText", gluehbirneInfo);
+  setHTML("#torpedoMoreAdvice", gluehbirneText);
+  setHTML("#torpedoInfoText", mehrInfo);
+  setHTML("#torpedoMoreInfo", infotext);
+  setHTML("#torpedoRedirectButton", button);
+  setHTML("#torpedoActivateLinkButton", activateLinkButton);
+  setHTML("#torpedoLinkDelay", linkDeaktivierung);
+  setHTML("#torpedoMoreInfoButton", infoCheck);
 
-  // hide certain elements
-  $(tooltip.find("#torpedoWarningImage")[0]).hide();
-  $(tooltip.find("#torpedoWarningImage2")[0]).hide();
-  $(tooltip.find("#torpedoTimer")[0]).hide();
-  $(tooltip.find("#torpedoInfoDiv")[0]).hide();
-  $(tooltip.find("#torpedoLinkDelay")[0]).hide();
-  $(tooltip.find("#torpedoAdvice")[0]).hide();
-  $(tooltip.find("#torpedoAdviceDiv")[0]).hide();
-  $(tooltip.find("#torpedoMoreInfoButton")[0]).hide();
-  $(tooltip.find("#torpedoRedirectButton")[0]).hide();
-  $(tooltip.find("#torpedoActivateLinkButton")[0]).hide();
+  const elementsToHide = [
+    "#torpedoWarningImage",
+    "#torpedoWarningImage2",
+    "#torpedoTimer",
+    "#torpedoInfoDiv",
+    "#torpedoLinkDelay",
+    "#torpedoAdvice",
+    "#torpedoAdviceDiv",
+    "#torpedoMoreInfoButton",
+    "#torpedoRedirectButton",
+    "#torpedoActivateLinkButton"
+  ];
+  elementsToHide.forEach(hide);
 
-  // hide light bulb if no text is there
-  if (gluehbirneText) $(tooltip.find("#torpedoAdvice")[0]).show();
-  if (linkDeaktivierung) $(tooltip.find("#torpedoLinkDelay")[0]).show();
-  else {
-    $(tooltip.find("#torpedoInfo")[0]).css("margin-bottom", "0");
-    $(tooltip.find("#torpedoInfo")[0]).css("padding-bottom", "0");
+  if (gluehbirneText) show("#torpedoAdvice");
+  if (linkDeaktivierung) {
+    show("#torpedoLinkDelay");
+  } else {
+    setStyle("#torpedoInfo", {
+      marginBottom: "0",
+      paddingBottom: "0"
+    });
   }
 }
 
 /**
  * fill the basic tooltip structure with corresponding texts
  */
-function updateTooltip() {
+async function updateTooltip() {
   // Values of sync storage (r) and local storage (re) are relevant for further processing
-  chrome.storage.sync.get(null, function (r) {
-    const secStatus = new Promise((resolve) => {
-      // check for security level
-      var state = getSecurityStatus(r);
-      resolve(state);
-    });
-    secStatus.then(function (state) {
-      var t = torpedo.tooltip;
-      var url = torpedo.url;
-      var pathname = torpedo.pathname;
 
-      if (pathname.length > 100) {
-        var replace = pathname.substring(0, 100) + "...";
-        url = url.replace(pathname, replace);
-      }
-      $(t.find("#torpedoURL")[0]).html(
-        url.replace(
-          torpedo.domain,
-          '<span id="torpedoDomain">' + torpedo.domain + "</span>"
-        )
-      );
+  const r = await browser.storage.sync.get(null);
+  const secStatus = getSecurityStatus(r);
 
-      assignText(state, url, t);
+  const t = torpedo.tooltip;
+  let url = torpedo.url;
+  const pathname = torpedo.pathname;
 
-      if (
-        r.referrerPart1.indexOf(torpedo.domain) > -1 ||
-        r.userDefinedDomains.indexOf(torpedo.domain) > -1 ||
-        r.trustedDomains.indexOf(torpedo.domain) > -1 ||
-        r.redirectDomains.indexOf(torpedo.domain) > -1
-      ) {
-        $(t.find("#torpedoMarkTrusted")[0]).hide();
-      } else $(t.find("#torpedoMarkTrusted")[0]).show();
+  if (pathname.length > 100) {
+    const shortenedPathname = pathname.substring(0, 100) + "...";
+    url = url.replace(pathname, shortenedPathname);
+  }
 
-      if (isRedirect(torpedo.domain) && r.privacyModeActivated) {
-        $(torpedo.tooltip.find("#torpedoRedirectButton")[0]).show();
-      }
+  const torpedoURL = t.querySelector("#torpedoURL");
+  if (torpedoURL) {
+    torpedoURL.innerHTML = url.replace(torpedo.domain,
+        '<span id="torpedoDomain">' + torpedo.domain + "</span>");
+  }
 
-      if (state == "T4") {
-        $(torpedo.tooltip.find("#torpedoActivateLinkButton")[0]).show();
-      }
+  assignText(secStatus, url, t);
 
-      $(t.find("#torpedoMarkTrusted")[0]).html(
-        chrome.i18n.getMessage("markAsTrusted")
-      );
-      $(t.find("#torpedoGoogle")[0]).html(chrome.i18n.getMessage("googleCheck"));
-      $(t.find("#torpedoOpenSettings")[0]).html(
-        chrome.i18n.getMessage("openSettings")
-      );
-      $(t.find("#torpedoOpenTutorial")[0]).html(
-        chrome.i18n.getMessage("openTutorial")
-      );
+  const domain = torpedo.domain;
+  const shouldHideTrusted = r.referrerPart1?.includes(domain) ||
+    r.userDefinedDomains?.includes(domain) ||
+    r.trustedDomains?.includes(domain) ||
+    r.redirectDomains?.includes(domain);
 
-      $(".torpedoTooltip").removeClass(
-        "torpedoUserDefined torpedoTrusted torpedoPhish"
-      );
-      const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+  const markTrustedEl = t.querySelector("#torpedoMarkTrusted");
+    if (markTrustedEl) {
+      markTrustedEl.style.display = shouldHideTrusted ? "none" : "block";
+      markTrustedEl.textContent = browser.i18n.getMessage("markAsTrusted");
+    }
 
-      if (isTimerActivated(r, state)) {
-        countdown(r.timer, state, eventTypes);
-      } else {
-        reactivateLink(torpedo.target, eventTypes);
-      }
+  const redirectBtn = t.querySelector("#torpedoRedirectButton");
+  if (redirectBtn) {
+    if (isRedirect(domain) && r.privacyModeActivated) {
+      redirectBtn.style.display = "block";
+    } else {
+      redirectBtn.style.display = "none";
+    }
+  }
 
-      switch (state) {
-        case "T2":
-          $(".torpedoTooltip").addClass("torpedoUserDefined");
-          break;
-        case "T1":
-          $(".torpedoTooltip").addClass("torpedoTrusted");
-          $(t.find("#torpedoMarkTrusted")[0]).show();
-          break;
-        case "T32":
-          $(t.find("#torpedoMarkTrusted")[0]).show();
-          $(t.find("#torpedoWarningImage2")[0]).show();
-          $(t.find("#torpedoWarningText")[0]).show();
-          break;
-        default:
-          break;
-      }
-      deactivateLoader();
-    });
-  });
+  const activateBtn = t.querySelector("#torpedoActivateLinkButton");
+  if (activateBtn) {
+    if (secStatus === "T4") {
+      activateBtn.style.display = "block";
+    } else {
+      activateBtn.style.display = "none";
+    }
+  }
+
+  const googleBtn = t.querySelector("#torpedoGoogle");
+  if (googleBtn) {
+    googleBtn.textContent = browser.i18n.getMessage("googleCheck");
+  }
+
+  const settingsBtn = t.querySelector("#torpedoOpenSettings");
+  if (settingsBtn) {
+    settingsBtn.textContent = browser.i18n.getMessage("openSettings");
+  }
+
+  const tutorialBtn = t.querySelector("#torpedoOpenTutorial");
+  if (tutorialBtn) {
+    tutorialBtn.textContent = browser.i18n.getMessage("openTutorial");
+  }
+
+  const tooltipRoot = document.querySelector(".tippy-content");
+  if (tooltipRoot) {
+    tooltipRoot.classList.remove("torpedoUserDefined", "torpedoTrusted", "torpedoPhish");
+
+    switch (secStatus) {
+      case "T2":
+        tooltipRoot.classList.add("torpedoUserDefined");
+        break;
+      case "T1":
+        tooltipRoot.classList.add("torpedoTrusted");
+        if (markTrustedEl) markTrustedEl.style.display = "block";
+        break;
+      case "T32":
+        if (markTrustedEl) markTrustedEl.style.display = "block";
+        const warningImg = t.querySelector("#torpedoWarningImage2");
+        const warningText = t.querySelector("#torpedoWarningText");
+        if (warningImg) warningImg.style.display = "block";
+        if (warningText) warningText.style.display = "block";
+        break;
+      default:
+        break;
+    }
+  }
+
+  const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+
+  if (isTimerActivated(r, secStatus)) {
+    countdown(r.timer, secStatus, eventTypes);
+  } else {
+    reactivateLink(torpedo.target, eventTypes);
+  }
+
+  deactivateLoader();
 }
 
 /**
@@ -371,20 +431,22 @@ function processClick() {
 }
 
 function onlyShowLoader() {
-  const tooltip = torpedo.tooltip[0];
+  document.querySelectorAll(".torpedoTooltip > div > *").forEach(el => el.classList.add("loader-active"));
 
-  $(".torpedoTooltip>div>*").addClass("loader-active");
-  $(".torpedoTooltip>div>.loader-bg").addClass("transparent-bg");
-  $(".loader").addClass("loader-active");
+  const loaderBg = document.querySelector('.torpedoTooltip > div > .loader-bg');
+  if (loaderBg) loaderBg.classList.add("transparent-bg");
+
+  document.querySelectorAll(".loader").forEach(el => el.classList.add("loader-active"));
 }
 
 function showLoaderWithOverlay() {
-  $(".loader-bg").addClass("loader-active");
+  const overlay = document.querySelector('.loader-bg');
+  if (overlay) overlay.classList.add("loader-active");
 }
 
 function deactivateLoader() {
-  const tooltip = torpedo.tooltip[0];
+  document.querySelectorAll(".torpedoTooltip > div > *").forEach(el => el.classList.remove("loader-active"));
 
-  $(".torpedoTooltip>div>*").removeClass("loader-active");
-  $(".torpedoTooltip>div>.loader-bg").removeClass("transparent-bg");
+  const loaderBg = document.querySelector(".torpedoTooltip > div > .loader-bg");
+  if (loaderBg) loaderBg.classList.remove("transparent-bg");
 }
