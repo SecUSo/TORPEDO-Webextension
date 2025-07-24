@@ -1,17 +1,3 @@
-var torpedo = torpedo || {};
-torpedo.target = null;
-torpedo.api = null;
-torpedo.uri = "";
-torpedo.url = "";
-torpedo.domain = "";
-torpedo.pathname = "";
-torpedo.publicsuffixlist = "";
-torpedo.event;
-torpedo.location;
-torpedo.opened = false;
-torpedo.progUrl = false;
-torpedo.hasTooltip = false;
-
 $(document).ready(function () {
   chrome.runtime.sendMessage({ name: "TLD" }, function (r) {
     torpedo.publicSuffixList.parse(r, punycode.toASCII);
@@ -145,70 +131,43 @@ function openTooltip(e, type) {
         }
       });
 
-      // open the qTip
-      $(torpedo.target).qtip({
-        id: "torpedo",
-        content: {
-          text: tooltipText(url),
-          button: true,
-        },
-        show: {
-          event: e.type,
-          ready: true,
-          solo: true,
-          delay: 20,
-        },
-        hide: {
-          fixed: true,
-          event: "mouseleave",
-          delay: 200,
-        },
-        position: {
-          my: "top left",
-          at: "bottom left",
-          viewport: true,
-          target: $(torpedo.target),
-          adjust: {
-            y: 0,
-            x: 0,
-            mouse: false,
-            method: "flip flip",
-            resize: true,
-          },
-        },
-        style: {
-          tip: false,
-          classes: "torpedoTooltip",
-        },
-        events: {
-          render: function (event, api) {
-            torpedo.api = api;
-            torpedo.tooltip = api.elements.content;
+      const instance = tippy(torpedo.target, {
+        allowHTML: true,
+        content: tooltipText(),
+        interactive: true,
 
-            preventClickEvent(torpedo.tooltip.find("#torpedoURL")[0], ["click"]);
-            
-            $(torpedo.tooltip).on("mouseenter", function () {
-              torpedo.opened = true;
-            });
+        trigger: "mouseenter",
+        appendTo: document.body,
+        delay: [20, 200],
 
-            $(torpedo.tooltip).on("mouseleave", function () {
-              torpedo.opened = false;
-            });
+        placement: "bottom-start",
+        arrow: false,
+        theme: "torpedoTooltip",
 
-            // set the icon to "OK", because TORPEDO works on this page
-            chrome.runtime.sendMessage({ name: "ok" });
+        onShow: (inst) => {
+          tippy.hideAll({ exclude: inst });
 
-            // init the tooltip elements and texts
-            initTooltip();
-            updateTooltip();
-          },
-          hide: function () {
-            if (torpedo.timerInterval != null) {
-              clearInterval(torpedo.timerInterval);
-            }
-          },
+          torpedo.api = inst;
+          torpedo.tooltip = inst.popper.querySelector(".tippy-content");
+
+          const urlEl = torpedo.tooltip.querySelector("#torpedoURL");
+          preventClickEvent(urlEl, ["click"]);
+
+          torpedo.tooltip.addEventListener("mouseenter", () => { torpedo.opened = true; });
+          torpedo.tooltip.addEventListener("mouseleave", () => { torpedo.opened = false; });
+
+          browser.runtime.sendMessage({ name: "ok" });
+          initTooltip(torpedo.target);
+          updateTooltip(torpedo.target);
         },
+        onHide: () => {
+          if (torpedo.timerInterval) {
+            clearInterval(torpedo.timerInterval);
+          }
+        }
       });
+
+      instance.show();
     } catch (err) {
       console.log(torpedo.target.href);
       console.log(err);
