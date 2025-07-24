@@ -1,4 +1,4 @@
-.torpedoTooltip {
+.tippy-box[data-theme~="torpedoTooltip"] .tippy-content {
   border: solid 0.3rem #bfb9b9;
   border-radius: 5px;
   background-color: white;
@@ -30,11 +30,6 @@
 }
 #torpedoContextMenu li:hover {
   background-color: #cce0ff;
-}
-.qtip-content {
-  background-color: white !important;
-  min-height: 100px;
-  position: relative;
 }
 div.torpedoTooltip div.torpedoTooltip div,
 div.torpedoTooltip span,
@@ -170,11 +165,11 @@ div.torpedoTooltip table {
 .torpedoTooltip div {
   padding-bottom: 10px;
 }
-.torpedoTooltip p {
+.tippy-box[data-theme~="torpedoTooltip"] .tippy-content p {
   overflow: hidden !important;
   color: black !important;
 }
-.torpedoTooltip img {
+.tippy-box[data-theme~="torpedoTooltip"] .tippy-content img {
   float: left;
   width: 25px;
   height: 25px;
@@ -189,14 +184,14 @@ div.torpedoTooltip table {
   margin-bottom: 0px !important;
   margin-right: 2px;
 }
-.torpedoTrusted {
+.tippy-box[data-theme~="torpedoTooltip"] .torpedoTrusted {
   border: 0.3rem solid green !important;
 }
-.torpedoUserDefined {
+.tippy-box[data-theme~="torpedoTooltip"] .torpedoUserDefined {
   border: 0.3rem solid #1a509d !important;
 }
 
-.torpedoPhish {
+.tippy-box[data-theme~="torpedoTooltip"] .torpedoPhish {
   border: 0.3rem solid red !important;
 }
 
