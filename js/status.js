@@ -1,5 +1,3 @@
-var torpedo = torpedo || {};
-torpedo.state = "unknown";
 r = null;
 
 /**
