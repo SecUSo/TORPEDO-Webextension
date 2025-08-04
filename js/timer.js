@@ -25,24 +25,20 @@ function reactivateLink(eventTarget, eventTypes) {
 
 function reactivateTooltipURL(tooltipURL) {
   try {
-    tooltipURL.unbind("click");
-    tooltipURL.bind("click", function (event) {
-      event.preventDefault();
-      chrome.storage.sync.get(null, function (r) {
-        if (r.privacyModeActivated) {
-          chrome.runtime.sendMessage({
-            name: "open",
-            url: torpedo.oldUrl,
-          });
-        } else {
-          chrome.runtime.sendMessage({ name: "open", url: torpedo.url });
-        }
-      });
+    const clone = tooltipURL.cloneNode(true);
+    tooltipURL.parentNode.replaceChild(clone, tooltipURL);
+
+    tooltipURL.addEventListener("click", async function (event) {
+      event.preventDefault()
+      const storage = await browser.storage.sync.get();
+      const urlToOpen = storage.privacyModeActivated ? torpedo.oldUrl : torpedo.url;
+      browser.runtime.sendMessage({name: "open", url: urlToOpen});
       processClick();
       return false;
-    });
+    })
+
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
 }
 
@@ -64,26 +60,31 @@ function isTimerActivated(storage, securityStatus) {
 function countdown(time, state, clickLinkEventTypes) {
   if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
 
-  var tooltip = torpedo.tooltip;
+  const tooltip = torpedo.tooltip;
 
-  $(tooltip.find("#torpedoTimer")[0]).show();
+  const timerEl = tooltip.querySelector("#torpedoTimer");
+  timerEl.style.display = "block";
 
   /**
    * assert time to tooltip text
    */
   function showTime() {
     try {
-      tooltip.find("#torpedoTimer")[0].textContent = chrome.i18n.getMessage("verbleibendeZeit", "" + time);
+      const t = tooltip.querySelector("#torpedoTimer");
+      t.textContent = browser.i18n.getMessage("verbleibendeZeit", "" + time);
     } catch (e) {}
   }
 
-  $(torpedo.target).addClass("torpedoTimerShowing");
+  torpedo.target.classList.add("torpedoTimerShowing");
+  
 
   const onWebsite = new URL(window.location.href);
   if (onWebsite.hostname === "owa.kit.edu") {
-    $(
-      "div._rp_U4.ms-font-weight-regular.ms-font-color-neutralDark.rpHighlightAllClass.rpHighlightBodyClass"
-    ).unbind("click");
+    document.querySelectorAll("div._rp_U4.ms-font-weight-regular.ms-font-color-neutralDark.rpHighlightAllClass.rpHighlightBodyClass").
+    forEach(el => {
+      const clone = el.cloneNode(true);
+        el.parentNode.replaceChild(clone, el);
+    })
     // document.removeEventListener('click', getEventListeners(document).click[0].listener)
     /* 
       once script from owa can be used to remove eventlistener properly - insert here
@@ -93,16 +94,16 @@ function countdown(time, state, clickLinkEventTypes) {
   showTime();
   if (time > 0) time--;
 
-  var timerInterval = setInterval(function timer() {
+  const timerInterval = setInterval(function timer() {
     showTime();
-    if (time == 0) {
+    if (time === 0) {
       clearInterval(timerInterval);
-      if (!isRedirect(torpedo.domain) && state != "T4" && state != "T4a") {
-        $(torpedo.target).addClass("torpedoTimerFinished");
+      if (!isRedirect(torpedo.domain) && state !== "T4" && state !== "T4a") {
+        torpedo.target.classList.add("torpedoTimerFinished");
       }
 
       reactivateLink(torpedo.target, clickLinkEventTypes);
-      reactivateTooltipURL($(tooltip.find("#torpedoURL")[0]));
+      reactivateTooltipURL(tooltip.querySelector("#torpedoURL"));
     } else {
       --time;
     }
