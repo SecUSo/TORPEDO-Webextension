@@ -64,12 +64,11 @@
         "css/loader/loader.css"
       ],
       "js": [
+        "js/floating-ui.core.umd.min.js",
+        "js/floating-ui.dom.umd.min.js",
         "js/browser-polyfill.min.js",
-        "js/popper.min.js",
-        "js/tippy-bundle.umd.min.js",
         "js/torpedo.js",
         "js/jquery.min.js",
-        "js/jquery.qtip.js",
         "js/punycode.js",
         "js/contentscript.js",
         "js/publicsuffixlist.js",
