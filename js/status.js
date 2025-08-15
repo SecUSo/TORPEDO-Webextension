@@ -51,18 +51,13 @@ function getSecurityStatus(storage) {
   }
 }
 
-/**
- * checks if link contains a tooltip
- * @param eventTarget
- * @return url from tooltip or <HAS_NO_TOOLTIP> if there is no tooltip
+/*
+ * Checks if the eventTarget has a programmed tooltip. If yes, it returns the tooltip URL.
+ * If not, it returns "<HAS_NO_TOOLTIP>".
  */
 
 function hasTooltip(eventTarget) {
-  if (eventTarget.hasAttribute("title")) {
-    tooltipURL = eventTarget.getAttribute("title");
-    return tooltipURL;
-  }
-  return "<HAS_NO_TOOLTIP>";
+    return eventTarget.getAttribute("title") ?? "<HAS_NO_TOOLTIP>";
 }
 
 function isRedirect(url) {
@@ -146,14 +141,15 @@ function inUserList(url) {
   return false;
 }
 
+const IPV4_REGEX = new RegExp(
+    /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$/
+);
+
+/*
+ * Checks if the given address is a valid IPv4 address.
+ */
 function isIP(address) {
-  const ipWithProtocol = new RegExp(
-    "^http[s]?://((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])"
-  );
-  const ipWithoutProtocol = new RegExp(
-    "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])"
-  );
-  return ipWithProtocol.test(address) || ipWithoutProtocol.test(address);
+    return IPV4_REGEX.test(address);
 }
 
 function getSimilarTrustedList() {
