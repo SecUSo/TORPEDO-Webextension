@@ -371,35 +371,34 @@ function extractTLDfromDomain(domain) {
   return domainTLD;
 }
 
-/**
- * get domain out of hostname
+/*
+ * Extracts the domain from a URL, using the public suffix list if available. If the URL is an IP address
+ * or if the public suffix list does not return a valid domain, it returns the original URL.
  */
 function extractDomain(url) {
-  if (isIP(url)) {
-    return url;
-  } else {
-    var psl = torpedo.publicSuffixList.getDomain(url);
-    // psl empty -> url is already a valid domain
-    return psl != "" ? psl : url;
-  }
+    if (isIP(url)) {
+        return url;
+    }
+
+    const psl = torpedo.publicSuffixList.getDomain(url);
+    return psl || url;
 }
 
-/**
- * set given url as new global torpedo url
+/*
+ * Sets the incoming URL as the new torpedo URL.
  */
 function setNewUrl(uri) {
-  if (uri.hostname.slice(-1) === ".")
-    uri = new URL(
-      `${uri.href.replace(uri.hostname, uri.hostname.slice(0, -1))}`
-    );
-  torpedo.uri = uri;
-  torpedo.url = uri.href;
-  torpedo.domain = extractDomain(uri.hostname);
-  var index = torpedo.url.indexOf(torpedo.domain);
-  torpedo.pathname = torpedo.url.substring(
-    index + torpedo.domain.length,
-    torpedo.url.length
-  );
+    let normalizedUri = uri;
+
+    if (normalizedUri.hostname.endsWith(".")) {
+        const newHref = normalizedUri.href.replace(normalizedUri.hostname, normalizedUri.hostname.slice(0, -1));
+        normalizedUri = new URL(newHref);
+    }
+
+    torpedo.uri = normalizedUri;
+    torpedo.url = normalizedUri.href;
+    torpedo.domain = extractDomain(normalizedUri.hostname);
+    torpedo.pathname = normalizedUri.pathname + normalizedUri.search + normalizedUri.hash;
 }
 
 /**
@@ -445,6 +444,7 @@ function showLoaderWithOverlay() {
 }
 
 function deactivateLoader() {
+  document.querySelectorAll(".torpedoTooltip > *").forEach(el => el.classList.remove("loader-active"));
   document.querySelectorAll(".torpedoTooltip > div > *").forEach(el => el.classList.remove("loader-active"));
 
   const loaderBg = document.querySelector(".torpedoTooltip > div > .loader-bg");
