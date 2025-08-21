@@ -51,7 +51,7 @@
         if ( !hostname || hostname.charAt(0) === '.' ) {
             return '';
         }
-        hostname = hostname.toLowerCase();
+        hostname = String(hostname).toLowerCase();
         var suffix = getPublicSuffix(hostname);
         if ( suffix === hostname ) {
             return '';
@@ -157,7 +157,7 @@
         // http://publicsuffix.org/list/:
         // "... all rules must be canonicalized in the normal way
         // for hostnames - lower-case, Punycode ..."
-        text = text.toLowerCase();
+        text = String(text).toLowerCase();
     
         var lineBeg = 0, lineEnd;
         var textEnd = text.length;
