@@ -1,167 +1,139 @@
-r = null;
-
 /**
- * determine security status of domain by
- * looking up trusted, redirect, and user defined domains
+ * Determines the security status of the current domain.
  */
-function getSecurityStatus(storage) {
-  r = storage;
+async function getSecurityStatus(storage) {
+    let referrerURL = matchReferrer(torpedo.url, storage);
 
-  let referrerURL = matchReferrer(torpedo.url);
+    while (referrerURL !== "<NO_RESOLVED_REFERRER>") {
+        try {
+            const href = new URL(referrerURL);
+            TooltipManager.setNewUrl(href);
+        } catch (e) { }
 
-  while (referrerURL != "<NO_RESOLVED_REFERRER>") {
-    try {
-      const href = new URL(referrerURL);
-      setNewUrl(href);
-    } catch (e) {}
+        referrerURL = matchReferrer(torpedo.url, storage);
+        torpedo.countRedirect++;
+    }
 
-    referrerURL = matchReferrer(torpedo.url);
-    torpedo.countRedirect++;
-  }
-  if (isRedirect(torpedo.domain)) {
-    // short url
-    torpedo.countShortURL++;
-    if (!r.privacyModeActivated) {
-      resolveRedirect(event);
-      return "URLnachErmittelnButtonPrivacyMode";
+    if (await isRedirect(torpedo.domain)) {
+        torpedo.countShortURL++;
+        if (!storage.privacyModeActivated) {
+            resolveRedirect();
+            return "URLnachErmittelnButtonPrivacyMode";
+        }
+        return "URLnachErmittelnButton2";
     }
-    return "URLnachErmittelnButton2";
-  } else if (inTrusted(torpedo.domain)) {
-    return "T1";
-  } else if (inUserList(torpedo.domain)) {
-    return "T2";
-  } else if (torpedo.progUrl || torpedo.hasTooltip || isIP(torpedo.url)) {
-    return "T32";
-  } else if (torpedo.countRedirect == 0) {
-    if (isMismatch(torpedo.domain)) {
-      return "T32";
-    } else {
-      return "T31";
+
+    if (inTrusted(torpedo.domain, storage)) return "T1";
+    if (inUserList(torpedo.domain, storage)) return "T2";
+    if (torpedo.progUrl || torpedo.hasTooltip || isIP(torpedo.domain)) return "T32";
+
+    if (torpedo.countRedirect === 0) {
+        return isMismatch(torpedo.domain) ? "T32" : "T31";
     }
-  } else {
-    if (r.redirectModeActivated) {
-      if (!isMismatch(torpedo.domain)) {
-        return "T31";
-      } else {
-        return "T32";
-      }
-    } else {
-      return "T32";
-    }
-  }
+
+    return storage.redirectModeActivated && !isMismatch(torpedo.domain) ? "T31" : "T32";
 }
 
-/*
- * Checks if the eventTarget has a programmed tooltip. If yes, it returns the tooltip URL.
- * If not, it returns "<HAS_NO_TOOLTIP>".
+/**
+ * Checks if the target element has a programmed tooltip.
  */
-
 function hasTooltip(eventTarget) {
     return eventTarget.getAttribute("title") ?? "<HAS_NO_TOOLTIP>";
 }
 
-function isRedirect(url) {
-  var lst = r.redirectDomains;
-  for (var i = 0; i < lst.length; i++) {
-    if (lst[i].indexOf(url) > -1) return true;
-  }
-  return false;
+/**
+ * Checks if a URL is a known redirector.
+ */
+async function isRedirect(url) {
+    try {
+        const { redirectDomains = [] } = await browser.storage.sync.get("redirectDomains");
+        return redirectDomains.some(domain => domain.includes(url));
+    } catch (e) { }
 }
 
+/**
+ * Checks if a string is a URL without a protocol.
+ */
 function isURLwithoutProtocol(string) {
-  var isURLorDomainRegEx = /^(https?:\/\/)|^(www.)/;
-  var matchesURLorDomain = string.match(isURLorDomainRegEx);
-
-  if (matchesURLorDomain.length > 0) {
-    if (matchesURLorDomain[0] == "www.") {
-      return true;
-    }
-  }
-  return false;
+    return /^(?!https?:\/\/)www\./i.test(string);
 }
 
+/**
+ * Checks for a mismatch between the link text and the actual domain.
+ */
 function isMismatch(domain) {
-  try {
-    var displayedLinkText = torpedo.target.innerText;
-    if (isURLwithoutProtocol(displayedLinkText)) {
-      displayedLinkText = "http://" + displayedLinkText;
-    }
+    try {
+        let displayedLinkText = torpedo.target.innerText;
+        if (isURLwithoutProtocol(displayedLinkText)) {
+            displayedLinkText = "http://" + displayedLinkText;
+        }
 
-    const uri = new URL(displayedLinkText);
-    var displayedLinkTextDom = extractDomain(uri.hostname);
+        const uri = new URL(displayedLinkText);
+        const displayedLinkTextDom = TooltipManager.extractDomain(uri.hostname);
 
-    if (
-      displayedLinkTextDom != torpedo.oldDomain &&
-      displayedLinkTextDom != domain
-    ) {
-      return true;
+        return displayedLinkTextDom !== torpedo.oldDomain && displayedLinkTextDom !== domain;
+    } catch (e) {
+        return false;
     }
-  } catch (e) {
-    return false;
-  }
-  return false;
 }
 
+/**
+ * Compares the domains of two URLs.
+ */
 function isTooltipMismatch(tooltipURL, hrefURL) {
-  if (
-    tooltipURL == "" ||
-    tooltipURL == undefined ||
-    hrefURL == "" ||
-    hrefURL == undefined
-  ) {
-    return false;
-  }
-  try {
-    if (isURLwithoutProtocol(tooltipURL)) {
-      tooltipURL = "http://" + tooltipURL;
+    if (!tooltipURL || !hrefURL) return false;
+
+    try {
+        if (isURLwithoutProtocol(tooltipURL)) {
+            tooltipURL = "http://" + tooltipURL;
+        }
+
+        const hrefDomain = TooltipManager.extractDomain(hrefURL);
+        const tooltipDomain = TooltipManager.extractDomain(tooltipURL);
+        return tooltipDomain !== hrefDomain;
+
+    } catch (e) {
+        return false;
     }
-    var hrefDomain = extractDomain(hrefURL);
-    var tooltipDomain = extractDomain(tooltipURL);
-    return tooltipDomain != hrefDomain;
-  } catch (e) {
-    return false;
-  }
 }
 
-function inTrusted(domain) {
-  if (r.trustedListActivated) {
-    const lst = r.trustedDomains;
-    for (let i of lst) {
-      if (i.indexOf(domain) > -1) return true;
-    }
-  }
-  return false;
+/**
+ * Checks if a domain is in the trusted list.
+ */
+function inTrusted(domain, storage) {
+    return storage.trustedListActivated && storage.trustedDomains?.some(d => d.includes(domain));
 }
 
-function inUserList(url) {
-  var lst = r.userDefinedDomains;
-  for (var i = 0; i < lst.length; i++) {
-    if (lst[i].indexOf(url) > -1) return true;
-  }
-  return false;
+/**
+ * Checks if a domain is in the user-defined list.
+ */
+function inUserList(url, storage) {
+    return storage.userDefinedDomains?.some(d => d.includes(url));
 }
 
 const IPV4_REGEX = new RegExp(
     /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$/
 );
 
-/*
- * Checks if the given address is a valid IPv4 address.
+/**
+ * Checks if an address is a valid IPv4 address.
  */
 function isIP(address) {
     return IPV4_REGEX.test(address);
 }
 
-function getSimilarTrustedList() {
-  var similarTrustedList = r.similiarTrustedDomains;
-  var userList = r.userDefinedDomains;
 
-  for (var i = 0; i < userList.length; i++) {
-    var domainUserList = userList[i];
-    var similarDomain = domainUserList.replace("-", "");
+// unused methods for later features
+function getSimilarTrustedList(storage) {
+  let similarTrustedList = storage.similiarTrustedDomains;
+  let userList = storage.userDefinedDomains;
+
+  for (let i = 0; i < userList.length; i++) {
+    let domainUserList = userList[i];
+    let similarDomain = domainUserList.replace("-", "");
     similarTrustedList.push(domainUserList);
 
-    var regEx = /^[0-9]+$/;
+    const regEx = /^[0-9]+$/;
     similarDomain = similarDomain.replace(regEx, "");
 
     if (similarDomain.length >= 4) similarTrustedList.push(similarDomain);
@@ -175,13 +147,12 @@ function getSimilarTrustedList() {
  * @param url
  * @return {boolean}
  */
-
-function isDomainExtension(domain) {
+function isDomainExtension(domain, storage) {
   var domainWithoutTLD = domain.split(".")[0];
-  var similarTrustedList = getSimilarTrustedList();
+  var similarTrustedList = getSimilarTrustedList(storage);
 
-  var okDomainList = r.trustedDomains;
-  var userList = r.userDefinedDomains;
+  var okDomainList = storage.trustedDomains;
+  var userList = storage.userDefinedDomains;
 
   okDomainList = okDomainList.concat(userList);
   okDomainList = okDomainList.concat(similarTrustedList);
