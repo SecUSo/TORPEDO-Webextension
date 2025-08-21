@@ -1,20 +1,37 @@
+/**
+ * Global state object for the Torpedo extension.
+ */
 const torpedo = {
-    api: null,
+    // Counter for redirects.
     countRedirect: 0,
+    //
     countShortURL: 0,
-    domain: "",  // the domain of the target URL
-    event: null,
+    // The domain of the torpedo target link.
+    domain: "",
     hasTooltip: false,
+    // Timer to hide the tooltip.
+    hideTimer: null,
+    // The current location of the browser.
     location: null,
     oldDomain: "",
     oldUrl: "",
+    // Flag that indicating if the tooltip is currently open.
     opened: false,
-    pathname: "",  // the pathname of the target URL after the hostname
+    // The pathname of the URL.
+    pathname: "",
     progUrl: false,
+    // The public suffix list instance.
     publicSuffixList: "",
+    // The current security state of the target URL.
     state: "unknown",
-    target: null,  // target element for which the tooltip should be shown
-    tooltip: null,  // tippy html content
-    uri: "",  // URI object fot the target URL with protocol, host, port, pathname, search, hash, ...
-    url: ""  // the complete URL of the target element
+    // The DOM element for which the tooltip should be shown.
+    target: null,
+    // The timer interval for the countdown timer.
+    timerInterval: null,
+    // The tooltip DOM element.
+    tooltip: null,
+    // A URL object containing states like hostname, href, pathname, protocol, etc.
+    uri: "",
+    // The href of the URL object.
+    url: ""
 }
