@@ -59,7 +59,6 @@
       ],
       "css": [
         "css/all.min.css",
-        "css/jquery.qtip.min.css",
         "css/tooltip.css",
         "css/loader/loader.css"
       ],
