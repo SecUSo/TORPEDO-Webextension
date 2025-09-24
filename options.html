@@ -1,145 +1,174 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	  <meta charset="utf-8"/>
-  	<title id="title"></title>
-    <link type="text/css" rel="stylesheet" href="css/options.css" />
-  	<script type="text/javascript" src="js/jquery.min.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Torpedo Options</title>
+    <link rel="stylesheet" href="css/options.css" />
+
+    <script type="text/javascript" src="js/torpedo.js"></script>
+    <script type="text/javascript" src="js/browser-polyfill.min.js"></script>
   	<script type="text/javascript" src="js/publicsuffixlist.js"></script>
   	<script type="text/javascript" src="js/punycode.js"></script>
   	<script type="text/javascript" src="js/options.js"></script>
   	<script type="text/javascript" src="js/status.js"></script>
   	<script type="text/javascript" src="js/tooltip.js"></script>
-	</head>
-	<body>
-    <h1 id="options"></h1>
-    <div class="tabs">
-      <ul class="tab-links">
-          <li class="active"><a href="#tab1">Timer</a></li>
-          <li><a href="#tab2">Domains</a></li>
-          <li id="ref"><a href="#tab3">Redirect</a></li>
-		  <li id="ref"><a href="#tab4">Short-URL</a></li>
-      </ul>
+</head>
 
-      <div class="tab-content">
-          <div id="tab1" class="tab active">
-            <div>
-              <input id="timerCheckbox" class="left" type="checkbox">
-              <p id="timerCheckboxText" class="right"></p>
-            </div>
-            <div class="clear">
-              <p id="timerAmountText" class="left"></p>
-              <input id="timerInput" class="left right" type="number" value="3" min="0" max="100">
-              <p id="seconds" class="last"></p>
-            </div>
-            <div class="clear">
-              <div>
-                <input id="trustedTimerCheckbox" class="left" type="checkbox">
-                <p id="trustedTimerActivated" class="right"></p>
-              </div>
-            </div>
-            <div>
-              <div>
-                <input id="userTimerCheckbox" class="left" type="checkbox" >
-                <p id="userTimerActivated" class="right"></p>
-              </div>
-            </div>
-			<div>
-              <div>
-                <input id="privacyModeCheckbox" class="left" type="checkbox" >
-                <p id="privacyModeActivated" class="right"></p>
-              </div>
-            </div>
-			<div>
-              <div>
-                <input id="securityModeCheckbox" class="left" type="checkbox" >
-                <p id="securityModeActivated" class="right"></p>
-              </div>
-            </div>
-			<div>
-              <div>
-                <input id="redirectModeCheckbox" class="left" type="checkbox" >
-                <p id="redirectModeActivated" class="right"></p>
-              </div>
-            </div>
-          </div>
+<body>
+    <h1 id="options-title"></h1>
 
-          <div id="tab2" class="tab">
-            <p id="trustedListText"></p>
-            <div>
-              <input id="trustedListActivated" class="left" type="checkbox">
-              <p id="activateTrustedList" class="right"></p>
-            </div>
-            <div>
-              <button id="showTrustedDomains"></button>
-            </div>
-            <p id="userListText"></p>
-						<button id="editUserDefined"></button>
-            <div>
-            	<input id="userDefinedInput" type="text" autofocus/>
-              <button id="addUserDefined"></button>
-							<p id="errorAddUserDefined"></p>
-            </div>
-          </div>
+    <nav class="tabs">
+        <ul class="tab-links">
+            <li><a href="#tab1" class="active">Timer</a></li>
+            <li><a href="#tab2">Domains</a></li>
+            <li><a href="#tab3">Redirect</a></li>
+		    <li><a href="#tab4">Short-URL</a></li>
+            <li><a href="#tab5">Tooltip</a></li>
+        </ul>
+    </nav>
 
-         <div id="tab3" class="tab">
+    <div class="tab-content">
+        <div id="tab1" class="tab active">
+
+            <div class="form-group">
+                <input id="timerCheckbox" type="checkbox">
+                <label for="timerCheckbox" id="timerCheckboxText"></label>
+            </div>
+
+            <div class="form-group">
+                <label for="timerInput" id="timerAmountText"></label>
+                <input id="timerInput" type="number" value="3" min="0" max="100">
+                <span id="seconds"></span>
+            </div>
+
+            <div class="form-group">
+                <input id="trustedTimerCheckbox" type="checkbox">
+                <label for="trustedTimerCheckbox" id="trustedTimerActivated"></label>
+            </div>
+
+            <div class="form-group">
+                <input id="userTimerCheckbox" type="checkbox">
+                <label for="userTimerCheckbox" id="userTimerActivated"></label>
+            </div>
+
+            <div class="form-group">
+                <input id="privacyModeCheckbox" type="checkbox">
+                <label for="privacyModeCheckbox" id="privacyModeActivated"></label>
+            </div>
+
+            <div class="form-group">
+                <input id="securityModeCheckbox" type="checkbox">
+                <label for="securityModeCheckbox" id="securityModeActivated"></label>
+            </div>
+
+            <div class="form-group">
+                <input id="redirectModeCheckbox" type="checkbox">
+                <label for="redirectModeCheckbox" id="redirectModeActivated"></label>
+            </div>
+        </div>
+
+        <div id="tab2" class="tab">
+
+            <div class="form-section">
+                <h3 id="trustedListText"></h3>
+
+                <div class="form-group">
+                    <input id="trustedListActivated" type="checkbox">
+                    <label for="trustedListActivated" id="activateTrustedList"></label>
+                </div>
+
+                <button id="showTrustedDomains" class="button"></button>
+            </div>
+
+            <div class="form-section">
+                <h3 id="userListText"></h3>
+
+                <button id="editUserDefined" class="button"></button>
+                <div class="form-group">
+                    <input id="userDefinedInput" type="text" placeholder="e.g., example.com">
+                    <button id="addUserDefined" class="button-primary"></button>
+                </div>
+                <p id="errorAddUserDefined" class="error-message"></p>
+            </div>
+        </div>
+
+        <div id="tab3" class="tab">
             <p id="referrerDialog1"></p>
-	           <p id="referrerExample"></p>
- 	           <button id="addDefaultReferrer"></button>
+            <p id="referrerExample" class="code-example"></p>
+            <button id="addDefaultReferrer" class="button"></button>
+
             <table id="referrerList">
               <tr>
                 <th id="referrerListTitle"></th>
               </tr>
             </table>
-            <button id="clearReferrer"></button>
-            <p id="referrerHeadline"></p>
-            <p id="referrerDialog2"></p>
-			<p id="exampleReferrerHost"></p>
-            <input id="referrerInputHost" type="text" autofocus/>
-			<p id="exampleReferrerPath"></p>
-			<input id="referrerInputPath" type="text" autofocus/>
-			<p id="exampleReferrerAttribute"></p>
-			<input id="referrerInputAttribute" type="text" autofocus/>
-			<button id="addReferrerAttribute"></button>
-			<p id="errorAddReferrer"></p>
+            <button id="clearReferrer" class="button-danger"></button>
+
+            <div class="form-section">
+                <h3 id="referrerHeadline"></h3>
+                <p id="referrerDialog2"></p>
+                <div class="form-group-column">
+                    <label for="referrerInputHost" id="exampleReferrerHost"></label>
+                    <input id="referrerInputHost" type="text" placeholder="e.g., google.*">
+                    <label for="referrerInputPath" id="exampleReferrerPath"></label>
+                    <input id="referrerInputPath" type="text" placeholder="e.g., /url?">
+                    <label for="referrerInputAttribute" id="exampleReferrerAttribute"></label>
+                    <input id="referrerInputAttribute" type="text" placeholder="e.g., q=">
+                </div>
+                <button id="addReferrerAttribute" class="button-primary"></button>
+                <p id="errorAddReferrer" class="error-message"></p>
+            </div>
 		</div>
 		
 		<div id="tab4" class="tab">
+
             <p id="shortURLText"></p>
-            <p id="shortURLListText"></p>
-						<button id="editShortURL"></button>
-			<table id="shortURLList">
-              <tr>
-                <th id="shortURLListTitle"></th>
-              </tr>
+            <h3 id="shortURLListText"></h3>
+            <button id="editShortURL" class="button"></button>
+
+            <table id="shortURLList" class="data-table">
+                <tr>
+                    <th id="shortURLListTitle"></th>
+                </tr>
             </table>
-			<div>
-            	<input id="userDefinedShortURLInput" type="text" autofocus/>
-              <button id="addUserDefinedShortURL"></button>
-							<p id="errorAddUserDefinedShortURL"></p>
+
+            <div class="form-group">
+                <input id="userDefinedShortURLInput" type="text" placeholder="e.g., tiny.cc">
+                <button id="addUserDefinedShortURL" class="button-primary"></button>
             </div>
-         </div>
+            <p id="errorAddUserDefinedShortURL" class="error-message"></p>
+        </div>
+
+        <div id="tab5" class="tab">
+
+            <div class="form-group">
+                <input id="tooltipCheckbox" type="checkbox">
+                <label for="tooltipCheckbox" id="tooltipCheckboxText"></label>
+            </div>
+        </div>
     </div>
 
     <div id="optionButtons">
-      <button id="saveChanges"></button>
-      <button id="revertChanges"></button>
-      <button id="defaultSettings"></button>
+        <button id="saveChanges" class="button-primary"></button>
+        <button id="revertChanges" class="button"></button>
+        <button id="defaultSettings" class="button-danger"></button>
     </div>
 
-    <p id="statusSettings"></p>
-		<div>
-		<table id="trustedList">
+    <p id="statusSettings" class="status-message"></p>
+
+    <div class="list-container">
+		<table id="trustedList" class="data-table">
 			<tr>
 				<th id="trustedListTitle"></th>
 			</tr>
 		</table>
 
-		<table id="userList">
+		<table id="userList" class="data-table">
 			<tr>
 				<th id="userListTitle"></th>
 			</tr>
 		</table>
 	</div>
-	</body>
+
+</body>
 </html>

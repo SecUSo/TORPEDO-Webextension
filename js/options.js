@@ -1,909 +1,769 @@
-changes = [];
-
-$(document).ready(function () {
-  $(".tabs .tab-links a").on("click", function (e) {
-    var currentAttrValue = $(this).attr("href");
-    // Show/Hide Tabs
-    $(".tabs " + currentAttrValue)
-      .show()
-      .fadeIn(400)
-      .siblings()
-      .hide();
-
-    // Change/remove current tab to active
-    $(this).parent("li").addClass("active").siblings().removeClass("active");
-    e.preventDefault();
-  });
-  $("li").on("click", function (e) {
-    $("#trustedList").hide();
-    $("#userList").hide();
-    $("#shortURLList").hide();
-    //$("#userShortURLList").hide();
-  });
-
-  $("#trustedList").hide();
-  $("#userList").hide();
-  $("#shortURLList").hide();
-  //$("#userShortURLList").hide();
-
-  addTexts();
-  init();
-  addEvents();
+document.addEventListener("DOMContentLoaded", async () => {
+    await OptionsPage.init();
 });
 
-/**
- * set texts of options page
- */
-function addTexts() {
-  // Title
-  $("#options").html(chrome.i18n.getMessage("options"));
-  $("#title").html(chrome.i18n.getMessage("options"));
+const OptionsPage = {
+    originalSettings: {},
 
-  // Timer tab
-  $("#timerCheckboxText").html(chrome.i18n.getMessage("timerActivated"));
-  $("#timerAmountText").html(chrome.i18n.getMessage("timerAmount"));
-  $("#seconds").html(chrome.i18n.getMessage("seconds"));
-  $("#trustedTimerActivated").html(
-    chrome.i18n.getMessage("activateTimerOnLowRisk")
-  );
-  $("#userTimerActivated").html(
-    chrome.i18n.getMessage("activateTimerOnUserList")
-  );
-  $("#privacyModeActivated").html(
-    chrome.i18n.getMessage("activatePrivacyMode")
-  );
-  $("#securityModeActivated").html(
-    chrome.i18n.getMessage("activateSecurityMode")
-  );
-  $("#redirectModeActivated").html(
-    chrome.i18n.getMessage("activateRedirectMode")
-  );
+    async init() {
+        this.setStaticTexts();
+        await this.loadAndApplySettings();
+        await this.attachEventListeners();
+    },
 
-  // Domains tab
-  $("#trustedListText").html(chrome.i18n.getMessage("lowRiskDomains"));
-  $("#activateTrustedList").html(chrome.i18n.getMessage("activateLowRiskList"));
-  $("#showTrustedDomains").html(chrome.i18n.getMessage("showLowRiskList"));
-  $("#userListText").html(chrome.i18n.getMessage("userDomains"));
-  $("#addUserDefined").html(chrome.i18n.getMessage("addEntries"));
-  $("#editUserDefined").html(chrome.i18n.getMessage("editUserList"));
+    async loadAndApplySettings() {
+        const settings = await browser.storage.sync.get(null);
+        this.originalSettings = { ...settings };
 
-  // Referrer tab
-  $("#referrerDialog1").html(chrome.i18n.getMessage("referrerInfo1"));
-  $("#referrerExample").html(chrome.i18n.getMessage("referrerExample"));
-  $("#referrerDialog2").html(chrome.i18n.getMessage("referrerInfo2"));
-  $("#referrerListTitle").html(chrome.i18n.getMessage("referrerList"));
-  $("#deleteReferrer").html(chrome.i18n.getMessage("deleteEntries"));
-  $("#clearReferrer").html(chrome.i18n.getMessage("clearEntries"));
-  $("#referrerHeadline").html(chrome.i18n.getMessage("addEntries"));
-  $("#addDefaultReferrer").html(chrome.i18n.getMessage("addDefaultReferrer"));
-  $("#addReferrerHost").html(chrome.i18n.getMessage("addEntries"));
-  $("#addReferrerPath").html(chrome.i18n.getMessage("addEntries"));
-  $("#addReferrerAttribute").html(chrome.i18n.getMessage("addEntries"));
-  $("#insertRandom").html(chrome.i18n.getMessage("insertRandom"));
-  $("#exampleReferrerHost").html(chrome.i18n.getMessage("exampleReferrerHost"));
-  $("#exampleReferrerPath").html(chrome.i18n.getMessage("exampleReferrerPath"));
-  $("#exampleReferrerAttribute").html(
-    chrome.i18n.getMessage("exampleReferrerAttribute")
-  );
+        // Timer tab
+        document.getElementById("timerInput").value = settings.timer;
+        document.getElementById("timerCheckbox").checked = settings.timer > 0;
+        document.getElementById("trustedTimerCheckbox").checked = settings.trustedTimerActivated;
+        document.getElementById("userTimerCheckbox").checked = settings.userTimerActivated;
+        document.getElementById("privacyModeCheckbox").checked = settings.privacyModeActivated;
+        document.getElementById("securityModeCheckbox").checked = settings.securityModeActivated;
+        document.getElementById("redirectModeCheckbox").checked = settings.redirectModeActivated;
 
-  // Redirection Short URL tab
-  $("#shortURLText").html(chrome.i18n.getMessage("shortURLInfo"));
-  $("#shortURLListText").html(chrome.i18n.getMessage("shortURLListText"));
-  $("#editShortURL").html(chrome.i18n.getMessage("editUserList"));
-  $("#addUserDefinedShortURL").html(chrome.i18n.getMessage("addEntries"));
+        // Domains tab
+        document.getElementById("trustedListActivated").checked = settings.trustedListActivated;
+        document.getElementById("showTrustedDomains").disabled = !settings.trustedListActivated;
 
-  // Additional buttons
-  $("#saveChanges").html(chrome.i18n.getMessage("saveChanges"));
-  $("#revertChanges").html(chrome.i18n.getMessage("revertChanges"));
-  $("#defaultSettings").html(chrome.i18n.getMessage("defaultSettings"));
+        // Referrer tab
+        document.getElementById("addDefaultReferrer").disabled = settings.referrerPart1?.includes("deref-gmx.net") &&
+            settings.referrerPart1?.includes("deref-web-02.de");
 
-  // Lists
-  $("#trustedListTitle").html(chrome.i18n.getMessage("trustedList"));
-  $("#userListTitle").html(chrome.i18n.getMessage("userList"));
-}
+        // Tooltip tab
+        document.getElementById("tooltipCheckbox").checked = settings.minimalTooltip;
 
-/**
- * initialize the options page
- */
-function init() {
-  chrome.storage.sync.get(null, function (r) {
-    // init changes for "revert changes" button
-    changes = [];
+        if (document.getElementById("referrerList")) await this.fillReferrerList();
+        if (document.getElementById("trustedList")) await this.fillTrustedList();
+        if (document.getElementById("userList")) await this.fillUserList();
+        if (document.getElementById("shortURLList")) await this.fillShortURLList();
 
-    // Timer tab
-    $("#timerCheckbox").prop("checked", r.timer > 0);
-    $("#timerInput").val(r.timer);
-    $("#trustedTimerCheckbox").prop("checked", r.trustedTimerActivated);
-    $("#userTimerCheckbox").prop("checked", r.userTimerActivated);
-    $("#privacyModeCheckbox").prop("checked", r.privacyModeActivated);
-    $("#securityModeCheckbox").prop("checked", r.securityModeActivated);
-    $("#redirectModeCheckbox").prop("checked", r.redirectModeActivated);
+        document.getElementById('statusSettings').textContent = '';
+        document.getElementById('errorAddUserDefined').textContent = '';
+        document.getElementById('errorAddReferrer').textContent = '';
+        document.getElementById('errorAddUserDefinedShortURL').textContent = '';
+    },
 
-    // Domains tab
-    $("#trustedListActivated").prop("checked", r.trustedListActivated);
-    $("#showTrustedDomains").prop("disabled", !r.trustedListActivated);
+    async attachEventListeners() {
+        // Tab navigation
+        document.querySelectorAll('.data-table').forEach(table => table.style.display = 'none');
 
-    // Referrer tab
-    var arr1 = r.referrerPart1;
-    var arr2 = r.referrerPart2;
-    var arr3 = r.referrerPart3;
-    var index1 = arr1.indexOf("deref-gmx.net");
-    var index2 = arr1.indexOf("deref-web-02.de");
-    var containsDefault = false;
-    if (index1 > -1 && index2 > -1) {
-      containsDefault =
-        arr2[index1] == "/mail/client/[...]/dereferrer/?" &&
-        arr2[index2] == "/mail/client/[...]/dereferrer/?";
-    }
-    if (document.getElementById("addDefaultReferrer"))
-      document.getElementById("addDefaultReferrer").disabled = containsDefault;
-    if (document.getElementById("referrerList")) fillReferrerList();
-
-    // Additional buttons
-    $("#statusSettings").html("");
-
-    // Additional lists
-    if (document.getElementById("trustedList")) fillTrustedList();
-    if (document.getElementById("userList")) fillUserList();
-    $("#errorAddUserDefined").html("");
-    if (document.getElementById("shortURLList")) fillShortURLList();
-  });
-}
-
-/**
- *   filling the options page elements with functionalities
- */
-function addEvents() {
-  chrome.storage.sync.get(null, function (r) {
-    // Timer tab
-    $("#timerCheckbox").on("change", function (e) {
-      save("timer", r.timer);
-      var checked = $(this).prop("checked");
-      if (!checked) {
-        chrome.storage.sync.set({ timer: 0 });
-        $("#timerInput").val("0");
-      } else {
-        chrome.storage.sync.set({ timer: 3 });
-        $("#timerInput").val("3");
-      }
-    });
-    $("#timerInput").on("change", function (e) {
-      save("timer", r.timer);
-      var timer = $(this).val();
-      chrome.storage.sync.set({ timer: timer });
-      if (timer == 0) $("#timerCheckbox").prop("checked", false);
-      else $("#timerCheckbox").prop("checked", true);
-    });
-    $("#trustedTimerCheckbox").on("change", function (e) {
-      save("trustedTimerActivated", r.trustedTimerActivated);
-      var checked = $(this).prop("checked");
-      chrome.storage.sync.set({ trustedTimerActivated: checked });
-    });
-    $("#userTimerCheckbox").on("change", function (e) {
-      save("userTimerActivated", r.userTimerActivated);
-      var checked = $(this).prop("checked");
-      chrome.storage.sync.set({ userTimerActivated: checked });
-    });
-
-    $("#privacyModeCheckbox").on("change", function (e) {
-      save("privacyModeActivated", r.privacyModeActivated);
-      var checked = $(this).prop("checked");
-      $("#securityModeCheckbox").prop("checked", !checked);
-      chrome.storage.sync.set({ privacyModeActivated: checked });
-      chrome.storage.sync.set({ securityModeActivated: !checked });
-    });
-
-    $("#securityModeCheckbox").on("change", function (e) {
-      save("securityModeActivated", r.securityModeActivated);
-      var checked = $(this).prop("checked");
-      $("#privacyModeCheckbox").prop("checked", !checked);
-      chrome.storage.sync.set({ securityModeActivated: checked });
-      chrome.storage.sync.set({ privacyModeActivated: !checked });
-    });
-
-    $("#redirectModeCheckbox").on("change", function (e) {
-      save("redirectModeActivated", r.redirectModeActivated);
-      var checked = $(this).prop("checked");
-      chrome.storage.sync.set({ redirectModeActivated: checked });
-    });
-
-    // Domains tab
-    $("#trustedListActivated").on("change", function (e) {
-      save("trustedListActivated", r.trustedListActivated);
-      var checked = $(this).prop("checked");
-      chrome.storage.sync.set({ trustedListActivated: checked });
-      if (!checked) $("#showTrustedDomains").prop("disabled", true);
-      else $("#showTrustedDomains").prop("disabled", false);
-    });
-    $("#showTrustedDomains").on("click", function (e) {
-      $("#userList").hide();
-      $("#trustedList").toggle();
-    });
-    $("#addUserDefined").on("click", function (e) {
-      addUserDefined();
-    });
-    $("#editUserDefined").on("click", function (e) {
-      $("#trustedList").hide();
-      $("#userList").toggle();
-    });
-
-    // Referrer tab
-    $("#clearReferrer").on("click", function (e) {
-      save("referrerPart1", r.referrerPart1);
-      save("referrerPart2", r.referrerPart2);
-      save("referrerPart3", r.referrerPart3);
-      var table = document.getElementById("referrerList");
-      $(table.getElementsByTagName("tbody")[0]).text(
-        chrome.i18n.getMessage("referrerList")
-      );
-      var arr1 = [];
-      var arr2 = [];
-      var arr3 = [];
-      chrome.storage.sync.set({ referrerPart1: arr1 });
-      chrome.storage.sync.set({ referrerPart2: arr2 });
-      chrome.storage.sync.set({ referrerPart3: arr3 });
-      init();
-    });
-    $("#addDefaultReferrer").on("click", function (e) {
-      addDefaultReferrer();
-    });
-
-    $("#addReferrerAttribute").on("click", function (e) {
-      addReferrer();
-      init();
-    });
-    $("#insertRandom").on("click", function (e) {
-      $("#referrerInput").val($("#referrerInput").val() + "[...]");
-    });
-
-    // Short-URL tab
-
-    $("#editShortURL").on("click", function (e) {
-      $("#userShortURLList").hide();
-      $("#shortURLList").toggle();
-    });
-    $("#addUserDefinedShortURL").on("click", function (e) {
-      addShortURL();
-    });
-    $("#editUserDefinedShortURL").on("click", function (e) {
-      $("#shortURLList").hide();
-      $("#userShortURLList").toggle();
-    });
-
-    // Additional buttons
-    $("#saveChanges").on("click", function (e) {
-      changes = [];
-      $("#statusSettings").html(chrome.i18n.getMessage("savedChanges"));
-    });
-    $("#revertChanges").on("click", function (e) {
-      for (var i = 0; i < changes.length; i++) {
-        if (changes[i][0] == "onceClickedDomains")
-          chrome.storage.sync.set({ onceClickedDomains: changes[i][1] });
-        else if (changes[i][0] == "userDefinedDomains")
-          chrome.storage.sync.set({ userDefinedDomains: changes[i][1] });
-        else if (changes[i][0] == "timer")
-          chrome.storage.sync.set({ timer: changes[i][1] });
-        else if (changes[i][0] == "trustedTimerActivated")
-          chrome.storage.sync.set({ trustedTimerActivated: changes[i][1] });
-        else if (changes[i][0] == "userTimerActivated")
-          chrome.storage.sync.set({ userTimerActivated: changes[i][1] });
-        else if (changes[i][0] == "trustedListActivated")
-          chrome.storage.sync.set({ trustedListActivated: changes[i][1] });
-        else if (changes[i][0] == "referrerPart1")
-          chrome.storage.sync.set({ referrerPart1: changes[i][1] });
-        else if (changes[i][0] == "referrerPart2")
-          chrome.storage.sync.set({ referrerPart2: changes[i][1] });
-        else if (changes[i][0] == "referrerPart3")
-          chrome.storage.sync.set({ referrerPart3: changes[i][1] });
-      }
-      init();
-      $("#statusSettings").html(chrome.i18n.getMessage("reversedChanges"));
-    });
-    $("#defaultSettings").on("click", function (e) {
-      chrome.storage.sync.set({
-        onceClickedDomains: [],
-        userDefinedDomains: [],
-        timer: 3,
-        trustedTimerActivated: false,
-        userTimerActivated: false,
-        trustedListActivated: true,
-        referrerPart1: [
-          "deref-gmx.net",
-          "deref-web-02.de/",
-          "google.*",
-          "google.*",
-        ],
-        referrerPart2: [
-          "/mail/client/[...]/dereferrer/?",
-          "/mail/client/[...]/dereferrer/?",
-          "/url?",
-          "/url?",
-        ],
-        referrerPart3: ["redirectUrl=", "redirectUrl=", "url=", "q="],
-        redirectDomains: [
-          "bit.ly",
-          "goo.gl",
-          "bit.do",
-          "tinyurl.com",
-          "is.gd",
-          "cli.gs",
-          "pic.gd",
-          "DwarfURL.com",
-          "ow.ly",
-          "yfrog.com",
-          "migre.me",
-          "ff.im",
-          "tiny.cc",
-          "url4.eu",
-          "tr.im",
-          "twit.ac",
-          "su.pr",
-          "twurl.nl",
-          "snipurl.com",
-          "BudURL.com",
-          "short.to",
-          "ping.fm",
-          "Digg.com",
-          "post.ly",
-          "Just.as",
-          "bkite.com",
-          "snipr.com",
-          "flic.kr",
-          "loopt.us",
-          "doiop.com",
-          "twitthis.com",
-          "htxt.it",
-          "AltURL.com",
-          "RedirX.com",
-          "DigBig.com",
-          "short.ie",
-          "u.mavrev.com",
-          "kl.am",
-          "wp.me",
-          "u.nu",
-          "rubyurl.com",
-          "om.ly",
-          "linkbee.com",
-          "Yep.it",
-          "posted.at",
-          "xrl.us",
-          "metamark.net",
-          "sn.im",
-          "hurl.ws",
-          "eepurl.com",
-          "idek.net",
-          "urlpire.com",
-          "chilp.it",
-          "moourl.com",
-          "snurl.com",
-          "xr.com",
-          "lin.cr",
-          "EasyURI.com",
-          "zz.gd",
-          "ur1.ca",
-          "URL.ie",
-          "adjix.com",
-          "twurl.cc",
-          "s7y.us",
-          "EasyURL.net",
-          "atu.ca",
-          "sp2.ro",
-          "Profile.to",
-          "ub0.cc",
-          "minurl.fr",
-          "cort.as",
-          "fire.to",
-          "2tu.us",
-          "twiturl.de",
-          "to.ly",
-          "BurnURL.com",
-          "nn.nf",
-          "clck.ru",
-          "notlong.com",
-          "thrdl.es",
-          "spedr.com",
-          "vl.am",
-          "miniurl.com",
-          "virl.com",
-          "PiURL.com",
-          "1url.com",
-          "gri.ms",
-          "tr.my",
-          "Sharein.com",
-          "urlzen.com",
-          "fon.gs",
-          "Shrinkify.com",
-          "ri.ms",
-          "b23.ru",
-          "Fly2.ws",
-          "xrl.in",
-          "Fhurl.com",
-          "wipi.es",
-          "korta.nu",
-          "shortna.me",
-          "fa.b",
-          "WapURL.co.uk",
-          "urlcut.com",
-          "6url.com",
-          "abbrr.com",
-          "SimURL.com",
-          "klck.me",
-          "x.se",
-          "2big.at",
-          "url.co.uk",
-          "ewerl.com",
-          "inreply.to",
-          "TightURL.com",
-          "a.gg",
-          "tinytw.it",
-          "zi.pe",
-          "riz.gd",
-          "hex.io",
-          "fwd4.me",
-          "bacn.me",
-          "shrt.st",
-          "ln-s.ru",
-          "tiny.pl",
-          "o-x.fr",
-          "StartURL.com",
-          "jijr.com",
-          "shorl.com",
-          "icanhaz.com",
-          "updating.me",
-          "kissa.be",
-          "hellotxt.com",
-          "pnt.me",
-          "nsfw.in",
-          "xurl.jp",
-          "yweb.com",
-          "urlkiss.com",
-          "QLNK.net",
-          "w3t.org",
-          "lt.tl",
-          "twirl.at",
-          "zipmyurl.com",
-          "urlot.com",
-          "a.nf",
-          "hurl.me",
-          "URLHawk.com",
-          "Tnij.org",
-          "4url.cc",
-          "firsturl.de",
-          "Hurl.it",
-          "sturly.com",
-          "shrinkster.com",
-          "ln-s.net",
-          "go2cut.com",
-          "liip.to",
-          "shw.me",
-          "XeeURL.com",
-          "liltext.com",
-          "lnk.gd",
-          "xzb.cc",
-          "linkbun.ch",
-          "href.in",
-          "urlbrief.com",
-          "2ya.com",
-          "safe.mn",
-          "shrunkin.com",
-          "bloat.me",
-          "krunchd.com",
-          "minilien.com",
-          "ShortLinks.co.uk",
-          "qicute.com",
-          "rb6.me",
-          "urlx.ie",
-          "pd.am",
-          "go2.me",
-          "tinyarro.ws",
-          "tinyvid.io",
-          "lurl.no",
-          "ru.ly",
-          "lru.jp",
-          "rickroll.it",
-          "togoto.us",
-          "ClickMeter.com",
-          "hugeurl.com",
-          "tinyuri.ca",
-          "shrten.com",
-          "shorturl.com",
-          "Quip-Art.com",
-          "urlao.com",
-          "a2a.me",
-          "tcrn.ch",
-          "goshrink.com",
-          "DecentURL.com",
-          "decenturl.com",
-          "zi.ma",
-          "1link.in",
-          "sharetabs.com",
-          "shoturl.us",
-          "fff.to",
-          "hover.com",
-          "lnk.in",
-          "jmp2.net",
-          "dy.fi",
-          "urlcover.com",
-          "2pl.us",
-          "tweetburner.com",
-          "u6e.de",
-          "xaddr.com",
-          "gl.am",
-          "dfl8.me",
-          "go.9nl.com",
-          "gurl.es",
-          "C-O.IN",
-          "TraceURL.com",
-          "liurl.cn",
-          "MyURL.in",
-          "urlenco.de",
-          "ne1.net",
-          "buk.me",
-          "rsmonkey.com",
-          "cuturl.com",
-          "turo.us",
-          "sqrl.it",
-          "iterasi.net",
-          "tiny123.com",
-          "EsyURL.com",
-          "adf.ly",
-          "urlx.org",
-          "IsCool.net",
-          "twitterpan.com",
-          "GoWat.ch",
-          "poprl.com",
-          "njx.me",
-          "shrinkify.info",
-        ],
-      });
-      init();
-      $("#statusSettings").html(
-        chrome.i18n.getMessage("defaultSettingsRestored")
-      );
-    });
-  });
-}
-
-function save(list, value) {
-  var i = 0;
-  for (i = 0; i < changes.length; i++) {
-    if (changes[i][0] == list) {
-      return;
-    }
-  }
-  changes.push([list, value]);
-}
-
-/**
- * adding all entries to the list of referrers
- */
-function fillReferrerList() {
-  chrome.storage.sync.get(null, function (r) {
-    var table = document.getElementById("referrerList");
-    $(table.getElementsByTagName("tbody")[0]).text(
-      chrome.i18n.getMessage("referrerList")
-    );
-    var arr1 = r.referrerPart1;
-    var arr2 = r.referrerPart2;
-    var arr3 = r.referrerPart3;
-    for (i = 0; i < arr1.length; i++) {
-      if (arr1[i].length > 0) {
-        var row = table.insertRow(table.rows.length);
-        var cell = row.insertCell(0);
-        //var placeholder = arr2[i]? "<span style='color:blue;'> [...] </span>" : "";
-        $(cell).html(
-          '<div><button id="row' +
-            i +
-            '" style="margin-right:10px;color:red">X</button><span>' +
-            arr1[i] +
-            arr2[i] +
-            arr3[i] +
-            "</span></div>"
-        );
-
-        $("#row" + i).on("click", function (e) {
-          save("referrerPart1", r.referrerPart1);
-          save("referrerPart2", r.referrerPart2);
-          save("referrerPart3", r.referrerPart3);
-          //var split = $(this).next().html().split('<span style="color:blue;"> [...] </span>');
-          var index = $(this).attr("id").replace("row", "");
-          $(this).parent().parent().parent().remove();
-          //if(!split[1]) split[1] = "";
-          var arr1 = r.referrerPart1;
-          var arr2 = r.referrerPart2;
-          var arr3 = r.referrerPart3;
-          arr1.splice(index, 1);
-          arr2.splice(index, 1);
-          arr3.splice(index, 1);
-          chrome.storage.sync.set({ referrerPart1: arr1 });
-          chrome.storage.sync.set({ referrerPart2: arr2 });
-          chrome.storage.sync.set({ referrerPart3: arr3 });
-          init();
+        document.querySelector('.tab-links').addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                this.switchTab(e.target);
+            }
         });
-      }
+
+        // Timer tab
+        document.getElementById("timerCheckbox").addEventListener('change', (e) => {
+            const timerValue = e.target.checked ? 3 : 0;
+            document.getElementById('timerInput').value = timerValue;
+            chrome.storage.sync.set({ timer: timerValue });
+        });
+
+        document.getElementById("timerInput").addEventListener('change', (e) => {
+            const timerValue = e.target.value;
+            document.getElementById('timerCheckbox').checked = timerValue > 0;
+            chrome.storage.sync.set({ timer: timerValue });
+        });
+
+        const addCheckboxListener = (id, settingName) => {
+            document.getElementById(id).addEventListener('change', (e) => {
+                chrome.storage.sync.set({ [settingName]: e.target.checked });
+            });
+        };
+
+        addCheckboxListener('trustedTimerCheckbox', 'trustedTimerActivated');
+        addCheckboxListener('userTimerCheckbox', 'userTimerActivated');
+        addCheckboxListener('redirectModeCheckbox', 'redirectModeActivated');
+        addCheckboxListener("tooltipCheckbox", "minimalTooltip");
+
+        document.getElementById('privacyModeCheckbox').addEventListener('change', (e) => {
+            const isChecked = e.target.checked;
+            document.getElementById('securityModeCheckbox').checked = !isChecked;
+            chrome.storage.sync.set({ privacyModeActivated: isChecked, securityModeActivated: !isChecked });
+        });
+        document.getElementById('securityModeCheckbox').addEventListener('change', (e) => {
+            const isChecked = e.target.checked;
+            document.getElementById('privacyModeCheckbox').checked = !isChecked;
+            chrome.storage.sync.set({ securityModeActivated: isChecked, privacyModeActivated: !isChecked });
+        });
+
+        // Domains tab
+        document.getElementById('trustedListActivated').addEventListener('change', (e) => {
+            const isChecked = e.target.checked;
+            document.getElementById('showTrustedDomains').disabled = !isChecked;
+            chrome.storage.sync.set({ trustedListActivated: isChecked });
+        });
+
+        document.getElementById('showTrustedDomains').addEventListener('click', () => this.toggleListVisibility('trustedList'));
+        document.getElementById('editUserDefined').addEventListener('click', () => this.toggleListVisibility('userList'));
+        document.getElementById('addUserDefined').addEventListener('click', () => this.addUserDefined());
+
+        // Redirect tab
+        document.getElementById("clearReferrer").addEventListener("click", async () => {
+            const table = document.getElementById("referrerList");
+            const tbody = table.querySelector('tbody');
+            tbody.innerHTML = `
+                <tr>
+                    <th id="referrerListTitle">${chrome.i18n.getMessage("referrerList")}</th>
+                </tr>
+            `;
+            await chrome.storage.sync.set({ referrerPart1: [], referrerPart2: [], referrerPart3: [] });
+            await this.loadAndApplySettings();
+        });
+
+        document.getElementById("addDefaultReferrer").addEventListener("click", () => {
+            this.addDefaultReferrer();
+        });
+
+        document.getElementById("addReferrerAttribute").addEventListener("click", () => {
+            this.addReferrer();
+        });
+
+        // Short-URL tab
+        document.getElementById("addUserDefinedShortURL").addEventListener("click", () => {
+            this.addShortURL();
+        });
+
+        document.getElementById("editShortURL").addEventListener("click", () => this.toggleListVisibility("shortURLList"));
+
+        document.getElementById("saveChanges").addEventListener("click", async () => {
+            const set = await browser.storage.sync.get(null);
+            this.originalSettings = {};
+            this.originalSettings = { ...set };
+            console.log(set);
+           document.getElementById("statusSettings").textContent = browser.i18n.getMessage("savedChanges");
+        });
+
+        document.getElementById("revertChanges").addEventListener("click", async () => {
+            await browser.storage.sync.set(this.originalSettings);
+
+            const set = await browser.storage.sync.get(null);
+            console.log(set);
+            await this.loadAndApplySettings();
+            document.getElementById("statusSettings").textContent = browser.i18n.getMessage("reversedChanges");
+        });
+
+        document.getElementById("defaultSettings").addEventListener("click", async () => {
+           await browser.storage.sync.set({
+               onceClickedDomains: [],
+               userDefinedDomains: [],
+               timer: 3,
+               trustedTimerActivated: false,
+               userTimerActivated: false,
+               trustedListActivated: true,
+               minimalTooltip: false,
+               referrerPart1: [
+                   "deref-gmx.net",
+                   "deref-web-02.de/",
+                   "google.*",
+                   "google.*",
+               ],
+               referrerPart2: [
+                   "/mail/client/[...]/dereferrer/?",
+                   "/mail/client/[...]/dereferrer/?",
+                   "/url?",
+                   "/url?",
+               ],
+               referrerPart3: ["redirectUrl=", "redirectUrl=", "url=", "q="],
+               redirectDomains: [
+                   "bit.ly",
+                   "goo.gl",
+                   "bit.do",
+                   "tinyurl.com",
+                   "is.gd",
+                   "cli.gs",
+                   "pic.gd",
+                   "DwarfURL.com",
+                   "ow.ly",
+                   "yfrog.com",
+                   "migre.me",
+                   "ff.im",
+                   "tiny.cc",
+                   "url4.eu",
+                   "tr.im",
+                   "twit.ac",
+                   "su.pr",
+                   "twurl.nl",
+                   "snipurl.com",
+                   "BudURL.com",
+                   "short.to",
+                   "ping.fm",
+                   "Digg.com",
+                   "post.ly",
+                   "Just.as",
+                   "bkite.com",
+                   "snipr.com",
+                   "flic.kr",
+                   "loopt.us",
+                   "doiop.com",
+                   "twitthis.com",
+                   "htxt.it",
+                   "AltURL.com",
+                   "RedirX.com",
+                   "DigBig.com",
+                   "short.ie",
+                   "u.mavrev.com",
+                   "kl.am",
+                   "wp.me",
+                   "u.nu",
+                   "rubyurl.com",
+                   "om.ly",
+                   "linkbee.com",
+                   "Yep.it",
+                   "posted.at",
+                   "xrl.us",
+                   "metamark.net",
+                   "sn.im",
+                   "hurl.ws",
+                   "eepurl.com",
+                   "idek.net",
+                   "urlpire.com",
+                   "chilp.it",
+                   "moourl.com",
+                   "snurl.com",
+                   "xr.com",
+                   "lin.cr",
+                   "EasyURI.com",
+                   "zz.gd",
+                   "ur1.ca",
+                   "URL.ie",
+                   "adjix.com",
+                   "twurl.cc",
+                   "s7y.us",
+                   "EasyURL.net",
+                   "atu.ca",
+                   "sp2.ro",
+                   "Profile.to",
+                   "ub0.cc",
+                   "minurl.fr",
+                   "cort.as",
+                   "fire.to",
+                   "2tu.us",
+                   "twiturl.de",
+                   "to.ly",
+                   "BurnURL.com",
+                   "nn.nf",
+                   "clck.ru",
+                   "notlong.com",
+                   "thrdl.es",
+                   "spedr.com",
+                   "vl.am",
+                   "miniurl.com",
+                   "virl.com",
+                   "PiURL.com",
+                   "1url.com",
+                   "gri.ms",
+                   "tr.my",
+                   "Sharein.com",
+                   "urlzen.com",
+                   "fon.gs",
+                   "Shrinkify.com",
+                   "ri.ms",
+                   "b23.ru",
+                   "Fly2.ws",
+                   "xrl.in",
+                   "Fhurl.com",
+                   "wipi.es",
+                   "korta.nu",
+                   "shortna.me",
+                   "fa.b",
+                   "WapURL.co.uk",
+                   "urlcut.com",
+                   "6url.com",
+                   "abbrr.com",
+                   "SimURL.com",
+                   "klck.me",
+                   "x.se",
+                   "2big.at",
+                   "url.co.uk",
+                   "ewerl.com",
+                   "inreply.to",
+                   "TightURL.com",
+                   "a.gg",
+                   "tinytw.it",
+                   "zi.pe",
+                   "riz.gd",
+                   "hex.io",
+                   "fwd4.me",
+                   "bacn.me",
+                   "shrt.st",
+                   "ln-s.ru",
+                   "tiny.pl",
+                   "o-x.fr",
+                   "StartURL.com",
+                   "jijr.com",
+                   "shorl.com",
+                   "icanhaz.com",
+                   "updating.me",
+                   "kissa.be",
+                   "hellotxt.com",
+                   "pnt.me",
+                   "nsfw.in",
+                   "xurl.jp",
+                   "yweb.com",
+                   "urlkiss.com",
+                   "QLNK.net",
+                   "w3t.org",
+                   "lt.tl",
+                   "twirl.at",
+                   "zipmyurl.com",
+                   "urlot.com",
+                   "a.nf",
+                   "hurl.me",
+                   "URLHawk.com",
+                   "Tnij.org",
+                   "4url.cc",
+                   "firsturl.de",
+                   "Hurl.it",
+                   "sturly.com",
+                   "shrinkster.com",
+                   "ln-s.net",
+                   "go2cut.com",
+                   "liip.to",
+                   "shw.me",
+                   "XeeURL.com",
+                   "liltext.com",
+                   "lnk.gd",
+                   "xzb.cc",
+                   "linkbun.ch",
+                   "href.in",
+                   "urlbrief.com",
+                   "2ya.com",
+                   "safe.mn",
+                   "shrunkin.com",
+                   "bloat.me",
+                   "krunchd.com",
+                   "minilien.com",
+                   "ShortLinks.co.uk",
+                   "qicute.com",
+                   "rb6.me",
+                   "urlx.ie",
+                   "pd.am",
+                   "go2.me",
+                   "tinyarro.ws",
+                   "tinyvid.io",
+                   "lurl.no",
+                   "ru.ly",
+                   "lru.jp",
+                   "rickroll.it",
+                   "togoto.us",
+                   "ClickMeter.com",
+                   "hugeurl.com",
+                   "tinyuri.ca",
+                   "shrten.com",
+                   "shorturl.com",
+                   "Quip-Art.com",
+                   "urlao.com",
+                   "a2a.me",
+                   "tcrn.ch",
+                   "goshrink.com",
+                   "DecentURL.com",
+                   "decenturl.com",
+                   "zi.ma",
+                   "1link.in",
+                   "sharetabs.com",
+                   "shoturl.us",
+                   "fff.to",
+                   "hover.com",
+                   "lnk.in",
+                   "jmp2.net",
+                   "dy.fi",
+                   "urlcover.com",
+                   "2pl.us",
+                   "tweetburner.com",
+                   "u6e.de",
+                   "xaddr.com",
+                   "gl.am",
+                   "dfl8.me",
+                   "go.9nl.com",
+                   "gurl.es",
+                   "C-O.IN",
+                   "TraceURL.com",
+                   "liurl.cn",
+                   "MyURL.in",
+                   "urlenco.de",
+                   "ne1.net",
+                   "buk.me",
+                   "rsmonkey.com",
+                   "cuturl.com",
+                   "turo.us",
+                   "sqrl.it",
+                   "iterasi.net",
+                   "tiny123.com",
+                   "EsyURL.com",
+                   "adf.ly",
+                   "urlx.org",
+                   "IsCool.net",
+                   "twitterpan.com",
+                   "GoWat.ch",
+                   "poprl.com",
+                   "njx.me",
+                   "shrinkify.info",
+               ],
+           });
+           await this.loadAndApplySettings();
+           document.getElementById("statusSettings").textContent = browser.i18n.getMessage("defaultSettingsRestored");
+        });
+    },
+
+    switchTab(clickedLink) {
+        document.querySelectorAll(".tab-links a").forEach(el => el.classList.remove("active"));
+        document.querySelectorAll('.tab-content .tab').forEach(tab => tab.classList.remove('active'));
+
+        clickedLink.classList.add('active');
+        const targetTab = document.querySelector(clickedLink.getAttribute("href"));
+        if (targetTab) {
+            targetTab.classList.add('active');
+        }
+
+        document.querySelectorAll('.data-table').forEach(table => table.style.display = 'none');
+    },
+
+    toggleListVisibility(listId) {
+        const listElement = document.getElementById(listId);
+        if (listElement) {
+            const isVisible = listElement.style.display !== 'none';
+            // Hide all lists first
+            document.querySelectorAll('.data-table').forEach(table => table.style.display = 'none');
+            // Then show the target list if it was hidden
+            listElement.style.display = isVisible ? 'none' : 'block';
+        }
+    },
+
+    setStaticTexts() {
+        const textMap = {
+            // Timer tab
+            "options-title": "options",
+            "timerCheckboxText": "timerActivated",
+            "timerAmountText": "timerAmount",
+            "seconds": "seconds",
+            "trustedTimerActivated": "activateTimerOnLowRisk",
+            "userTimerActivated": "activateTimerOnUserList",
+            "privacyModeActivated": "activatePrivacyMode",
+            "securityModeActivated": "activateSecurityMode",
+            "redirectModeActivated": "activateRedirectMode",
+            // Domains tab
+            "trustedListText": "lowRiskDomains",
+            "activateTrustedList": "activateLowRiskList",
+            "showTrustedDomains": "showLowRiskList",
+            "userListText": "userDomains",
+            "addUserDefined": "addEntries",
+            "editUserDefined": "editUserList",
+            // Referrer tab
+            "referrerDialog1": "referrerInfo1",
+            "referrerExample": "referrerExample",
+            "referrerDialog2": "referrerInfo2",
+            "referrerListTitle": "referrerList",
+            "deleteReferrer": "deleteEntries",
+            "clearReferrer": "clearEntries",
+            "referrerHeadline": "addEntries",
+            "addDefaultReferrer": "addDefaultReferrer",
+            "addReferrerHost": "addEntries",
+            "addReferrerPath": "addEntries",
+            "addReferrerAttribute": "addEntries",
+            "insertRandom": "insertRandom",
+            "exampleReferrerHost": "exampleReferrerHost",
+            "exampleReferrerPath": "exampleReferrerPath",
+            "exampleReferrerAttribute": "exampleReferrerAttribute",
+            // Redirection Short URL tab
+            "shortURLText": "shortURLInfo",
+            "shortURLListText": "shortURLListText",
+            "editShortURL": "editUserList",
+            "addUserDefinedShortURL": "addEntries",
+            // Additional buttons
+            "saveChanges": "saveChanges",
+            "revertChanges": "revertChanges",
+            "defaultSettings": "defaultSettings",
+            // Lists
+            "trustedListTitle": "trustedList",
+            "userListTitle": "userList",
+            // Tooltip tab
+            "tooltipCheckboxText": "minimal_tooltip"
+        }
+
+        for (const id in textMap) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = browser.i18n.getMessage(textMap[id]) || textMap[id];
+            }
+        }
+    },
+
+    async addDefaultReferrer() {
+        const defaultReferrers = [
+            { host: 'deref-gmx.net', path: '/mail/client/[...]/dereferrer/?', attribute: 'redirectUrl=' },
+            { host: 'deref-web-02.de', path: '/mail/client/[...]/dereferrer/?', attribute: 'redirectUrl=' }
+        ];
+
+        const settings = await chrome.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
+        const hosts = settings.referrerPart1 || [];
+        const paths = settings.referrerPart2 || [];
+        const attributes = settings.referrerPart3 || [];
+
+        defaultReferrers.forEach(referrer => {
+            const alreadyExists = hosts.some((host, index) =>
+                host === referrer.host &&
+                paths[index] === referrer.path &&
+                attributes[index] === referrer.attribute
+            );
+
+            if (!alreadyExists) {
+                hosts.push(referrer.host);
+                paths.push(referrer.path);
+                attributes.push(referrer.attribute);
+
+            }
+        });
+
+        await chrome.storage.sync.set({ referrerPart1: hosts, referrerPart2: paths, referrerPart3: attributes });
+        await this.fillReferrerList();
+        document.getElementById("addDefaultReferrer").disabled = true;
+    },
+
+    async fillReferrerList() {
+        const settings = await browser.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
+        const hosts = settings.referrerPart1 || [];
+        const paths = settings.referrerPart2 || [];
+        const attributes = settings.referrerPart3 || [];
+
+        const table = document.getElementById("referrerList");
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = `
+                <tr>
+                    <th id="referrerListTitle">${chrome.i18n.getMessage("referrerList")}</th>
+                </tr>
+            `;
+
+        hosts.forEach((host, index) => {
+           const path = paths[index] || "";
+           const attribute = attributes[index] || "";
+
+           const row = table.insertRow();
+           const cell = row.insertCell(0);
+
+           cell.innerHTML = `
+                <div>
+                    <button class="delete-btn" data-index="${index}" id="row${index}" style="margin-right:10px;color:red">X</button>
+                    <span>${host}${path}${attribute}</span>
+                </div>
+           `;
+        });
+
+        tbody.onclick = (event) => {
+            if (event.target.classList.contains("delete-btn")) {
+                const indexToDelete = parseInt(event.target.dataset.index, 10);
+                if (!isNaN(indexToDelete)) {
+                    this.deleteReferrer(indexToDelete);
+                }
+            }
+        }
+    },
+
+    async deleteReferrer(index) {
+        const settings = await chrome.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
+
+        const hosts = settings.referrerPart1 || [];
+        const paths = settings.referrerPart2 || [];
+        const attributes = settings.referrerPart3 || [];
+
+        // Remove the element at the specified index from each array
+        hosts.splice(index, 1);
+        paths.splice(index, 1);
+        attributes.splice(index, 1);
+
+        // Save the modified arrays back to storage
+        await chrome.storage.sync.set({ referrerPart1: hosts, referrerPart2: paths, referrerPart3: attributes });
+
+        // Re-render the list with the updated data
+        await this.fillReferrerList();
+    },
+
+    async addReferrer() {
+        const hostInput = document.getElementById("referrerInputHost").value.trim().toLowerCase();
+        const pathInput = document.getElementById("referrerInputPath").value.trim();
+        const attributeInput = document.getElementById("referrerInputAttribute").value.trim();
+        const errorElement = document.getElementById('errorAddReferrer');
+
+        errorElement.textContent = '';
+
+        const settings = await browser.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
+        const hosts = settings.referrerPart1 || [];
+        const paths = settings.referrerPart2 || [];
+        const attributes = settings.referrerPart3 || [];
+
+        const alreadyExists = hosts.some((host, index) => {
+            return host === hostInput &&
+                paths[index] === pathInput &&
+                attributes[index] === attributeInput;
+        });
+
+        if (alreadyExists) {
+            errorElement.textContent = browser.i18n.getMessage("alreadyInReferrerList");
+            return;
+        }
+
+        const updatedHosts = [...hosts, hostInput];
+        const updatedPaths = [...paths, pathInput];
+        const updatedAttributes = [...attributes, attributeInput];
+
+        await browser.storage.sync.set({
+            referrerPart1: updatedHosts,
+            referrerPart2: updatedPaths,
+            referrerPart3: updatedAttributes
+        })
+
+        // re-rendering the list
+        await this.fillReferrerList();
+
+        document.getElementById('referrerInputHost').value = "";
+        document.getElementById('referrerInputPath').value = "";
+        document.getElementById('referrerInputAttribute').value = "";
+    },
+
+    async fillTrustedList() {
+        const table = document.getElementById("trustedList");
+        const settings = await browser.storage.sync.get(null);
+
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = `
+                <tr>
+                    <th id="trustedListTitle">${chrome.i18n.getMessage("trustedList")}</th>
+                </tr>
+            `;
+
+        settings.trustedDomains.forEach(domain => {
+            const row = table.insertRow();
+            const cell = row.insertCell(0);
+            cell.textContent = domain;
+        });
+    },
+
+    async fillUserList() {
+        const settings = await browser.storage.sync.get(['userDefinedDomains']);
+        const table = document.getElementById("userList");
+
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = `
+                <tr>
+                    <th id="userListTitle">${chrome.i18n.getMessage("userList")}</th>
+                </tr>
+            `;
+
+        settings.userDefinedDomains.forEach((domain, index) => {
+            const row = table.insertRow();
+            const cell = row.insertCell(0);
+            cell.innerHTML = `
+                <div>
+                    <button class="delete-btn" data-index="${index}" id="row${index}" style="margin-right:10px;color:red">X</button>
+                    <span>${domain}</span>
+                </div>
+            `;
+
+            tbody.onclick = (event) => {
+                if (event.target.classList.contains("delete-btn")) {
+                    const indexToDelete = parseInt(event.target.dataset.index, 10);
+                    if (!isNaN(indexToDelete)) {
+                        const domains = settings.userDefinedDomains;
+                        domains.splice(indexToDelete, 1);
+                        browser.storage.sync.set({ userDefinedDomains: domains });
+                        this.fillUserList();
+                    }
+                }
+            }
+        });
+    },
+
+    async addUserDefined() {
+        let input = document.getElementById("userDefinedInput").value.trim();
+        const errorElement = document.getElementById('errorAddUserDefined');
+        const settings = await browser.storage.sync.get(null);
+
+        errorElement.textContent = '';
+
+        chrome.runtime.sendMessage({ name: "TLD" }, async (tld) => {
+            torpedo.publicSuffixList.parse(tld, punycode.toASCII);
+        });
+
+        try {
+            const href = new URL(input);
+            input = TooltipManager.extractDomain(href.hostname);
+        } catch (e) {
+            errorElement.textContent = browser.i18n.getMessage("nonValidUrl");
+            return;
+        }
+
+        if (settings.trustedDomains.includes(input) && settings.trustedListActivated) {
+            errorElement.textContent = browser.i18n.getMessage("alreadyInTrustedUrls");
+            return;
+        }
+
+        input = document.getElementById("userDefinedInput").value;
+        if (settings.userDefinedDomains.includes(input)) {
+            errorElement.textContent = browser.i18n.getMessage("alreadyInUserDefinedDomains");
+            return;
+        }
+
+        const updatedDomains = [...settings.userDefinedDomains, input];
+        await browser.storage.sync.set({ userDefinedDomains: updatedDomains });
+
+        await this.fillUserList();
+        document.getElementById("userDefinedInput").value = "";
+    },
+
+    async fillShortURLList() {
+        const settings = await browser.storage.sync.get(['redirectDomains']);
+        const table = document.getElementById("shortURLList");
+
+        const tbody = table.querySelector('tbody');
+        tbody.innerHTML = `
+                <tr>
+                    <th id="shortURLListTitle">${chrome.i18n.getMessage("trustedList")}</th>
+                </tr>
+            `;
+
+        settings.redirectDomains.forEach((domain, index) => {
+            const row = table.insertRow();
+            const cell = row.insertCell(0);
+            cell.innerHTML = `
+                <div>
+                    <button class="delete-btn" data-index="${index}" id="row${index}" style="margin-right:10px;color:red">X</button>
+                    <span>${domain}</span>
+                </div>
+            `;
+
+            tbody.onclick = (event) => {
+                if (event.target.classList.contains("delete-btn")) {
+                    const indexToDelete = parseInt(event.target.dataset.index, 10);
+                    if (!isNaN(indexToDelete)) {
+                        const domains = settings.redirectDomains;
+                        domains.splice(indexToDelete, 1);
+                        browser.storage.sync.set({ redirectDomains: domains });
+                        this.fillShortURLList();
+                    }
+                }
+            }
+        });
+    },
+
+    async addShortURL() {
+        const inputElement = document.getElementById("userDefinedShortURLInput").value.trim().toLowerCase();
+        const settings = await browser.storage.sync.get(['redirectDomains']);
+        const errorElement = document.getElementById('errorAddUserDefinedShortURL');
+
+        if (settings.redirectDomains.includes(inputElement)) {
+            errorElement.textContent = browser.i18n.getMessage("alreadyInReferrerList");
+            return;
+        }
+
+        const domains = [...settings.redirectDomains, inputElement];
+        await browser.storage.sync.set({ redirectDomains: domains });
+        document.getElementById("userDefinedShortURLInput").value = "";
+
+        await this.fillShortURLList();
     }
-  });
-}
-
-/**
- * adding all entries to the list of trusted domains
- */
-function fillTrustedList() {
-  chrome.storage.sync.get(null, function (r) {
-    var i = 0;
-    var table = document.getElementById("trustedList");
-    $(table.getElementsByTagName("tbody")[0]).text(
-      chrome.i18n.getMessage("trustedList")
-    );
-    for (i = 0; i < r.trustedDomains.length; i++) {
-      var row = table.insertRow(table.rows.length);
-      var cell = row.insertCell(0);
-      $(cell).html(r.trustedDomains[i]);
-    }
-  });
-}
-
-/**
- * adding all entries to the list of user defined domains
- */
-function fillUserList() {
-  chrome.storage.sync.get(null, function (r) {
-    var userDomains = r.userDefinedDomains;
-    var table = document.getElementById("userList");
-    $(table.getElementsByTagName("tbody")[0]).text(
-      chrome.i18n.getMessage("userList")
-    );
-    for (i = 0; i < userDomains.length; i++) {
-      var row = table.insertRow(table.rows.length);
-      var cell = row.insertCell(0);
-      $(cell).html(
-        '<div><button id="user' +
-          i +
-          '" name="' +
-          userDomains[i] +
-          '" style="margin-right:10px;color:red">X</button><span>' +
-          userDomains[i] +
-          "</span></div>"
-      );
-      $("#user" + i).on("click", function (e) {
-        save("userDefinedDomains", r.userDefinedDomains);
-        var element = $(this).next().html();
-        var index = $(this).attr("id").replace("user", "");
-        $(this).parent().parent().parent().remove();
-        var arr = r.userDefinedDomains;
-        arr.splice(index, 1);
-        chrome.storage.sync.set({ userDefinedDomains: arr });
-      });
-    }
-  });
-}
-function addDefaultReferrer() {
-  chrome.storage.sync.get(null, function (r) {
-    save("referrerPart1", r.referrerPart1);
-    save("referrerPart2", r.referrerPart2);
-    var arr1 = r.referrerPart1;
-    var arr2 = r.referrerPart2;
-    var arr3 = r.referrerPart3;
-    var index1 = arr1.indexOf("deref-gmx.net");
-    var index2 = arr1.indexOf("deref-web-02.de");
-    var containsDefaultPath = false;
-    var containsDefaultAttribute = false;
-    if (index1 > -1 && index2 > -1) {
-      containsDefaultPath =
-        arr2[index1] == "/mail/client/[...]/dereferrer/?" &&
-        arr2[index2] == "/mail/client/[...]/dereferrer/?";
-      containsDefaultAttribute =
-        arr3[index1] == "redirectUrl=" && arr3[index2] == "redirectUrl=";
-    }
-    if (!containsDefaultPath && !containsDefaultAttribute) {
-      if (index1 == -1) {
-        arr1.push("deref-gmx.net");
-        arr2.push("/mail/client/[...]/dereferrer/?");
-        arr3.push("redirectUrl=");
-      }
-      if (index2 == -1) {
-        arr1.push("deref-web-02.de");
-        arr2.push("/mail/client/[...]/dereferrer/?");
-        arr3.push("redirectUrl=");
-      }
-      chrome.storage.sync.set({ referrerPart1: arr1 });
-      chrome.storage.sync.set({ referrerPart2: arr2 });
-      chrome.storage.sync.set({ referrerPart3: arr3 });
-      fillReferrerList();
-    }
-    document.getElementById("addDefaultReferrer").disabled = true;
-  });
-}
-/**
- * adding one entry to the list of user defined domains
- */
-function addUserDefined() {
-  chrome.storage.sync.get(null, function (r) {
-    save("userDefinedDomains", r.userDefinedDomains);
-    var table = document.getElementById("userList");
-    var input = $("#userDefinedInput").val().replace(" ", "");
-    $("#errorAddUserDefined").html("");
-    chrome.runtime.sendMessage({ name: "TLD" }, function (tld) {
-      torpedo.publicSuffixList.parse(tld, punycode.toASCII);
-      try {
-        const href = new URL(input);
-        input = extractDomain(href.hostname);
-      } catch (e) {
-        $("#errorAddUserDefined").html(chrome.i18n.getMessage("nonValidUrl"));
-        return;
-      }
-      if (r.trustedDomains.indexOf(input) > -1 && r.trustedListActivated) {
-        $("#errorAddUserDefined").html(
-          chrome.i18n.getMessage("alreadyInTrustedUrls")
-        );
-        return;
-      }
-      var arr = r.userDefinedDomains;
-      if (arr.indexOf(input) > -1) {
-        $("#errorAddUserDefined").html(
-          chrome.i18n.getMessage("alreadyInUserDefinedDomains")
-        );
-        return;
-      }
-      $("#userDefinedInput").val("");
-      arr.push(input);
-      chrome.storage.sync.set({ userDefinedDomains: arr });
-
-      var row = table.insertRow(table.rows.length);
-      var cell = row.insertCell(0);
-      $(cell).html(
-        '<div><button id="user' +
-          table.rows.length +
-          '" name="' +
-          input +
-          '" style="margin-right:10px;color:red">X</button><span>' +
-          input +
-          "</span></div>"
-      );
-      $("#userDefinedInput").val("");
-      init();
-    });
-  });
-}
-
-/**
- * adding one entry to the list of referrers
- */
-function addReferrer() {
-  chrome.storage.sync.get(null, function (r) {
-    save("referrerPart1", r.referrerPart1);
-    save("referrerPart2", r.referrerPart2);
-    save("referrerPart3", r.referrerPart3);
-    var table = document.getElementById("referrerList");
-    var inputHost = $("#referrerInputHost")
-      .val()
-      .replace(" ", "")
-      .toLowerCase();
-    var inputPath = $("#referrerInputPath").val().replace(" ", "");
-    var inputAttribute = $("#referrerInputAttribute").val().replace(" ", "");
-
-    var arr1 = r.referrerPart1;
-    var arr2 = r.referrerPart2;
-    var arr3 = r.referrerPart3;
-
-    var i = 0;
-    var alreadyInReferrerList = false;
-    var alreadyInPart1Index = arr1.indexOf(inputHost, i);
-    while (alreadyInPart1Index !== -1) {
-      alreadyInPart1Index = arr1.indexOf(inputHost, i);
-      if (
-        arr2[alreadyInPart1Index] === inputPath &&
-        arr3[alreadyInPart1Index] === inputAttribute
-      ) {
-        alreadyInReferrerList = true;
-        break;
-      }
-      i++;
-    }
-    if (alreadyInReferrerList) {
-      $("#errorAddReferrer").html(
-        chrome.i18n.getMessage("alreadyInReferrerList")
-      );
-      return;
-    }
-    var row = table.insertRow(table.rows.length);
-    var cell = row.insertCell(0);
-    if (inputAttribute == undefined) inputAttribute = "";
-    //var placeholder = input[1]? "<span style='color:blue'> [...] </span>" : "";
-    $(cell).html(
-      '<div><button id="row' +
-        table.rows.length +
-        '" name="' +
-        inputHost +
-        "," +
-        inputPath +
-        "," +
-        inputAttribute +
-        'style="margin-right:10px;color:red">X</button><span>' +
-        inputHost +
-        inputPath +
-        inputAttribute +
-        "</span></div>"
-    );
-    arr1.push(inputHost);
-    arr2.push(inputPath);
-    arr3.push(inputAttribute);
-    chrome.storage.sync.set({ referrerPart1: arr1 });
-    chrome.storage.sync.set({ referrerPart2: arr2 });
-    chrome.storage.sync.set({ referrerPart3: arr3 });
-    $("#referrerInputHost").val("");
-    $("#referrerInputPath").val("");
-    $("#referrerInputAttribute").val("");
-    init();
-  });
-}
-
-/**
- * adding all entries to the list of Short-URLs
- */
-function fillShortURLList() {
-  chrome.storage.sync.get(null, function (r) {
-    var i = 0;
-    var table = document.getElementById("shortURLList");
-    $(table.getElementsByTagName("tbody")[0]).text(
-      chrome.i18n.getMessage("trustedList")
-    );
-    for (i = 0; i < r.redirectDomains.length; i++) {
-      var row = table.insertRow(table.rows.length);
-      var cell = row.insertCell(0);
-      $(cell).html(
-        '<div><button id="shortURL' +
-          i +
-          '" style="margin-right:10px;color:red">X</button><span>' +
-          r.redirectDomains[i] +
-          "</span></div>"
-      );
-
-      $("#shortURL" + i).on("click", function (e) {
-        save("redirectDomains", r.redirectDomains);
-        var index = $(this).attr("id").replace("shortURL", "");
-        $(this).parent().parent().parent().remove();
-        r.redirectDomains.splice(index, 1);
-        chrome.storage.sync.set({ redirectDomains: r.redirectDomains });
-        init();
-      });
-    }
-  });
-}
-
-/**
- * adding one entry to the list of short urls
- */
-function addShortURL() {
-  chrome.storage.sync.get(null, function (r) {
-    save("redirectDomains", r.redirectDomains);
-    var table = document.getElementById("shortURLList");
-    var input = $("#userDefinedShortURLInput")
-      .val()
-      .replace(" ", "")
-      .toLowerCase();
-
-    var arr1 = r.redirectDomains;
-    if (arr1.indexOf(input) > -1) {
-      $("#errorAddUserDefinedShortURL").html(
-        chrome.i18n.getMessage("alreadyInReferrerList")
-      );
-      return;
-    }
-    var row = table.insertRow(table.rows.length);
-    var cell = row.insertCell(0);
-    $(cell).html(
-      '<div><button id="shortURL' +
-        table.rows.length +
-        '" name="' +
-        input +
-        '" style="margin-right:10px;color:red">X</button><span>' +
-        input +
-        "</span></div>"
-    );
-    arr1.push(input);
-    chrome.storage.sync.set({ redirectDomains: arr1 });
-    $("#userDefinedShortURLInput").val("");
-    init();
-  });
-}
+};

@@ -57,59 +57,88 @@ table, td {
     display:inline-block;
 }
 
-    /*----- Tab Links -----*/
-    .tab-links{
-      margin: 0;
-      padding: 0;
-    }
-    /* Clearfix */
-    .tab-links:after {
-        display:block;
-        clear:both;
-        content:'';
-    }
+/*----- Tab Links -----*/
+.tab-links{
+  margin: 0;
+  padding: 0;
+}
+/* Clearfix */
+.tab-links:after {
+    display:block;
+    clear:both;
+    content:'';
+}
 
-    .tab-links li {
-        margin:0px 5px 0px 0px;
-        float:left;
-        list-style:none;
-    }
+.tab-links li {
+    margin:0px 5px 0px 0px;
+    float:left;
+    list-style:none;
+}
 
-        .tab-links a {
-            padding:9px 15px;
-            display:inline-block;
-            border-radius:3px 3px 0px 0px;
-            background:#d9d9d9;
-            font-size:16px;
-            font-weight:600;
-            color:#4c4c4c;
-            transition:all linear 0.15s;
-        }
-
-        .tab-links a:hover {
-            background:#a7cce5;
-            text-decoration:none;
-        }
-
-    li.active a, li.active a:hover {
-        background:#a7cce5;
+    .tab-links a {
+        padding:9px 15px;
+        display:inline-block;
+        border-radius:3px 3px 0px 0px;
+        background:#d9d9d9;
+        font-size:16px;
+        font-weight:600;
         color:#4c4c4c;
+        transition:all linear 0.15s;
     }
 
-    /*----- Content of Tabs -----*/
-    .tab-content {
-        padding:15px;
-        border-radius:3px;
-        box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
-        background: #f2f2f2;
-        border:1px solid #999;
+    .tab-links a:hover {
+        background:#a7cce5;
+        text-decoration:none;
     }
-    .tab {
-        display:none;
-    }
-    .tab.active {
-        display:block;
-      }
-    .tab > div{
-      margin: 10px 5px 15px 5px;
-    }
+
+li.active a, li.active a:hover {
+    background:#a7cce5;
+    color:#4c4c4c;
+}
+
+/*----- Content of Tabs -----*/
+.tab-content {
+    padding:15px;
+    border-radius:3px;
+    box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+    background: #f2f2f2;
+    border:1px solid #999;
+}
+.tab {
+    display:none;
+}
+.tab.active {
+    display:block;
+  }
+.tab > div{
+  margin: 10px 5px 15px 5px;
+}
+
+h1, h2, h3 {
+    color: #212529;
+}
+
+.form-section {
+    margin-top: 2rem;
+    border-top: 1px solid #dee2e6;
+    padding-top: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 1rem;
+    flex-grow: 1;
+}
