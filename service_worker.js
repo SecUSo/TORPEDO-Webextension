@@ -12,6 +12,7 @@ chrome.runtime.onInstalled.addListener(function () {
     securityModeActivated: false,
     redirectModeActivated: false,
     trustedListActivated: true,
+      minimalTooltip: false,
     referrerPart1: [
       "deref-gmx.net",
       "deref-web-02.de",
@@ -436,7 +437,6 @@ chrome.runtime.onInstalled.addListener(function () {
 
   // Disable page action when not on a supported mail client website
   chrome.action.disable();
-
 });
 
 function showTutorial() {
