@@ -31,10 +31,6 @@ div.loader-card {
   border-radius: 6px;
 }
 
-div.loader:not(.loader-active), div.loader-bg:not(.loader-active) {
-  display: none;
-}
-
 div.loader * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
