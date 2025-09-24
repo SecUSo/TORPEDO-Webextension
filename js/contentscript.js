@@ -1,12 +1,6 @@
-(function () {
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", main);
-    } else {
-        main();
-    }
-
+(async function () {
     /**
-     * Entry point of the Torpedo extension.
+     * Start entry point of the Torpedo extension.
      */
     async function main() {
         const siteConfig = {
@@ -24,9 +18,8 @@
 
         try {
             const tldData = await browser.runtime.sendMessage({ name: "TLD" });
-            if (tldData) {
-                torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
-            }
+            if (tldData) torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
+
         } catch (e) {
             console.error("Failed to fetch TLD data:", e);
         }
@@ -50,9 +43,7 @@
 
         document.body.addEventListener("mouseover", (event) => {
             const targetLink = event.target.closest(anchorSelectors);
-            if (targetLink) {
-                openTooltip(targetLink, "a");
-            }
+            if (targetLink) openTooltip(targetLink, "a");
 
             const targetForm = event.target.closest(formSelectors);
             if (targetForm) {
@@ -68,10 +59,7 @@
     function setupIframeEventListeners() {
         document.body.addEventListener("mouseover", (event) => {
             const anchorTarget = event.target.closest("a");
-
-            if (anchorTarget && event.view.location.href.includes("iframe")) {
-                openTooltip(anchorTarget, "a");
-            }
+            if (anchorTarget && event.view.location.href.includes("iframe")) openTooltip(anchorTarget, "a");
         });
     }
 
@@ -97,32 +85,35 @@
      * Handles mouse enter events on the target element.
      */
     const handleMouseEnter = () => {
-        if (torpedo.hideTimer) {
-            clearTimeout(torpedo.hideTimer);
-        }
+        if (torpedo.hideTimer) clearTimeout(torpedo.hideTimer);
     };
 
     /**
      * Handles mouse leave events on the target element.
      */
     const handleMouseLeave = () => {
-        torpedo.hideTimer = setTimeout(() => {
-            TooltipManager.hideTooltip();
-        }, 150);
+        torpedo.hideTimer = setTimeout(() => TooltipManager.hideTooltip(), 150);
     };
 
     /**
-     * Initializes and opens the tooltip.
+     * This method is being called when the user hovers over a link
+     * and the tooltip should open.
      */
     async function openTooltip(e, type) {
         if (torpedo.opened) return;
 
+        if (torpedo.target) {
+            torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
+            torpedo.target.removeEventListener("mouseleave", handleMouseLeave);
+        }
+
         torpedo.target = e;
-        torpedo.progUrl = false;
-        torpedo.hasTooltip = false;
 
         torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
         torpedo.target.removeEventListener("mouseleave", handleMouseLeave);
+
+        torpedo.progUrl = false;
+        torpedo.hasTooltip = false;
 
         const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
         preventClickEvent(torpedo.target, eventTypes);
@@ -159,12 +150,21 @@
             torpedo.target.addEventListener("mouseenter", handleMouseEnter);
             torpedo.target.addEventListener("mouseleave", handleMouseLeave);
 
-            TooltipManager.showTooltip(torpedo.target);
+            await TooltipManager.showTooltip(torpedo.target);
 
         } catch (err) {
             console.log(torpedo.target.href);
             console.log(err);
-            browser.runtime.sendMessage({ name: "error" });
+            await browser.runtime.sendMessage({name: "error"});
         }
+    }
+
+    /**
+     * Starts the main function when the DOM is fully loaded.
+     */
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", main);
+    } else {
+        await main();
     }
 })();
