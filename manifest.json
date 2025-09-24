@@ -31,7 +31,8 @@
     {
       "resources": [
         "img/*.png",
-        "img/*.svg"
+        "img/*.svg",
+        "tooltip.html"
       ],
       "matches": [
         "<all_urls>"
