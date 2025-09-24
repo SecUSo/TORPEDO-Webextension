@@ -1,85 +1,22 @@
 const TooltipManager = (function() {
-    /**
-     * Creates the tooltip HTML structure with the necessary elements and images.
-     */
-    function tooltipText() {
-        return "<div id='torpedoWarning' class='loader-active'> \
-                        <img id='torpedoWarningImage' src='" +
-            chrome.runtime.getURL("img/warning.png") +
-            "'> \
-                                <img id='torpedoWarningImage2' src='" +
-            chrome.runtime.getURL("img/warning2.png") +
-            "'> \
-                        <p id='torpedoWarningText'></p>\
-                      </div>\
-                      <div class='loader-active'><a href='" +
-            torpedo.url +
-            "' id='torpedoURL''></a></div> \
-                      <div style='display:none' class='loader-active' id='torpedoContextMenu'>\
-                          <ul>\
-                              <li id='torpedoMarkTrusted'></li>\
-                              <li id='torpedoGoogle'></li>\
-                              <li id='torpedoOpenSettings'></li>\
-                              <li id='torpedoOpenTutorial'></li>\
-                          </ul>\
-                      </div>\
-                      <div class='loader-active'><p id='torpedoSecurityStatus'></p></div> \
-                      <div class='loader-active' id='torpedoAdvice'> \
-                        <img id='torpedoAdviceImage' src='" +
-            chrome.runtime.getURL("img/advice.png") +
-            "'> \
-                        <p id='torpedoAdviceText'></p> \
-                      </div> \
-                            <div class='loader-active' id='torpedoAdviceDiv'><p id='torpedoMoreAdvice'></p></div> \
-                      <div class='loader-active' id='torpedoInfo'>  \
-                        <img id='torpedoInfoImage' src='" +
-            chrome.runtime.getURL("img/info.png") +
-            `'> \
-                <p id='torpedoInfoText'></p> \
-              </div>\
-              <div class='loader-active' id='torpedoInfoDiv'><p id='torpedoMoreInfo'></p></div> \
-              <div class='loader-active'><button id='torpedoMoreInfoButton' type='button'></button></div> \
-              <div class='loader-active'><button id='torpedoRedirectButton' type='button''></button></div> \
-              <div class='loader-active'><button id='torpedoActivateLinkButton' type='button''></button></div>
-              <div class='loader-active'><p id='torpedoLinkDelay'></p></div>
-              <p class='loader-active' id='torpedoTimer'></p>
-              ` +
-            `<div class="loader-bg"> \
-    <div class="loader-card"> \
-    <div class="loader loader-active"> \
-          <div class="dots"> \
-            <div class="dot dot-0"></div> \
-            <div class="dot dot-1"></div> \
-            <div class="dot dot-2"></div> \
-            <div class="dot dot-3"></div> \
-            <div class="dot dot-4"></div> \
-            <div class="dot dot-5"></div> \
-            <div class="dot dot-6"></div> \
-            <div class="dot dot-7"></div> \
-            <div class="dot dot-8"></div> \
-            <div class="dot dot-9"></div> \
-          </div> \
-          <div class="lens"> \
-            <img src="${chrome.runtime.getURL(
-                "./img/TORPEDO_Icon.svg"
-            )}" alt="loading..." /> \
-          </div> \
-          <div class="load-text"> \
-            <p>Loading...</p> \
-          </div> \
-        </div> \
-      </div> \
-    </div> \
-              `;
-    }
 
     /**
      * Displays the tooltip at the specified target element.
      */
-    function showTooltip(target) {
+    async function showTooltip(target) {
         const tooltipElement = document.createElement("div");
-        tooltipElement.className = "torpedoTooltip";
-        tooltipElement.innerHTML = tooltipText();
+
+        tooltipElement.className = "torpedo-tooltip is-loading";
+
+        const settings = await browser.storage.sync.get(null);
+        if (settings.minimalTooltip === true) {
+            tooltipElement.classList.add("minimal-tooltip");
+        }
+
+        const tooltipURL = browser.runtime.getURL("tooltip.html");
+        const resp = await fetch(tooltipURL);
+        tooltipElement.innerHTML = await resp.text();
+
         document.body.appendChild(tooltipElement);
 
         torpedo.tooltip = tooltipElement;
@@ -106,7 +43,7 @@ const TooltipManager = (function() {
         });
 
         initTooltip();
-        updateTooltip().then();
+        await updateTooltip();
     }
 
     /**
@@ -134,11 +71,10 @@ const TooltipManager = (function() {
         onlyShowLoader();
 
         torpedo.countRedirect = 0;
-        torpedo.countShortURL = 0;
         torpedo.oldDomain = torpedo.domain;
         torpedo.oldUrl = torpedo.url;
 
-        const contextMenu = tooltip.querySelector("#torpedoContextMenu");
+        const contextMenu = tooltip.querySelector(".torpedo-context-menu");
 
         tooltip.addEventListener("contextmenu", (event) => {
             event.preventDefault();
@@ -146,42 +82,40 @@ const TooltipManager = (function() {
         });
 
         tooltip.addEventListener("click", (event) => {
-            if (contextMenu.style.display === "block" && !event.target.closest("#torpedoContextMenu")) {
+            if (contextMenu.style.display === "block" && !event.target.closest(".torpedo-context-menu")) {
                 contextMenu.style.display = "none";
             }
         });
 
-        onClick("#torpedoMarkTrusted", async () => {
+        onClick(".torpedo-mark-trusted", async () => {
             const { userDefinedDomains = [] } = await browser.storage.sync.get("userDefinedDomains");
             await browser.storage.sync.set({ userDefinedDomains: [...userDefinedDomains, torpedo.domain] });
-            updateTooltip();
+            await updateTooltip();
         })
 
-        onClick("#torpedoGoogle", () => browser.runtime.sendMessage({ name: "google", url: torpedo.domain }));
+        onClick(".torpedo-google", () => browser.runtime.sendMessage({ name: "google", url: torpedo.domain }));
 
-        onClick("#torpedoOpenSettings", () => browser.runtime.sendMessage({ name: "settings" }));
+        onClick(".torpedo-open-settings", () => browser.runtime.sendMessage({ name: "settings" }));
 
-        onClick("#torpedoOpenTutorial", () => browser.runtime.sendMessage({ name: "tutorial" }));
+        onClick(".torpedo-open-tutorial", () => browser.runtime.sendMessage({ name: "tutorial" }));
 
-        onClick("#torpedoInfoText", () => {
-            const infoDiv = tooltip.querySelector("#torpedoInfoDiv");
+        onClick(".torpedo-info-text", () => {
+            const infoDiv = tooltip.querySelector(".torpedo-info-div");
             if (infoDiv) {
                 infoDiv.style.display = getComputedStyle(infoDiv).display === "none" ? "block" : "none";
             }
         });
 
-        onClick("#torpedoAdviceText", () => {
-            const adviceDiv = tooltip.querySelector("#torpedoAdviceDiv");
-            if (adviceDiv) {
-                adviceDiv.style.display = getComputedStyle(adviceDiv).display === "none" ? "block" : "none";
-            }
-        });
+        onClick(".torpedo-redirect-button", (event) => resolveRedirect(event));
 
-        onClick("#torpedoMoreInfoButton", (event) => {openInfoImage(event)}); // ToDo
+        const warningImg = tooltip.querySelector(".torpedo-warning-img");
+        if (warningImg) warningImg.src = browser.runtime.getURL("img/warning2.png")
 
-        onClick("#torpedoRedirectButton", (event) => resolveRedirect(event));
+        const infoImg = tooltip.querySelector(".torpedo-info-img");
+        if (infoImg) infoImg.src = browser.runtime.getURL("img/info.png")
 
-        tooltip.querySelector("#torpedoActivateLinkButton").disabled = true;
+        const lensImg = tooltip.querySelector(".torpedo-lens-img");
+        if (lensImg) lensImg.src = browser.runtime.getURL("img/TORPEDO_Icon.svg")
     }
 
     /**
@@ -239,10 +173,12 @@ const TooltipManager = (function() {
             url = url.replace(pathname, shortenedPathname);
         }
 
-        const torpedoURL = t.querySelector("#torpedoURL");
+        const torpedoURL = t.querySelector(".torpedo-URL");
         if (torpedoURL) {
-            torpedoURL.innerHTML = url.replace(torpedo.domain,
-                '<span id="torpedoDomain">' + torpedo.domain + "</span>");
+            const urlSplit = url.split(torpedo.domain);
+            t.querySelector(".torpedo-url-prefix").innerHTML = urlSplit[0];
+            t.querySelector(".torpedo-url-suffix").innerHTML = urlSplit[1] || "";
+            t.querySelector(".torpedo-url-domain").innerHTML = torpedo.domain;
         }
 
         assignText(secStatus, url);
@@ -253,13 +189,13 @@ const TooltipManager = (function() {
             storage.trustedDomains?.includes(domain) ||
             storage.redirectDomains?.includes(domain);
 
-        const markTrustedEl = t.querySelector("#torpedoMarkTrusted");
+        const markTrustedEl = t.querySelector(".torpedo-mark-trusted");
         if (markTrustedEl) {
             markTrustedEl.style.display = shouldHideTrusted ? "none" : "block";
             markTrustedEl.textContent = browser.i18n.getMessage("markAsTrusted");
         }
 
-        const redirectBtn = t.querySelector("#torpedoRedirectButton");
+        const redirectBtn = t.querySelector(".torpedo-redirect-button");
         if (redirectBtn) {
             if (await isRedirect(domain) && storage.privacyModeActivated) {
                 redirectBtn.style.display = "block";
@@ -268,32 +204,24 @@ const TooltipManager = (function() {
             }
         }
 
-        const activateBtn = t.querySelector("#torpedoActivateLinkButton");
-        if (activateBtn) {
-            if (secStatus === "T4") {
-                activateBtn.style.display = "block";
-            } else {
-                activateBtn.style.display = "none";
-            }
-        }
-
-        const googleBtn = t.querySelector("#torpedoGoogle");
+        const googleBtn = t.querySelector(".torpedo-google");
         if (googleBtn) {
             googleBtn.textContent = browser.i18n.getMessage("googleCheck");
         }
 
-        const settingsBtn = t.querySelector("#torpedoOpenSettings");
+        const settingsBtn = t.querySelector(".torpedo-open-settings");
         if (settingsBtn) {
             settingsBtn.textContent = browser.i18n.getMessage("openSettings");
         }
 
-        const tutorialBtn = t.querySelector("#torpedoOpenTutorial");
+        const tutorialBtn = t.querySelector(".torpedo-open-tutorial");
         if (tutorialBtn) {
             tutorialBtn.textContent = browser.i18n.getMessage("openTutorial");
         }
 
-        const tooltipRoot = document.querySelector(".torpedoTooltip");
-        tooltipRoot.className = "torpedoTooltip";
+        const tooltipRoot = document.querySelector(".torpedo-tooltip");
+        tooltipRoot.classList.remove("torpedoUserDefined");
+        tooltipRoot.classList.remove("torpedoTrusted");
 
         switch (secStatus) {
             case "T2":
@@ -305,10 +233,8 @@ const TooltipManager = (function() {
                 break;
             case "T32":
                 if (markTrustedEl) markTrustedEl.style.display = "block";
-                const warningImg = t.querySelector("#torpedoWarningImage2");
-                const warningText = t.querySelector("#torpedoWarningText");
+                const warningImg = t.querySelector(".torpedo-warning-img");
                 if (warningImg) warningImg.style.display = "block";
-                if (warningText) warningText.style.display = "block";
                 break;
             default:
                 break;
@@ -328,46 +254,32 @@ const TooltipManager = (function() {
     function assignText(state, url) {
         // get texts from textfile
         const button = browser.i18n.getMessage("ButtonWeiterleitung");
-        const activateLinkButton = browser.i18n.getMessage("LinkAktivierung");
         const ueberschrift = browser.i18n.getMessage(state + "Ueberschrift");
         const erklaerung = browser.i18n.getMessage(state + "Erklaerung");
         const mehrInfo = browser.i18n.getMessage("MehrInfo");
         const infotext = browser.i18n.getMessage(state + "Infotext").replace("<URL>", url);
-        const infoCheck = browser.i18n.getMessage("Info");
-        const gluehbirneText = browser.i18n.getMessage(state + "GluehbirneText");
-        const gluehbirneInfo = browser.i18n.getMessage("mehrInfoGluehbirne");
         const linkDeaktivierung = browser.i18n.getMessage(state + "LinkDeaktivierung");
 
-        setHTML("#torpedoWarningText", ueberschrift);
-        setHTML("#torpedoSecurityStatus", erklaerung);
-        setHTML("#torpedoAdviceText", gluehbirneInfo);
-        setHTML("#torpedoMoreAdvice", gluehbirneText);
-        setHTML("#torpedoInfoText", mehrInfo);
-        setHTML("#torpedoMoreInfo", infotext);
-        setHTML("#torpedoRedirectButton", button);
-        setHTML("#torpedoActivateLinkButton", activateLinkButton);
-        setHTML("#torpedoLinkDelay", linkDeaktivierung);
-        setHTML("#torpedoMoreInfoButton", infoCheck);
+        setHTML(".torpedo-redirect-button", button);
+        setHTML(".torpedo-state-title", ueberschrift);
+        setHTML(".torpedo-security-status", erklaerung);
+        setHTML(".torpedo-info-text", mehrInfo);
+        setHTML(".torpedo-more-info", infotext);
+        setHTML(".torpedo-link-delay", linkDeaktivierung);
 
         const elementsToHide = [
-            "#torpedoWarningImage",
-            "#torpedoWarningImage2",
-            "#torpedoTimer",
-            "#torpedoInfoDiv",
-            "#torpedoLinkDelay",
-            "#torpedoAdvice",
-            "#torpedoAdviceDiv",
-            "#torpedoMoreInfoButton",
-            "#torpedoRedirectButton",
-            "#torpedoActivateLinkButton"
+            ".torpedo-warning-img",
+            ".torpedo-timer",
+            ".torpedo-info-div",
+            ".torpedo-link-delay",
+            ".torpedo-redirect-button"
         ];
         elementsToHide.forEach(hide);
 
-        if (gluehbirneText) show("#torpedoAdvice");
         if (linkDeaktivierung) {
-            show("#torpedoLinkDelay");
+            show(".torpedo-link-delay");
         } else {
-            setStyle("#torpedoInfo", {
+            setStyle(".torpedo-info", {
                 marginBottom: "0",
                 paddingBottom: "0"
             });
@@ -375,7 +287,7 @@ const TooltipManager = (function() {
     }
 
     async function processClick() {
-        const storage = await browser.runtime.sync.get(["userDefinedDomains", "trustedDomains", "onceClickedDomains"]);
+        const storage = await browser.storage.sync.get(["userDefinedDomains", "trustedDomains", "onceClickedDomains"]);
         if (storage.userDefinedDomains.includes(torpedo.domain) || storage.trustedDomains.includes(torpedo.domain)) return;
 
         let { onceClickedDomains = [] } = storage;
@@ -390,22 +302,20 @@ const TooltipManager = (function() {
     }
 
     /*
-     * Hides all elements in the tooltip except the loader.
+     * Starts the loader animation.
      */
     function onlyShowLoader() {
-        document.querySelectorAll(".torpedoTooltip > div > *").forEach(el => el.classList.add("loader-active"));
-
-        const loaderBg = document.querySelector('.torpedoTooltip > .loader-bg');
+        const loaderBg = document.querySelector('.torpedo-tooltip > .loader-bg');
         if (loaderBg) loaderBg.classList.add("transparent-bg");
-
-        document.querySelectorAll(".loader").forEach(el => el.classList.add("loader-active"));
     }
 
+    /*
+     * Stops the loader animation.
+     */
     function deactivateLoader() {
-        document.querySelectorAll(".torpedoTooltip > *").forEach(el => el.classList.remove("loader-active"));
-        document.querySelectorAll(".torpedoTooltip > div > *").forEach(el => el.classList.remove("loader-active"));
+        document.querySelector(".torpedo-tooltip").classList.remove("is-loading");
 
-        const loaderBg = document.querySelector(".torpedoTooltip > div > .loader-bg");
+        const loaderBg = document.querySelector(".torpedo-tooltip > .loader-bg");
         if (loaderBg) loaderBg.classList.remove("transparent-bg");
     }
 
@@ -425,7 +335,6 @@ const TooltipManager = (function() {
             normalizedUri = new URL(newHref);
         }
 
-        torpedo.uri = normalizedUri;
         torpedo.url = normalizedUri.href;
         torpedo.domain = extractDomain(normalizedUri.hostname);
         torpedo.pathname = normalizedUri.pathname + normalizedUri.search + normalizedUri.hash;
