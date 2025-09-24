@@ -657,5 +657,10 @@
   "settings_option_3": {
     "message": "Unter „Kurz-URL“ können Sie die aktuell integrierten Kurz-URLs ansehen und eigene ergänzen.",
     "description": "translations for tut on configurations page"
+  },
+
+  "minimal_tooltip": {
+    "message": "Minimaler Tooltip",
+    "description": "Set for minimal tooltip option"
   }
 }
