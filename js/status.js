@@ -15,7 +15,6 @@ async function getSecurityStatus(storage) {
     }
 
     if (await isRedirect(torpedo.domain)) {
-        torpedo.countShortURL++;
         if (!storage.privacyModeActivated) {
             resolveRedirect();
             return "URLnachErmittelnButtonPrivacyMode";
