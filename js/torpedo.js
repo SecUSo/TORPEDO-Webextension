@@ -4,14 +4,12 @@
 const torpedo = {
     // Counter for redirects.
     countRedirect: 0,
-    //
-    countShortURL: 0,
     // The domain of the torpedo target link.
     domain: "",
     hasTooltip: false,
     // Timer to hide the tooltip.
     hideTimer: null,
-    // The current location of the browser.
+    // The current location of the browser e.x. mail.google.com
     location: null,
     oldDomain: "",
     oldUrl: "",
@@ -30,8 +28,6 @@ const torpedo = {
     timerInterval: null,
     // The tooltip DOM element.
     tooltip: null,
-    // A URL object containing states like hostname, href, pathname, protocol, etc.
-    uri: "",
     // The href of the URL object.
     url: ""
 }
