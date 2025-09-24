@@ -64,7 +64,7 @@ function isTimerActivated(storage, securityStatus) {
 function countdown(time, state, clickLinkEventTypes) {
     if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
 
-    const timerEl = torpedo.tooltip.querySelector("#torpedoTimer");
+    const timerEl = torpedo.tooltip.querySelector(".torpedo-timer");
     timerEl.style.display = "block";
 
     const updateTimerText = (remainingTime) => {
@@ -85,7 +85,7 @@ function countdown(time, state, clickLinkEventTypes) {
             }
 
             reactivateLink(torpedo.target, clickLinkEventTypes);
-            reactivateTooltipURL(torpedo.tooltip.querySelector("#torpedoURL"));
+            reactivateTooltipURL(torpedo.tooltip.querySelector(".torpedo-URL"));
         } else {
             time--;
         }
