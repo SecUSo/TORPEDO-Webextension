@@ -1,31 +1,33 @@
 document.addEventListener("click", (e) => {
-  switch ($(e.target).attr("id")) {
-    case "torpedoPage":
-      chrome.tabs.create({ url: "https://secuso.aifb.kit.edu/TORPEDO.php" });
-      break;
-    case "options":
-      chrome.runtime.openOptionsPage();
-      break;
-    case "error":
-      if (e.target.classList == "error") {
-        chrome.runtime.sendMessage({ name: "sendMail" });
-      }
-      break;
-  }
+    const targetId = e.target.id;
+
+    if (targetId === "torpedoPage") {
+        browser.tabs.create({url: "https://secuso.aifb.kit.edu/TORPEDO.php"});
+    } else if (targetId === "options") {
+        browser.runtime.openOptionsPage();
+    } else if (targetId === "error" && e.target.classList.contains("error")) {
+        browser.runtime.sendMessage({name: "sendMail"});
+    }
 });
 
+
 function init() {
-  $("#torpedoPage").text(chrome.i18n.getMessage("extensionName"));
-  $("#options").text(chrome.i18n.getMessage("options"));
-  chrome.storage.session.get("state").
-    then(object => {
-      if (object.state.works) {
-        $("#error").attr("class", "working");
-        $("#error").text(chrome.i18n.getMessage("OK"));
-      } else {
-        $("#error").attr("class", "error");
-        $("#error").text(chrome.i18n.getMessage("error"));
-      }
+    const torpedoPageButton = document.getElementById("torpedoPage");
+    const optionsButton = document.getElementById("options");
+    const errorButton = document.getElementById("error");
+
+    torpedoPageButton.textContent = browser.i18n.getMessage("extensionName");
+    optionsButton.textContent = browser.i18n.getMessage("options");
+
+    browser.storage.session.get("state").then((object) => {
+        console.log(object);
+        if (object.state && object.state.works) {
+            errorButton.className = "working";
+            errorButton.textContent = browser.i18n.getMessage("OK");
+        } else {
+            errorButton.className = "error";
+            errorButton.textContent = browser.i18n.getMessage("error");
+        }
     });
 }
 
