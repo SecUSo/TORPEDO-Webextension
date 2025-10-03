@@ -3,6 +3,7 @@ div.loader {
   height: 100px;
   position: relative;
   margin: auto;
+    display: none;
 }
 
 .loader-bg {
