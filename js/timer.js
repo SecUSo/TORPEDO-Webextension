@@ -38,8 +38,8 @@ function reactivateTooltipURL(tooltipURL) {
             event.preventDefault()
             const storage = await browser.storage.sync.get();
             const urlToOpen = storage.privacyModeActivated ? torpedo.oldUrl : torpedo.url;
-            browser.runtime.sendMessage({ name: "open", url: urlToOpen });
-            TooltipManager.processClick();
+            await browser.runtime.sendMessage({name: "open", url: urlToOpen});
+            await TooltipManager.processClick();
         });
 
     } catch (e) {
