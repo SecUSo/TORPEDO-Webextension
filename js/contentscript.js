@@ -130,9 +130,8 @@
             }
         }
 
-        torpedo.state = "unknown";
-
         const url = type === "form" ? new URL(torpedo.target.action) : new URL(torpedo.target.href);
+        torpedo.urlObject = url;
         TooltipManager.setNewUrl(url);
 
         const tooltipURL = hasTooltip(torpedo.target);
