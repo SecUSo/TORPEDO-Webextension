@@ -20,7 +20,6 @@ function init() {
     optionsButton.textContent = browser.i18n.getMessage("options");
 
     browser.storage.session.get("state").then((object) => {
-        console.log(object);
         if (object.state && object.state.works) {
             errorButton.className = "working";
             errorButton.textContent = browser.i18n.getMessage("OK");
