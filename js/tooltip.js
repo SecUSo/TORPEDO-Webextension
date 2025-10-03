@@ -42,6 +42,7 @@ const TooltipManager = (function() {
             tooltipElement.style.top = `${y}px`;
         });
 
+        preventClickEvent(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"]);
         initTooltip();
         await updateTooltip();
     }
@@ -165,16 +166,19 @@ const TooltipManager = (function() {
         const secStatus = await getSecurityStatus(storage);
 
         const t = torpedo.tooltip;
-        let url = torpedo.url;
-        const pathname = torpedo.pathname;
 
-        if (pathname.length > 100) {
-            const shortenedPathname = pathname.substring(0, 100) + "...";
-            url = url.replace(pathname, shortenedPathname);
+        let url = torpedo.urlObject.href;
+        const pathSuffix = torpedo.urlObject.pathname + torpedo.urlObject.search + torpedo.urlObject.hash;
+
+        if (pathSuffix.length > 100) {
+            const shortenedPathname = pathSuffix.substring(0, 100) + "...";
+            url = url.replace(pathSuffix, shortenedPathname);
         }
 
         const torpedoURL = t.querySelector(".torpedo-URL");
         if (torpedoURL) {
+            torpedoURL.href = torpedo.url;
+
             const urlSplit = url.split(torpedo.domain);
             t.querySelector(".torpedo-url-prefix").innerHTML = urlSplit[0];
             t.querySelector(".torpedo-url-suffix").innerHTML = urlSplit[1] || "";
@@ -337,7 +341,6 @@ const TooltipManager = (function() {
 
         torpedo.url = normalizedUri.href;
         torpedo.domain = extractDomain(normalizedUri.hostname);
-        torpedo.pathname = normalizedUri.pathname + normalizedUri.search + normalizedUri.hash;
     }
 
     /*
