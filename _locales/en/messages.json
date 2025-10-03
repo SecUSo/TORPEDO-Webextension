@@ -662,5 +662,10 @@
   "settings_option_3": {
     "message": "\"Short URL\" lets you view the currently integrated short URLs and add your own.",
     "description": "translations for tut on configurations page"
+  },
+
+  "minimal_tooltip": {
+    "message": "Minimal Tooltip",
+    "description": "Set for minimal tooltip option"
   }
 }
