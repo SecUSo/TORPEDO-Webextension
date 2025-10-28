@@ -1,6 +1,9 @@
+/**
+ * Content script for the Torpedo browser extension.
+ */
 (async function () {
     /**
-     * Start entry point of the Torpedo extension.
+     * Main function to initialize the content script.
      */
     async function main() {
         const siteConfig = {
@@ -48,7 +51,6 @@
             const targetForm = event.target.closest(formSelectors);
             if (targetForm) {
                 openTooltip(targetForm, "form");
-                torpedo.progUrl = true;
             }
         });
     }
@@ -112,11 +114,8 @@
         torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
         torpedo.target.removeEventListener("mouseleave", handleMouseLeave);
 
-        torpedo.progUrl = false;
-        torpedo.hasTooltip = false;
-
         const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
-        preventClickEvent(torpedo.target, eventTypes);
+        Utils.preventEvents(torpedo.target, eventTypes);
 
         if (type === "a") {
             const href = torpedo.target.href;
@@ -131,13 +130,7 @@
         }
 
         const url = type === "form" ? new URL(torpedo.target.action) : new URL(torpedo.target.href);
-        torpedo.urlObject = url;
-        TooltipManager.setNewUrl(url);
-
-        const tooltipURL = hasTooltip(torpedo.target);
-        if (tooltipURL !== "<HAS_NO_TOOLTIP>") {
-            torpedo.hasTooltip = isTooltipMismatch(tooltipURL, torpedo.url);
-        }
+        torpedo.setNewUrl(url);
 
         try {
             const storage = await browser.storage.sync.get(null);
@@ -154,13 +147,10 @@
         } catch (err) {
             console.log(torpedo.target.href);
             console.log(err);
-            await browser.runtime.sendMessage({name: "error"});
+            await browser.runtime.sendMessage({ name: "error" });
         }
     }
 
-    /**
-     * Starts the main function when the DOM is fully loaded.
-     */
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", main);
     } else {

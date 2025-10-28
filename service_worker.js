@@ -2,14 +2,17 @@ const initialStorage = new Map([
     ['onceClickedDomains', []],
     ['userDefinedDomains', []],
     ['timer', 3],
-    ['tooltipTextCounter', [0, 0, 0, 0, 0, 0]], // T1=0, T2=1, T31=2, T32=3, T33=4, T4=5
+    ['tooltipTextCounter', [0, 0, 0, 0, 0, 0]],
     ['trustedTimerActivated', false],
     ['userTimerActivated', false],
     ['privacyModeActivated', true],
     ['securityModeActivated', false],
     ['redirectModeActivated', false],
     ['trustedListActivated', true],
-    ['minimalTooltip', false],
+    ['minimalTooltip_url', true],
+    ['minimalTooltip_security', true],
+    ['minimalTooltip_info', true],
+    ['minimalTooltip_timer', true],
     ['referrerPart1', ["deref-gmx.net", "deref-web-02.de", "deref-web.de", "google.*", "google.*"]],
     ['referrerPart2', ["/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/url?", "/url?"]],
     ['referrerPart3', ["redirectUrl=", "redirectUrl=", "redirectUrl=", "url=", "q="]],
@@ -415,6 +418,10 @@ const initialStorage = new Map([
 ]);
 
 
+/**
+ * Initializes the storage with default values if they are not already set.
+ * @returns {Promise<void>} A promise that resolves when the storage is initialized.
+ */
 const initializeStorage = async () => {
     const currentStorage = await chrome.storage.sync.get(null);
     const newStorage = {};
@@ -429,61 +436,82 @@ const initializeStorage = async () => {
 };
 
 
-const showTutorial = () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL("tutorial.html") });
+/**
+ * Opens the tutorial page in a new tab.
+ * @returns {Promise<void>} A promise that resolves when the tutorial page is opened.
+ */
+const showTutorial = async () => {
+    await chrome.tabs.create({ url: chrome.runtime.getURL("tutorial.html") });
 }
 
 
+/**
+ * Handles the extension installation event.
+ * @param details - The installation details.
+ * @returns {Promise<void>} A promise that resolves when the installation handling is complete.
+ */
 const onInstalledHandler = async (details) => {
     await initializeStorage();
 
     if (details.reason === "install") {
-        showTutorial();
+        await showTutorial();
     }
 
-    chrome.action.disable();
+    await chrome.action.disable();
 }
 
 
-chrome.runtime.onInstalled.addListener(onInstalledHandler);
-
-
-const sendEmail = (location) => {
-    const emailUrl = new URL("mailto:torpedo@secuso.org")
-    emailUrl.searchParams.set("subject", "Error with TORPEDO Webextension");
-    emailUrl.searchParams.set("body", `Dear TORPEDO-dev-Team,\n\nTORPEDO seems to not properly work in this 
-    location: "${location}"\nHere is additional information that might help you (add information to help resolve the issue here):`)
-
-    chrome.tabs.create({ url: emailUrl.href });
-}
-
-
-const toggleActionIcon = (tabId, changeInfo, tab) => {
+/**
+ * Toggles the action icon based on the URL of the updated tab.
+ * @param tabId - The ID of the updated tab.
+ * @param changeInfo - The change information of the updated tab.
+ * @param tab - The updated tab object.
+ * @returns {Promise<void>} A promise that resolves when the action icon is toggled.
+ */
+const toggleActionIcon = async (tabId, changeInfo, tab) => {
     if (tab.url) {
         const manifest = chrome.runtime.getManifest();
         const contentScriptMatches = manifest.content_scripts[0].matches;
         const isMatched = contentScriptMatches.some((pattern) => tab.url.match(pattern) !== null);
 
         if (isMatched) {
-            chrome.action.enable(tabId);
+            await chrome.action.enable(tabId);
         } else {
-            chrome.action.disable(tabId);
+            await chrome.action.disable(tabId);
         }
     }
 }
 
 
-chrome.tabs.onUpdated.addListener(toggleActionIcon);
+/**
+ * Sends an email to the TORPEDO development team with information about an error.
+ * @param location - The location where the error occurred.
+ * @returns {Promise<void>} A promise that resolves when the email is sent.
+ */
+const sendEmail = async (location) => {
+    const emailUrl = new URL("mailto:torpedo@secuso.org")
+    emailUrl.searchParams.set("subject", "Error with TORPEDO Webextension");
+    emailUrl.searchParams.set("body", `Dear TORPEDO-dev-Team,\n\nTORPEDO seems to not properly work in this 
+    location: "${location}"\nHere is additional information that might help you (add information to help resolve the issue here):`)
+
+    await chrome.tabs.create({ url: emailUrl.href });
+}
 
 
+/**
+ * Updates the extension state in storage and changes the action icon accordingly.
+ * @param works - A boolean indicating whether the extension works properly.
+ * @param location - The location where the state update is occurring.
+ * @returns {Promise<void>} A promise that resolves when the extension state is updated.
+ */
 const updateExtensionState = async (works, location) => {
-    await chrome.storage.sync.set({ state: { works, location} });
+    await chrome.storage.sync.set({ state: { works, location } });
     const iconPath = works ? "img/icon38.png" : "img/error38.png";
 
     try {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
         if (tab) {
-            await chrome.action.setIcon({ tabId: tab.id, path: { "38": iconPath} });
+            await chrome.action.setIcon({ tabId: tab.id, path: { "38": iconPath } });
         }
     } catch (e) {
         console.log("Failed to set action icon:", e);
@@ -491,6 +519,13 @@ const updateExtensionState = async (works, location) => {
 }
 
 
+/**
+ * Handles incoming messages from content scripts or other parts of the extension.
+ * @param request - The message request object.
+ * @param sender - The sender of the message.
+ * @param sendResponse - The function to send a response back to the sender.
+ * @returns {boolean} - Indicates that the response will be sent asynchronously.
+ */
 const onMessageHandler = (request, sender, sendResponse) => {
     (async () => {
         switch (request.name) {
@@ -527,19 +562,17 @@ const onMessageHandler = (request, sender, sendResponse) => {
             }
 
             case "tutorial": {
-                showTutorial();
+                await showTutorial();
                 break;
             }
 
             case "google": {
-                await chrome.tabs.create({
-                    url: `https://google.de/?q=${encodeURIComponent(request.url)}`
-                });
+                await chrome.tabs.create({ url: `https://google.de/?q=${encodeURIComponent(request.url)}` });
                 break;
             }
 
             case "open": {
-                await chrome.tabs.create({url: request.url});
+                await chrome.tabs.create({ url: request.url });
                 break;
             }
 
@@ -555,7 +588,7 @@ const onMessageHandler = (request, sender, sendResponse) => {
 
             case "sendMail": {
                 const {state} = await chrome.storage.session.get("state");
-                sendEmail(state?.location || "");
+                await sendEmail(state?.location || "");
                 break;
             }
         }
@@ -566,4 +599,6 @@ const onMessageHandler = (request, sender, sendResponse) => {
 };
 
 
+chrome.runtime.onInstalled.addListener(onInstalledHandler);
+chrome.tabs.onUpdated.addListener(toggleActionIcon);
 chrome.runtime.onMessage.addListener(onMessageHandler);
