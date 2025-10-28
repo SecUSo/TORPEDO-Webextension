@@ -22,22 +22,22 @@ async function getSecurityStatus(storage) {
         return "URLnachErmittelnButton2";
     }
 
+    let tooltipWarning;
+    if (torpedo.target.getAttribute("title")) {
+        tooltipWarning = !Utils.isDomainMatch(torpedo.urlObject.hostname, torpedo.target.getAttribute("title"));
+    } else {
+        tooltipWarning = false;
+    }
+
     if (inTrusted(torpedo.domain, storage)) return "T1";
     if (inUserList(torpedo.domain, storage)) return "T2";
-    if (torpedo.progUrl || torpedo.hasTooltip || isIP(torpedo.domain)) return "T32";
+    if (tooltipWarning || isIP(torpedo.domain)) return "T32";
 
     if (torpedo.countRedirect === 0) {
         return isMismatch(torpedo.domain) ? "T32" : "T31";
     }
 
     return storage.redirectModeActivated && !isMismatch(torpedo.domain) ? "T31" : "T32";
-}
-
-/**
- * Checks if the target element has a programmed tooltip.
- */
-function hasTooltip(eventTarget) {
-    return eventTarget.getAttribute("title") ?? "<HAS_NO_TOOLTIP>";
 }
 
 /**
@@ -71,26 +71,6 @@ function isMismatch(domain) {
         const displayedLinkTextDom = TooltipManager.extractDomain(uri.hostname);
 
         return displayedLinkTextDom !== torpedo.oldDomain && displayedLinkTextDom !== domain;
-    } catch (e) {
-        return false;
-    }
-}
-
-/**
- * Compares the domains of two URLs.
- */
-function isTooltipMismatch(tooltipURL, hrefURL) {
-    if (!tooltipURL || !hrefURL) return false;
-
-    try {
-        if (isURLwithoutProtocol(tooltipURL)) {
-            tooltipURL = "http://" + tooltipURL;
-        }
-
-        const hrefDomain = TooltipManager.extractDomain(hrefURL);
-        const tooltipDomain = TooltipManager.extractDomain(tooltipURL);
-        return tooltipDomain !== hrefDomain;
-
     } catch (e) {
         return false;
     }

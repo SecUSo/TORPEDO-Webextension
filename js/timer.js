@@ -1,53 +1,4 @@
 /**
- * Prevents the default action of an event.
- */
-function preventDefaultHandler(event) {
-    event.preventDefault();
-    event.stopPropagation();
-}
-
-/**
- * Prevents click events on a target element.
- */
-function preventClickEvent(eventTarget, eventTypes) {
-    eventTypes.forEach(eventType => {
-       eventTarget.addEventListener(eventType, preventDefaultHandler, { capture: true });
-    });
-}
-
-/**
- * Re-enables click events on a target element.
- */
-function reactivateLink(eventTarget, eventTypes) {
-    eventTypes.forEach(eventType => {
-        eventTarget.removeEventListener(eventType, preventDefaultHandler, { capture: true });
-    });
-
-    eventTarget.addEventListener("click", () => TooltipManager.processClick());
-}
-
-/**
- * Re-enables the tooltip URL link.
- */
-function reactivateTooltipURL(tooltipURL) {
-    try {
-        const clone = tooltipURL.cloneNode(true);
-        tooltipURL.parentNode.replaceChild(clone, tooltipURL);
-
-        tooltipURL.addEventListener("click", async (event) => {
-            event.preventDefault()
-            const storage = await browser.storage.sync.get();
-            const urlToOpen = storage.privacyModeActivated ? torpedo.oldUrl : torpedo.url;
-            await browser.runtime.sendMessage({name: "open", url: urlToOpen});
-            await TooltipManager.processClick();
-        });
-
-    } catch (e) {
-        console.log(e)
-    }
-}
-
-/**
  * Checks if the timer is activated for a given security status.
  */
 function isTimerActivated(storage, securityStatus) {
@@ -84,8 +35,8 @@ function countdown(time, state, clickLinkEventTypes) {
                 torpedo.target.classList.add("torpedoTimerFinished");
             }
 
-            reactivateLink(torpedo.target, clickLinkEventTypes);
-            reactivateTooltipURL(torpedo.tooltip.querySelector(".torpedo-URL"));
+            Utils.reactivateEvents(torpedo.target, clickLinkEventTypes)
+            Utils.reactivateEvents(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"])
         } else {
             time--;
         }
