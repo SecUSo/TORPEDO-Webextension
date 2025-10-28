@@ -71,7 +71,7 @@
   },
 
   "T1Erklaerung": {
-    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) als gering eingestuft.",
+    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
 
@@ -96,7 +96,7 @@
   },
 
   "T2Erklaerung": {
-    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) als gering eingestuft.",
+    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
 
@@ -121,7 +121,7 @@
   },
 
   "T31Erklaerung": {
-    "message": "<div class='torpedoHighlight'>Unbekanntes Risiko:</div> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>).",
+    "message": "<span class='torpedoHighlight'>Unbekanntes Risiko:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>).",
     "description": "Information on the classification of this domain"
   },
 
@@ -146,7 +146,7 @@
   },
 
   "T32Erklaerung": {
-    "message": "<div class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</div> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) prüfen.",
+    "message": "<span class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) prüfen.",
     "description": "Information on the classification of this domain"
   },
 
@@ -171,7 +171,7 @@
   },
 
   "T33Erklaerung": {
-    "message": "<div class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</div> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein gravierender Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) prüfen.",
+    "message": "<span class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein gravierender Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) prüfen.",
     "description": "Information on the classification of this domain"
   },
 
@@ -221,7 +221,7 @@
   },
 
   "URLnachErmittelnButton2Erklaerung": {
-    "message": "<div class='torpedoHighlight'>Unbekanntes Risiko:</div> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Die Domain (<div class='torpedoHighlight'>fett hervorgehobener Bereich der URL</div>) ist nicht die Ziel-Domain. Wenn Sie auf den Link klicken, werden Sie auf eine andere Domain weitergeleitet. Um die Ziel-Domain zu überprüfen, muss TORPEDO diese ermitteln. Dies geschieht nicht automatisch, da eine Ermittlung Ihre Privatsphäre gefährdet.",
+    "message": "<span class='torpedoHighlight'>Unbekanntes Risiko:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Die Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) ist nicht die Ziel-Domain. Wenn Sie auf den Link klicken, werden Sie auf eine andere Domain weitergeleitet. Um die Ziel-Domain zu überprüfen, muss TORPEDO diese ermitteln. Dies geschieht nicht automatisch, da eine Ermittlung Ihre Privatsphäre gefährdet.",
     "description": "Information on the classification of this domain"
   },
 
@@ -659,8 +659,23 @@
     "description": "translations for tut on configurations page"
   },
 
-  "minimal_tooltip": {
-    "message": "Minimaler Tooltip",
-    "description": "Set for minimal tooltip option"
-  }
+  "tooltipCheckboxText_url": {
+    "message": "tooltipCheckboxText url",
+    "description": ""
+  },
+
+  "tooltipCheckboxText_security": {
+    "message": "tooltipCheckboxText security",
+    "description": ""
+  },
+
+    "tooltipCheckboxText_info": {
+      "message": "tooltipCheckboxText info",
+      "description": ""
+    },
+
+    "tooltipCheckboxText_timer": {
+        "message": "tooltipCheckboxText timer",
+        "description": ""
+    }
 }
