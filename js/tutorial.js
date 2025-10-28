@@ -29,191 +29,158 @@ const pages = {
   7: "warning-grey_case_no-phish",
   8: "configurations",
 };
-const lastPage = Object.keys(pages).reduce((a, b) =>
-  parseInt(a) > parseInt(b) ? parseInt(a) : parseInt(b)
-);
+
+const lastPage = Math.max(...Object.keys(pages).map(Number));
 let overviewCircles;
 
-// TESTING STUFF
-nrInCategory("warning-grey_case_no-phish", pages);
+document.addEventListener("DOMContentLoaded", () => {
+    lang = browser.i18n.getUILanguage().substring(0, 2);
+    overviewCircles = document.querySelectorAll(".overview-case");
 
-// STARTING WHEN CONTENT IS LOADED ON PAGE
-$(document).ready(function () {
-  // get language details
-  lang = chrome.i18n.getUILanguage().substr(0, 2);
+    overviewCircles.forEach((circle) => {
+        circle.addEventListener("click", () => {
+            const pageName = circle.dataset.pageName;
+            if (!pageName) return;
 
-  overviewCircles = document.querySelectorAll(".overview-case");
+            const pageIndex = Object.keys(pages).find(
+                (key) => pages[key] === pageName
+            );
 
-  // add eventlisteners
-  // to overview for interactive clicking (since css and JS names differ there might be some adaptations)
-  overviewCircles.forEach((circle) => {
-    circle.addEventListener("click", (e) => {
-      activePageContent = Object.entries(pages)
-        .sort((a, b) => {
-          a[0] - b[0];
-        })
-        .find((page) => {
-          return circle.classList.contains(page[1].replace(/_/g, "-"))
-            ? page
-            : null;
-        })[0];
-      show();
+            if (pageIndex !== undefined) {
+                activePageContent = parseInt(pageIndex, 10);
+                show();
+            }
+        });
     });
-  });
-  // to nav-buttons
-  $("#prev").on("click", function (e) {
-    if (activePageContent > 0) show(--activePageContent);
-  });
-  $("#next").on("click", function (e) {
-    if (activePageContent < lastPage) show(++activePageContent);
-  });
-  $("#finish").on("click", function (e) {
-    e.target.classList.contains("disabled")
-      ? false
-      : chrome.runtime.sendMessage({ name: "close" });
-  });
 
-  init();
-  show(activePageContent);
+    document.getElementById("prev").addEventListener("click", () => {
+       if (activePageContent > 0) show(--activePageContent);
+    });
+
+    document.getElementById("next").addEventListener("click", () => {
+       if (activePageContent < lastPage) show(++activePageContent);
+    });
+
+    document.getElementById("finish").addEventListener("click", (e) => {
+       if (!e.currentTarget.classList.contains("disabled")) {
+           browser.runtime.sendMessage({ name: "close" });
+       }
+    });
+
+    init();
+    show(activePageContent);
 });
 
 function show() {
-  console.log(`We are currently on page: ${activePageContent}`);
-  activateCurrentPageElements();
-  showPageContent();
+
+    activateCurrentPageElements();
+    showPageContent();
 }
 
 function activateCurrentPageElements() {
-  // possibility to adapt the visibility of overview-bubbles
-  if (overviewVisible) {
-    document.querySelector(".overview").style.display = "flex";
-    // remove selected from all and then assign selected to the active circle
-    overviewCircles.forEach((circle) => {
-      circle.classList.remove("selected");
-      circle.classList.contains(pages[activePageContent].replace(/_/g, "-"))
-        ? circle.classList.add("selected")
-        : null;
-    });
-  } else {
-    document.querySelector(".overview").style.display = "none";
-  }
+    if (overviewVisible) {
+        document.querySelector(".overview").style.display = "flex";
+        const activePageName = pages[activePageContent];
 
-  // logic for buttons (which are active/deactivated)
-  activePageContent == Object.keys(pages).length - 1
-    ? document.querySelector("#finish").classList.remove("disabled")
-    : document.querySelector("#finish").classList.add("disabled");
+        overviewCircles.forEach((circle) => {
+           circle.classList.toggle("selected", circle.dataset.pageName === activePageName);
+        });
+    } else {
+        document.querySelector(".overview").style.display = "none";
+    }
+
+    const isLastPage = activePageContent === lastPage;
+    document.getElementById("finish").classList.toggle("disabled", !isLastPage);
 }
 
 function showPageContent() {
-  // not displaying anything
-  $(".tut-content > div").addClass("off");
-
-  pages[activePageContent].includes("_case")
-    ? // if it's an example
-      prepExample()
-    : // if it's a different page
-      prepNoExamplePage();
-}
-/**
- * Initialize the entire tutorial with correct lang
- */
-function init() {
-  // see if we want overview or not
-  activateCurrentPageElements();
-  // at beginning for language´
-  // page 'welcome'
-  $("#welcome-title").html(getMsg("welcome_title"));
-  $("#introduction-txt").html(getMsg("introduction_txt"));
-  $("#technical-bg-title").html(getMsg("technical_background_title"));
-  $("#technical-bg-txt").html(getMsg("technical_background_txt"));
-  $("#functionality-title").html(getMsg("functionality_title"));
-  $("#functionality-txt").html(getMsg("functionality_txt"));
-  $(".welcome").removeClass("off");
-
-  // page 'explanation'
-  $("#functionality-explanation-title").text(
-    getMsg("functionality_explanation_title")
-  );
-  for (let i = 1; i < 8; i++) {
-    $(`#functionality-explanation-txt-${i}`).html(
-      getMsg(`functionality_explanation_txt_${i}`)
-    );
-  }
-  $(`#domain-explain`).text(getMsg(`domain_translation`));
-  // pages of the cases and their explanations
-  $("#green-case-showcase-title").text(getMsg("green_case_title"));
-  $("#blue-case-showcase-title").text(getMsg("blue_case_title"));
-  $("#simple-grey-case-showcase-title").text(getMsg("simple_grey_case_title"));
-  $("#warning-grey-case-showcase-title").text(
-    getMsg("warning_grey_case_title")
-  );
-  $("#red-case-showcase-title").text(getMsg("red_case_title"));
-  $("#green-case-showcase-img").attr(
-    "src",
-    `/img/examples/${lang}/green_case_${lang}.svg`
-  );
-  $("#blue-case-showcase-img").attr(
-    "src",
-    `/img/examples/${lang}/blue_case_${lang}.svg`
-  );
-  $("#simple-grey-case-showcase-img").attr(
-    "src",
-    `/img/examples/${lang}/simple-grey_case_no-phish_${lang}.svg`
-  );
-  $("#warning-grey-case-showcase-img").attr(
-    "src",
-    `/img/examples/${lang}/warning-grey_case_no-phish_${lang}.svg`
-  );
-  $("#red-case-showcase-img").attr(
-    "src",
-    `/img/examples/${lang}/red_case_${lang}.svg`
-  );
-  // making examples clickable by binding them to pages depending on first word of css selector
-  let showcases = Array.from(document.querySelectorAll(".show-case-card.card"));
-  showcases.forEach((showcase) => {
-    showcase.addEventListener("click", (e) => {
-      let keyword = showcase.classList[0].split("-")[0];
-      activePageContent = findFirstByIndex(pages, keyword);
-      show();
+    document.querySelectorAll(".tut-content > div").forEach((div) => {
+        div.classList.add("off");
     });
-  });
 
-  // page configurations
-  $("#contextmenu-img").attr(
-    "src",
-    `/img/examples/${lang}/simple-grey_case_contextmenu_${lang}.svg`
-  );
-  $("#special-cases-title").text(getMsg("special_cases_title"));
-  $("#special-cases-txt").text(getMsg("special_cases_txt"));
+    pages[activePageContent].includes("_case") ? prepExample() : prepNoExamplePage();
+}
 
-  $("#settings-title").text(getMsg("settings_title"));
-  $("#settings-subtitle").text(getMsg("settings_subtitle"));
-  $("#settings-img").attr("src", `/img/examples/${lang}/settings_${lang}.png`);
-  Array.from(document.querySelectorAll(".settings-option")).forEach(
-    (option, index) => {
-      $(`#settings-option-${index + 1}`).html(
-        getMsg(`settings_option_${index}`)
-      );
+function init() {
+    activateCurrentPageElements();
+
+    document.getElementById("welcome-title").innerHTML = getMsg("welcome_title");
+    document.getElementById("introduction-txt").innerHTML = getMsg("introduction_txt");
+    document.getElementById("technical-bg-title").innerHTML = getMsg("technical_background_title");
+    document.getElementById("technical-bg-txt").innerHTML = getMsg("technical_background_txt");
+    document.getElementById("functionality-title").innerHTML = getMsg("functionality_title");
+    document.getElementById("functionality-txt").innerHTML = getMsg("functionality_txt");
+    document.querySelectorAll(".welcome").forEach(el => el.classList.remove("off"));
+
+    document.getElementById("functionality-explanation-title").textContent = getMsg(
+        "functionality_explanation_title"
+    );
+
+    for (let i = 1; i < 8; i++) {
+        document.getElementById(`functionality-explanation-txt-${i}`).innerHTML =
+            getMsg(`functionality_explanation_txt_${i}`);
     }
-  );
+
+    document.getElementById(`domain-explain`).textContent = getMsg(`domain_translation`);
+    document.getElementById("green-case-showcase-title").textContent = getMsg("green_case_title");
+    document.getElementById("blue-case-showcase-title").textContent = getMsg("blue_case_title");
+    document.getElementById("simple-grey-case-showcase-title").textContent = getMsg("simple_grey_case_title");
+    document.getElementById("warning-grey-case-showcase-title").textContent = getMsg("warning_grey_case_title");
+
+    document
+        .getElementById("green-case-showcase-img")
+        .setAttribute("src", `/img/examples/${lang}/green_case_${lang}.svg`);
+    document
+        .getElementById("blue-case-showcase-img")
+        .setAttribute("src", `/img/examples/${lang}/blue_case_${lang}.svg`);
+    document
+        .getElementById("simple-grey-case-showcase-img")
+        .setAttribute(
+            "src",
+            `/img/examples/${lang}/simple-grey_case_no-phish_${lang}.svg`);
+    document
+        .getElementById("warning-grey-case-showcase-img")
+        .setAttribute(
+            "src",
+            `/img/examples/${lang}/warning-grey_case_no-phish_${lang}.svg`);
+
+    let showcases = Array.from(document.querySelectorAll(".show-case-card.card"));
+    showcases.forEach((showcase) => {
+        showcase.addEventListener("click", (e) => {
+            const targetPage = showcase.dataset.targetPage;
+            if (!targetPage) return;
+
+            const pageIndex = findFirstByIndex(pages, targetPage);
+            if (pageIndex !== null) {
+                activePageContent = pageIndex;
+                show();
+            }
+        });
+    });
+
+    document
+        .getElementById("contextmenu-img")
+        .setAttribute(
+            "src",
+            `/img/examples/${lang}/simple-grey_case_contextmenu_${lang}.svg`
+        );
+    document.getElementById("special-cases-title").textContent = getMsg("special_cases_title");
+    document.getElementById("special-cases-txt").textContent = getMsg("special_cases_txt");
+
+    document.getElementById("settings-title").textContent = getMsg("settings_title");
+    document.getElementById("settings-subtitle").textContent = getMsg("settings_subtitle");
+    document
+        .getElementById("settings-img")
+        .setAttribute("src", `/img/examples/${lang}/settings_${lang}.png`);
+    Array.from(document.querySelectorAll(".settings-option")).forEach(
+        (option, index) => {
+            // Using .innerHTML because msg might contain formatting
+            document.getElementById(`settings-option-${index + 1}`).innerHTML =
+                getMsg(`settings_option_${index}`);
+        }
+    );
 }
 
-// HELPER FUNCTIONS
-
-// ANALYZING PAGES
-/**
- *
- * @param {*} object object containing all pages
- *
- *  reads out all the names of pages and concatenating those to selector to
- *  easily display none all pages and activate the appropriate one.
- */
-function readOutCSSClassesConcatenatedNotExamples(object) {
-  let results = Object.values(object).filter((entry) => {
-    return !entry.match(/_case/g) ? entry : null;
-  });
-  return results;
-}
 /**
  *
  * @param {*} obj object to go through
@@ -231,23 +198,7 @@ function findFirstByIndex(obj, firstExampleValue = null) {
         .filter((entry) => entry[1].match(/_case/g));
   return result.length ? result[0][0] : null;
 }
-/**
- *
- * @param {*} obj object to go through
- * @param {*} firstExampleValue RegEx to look for, if none is specified first value containing the RegEx "_case" is used
- *
- *  @returns first match containing lastExampleValue, if none matches returns null
- */
-function findLastByIndex(obj, lastExampleValue = null) {
-  let result = lastExampleValue
-    ? Object.entries(obj)
-        .sort((b, a) => a[0] - b[0])
-        .filter((entry) => entry[1].match(lastExampleValue))
-    : Object.entries(obj)
-        .sort((b, a) => a[0] - b[0])
-        .filter((entry) => entry[1].match(/_case/g));
-  return result.length ? result[0][0] : null;
-}
+
 /**
  *
  * @param {*} string word that shall be cut off at stopper
@@ -283,25 +234,16 @@ function keyByValue(object, value, first = true) {
     return result;
   }
 }
-/**
- *
- * @param {*} category category that is searched for (naming convention, _case as indicator of a category)
- * @param {*} obj obj to go through
- */
+
 function findAmountOfExamplesOfCategory(category, obj) {
-  let amount = 0;
-  amount = Object.values(obj).filter((page) => {
-    return page.includes(caseStopper(category));
-  }).length;
-  return amount;
+    let amount = 0;
+    amount = Object.values(obj).filter((page) => {
+        return page.includes(caseStopper(category));
+    }).length;
+
+    return amount;
 }
-/**
- *
- * @param {*} category page to be analyzed
- * @param {*} obj object to go through
- *
- *  Because objects do not grant order, the index has to be analyzed to tell which nr it takes
- */
+
 function nrInCategory(category, obj) {
   let sortedCats = Object.entries(obj).filter((page) => {
     return page[1].includes(caseStopper(category));
@@ -311,64 +253,65 @@ function nrInCategory(category, obj) {
   return nrOfCat;
 }
 
-// PAGE PREPARATION
-/**
- *
- * @param {*} msg msg to be caught in ling
- *
- *  This function is shorter but works like chrome.i18n.getMessage(msg);
- */
 function getMsg(msg) {
-  return chrome.i18n.getMessage(msg.replace(/-/g, "_"));
+  return browser.i18n.getMessage(msg.replace(/-/g, "_"));
 }
 
 function prepExample() {
-  // showing image
-  $(".svg-in-img").attr(
-    "src",
-    `./img/examples/${lang}/${pages[activePageContent]}_${lang}.svg`
-  );
-
-  // filling card
-  // starting with content each example has
-  $("#example-title").html(
-    getMsg(`${caseStopper(pages[activePageContent])}_title`)
-  );
-  $("#category-explanation").html(
-    getMsg(`${caseStopper(pages[activePageContent])}_category`)
-  );
-  $("#explanation-of-specific-link").html(
-    getMsg(`${pages[activePageContent]}_specific_link_explanation`)
-  );
-  // THIS SECTION IS ONLY NECESSARY IF A CATEGORY HAS ADDITIONAL INFO OR MORE THAN ONE CASE
-  let amountActiveCat = findAmountOfExamplesOfCategory(
-    pages[activePageContent],
-    pages
-  );
-  let context = getMsg(`${pages[activePageContent]}_context`);
-  context
-    ? ($("#example-context").html(
-        `<span class="underlined">${getMsg("example")}${
-          amountActiveCat > 1
-            ? ` ${nrInCategory(pages[activePageContent], pages) + 1}`
-            : ""
-        }:</span> ` + context
-      ),
-      $("#additional-info").removeClass("off"))
-    : $("#additional-info").addClass("off");
-
-  if (amountActiveCat > 1) {
-    $("#more-than-one-example").html(
-      getMsg(`${caseStopper(pages[activePageContent])}_more_than_one`)
+    console.log("prep example");
+    document.querySelector(".svg-in-img").setAttribute(
+        "src", `./img/examples/${lang}/${pages[activePageContent]}_${lang}.svg`
     );
-    $("#more-than-one").removeClass("off");
-  } else {
-    $("#more-than-one").addClass("off");
-  }
-  // making it visible again
-  $(".example-wrapper").removeClass("off");
+
+    document.getElementById("example-title").innerHTML = getMsg(
+        `${caseStopper(pages[activePageContent])}_title`
+    );
+
+    document.getElementById("category-explanation").innerHTML = getMsg(
+        `${caseStopper(pages[activePageContent])}_category`
+    );
+
+    document.getElementById("explanation-of-specific-link").innerHTML = getMsg(
+        `${pages[activePageContent]}_specific_link_explanation`
+    );
+
+    let amountActiveCat = findAmountOfExamplesOfCategory(
+        pages[activePageContent],
+        pages
+    );
+
+    let context = getMsg(`${pages[activePageContent]}_context`);
+
+    if (context) {
+        document.getElementById("example-context").innerHTML =
+            `<span class="underlined">${getMsg("example")}${
+                amountActiveCat > 1
+                    ? ` ${nrInCategory(pages[activePageContent], pages) + 1}`
+                    : ""
+            }:</span> ` + context;
+
+        document.getElementById("additional-info").classList.remove("off");
+    } else {
+        document.getElementById("additional-info").classList.add("off");
+    }
+
+    if (amountActiveCat > 1) {
+        document.getElementById("more-than-one-example").innerHTML = getMsg(
+            `${caseStopper(pages[activePageContent])}_more_than_one`
+        );
+
+        document.getElementById("more-than-one").classList.remove("off");
+    } else {
+        document.getElementById("more-than-one").classList.add("off");
+    }
+
+    document.querySelector(".example-wrapper").classList.remove("off");
 }
 
 function prepNoExamplePage() {
-  $(`.${pages[activePageContent].replace(/_/g, "-")}`).removeClass("off");
+    const className = pages[activePageContent].replace(/-/g, "_");
+    console.log("prep no example with: ", className);
+    document.querySelectorAll(`.${className}`).forEach((elem) => {
+        elem.classList.remove("off");
+    })
 }
