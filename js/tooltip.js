@@ -1,17 +1,11 @@
 const TooltipManager = (function() {
 
     /**
-     * Displays the tooltip at the specified target element.
+     * Displays the tooltip for the specified target element.
      */
     async function showTooltip(target) {
         const tooltipElement = document.createElement("div");
-
         tooltipElement.className = "torpedo-tooltip is-loading";
-
-        const settings = await browser.storage.sync.get(null);
-        if (settings.minimalTooltip === true) {
-            tooltipElement.classList.add("minimal-tooltip");
-        }
 
         const tooltipURL = browser.runtime.getURL("tooltip.html");
         const resp = await fetch(tooltipURL);
@@ -21,6 +15,24 @@ const TooltipManager = (function() {
 
         torpedo.tooltip = tooltipElement;
         torpedo.opened = true;
+
+        const settings = await browser.storage.sync.get(null);
+
+        if (settings.minimalTooltip_url === true) {
+            document.getElementById("section-url").classList.add("active");
+        }
+
+        if (settings.minimalTooltip_security === true) {
+            document.getElementById("section-security").classList.add("active");
+        }
+
+        if (settings.minimalTooltip_info === true) {
+            document.getElementById("section-info").classList.add("active");
+        }
+
+        if (settings.minimalTooltip_timer === true) {
+            document.getElementById("section-timer").classList.add("active");
+        }
 
         tooltipElement.addEventListener("mouseenter", () => {
             if (torpedo.hideTimer) {
@@ -42,7 +54,7 @@ const TooltipManager = (function() {
             tooltipElement.style.top = `${y}px`;
         });
 
-        preventClickEvent(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"]);
+        Utils.preventEvents(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"])
         initTooltip();
         await updateTooltip();
     }
@@ -165,9 +177,11 @@ const TooltipManager = (function() {
         const storage = await browser.storage.sync.get(null);
         const secStatus = await getSecurityStatus(storage);
 
+        console.log("Security Status:", secStatus);
+
         const t = torpedo.tooltip;
 
-        let url = torpedo.urlObject.href;
+        let url = torpedo.url;
         const pathSuffix = torpedo.urlObject.pathname + torpedo.urlObject.search + torpedo.urlObject.hash;
 
         if (pathSuffix.length > 100) {
@@ -249,7 +263,8 @@ const TooltipManager = (function() {
         if (isTimerActivated(storage, secStatus)) {
             countdown(storage.timer, secStatus, eventTypes);
         } else {
-            reactivateLink(torpedo.target, eventTypes);
+            Utils.reactivateEvents(torpedo.target, eventTypes);
+            Utils.reactivateEvents(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"]);
         }
 
         deactivateLoader();
@@ -332,15 +347,13 @@ const TooltipManager = (function() {
      * Sets the incoming URL as the new torpedo URL.
      */
     function setNewUrl(uri) {
-        let normalizedUri = uri;
-
-        if (normalizedUri.hostname.endsWith(".")) {
-            const newHref = normalizedUri.href.replace(normalizedUri.hostname, normalizedUri.hostname.slice(0, -1));
-            normalizedUri = new URL(newHref);
+        if (uri.hostname.endsWith(".")) {
+            uri.hostname = uri.hostname.slice(0, -1);
         }
 
-        torpedo.url = normalizedUri.href;
-        torpedo.domain = extractDomain(normalizedUri.hostname);
+        torpedo.urlObject = uri;
+        torpedo.url = uri.href;
+        torpedo.domain = extractDomain(uri.hostname);
     }
 
     /*
