@@ -13,6 +13,8 @@ function isTimerActivated(storage, securityStatus) {
  * Starts a countdown timer to delay link activation.
  */
 function countdown(time, state, clickLinkEventTypes) {
+    clearInterval(torpedo.timerInterval);
+
     if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
 
     const timerEl = torpedo.tooltip.querySelector(".torpedo-timer");
@@ -36,7 +38,10 @@ function countdown(time, state, clickLinkEventTypes) {
             }
 
             Utils.reactivateEvents(torpedo.target, clickLinkEventTypes)
-            Utils.reactivateEvents(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"])
+
+            if (torpedo.tooltip !== null) {
+                Utils.reactivateEvents(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"])
+            }
         } else {
             time--;
         }
