@@ -6,7 +6,6 @@ const torpedo = {
     countRedirect: 0,
     // The domain of the torpedo target link.
     domain: "",
-    hasTooltip: false,
     // Timer to hide the tooltip.
     hideTimer: null,
     // The current location of the browser e.x. mail.google.com
@@ -15,7 +14,6 @@ const torpedo = {
     oldUrl: "",
     // Flag that indicating if the tooltip is currently open.
     opened: false,
-    progUrl: false,
     // The public suffix list instance.
     publicSuffixList: "",
     // The DOM element for which the tooltip should be shown.
@@ -26,6 +24,19 @@ const torpedo = {
     tooltip: null,
     // The href of the URL object.
     url: "",
-
+    // The URL object of the target link.
     urlObject: null,
+
+    /**
+     * Sets a new URL object and updates related properties.
+     */
+    setNewUrl(newUrlObject) {
+        if (newUrlObject.hostname.endsWith(".")) {
+            newUrlObject.hostname = newUrlObject.hostname.slice(0, -1);
+        }
+
+        this.urlObject = newUrlObject;
+        this.url = newUrlObject.href;
+        this.domain = TooltipManager.extractDomain(newUrlObject.hostname)
+    }
 }
