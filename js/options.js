@@ -33,7 +33,10 @@ const OptionsPage = {
             settings.referrerPart1?.includes("deref-web-02.de");
 
         // Tooltip tab
-        document.getElementById("tooltipCheckbox").checked = settings.minimalTooltip;
+        document.getElementById("tooltipCheckbox-url").checked = settings.minimalTooltip_url;
+        document.getElementById("tooltipCheckbox-security").checked = settings.minimalTooltip_security;
+        document.getElementById("tooltipCheckbox-info").checked = settings.minimalTooltip_info;
+        document.getElementById("tooltipCheckbox-timer").checked = settings.minimalTooltip_timer;
 
         if (document.getElementById("referrerList")) await this.fillReferrerList();
         if (document.getElementById("trustedList")) await this.fillTrustedList();
@@ -79,7 +82,11 @@ const OptionsPage = {
         addCheckboxListener('trustedTimerCheckbox', 'trustedTimerActivated');
         addCheckboxListener('userTimerCheckbox', 'userTimerActivated');
         addCheckboxListener('redirectModeCheckbox', 'redirectModeActivated');
-        addCheckboxListener("tooltipCheckbox", "minimalTooltip");
+
+        addCheckboxListener("tooltipCheckbox-url", "minimalTooltip_url");
+        addCheckboxListener("tooltipCheckbox-security", "minimalTooltip_security");
+        addCheckboxListener("tooltipCheckbox-info", "minimalTooltip_info");
+        addCheckboxListener("tooltipCheckbox-timer", "minimalTooltip_timer");
 
         document.getElementById('privacyModeCheckbox').addEventListener('change', (e) => {
             const isChecked = e.target.checked;
@@ -156,7 +163,10 @@ const OptionsPage = {
                trustedTimerActivated: false,
                userTimerActivated: false,
                trustedListActivated: true,
-               minimalTooltip: false,
+                minimalTooltip_url: true,
+                minimalTooltip_security: true,
+                minimalTooltip_info: true,
+                minimalTooltip_timer: true,
                referrerPart1: [
                    "deref-gmx.net",
                    "deref-web-02.de/",
@@ -483,7 +493,10 @@ const OptionsPage = {
             "trustedListTitle": "trustedList",
             "userListTitle": "userList",
             // Tooltip tab
-            "tooltipCheckboxText": "minimal_tooltip"
+            "tooltipCheckboxText-url": "tooltipCheckboxText_url",
+            "tooltipCheckboxText-security": "tooltipCheckboxText_security",
+            "tooltipCheckboxText-info": "tooltipCheckboxText_info",
+            "tooltipCheckboxText-timer": "tooltipCheckboxText_timer"
         }
 
         for (const id in textMap) {
