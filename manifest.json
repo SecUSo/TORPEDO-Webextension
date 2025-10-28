@@ -68,7 +68,7 @@
         "js/floating-ui.dom.umd.min.js",
         "js/browser-polyfill.min.js",
         "js/torpedo.js",
-        "js/jquery.min.js",
+        "js/utils.js",
         "js/punycode.js",
         "js/contentscript.js",
         "js/publicsuffixlist.js",
