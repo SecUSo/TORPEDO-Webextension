@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "author": "SECUSO",
   "name": "__MSG_extensionName__",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "default_locale": "de",
   "description": "__MSG_extensionDescription__",
   "background": {

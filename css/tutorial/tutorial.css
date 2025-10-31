@@ -584,4 +584,8 @@ header {
             flex: 1 1 40rem;
   }
 }
+
+#tutorial-settings-button {
+    font-size: 2rem;
+}
 /*# sourceMappingURL=tutorial.css.map */

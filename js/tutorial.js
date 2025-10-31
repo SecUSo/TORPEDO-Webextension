@@ -19,15 +19,16 @@ let overviewVisible = true;
     same name as css class; "-" in css, "_" in js
 */
 const pages = {
-  0: "welcome",
-  1: "explanation",
-  2: "green_case",
-  3: "blue_case",
-  4: "simple-grey_case_phish",
-  5: "simple-grey_case_no-phish",
-  6: "warning-grey_case_phish",
-  7: "warning-grey_case_no-phish",
-  8: "configurations",
+  0: "update",
+  1: "welcome",
+  2: "explanation",
+  3: "green_case",
+  4: "blue_case",
+  5: "simple-grey_case_phish",
+  6: "simple-grey_case_no-phish",
+  7: "warning-grey_case_phish",
+  8: "warning-grey_case_no-phish",
+  9: "configurations",
 };
 const lastPage = Object.keys(pages).reduce((a, b) =>
   parseInt(a) > parseInt(b) ? parseInt(a) : parseInt(b)
@@ -122,6 +123,13 @@ function init() {
   activateCurrentPageElements();
   // at beginning for language´
   // page 'welcome'
+  $("#update-title").html(getMsg("update_title"));
+  $("#update-txt").html(getMsg("update_txt"));
+  $("#update-domains").html(getMsg("update_domains"));
+  $("#update-contact").html(getMsg("update_contact") + ' <a href="mailto:addons@secuso.org">addons@secuso.org</a>');
+  $('#tutorial-settings-button').click(function (e) {
+        chrome.runtime.openOptionsPage();
+  });
   $("#welcome-title").html(getMsg("welcome_title"));
   $("#introduction-txt").html(getMsg("introduction_txt"));
   $("#technical-bg-title").html(getMsg("technical_background_title"));
