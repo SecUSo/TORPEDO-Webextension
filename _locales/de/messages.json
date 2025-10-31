@@ -484,7 +484,7 @@
     "description": "update-title tutorial on page 0"
   },
   "update_txt": {
-    "message": "Die Erweiterung TORPEDO Browser wird ab dem 10.11.2025 nicht mehr im Chrome Web Store verfügbar sein. Durch die Entfernung aus dem Chrome Web Store wird die Erweiterung in Ihrem Browser automatisch deaktiviert. Es wird danach nicht mehr möglich sein, die Erweiterung erneut zu aktivieren. TORPEDO Browser wird weiterhin für Mozilla Firefox verfügbar sein.",
+    "message": "Die Erweiterung TORPEDO Browser wird ab dem 01.12.2025 nicht mehr im Chrome Web Store verfügbar sein. Durch die Entfernung aus dem Chrome Web Store wird die Erweiterung in Ihrem Browser automatisch deaktiviert. Es wird danach nicht mehr möglich sein, die Erweiterung erneut zu aktivieren. TORPEDO Browser wird weiterhin für Mozilla Firefox verfügbar sein.",
     "description": "Notice about removal of web-extension"
   },
   "update_domains": {
