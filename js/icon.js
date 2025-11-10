@@ -19,7 +19,7 @@ function init() {
     torpedoPageButton.textContent = browser.i18n.getMessage("extensionName");
     optionsButton.textContent = browser.i18n.getMessage("options");
 
-    browser.storage.session.get("state").then((object) => {
+    browser.storage.sync.get("state").then((object) => {
         if (object.state && object.state.works) {
             errorButton.className = "working";
             errorButton.textContent = browser.i18n.getMessage("OK");
