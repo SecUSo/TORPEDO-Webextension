@@ -1,69 +1,78 @@
-<div class="torpedo-section" id="section-url">
-    <div class="torpedo-warning">
-        <img class="torpedo-warning-img" alt="warning" src="img/warning2.png">
-        <p class="torpedo-state-title"></p>
+<div class="torpedo-tooltip">
+
+    <div class="torpedo-section" id="section-url">
+        <div class="section-content torpedo-warning">
+            <img class="torpedo-warning-img" alt="warning" src="img/warning2.png">
+            <p class="torpedo-state-title"></p>
+        </div>
+
+        <div class="section-content">
+            <a class="torpedo-URL" href="">
+                <span class="torpedo-url-prefix"></span>
+                <span class="torpedo-url-domain"></span>
+                <span class="torpedo-url-suffix"></span>
+            </a>
+
+            <p class="torpedo-url-button" id="torpedo-url-button">[..]</p>
+        </div>
     </div>
 
-    <a class="torpedo-URL" href="">
-        <span class="torpedo-url-prefix"></span>
-        <span class="torpedo-url-domain"></span>
-        <span class="torpedo-url-suffix"></span>
-    </a>
-</div>
-
-<div class="torpedo-context-menu" style="display: none">
-    <ul>
-        <li class="torpedo-mark-trusted"></li>
-        <li class="torpedo-google"></li>
-        <li class="torpedo-open-settings"></li>
-        <li class="torpedo-open-tutorial"></li>
-    </ul>
-</div>
-
-<div class="torpedo-section" id="section-security">
-    <p class="torpedo-security-status"></p>
-</div>
-
-<div class="torpedo-section" id="section-info">
-    <div class="torpedo-info">
-        <img class="torpedo-info-img" alt="info" src="img/info.png">
-        <p class="torpedo-info-text"></p>
+    <div class="torpedo-context-menu" style="display: none">
+        <ul>
+            <li class="torpedo-mark-trusted"></li>
+            <li class="torpedo-google"></li>
+            <li class="torpedo-open-settings"></li>
+            <li class="torpedo-open-tutorial"></li>
+        </ul>
     </div>
 
-    <div class="torpedo-info-div">
-        <p class="torpedo-more-info"></p>
+    <div class="torpedo-section" id="section-security">
+        <p class="torpedo-security-status"></p>
     </div>
-</div>
 
-<button class="torpedo-redirect-button" type="button"></button>
+    <div class="torpedo-section" id="section-info">
+        <div class="section-content torpedo-info">
+            <img class="torpedo-info-img" alt="info" src="img/info.png">
+            <p class="torpedo-info-text"></p>
+        </div>
 
-<div class="torpedo-section" id="section-timer">
-    <p class="torpedo-link-delay"></p>
-    <p class="torpedo-timer"></p>
-</div>
+        <div class="section-content torpedo-info-div">
+            <p class="torpedo-more-info"></p>
+        </div>
+    </div>
 
-<div class="loader-bg">
-    <div class="loader-card">
-        <div class="loader">
-            <div class="dots">
-                <div class="dot dot-0"></div>
-                <div class="dot dot-1"></div>
-                <div class="dot dot-2"></div>
-                <div class="dot dot-3"></div>
-                <div class="dot dot-4"></div>
-                <div class="dot dot-5"></div>
-                <div class="dot dot-6"></div>
-                <div class="dot dot-7"></div>
-                <div class="dot dot-8"></div>
-                <div class="dot dot-9"></div>
-            </div>
+    <div class="torpedo-section active">
+        <button class="torpedo-redirect-button" type="button"></button>
+    </div>
 
-            <div class="lens">
-                <img class="torpedo-lens-img" src="img/TORPEDO_Icon.svg" alt="loading...">
-            </div>
+    <div class="torpedo-section" id="section-timer">
+        <p class="torpedo-link-delay"></p>
+        <p class="torpedo-timer"></p>
+    </div>
 
-            <div class="load-text">
-                <p>Loading...</p>
+    <div class="loader-bg">
+        <div class="loader-card">
+            <div class="loader">
+                <div class="dots">
+                    <div class="dot dot-0"></div>
+                    <div class="dot dot-1"></div>
+                    <div class="dot dot-2"></div>
+                    <div class="dot dot-3"></div>
+                    <div class="dot dot-4"></div>
+                    <div class="dot dot-5"></div>
+                    <div class="dot dot-6"></div>
+                    <div class="dot dot-7"></div>
+                    <div class="dot dot-8"></div>
+                    <div class="dot dot-9"></div>
+                </div>
+
+                <div class="lens">
+                    <img class="torpedo-lens-img" src="img/TORPEDO_Icon.svg" alt="loading...">
+                </div>
+
+                <div class="load-text">
+                    <p>Loading...</p>
+                </div>
             </div>
         </div>
     </div>

@@ -4,12 +4,14 @@ const TooltipManager = (function() {
      * Displays the tooltip for the specified target element.
      */
     async function showTooltip(target) {
-        const tooltipElement = document.createElement("div");
-        tooltipElement.className = "torpedo-tooltip is-loading";
-
         const tooltipURL = browser.runtime.getURL("tooltip.html");
         const resp = await fetch(tooltipURL);
-        tooltipElement.innerHTML = await resp.text();
+
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = await resp.text();
+
+        const tooltipElement = tempDiv.firstElementChild;
+        tooltipElement.classList.add("is-loading");
 
         document.body.appendChild(tooltipElement);
 
@@ -20,6 +22,10 @@ const TooltipManager = (function() {
 
         if (settings.minimalTooltip_url === true) {
             document.getElementById("section-url").classList.add("active");
+        }
+
+        if (settings.minimalTooltip_minimal === true) {
+            document.querySelector(".torpedo-URL").classList.add("active");
         }
 
         if (settings.minimalTooltip_security === true) {
@@ -120,6 +126,17 @@ const TooltipManager = (function() {
         });
 
         onClick(".torpedo-redirect-button", (event) => resolveRedirect(event));
+
+        onClick(".torpedo-url-button", (e) => {
+            const el = document.querySelector(".torpedo-URL");
+
+            if (el.classList.contains("active")) {
+                el.classList.remove("active");
+
+            } else {
+                el.classList.add("active");
+            }
+        })
 
         const warningImg = tooltip.querySelector(".torpedo-warning-img");
         if (warningImg) warningImg.src = browser.runtime.getURL("img/warning2.png")

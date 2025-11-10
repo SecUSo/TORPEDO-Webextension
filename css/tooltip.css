@@ -1,5 +1,5 @@
 /**********************************
- Base Tooltip styles
+ Base Tooltip
 ***********************************/
 .torpedo-tooltip {
     position: absolute;
@@ -9,53 +9,6 @@
     border-radius: 8px;
     background-color: white;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/**********************************
- Base reset for elements inside the Tooltip
-***********************************/
-.torpedo-tooltip div,
-.torpedo-tooltip p,
-.torpedo-tooltip a,
-.torpedo-tooltip span,
-.torpedo-tooltip ul,
-.torpedo-tooltip li,
-.torpedo-tooltip button {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    font-size: 100%;
-    vertical-align: baseline;
-    background-color: transparent;
-    color: black;
-}
-
-.torpedo-tooltip p {
-    font: 14px/1.5 Helvetica, sans-serif;
-}
-
-.torpedo-tooltip > *:not(:last-child) {
-    margin-bottom: 12px;
-}
-
-.torpedo-tooltip > div:has(button[style*="display: none"]),
-.torpedo-tooltip > div:has(p[style*="display: none"]) {
-    padding-bottom: 0;
-}
-.torpedo-tooltip > div:last-child {
-    padding-bottom: 0;
-}
-
-/**********************************
- Section display logic
-***********************************/
-.torpedo-section {
-    display: none !important;
-}
-
-.torpedo-section.active {
-    display: block !important;
 }
 
 /**********************************
@@ -74,26 +27,59 @@
 }
 
 /**********************************
+ Sections
+***********************************/
+.torpedo-section {
+    display: none;
+    margin-bottom: 0;
+}
+
+.torpedo-section.active {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+/* it can be not last-child, but is last visible child -> change later */
+.torpedo-section.active:last-child {
+    margin-bottom: 0;
+}
+
+.torpedo-section:has(p[style*="display: none"]),
+.torpedo-section:has(button[style*="display: none"]) {
+    margin-bottom: 0;
+}
+
+.section-content {
+    display: flex;
+    align-items: center;
+}
+
+/**********************************
  Context Menu
 ***********************************/
 .torpedo-context-menu {
     position: absolute;
-    padding: 5px;
-    border: 1px solid #bfb9b9;
-    border-radius: 4px;
+    padding: 10px;
+    border: 2px solid #bfb9b9;
+    border-radius: 6px;
     background-color: white;
     font-size: 14px;
     line-height: 1.4;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .torpedo-context-menu ul {
     list-style: none;
-    padding: 5px;
+    padding: 0;
+    margin: 0;
 }
 
 .torpedo-context-menu li {
-    padding: 0 10px;
+    padding: 5px;
     background-color: white;
+    border: 1px solid #bfb9b9;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
@@ -114,27 +100,34 @@
 }
 
 /**********************************
- Reusable Components
+ Standard Elements
 ***********************************/
-.torpedo-tooltip div {
-    display: flex;
-    align-items: flex-start;
-    padding-bottom: 8px;
+.torpedo-tooltip p {
+    font: 14px/1.5 Helvetica, sans-serif;
+    margin: 0;
+    color: black;
 }
 
 .torpedo-tooltip img {
     width: 22px;
     height: 22px;
-    margin-right: 12px;
-    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+.torpedo-tooltip a {
+    color: black;
+}
+
+.torpedo-tooltip button {
+    padding: 8px;
+    width: 100%;
+    cursor: pointer;
 }
 
 /**********************************
- Element Styles
+ URL Element Styles
 ***********************************/
 .torpedo-URL {
-    display: block;
-    color: black;
     word-wrap: break-word;
     word-break: break-all;
     text-decoration: none;
@@ -145,18 +138,44 @@
 }
 
 .torpedo-url-domain {
-    font-weight: bold !important;
-    letter-spacing: 3px !important;
+    font-weight: bold;
+    letter-spacing: 3px;
 }
 
+.torpedo-URL.active .torpedo-url-suffix,
+.torpedo-URL.active .torpedo-url-prefix {
+    display: none;
+}
+
+.torpedo-url-suffix,
+.torpedo-url-prefix {
+    display: inline;
+}
+
+.torpedo-url-button {
+    display: inline;
+    color: blue !important;
+    font-size: 14px !important;
+    padding-left: 5px !important;
+    cursor: pointer;
+}
+
+.torpedo-url-button:hover {
+    text-decoration: underline;
+}
+
+/**********************************
+ Info Element Styles
+***********************************/
 .torpedo-info-text {
+    display: inline;
     text-decoration: underline;
     cursor: pointer;
     transition: font-weight 0.2s ease;
 }
 
 .torpedo-info-text:hover {
-    font-weight: bold !important;
+    font-weight: bold;
 }
 
 .torpedo-info-div {
@@ -166,30 +185,20 @@
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     padding: 10px;
-    margin-top: 5px;
 }
 
+/**********************************
+ Redirect Button Styles
+***********************************/
 .torpedo-redirect-button {
-    width: 100% !important;
-    margin-top: 5px !important;
-    padding: 8px !important;
-    border: 1px solid black !important;
-    border-radius: 5px !important;
-    background-color: white !important;
-    cursor: pointer !important;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .torpedo-redirect-button:hover {
-    background-color: lightgray !important;
-}
-
-.torpedo-link-delay,
-.torpedo-timer {
-    color: #6c757d;
-    font-size: 12px;
-    margin-top: 8px;
+    background-color: lightgray;
 }
 
 .torpedoHighlight {
-    font-weight: bold !important;
+    font-weight: bold;
 }
