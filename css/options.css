@@ -142,3 +142,76 @@ input[type="number"] {
     font-size: 1rem;
     flex-grow: 1;
 }
+
+/****************
+ tooltip preview css
+*******************/
+.tooltip-preview {
+    border: 4px solid #bfb9b9;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    font-size: 12px;
+}
+
+.tooltip-preview > div {
+    color: black;
+    margin-bottom: 8px;
+}
+
+.tooltip-preview > div.disabled {
+    color: lightgray;
+}
+
+.tooltip-preview p {
+    margin: 0 !important;
+}
+
+.tooltip-preview-href {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.tooltip-preview-href.disabled .tooltip-preview-href-prefix,
+.tooltip-preview-href.disabled .tooltip-preview-href-suffix {
+    display: inline;
+    color: black !important;
+}
+
+.tooltip-preview-href-prefix,
+.tooltip-preview-href-suffix {
+    display: none;
+}
+
+.tooltip-preview-href-domain {
+    letter-spacing: 3px;
+    color: black !important;
+}
+
+.tooltip-preview-href-button {
+    color: blue !important;
+}
+
+.tooltip-preview-risk {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.tooltip-inline {
+    display: inline;
+}
+
+.tooltip-bold {
+    font-weight: bold;
+}
+
+.tooltip-preview-info {
+    display: flex;
+    align-items: center;
+}
+
+.tooltip-preview img {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+}

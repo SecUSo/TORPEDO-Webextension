@@ -33,7 +33,42 @@ const OptionsPage = {
             settings.referrerPart1?.includes("deref-web-02.de");
 
         // Tooltip tab
+        if (settings.minimalTooltip_url === true) {
+            document.querySelector(".tooltip-preview-url").classList.remove("disabled")
+
+        } else {
+            document.querySelector(".tooltip-preview-url").classList.add("disabled")
+        }
+
+        if (settings.minimalTooltip_minimal === true) {
+            document.querySelector(".tooltip-preview-href").classList.remove("disabled")
+        } else {
+            document.querySelector(".tooltip-preview-href").classList.add("disabled")
+        }
+
+        if (settings.minimalTooltip_security === true) {
+            document.querySelector(".tooltip-preview-risk").classList.remove("disabled")
+        } else {
+            document.querySelector(".tooltip-preview-risk").classList.add("disabled")
+        }
+
+        if (settings.minimalTooltip_info === true) {
+            document.querySelector(".tooltip-preview-info").classList.remove("disabled")
+        } else {
+            document.querySelector(".tooltip-preview-info").classList.add("disabled")
+        }
+
+        if (settings.minimalTooltip_timer === true) {
+            document.querySelector(".tooltip-preview-timer").classList.remove("disabled")
+        } else {
+            document.querySelector(".tooltip-preview-timer").classList.add("disabled")
+        }
+
+        const img_element = document.getElementById("tooltip-preview-info-img")
+        img_element.src = browser.runtime.getURL("img/info.png")
+
         document.getElementById("tooltipCheckbox-url").checked = settings.minimalTooltip_url;
+        document.getElementById("tooltipCheckbox-url-minimal").checked = settings.minimalTooltip_minimal;
         document.getElementById("tooltipCheckbox-security").checked = settings.minimalTooltip_security;
         document.getElementById("tooltipCheckbox-info").checked = settings.minimalTooltip_info;
         document.getElementById("tooltipCheckbox-timer").checked = settings.minimalTooltip_timer;
@@ -76,6 +111,7 @@ const OptionsPage = {
         const addCheckboxListener = (id, settingName) => {
             document.getElementById(id).addEventListener('change', (e) => {
                 chrome.storage.sync.set({ [settingName]: e.target.checked });
+                this.loadAndApplySettings();
             });
         };
 
@@ -84,6 +120,7 @@ const OptionsPage = {
         addCheckboxListener('redirectModeCheckbox', 'redirectModeActivated');
 
         addCheckboxListener("tooltipCheckbox-url", "minimalTooltip_url");
+        addCheckboxListener("tooltipCheckbox-url-minimal", "minimalTooltip_minimal");
         addCheckboxListener("tooltipCheckbox-security", "minimalTooltip_security");
         addCheckboxListener("tooltipCheckbox-info", "minimalTooltip_info");
         addCheckboxListener("tooltipCheckbox-timer", "minimalTooltip_timer");
@@ -167,6 +204,7 @@ const OptionsPage = {
                 minimalTooltip_security: true,
                 minimalTooltip_info: true,
                 minimalTooltip_timer: true,
+               minimalTooltip_minimal: true,
                referrerPart1: [
                    "deref-gmx.net",
                    "deref-web-02.de/",
