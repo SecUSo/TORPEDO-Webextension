@@ -13,6 +13,7 @@ const initialStorage = new Map([
     ['minimalTooltip_security', true],
     ['minimalTooltip_info', true],
     ['minimalTooltip_timer', true],
+    ['minimalTooltip_minimal', true],
     ['referrerPart1', ["deref-gmx.net", "deref-web-02.de", "deref-web.de", "google.*", "google.*"]],
     ['referrerPart2', ["/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/url?", "/url?"]],
     ['referrerPart3', ["redirectUrl=", "redirectUrl=", "redirectUrl=", "url=", "q="]],
@@ -595,7 +596,7 @@ const onMessageHandler = (request, sender, sendResponse) => {
 
     })();
 
-    return true;
+    return request.name === "redirect" || request.name === "TLD";
 };
 
 
