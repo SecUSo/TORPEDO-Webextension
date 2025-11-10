@@ -69,18 +69,35 @@
      * Checks the page for configured selectors and sets the browser icon.
      */
     function checkPageAndSetIcon(config) {
-        setTimeout(() => {
-            const message = { location: torpedo.location };
+        if (window.self !== window.top) return;
+        const message = { location: torpedo.location };
 
+        const performCheck = () => {
             if (config.iframe && window.location.href.includes("iframe")) {
                 message.name = "ok";
+                return true;
             } else if (!config.iframe && document.body.querySelector(config.selectors.join())) {
                 message.name = "ok";
-            } else {
-                message.name = "error";
+                return true;
             }
-            browser.runtime.sendMessage(message);
-        }, 2000);
+
+            return false;
+        };
+
+        const interval = setInterval(() => {
+            if (performCheck()) {
+                clearInterval(interval);
+                browser.runtime.sendMessage(message);
+            }
+        }, 500);
+
+        setTimeout(() => {
+            if (message.name !== "ok") {
+                clearInterval(interval);
+                message.name = "error";
+                browser.runtime.sendMessage(message);
+            }
+        }, 10000);
     }
 
     /**
