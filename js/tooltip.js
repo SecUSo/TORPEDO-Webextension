@@ -87,7 +87,7 @@ const TooltipManager = (function() {
     function initTooltip() {
         const tooltip = torpedo.tooltip;
 
-        onlyShowLoader();
+        TooltipManager.showLoaderWithOverlay();
 
         torpedo.countRedirect = 0;
         torpedo.oldDomain = torpedo.domain;
@@ -351,13 +351,19 @@ const TooltipManager = (function() {
     function deactivateLoader() {
         document.querySelector(".torpedo-tooltip").classList.remove("is-loading");
 
-        const loaderBg = document.querySelector(".torpedo-tooltip > .loader-bg");
-        if (loaderBg) loaderBg.classList.remove("transparent-bg");
+        const overlay = document.querySelector('.loader-bg');
+        const loader = document.querySelector('.loader');
+
+        if (overlay) overlay.classList.remove("loader-active");
+        if (loader) loader.classList.remove("loader-active");
     }
 
     function showLoaderWithOverlay() {
         const overlay = document.querySelector('.loader-bg');
+        const loader = document.querySelector('.loader');
+
         if (overlay) overlay.classList.add("loader-active");
+        if (loader) loader.classList.add("loader-active");
     }
 
     /*
