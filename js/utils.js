@@ -19,7 +19,7 @@ const Utils = (function () {
      */
     function reactivateEvents(target, eventTypes) {
         eventTypes.forEach(eventType => target.removeEventListener(eventType, preventDefaultActions, { capture: true }));
-        target.addEventListener("click", () => TooltipManager.processClick());
+        target.addEventListener("click", () => processClick());
     }
 
     /**
@@ -30,6 +30,26 @@ const Utils = (function () {
         const domain2 = TooltipManager.extractDomain(url2);
 
         return domain1 === domain2;
+    }
+
+    /**
+     * Processes a click on the link for which the tooltip is shown.
+     * @returns {Promise<void>} - A promise that resolves when the click processing is complete.
+     */
+    async function processClick() {
+        const storage = await browser.storage.sync.get(["userDefinedDomains", "trustedDomains", "onceClickedDomains"]);
+        if (storage.userDefinedDomains.includes(torpedo.domain) || storage.trustedDomains.includes(torpedo.domain)) return;
+
+        let { onceClickedDomains = [] } = storage;
+        if (onceClickedDomains.includes(torpedo.domain)) {
+            await browser.storage.sync.set({
+                onceClickedDomains: onceClickedDomains.filter(d => d !== torpedo.domain),
+                userDefinedDomains: [...(storage.userDefinedDomains || []), torpedo.domain]
+            })
+
+        } else {
+            await browser.storage.sync.set({ onceClickedDomains: [...onceClickedDomains, torpedo.domain] });
+        }
     }
 
     return { preventEvents, reactivateEvents, isDomainMatch };
