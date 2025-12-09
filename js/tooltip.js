@@ -1,80 +1,99 @@
 const TooltipManager = (function() {
 
     /**
-     * Displays the tooltip for the specified target element.
+     * CSS classes used in the tooltip.
+     * @type {{LOADING: string, ACTIVE: string, USER_DEFINED: string, TRUSTED: string}}
+     */
+    const CLASSES = {
+        LOADING: "is-loading",
+        ACTIVE: "active",
+        USER_DEFINED: "torpedoUserDefined",
+        TRUSTED: "torpedoTrusted"
+    };
+
+    /**
+     * UI helper methods for safely manipulating tooltip elements.
+     * @type {{find: function(*): *, setText: function(*, *): void, setHTML: function(*, *): void, toggle: function(*, *): void, setStyle: function(*, *): void, onClick: function(*, *): void, setImgSrc: function(*, *): void}}
+     */
+    const UI = {
+        /** Safely query an element within the tooltip */
+        find: (selector) => torpedo.tooltip?.querySelector(selector),
+
+        /** Set text content safely */
+        setText: (selector, text) => {
+            const el = UI.find(selector);
+            if (el) el.textContent = text;
+        },
+
+        /** Set inner HTML safely */
+        setHTML: (selector, html) => {
+            const el = UI.find(selector);
+            if (el) el.innerHTML = html;
+        },
+
+        /** Toggle display style */
+        toggle: (selector, show) => {
+            const el = UI.find(selector);
+            if (el) el.style.display = show ? "block" : "none";
+        },
+
+        /** Set specific style */
+        setStyle: (selector, styleObj) => {
+            const el = UI.find(selector);
+            if (el) Object.assign(el.style, styleObj);
+        },
+
+        /** Add click listener safely */
+        onClick: (selector, handler) => {
+            UI.find(selector)?.addEventListener("click", handler);
+        },
+
+        /** Set Image Source safely */
+        setImgSrc: (selector, path) => {
+            const el = UI.find(selector);
+            if (el) el.src = browser.runtime.getURL(path);
+        }
+    };
+
+    /**
+     * Shows the tooltip by fetching the HTML, applying user settings, binding events, positioning it,
+     * and updating its content.
+     * @param target - The target element for which the tooltip is to be shown.
+     * @returns {Promise<void>} - A promise that resolves when the tooltip has been shown.
      */
     async function showTooltip(target) {
-        const tooltipURL = browser.runtime.getURL("tooltip.html");
-        const resp = await fetch(tooltipURL);
+        const tooltipDiv = await fetchHTML("tooltip.html");
+        if (!tooltipDiv) {
+            console.error("Failed to load tooltip HTML.");
+            return;
+        }
 
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = await resp.text();
+        tooltipDiv.classList.add(CLASSES.LOADING);
+        document.body.appendChild(tooltipDiv);
 
-        const tooltipElement = tempDiv.firstElementChild;
-        tooltipElement.classList.add("is-loading");
-
-        document.body.appendChild(tooltipElement);
-
-        torpedo.tooltip = tooltipElement;
+        torpedo.tooltip = tooltipDiv;
         torpedo.opened = true;
 
-        const settings = await browser.storage.sync.get(null);
+        await applyUserSettings();
+        bindHoverEvents(tooltipDiv);
 
-        if (settings.minimalTooltip_url === true) {
-            document.getElementById("section-url").classList.add("active");
-        }
+        await positionTooltip(target, tooltipDiv);
 
-        if (settings.minimalTooltip_minimal === true) {
-            document.querySelector(".torpedo-URL").classList.add("active");
-        }
+        Utils.preventEvents(tooltipDiv.querySelector(".torpedo-URL"), ["click"])
+        initStaticContent();
+        initContextMenu();
 
-        if (settings.minimalTooltip_security === true) {
-            document.getElementById("section-security").classList.add("active");
-        }
-
-        if (settings.minimalTooltip_info === true) {
-            document.getElementById("section-info").classList.add("active");
-        }
-
-        if (settings.minimalTooltip_timer === true) {
-            document.getElementById("section-timer").classList.add("active");
-        }
-
-        tooltipElement.addEventListener("mouseenter", () => {
-            if (torpedo.hideTimer) {
-                clearTimeout(torpedo.hideTimer);
-            }
-        });
-
-        tooltipElement.addEventListener("mouseleave", () => {
-            torpedo.hideTimer = setTimeout(() => hideTooltip(), 150);
-        });
-
-        const { computePosition, offset, flip, shift } = window.FloatingUIDOM;
-
-        computePosition(target, tooltipElement, {
-            placement: "bottom-start",
-            middleware: [offset(8), flip(), shift({ padding: 5 })]
-        }).then(({ x, y }) => {
-            tooltipElement.style.left = `${x}px`;
-            tooltipElement.style.top = `${y}px`;
-        });
-
-        Utils.preventEvents(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"])
-        initTooltip();
         await updateTooltip();
     }
 
     /**
-     * Hides the tooltip and cleans up any associated timers or intervals.
+     * Hides the tooltip by removing it from the DOM and clearing any active timers.
      */
     function hideTooltip() {
-        if (!torpedo.opened) return;
+        if (!torpedo.opened || !torpedo.tooltip) return;
 
-        if (torpedo.hideTimer) {
-            clearTimeout(torpedo.hideTimer);
-        }
-        clearInterval(torpedo.timerInterval);
+        if (torpedo.hideTimer) clearTimeout(torpedo.hideTimer);
+        if (torpedo.timerInterval) clearInterval(torpedo.timerInterval);
 
         torpedo.tooltip.remove();
         torpedo.tooltip = null;
@@ -82,18 +101,123 @@ const TooltipManager = (function() {
     }
 
     /**
-     * Initializes the tooltip with event listeners and sets up the context menu.
+     * Fetches an HTML file and returns it as a div element or null if an error occurs.
+     * @param file_name - The name of the HTML file to fetch. Need to be in the manifest.
+     * @returns {Promise<Element|null>} - A promise that resolves to the div element or null if an error occurs.
      */
-    function initTooltip() {
-        const tooltip = torpedo.tooltip;
+    async function fetchHTML(file_name) {
+        try {
+            const fileURL = browser.runtime.getURL(file_name);
+            const resp = await fetch(fileURL);
 
-        TooltipManager.showLoaderWithOverlay();
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = await resp.text();
 
+            return tempDiv.firstElementChild;
+
+        } catch (err) {
+            return null;
+        }
+    }
+
+    /**
+     * Applies user settings to the tooltip by adding 'active' classes to sections based on stored preferences.
+     * @returns {Promise<void>} - A promise that resolves when the settings have been applied.
+     */
+    async function applyUserSettings() {
+        const settings = await browser.storage.sync.get(null);
+
+        const map = {
+            minimalTooltip_url: "section-url",
+            minimalTooltip_security: "section-security",
+            minimalTooltip_info: "section-info",
+            minimalTooltip_timer: "section-timer"
+
+        };
+
+        for (const [key, id] of Object.entries(map)) {
+            if (settings[key] === true) {
+                document.getElementById(id)?.classList.add(CLASSES.ACTIVE);
+            }
+        }
+
+        if (settings.minimalTooltip_minimal === true) {
+            UI.find(".torpedo-URL")?.classList.add(CLASSES.ACTIVE);
+        }
+    }
+
+    /**
+     * Binds hover events to the tooltip div to manage its visibility. Starts a hide timer on mouse leave
+     * and clears the timer on mouse enter.
+     * @param tooltipDiv - The tooltip div element to bind events to.
+     */
+    function bindHoverEvents(tooltipDiv) {
+        tooltipDiv.addEventListener("mouseenter", () => {
+            if (torpedo.hideTimer) clearTimeout(torpedo.hideTimer);
+        });
+
+        tooltipDiv.addEventListener("mouseleave", () => {
+            torpedo.hideTimer = setTimeout(() => hideTooltip(), 150);
+        });
+    }
+
+    /**
+     * Positions the tooltip relative to the target element using Floating UI for optimal placement.
+     * @param target - The target for which the tooltip is to be positioned.
+     * @param tooltipDiv - The tooltip div element to position.
+     * @returns {Promise<void>} - A promise that resolves when the tooltip has been positioned.
+     */
+    async function positionTooltip(target, tooltipDiv) {
+        const { computePosition, offset, flip, shift } = globalThis.FloatingUIDOM;
+
+        try {
+            computePosition(target, tooltipDiv, {
+                placement: "bottom-start",
+                middleware: [offset(8), flip(), shift({ padding: 5 })]
+            }).then(({ x, y }) => {
+                tooltipDiv.style.left = `${x}px`;
+                tooltipDiv.style.top = `${y}px`;
+            });
+
+        } catch (e) {
+            console.error("Torpedo: Positioning error", e);
+        }
+    }
+
+    /**
+     * Initializes static content in the tooltip, including images and event listeners for info text and redirect button.
+     */
+    function initStaticContent() {
         torpedo.countRedirect = 0;
         torpedo.oldDomain = torpedo.domain;
-        torpedo.oldUrl = torpedo.url;
 
-        const contextMenu = tooltip.querySelector(".torpedo-context-menu");
+        showLoaderWithOverlay();
+
+        UI.setImgSrc(".torpedo-warning-img", "img/warning2.png");
+        UI.setImgSrc(".torpedo-info-img", "img/info.png");
+        UI.setImgSrc(".torpedo-lens-img", "img/TORPEDO_Icon.svg");
+
+        UI.onClick(".torpedo-info-text", () => {
+            const infoDiv = UI.find(".torpedo-info-div");
+            if (infoDiv) {
+                const isHidden = getComputedStyle(infoDiv).display === "none";
+                infoDiv.style.display = isHidden ? "block" : "none";
+            }
+        });
+        UI.onClick(".torpedo-redirect-button", (event) => resolveRedirect(event));
+        UI.onClick(".torpedo-url-button", () => {
+            UI.find(".torpedo-URL")?.classList.toggle(CLASSES.ACTIVE);
+        });
+    }
+
+    /**
+     * Initializes the context menu for the tooltip, including event listeners for menu options.
+     */
+    function initContextMenu() {
+        const tooltip = torpedo.tooltip;
+        const contextMenu = UI.find(".torpedo-context-menu");
+
+        if (!contextMenu) return;
 
         tooltip.addEventListener("contextmenu", (event) => {
             event.preventDefault();
@@ -106,89 +230,19 @@ const TooltipManager = (function() {
             }
         });
 
-        onClick(".torpedo-mark-trusted", async () => {
+        UI.onClick(".torpedo-mark-trusted", async () => {
             const { userDefinedDomains = [] } = await browser.storage.sync.get("userDefinedDomains");
             await browser.storage.sync.set({ userDefinedDomains: [...userDefinedDomains, torpedo.domain] });
             await updateTooltip();
-        })
-
-        onClick(".torpedo-google", () => browser.runtime.sendMessage({ name: "google", url: torpedo.domain }));
-
-        onClick(".torpedo-open-settings", () => browser.runtime.sendMessage({ name: "settings" }));
-
-        onClick(".torpedo-open-tutorial", () => browser.runtime.sendMessage({ name: "tutorial" }));
-
-        onClick(".torpedo-info-text", () => {
-            const infoDiv = tooltip.querySelector(".torpedo-info-div");
-            if (infoDiv) {
-                infoDiv.style.display = getComputedStyle(infoDiv).display === "none" ? "block" : "none";
-            }
         });
-
-        onClick(".torpedo-redirect-button", (event) => resolveRedirect(event));
-
-        onClick(".torpedo-url-button", (e) => {
-            const el = document.querySelector(".torpedo-URL");
-
-            if (el.classList.contains("active")) {
-                el.classList.remove("active");
-
-            } else {
-                el.classList.add("active");
-            }
-        })
-
-        const warningImg = tooltip.querySelector(".torpedo-warning-img");
-        if (warningImg) warningImg.src = browser.runtime.getURL("img/warning2.png")
-
-        const infoImg = tooltip.querySelector(".torpedo-info-img");
-        if (infoImg) infoImg.src = browser.runtime.getURL("img/info.png")
-
-        const lensImg = tooltip.querySelector(".torpedo-lens-img");
-        if (lensImg) lensImg.src = browser.runtime.getURL("img/TORPEDO_Icon.svg")
+        UI.onClick(".torpedo-google", () => browser.runtime.sendMessage({ name: "google", url: torpedo.domain }));
+        UI.onClick(".torpedo-open-settings", () => browser.runtime.sendMessage({ name: "settings" }));
+        UI.onClick(".torpedo-open-tutorial", () => browser.runtime.sendMessage({ name: "tutorial" }));
     }
 
     /**
-     * Adds a click event listener to the element with the specified ID in the tooltip.
-     */
-    function onClick(id, handler) {
-        torpedo.tooltip.querySelector(id)?.addEventListener("click", handler);
-    }
-
-    /*
-     * Sets the inner HTML of the element with the specified selector to the provided HTML string.
-     */
-    function setHTML(selector, hmtl) {
-        const el = torpedo.tooltip.querySelector(selector);
-        if (el) el.innerHTML = hmtl;
-    }
-
-    /*
-     * Hides the element with the specified selector in the tooltip.
-     */
-    function hide(selector) {
-        const el = torpedo.tooltip.querySelector(selector);
-        if (el) el.style.display = "none";
-    }
-
-    /*
-     * Shows the element with the specified selector in the tooltip.
-     */
-    function show(selector) {
-        const el = torpedo.tooltip.querySelector(selector);
-        if (el) el.style.display = "block";
-    }
-
-    /*
-     * Sets the style of the element with the specified selector in the tooltip.
-     */
-    function setStyle(selector, styleObj) {
-        const el = torpedo.tooltip.querySelector(selector);
-        if (el) Object.assign(el.style, styleObj);
-    }
-
-    /**
-     * Updates the tooltip with the current security status and URL information.
+     * Updates the tooltip content based on the current security status and user settings.
+     * @returns {Promise<void>} - A promise that resolves when the tooltip has been updated.
      */
     async function updateTooltip() {
         const storage = await browser.storage.sync.get(null);
@@ -196,7 +250,22 @@ const TooltipManager = (function() {
 
         console.log("Security Status:", secStatus);
 
-        const t = torpedo.tooltip;
+        updateURLDisplay();
+        updateTextContent(secStatus);
+        await updateActionButtons(storage);
+
+        updateSecurityVisuals(secStatus, storage);
+        handleTimerLogic(storage, secStatus);
+
+        deactivateLoader();
+    }
+
+    /**
+     * Updates the URL display in the tooltip, shortening the path if it exceeds 100 characters.
+     */
+    function updateURLDisplay() {
+        const torpedoURL = UI.find(".torpedo-URL");
+        if (!torpedoURL) return;
 
         let url = torpedo.url;
         const pathSuffix = torpedo.urlObject.pathname + torpedo.urlObject.search + torpedo.urlObject.hash;
@@ -206,148 +275,114 @@ const TooltipManager = (function() {
             url = url.replace(pathSuffix, shortenedPathname);
         }
 
-        const torpedoURL = t.querySelector(".torpedo-URL");
-        if (torpedoURL) {
-            torpedoURL.href = torpedo.url;
+        torpedoURL.href = torpedo.url;
+        const urlSplit = url.split(torpedo.domain);
 
-            const urlSplit = url.split(torpedo.domain);
-            t.querySelector(".torpedo-url-prefix").innerHTML = urlSplit[0];
-            t.querySelector(".torpedo-url-suffix").innerHTML = urlSplit[1] || "";
-            t.querySelector(".torpedo-url-domain").innerHTML = torpedo.domain;
+        UI.setHTML(".torpedo-url-prefix", urlSplit[0]);
+        UI.setHTML(".torpedo-url-suffix", urlSplit[1] || "");
+        UI.setHTML(".torpedo-url-domain", torpedo.domain);
+    }
+
+    /**
+     * Updates the text content of various elements in the tooltip based on the security status.
+     * @param secStatus - The security status used to determine the text content.
+     */
+    function updateTextContent(secStatus) {
+        const getMsg = (key) => browser.i18n.getMessage(key);
+
+        UI.setHTML(".torpedo-redirect-button", getMsg("ButtonWeiterleitung"));
+        UI.setHTML(".torpedo-state-title", getMsg(secStatus + "Ueberschrift"));
+        UI.setHTML(".torpedo-security-status", getMsg(secStatus + "Erklaerung"));
+        UI.setHTML(".torpedo-info-text", getMsg("MehrInfo"));
+        UI.setHTML(".torpedo-more-info", getMsg(secStatus + "Infotext").replace("<URL>", torpedo.url));
+
+        const linkDelayText = getMsg(secStatus + "LinkDeaktivierung")
+        UI.setHTML(".torpedo-link-delay", linkDelayText);
+
+        [
+            ".torpedo-warning-img",
+            ".torpedo-timer",
+            ".torpedo-info-div",
+            ".torpedo-link-delay",
+            ".torpedo-redirect-button"
+        ].forEach(sel => UI.toggle(sel, false));
+
+        if (linkDelayText) {
+            UI.toggle(".torpedo-link-delay", true);
+        } else {
+            UI.setStyle(".torpedo-info", { marginBottom: "0", paddingBottom: "0" });
         }
+    }
 
-        assignText(secStatus, url);
+    /**
+     * Updates the action buttons in the tooltip based on the current storage settings.
+     * @param storage - The storage object containing user settings.
+     * @returns {Promise<void>} - A promise that resolves when the action buttons have been updated.
+     */
+    async function updateActionButtons(storage) {
+        const isRedirectDomain = await isRedirect(torpedo.domain);
+        const showRedirect = isRedirectDomain && storage.privacyModeActivated;
+        UI.toggle(".torpedo-redirect-button", showRedirect);
+
+        UI.setText(".torpedo-google", browser.i18n.getMessage("googleCheck"));
+        UI.setText(".torpedo-open-settings", browser.i18n.getMessage("openSettings"));
+        UI.setText(".torpedo-open-tutorial", browser.i18n.getMessage("openTutorial"));
+    }
+
+    /**
+     * Updates the security visuals of the tooltip based on the security status and storage settings.
+     * @param secStatus - The security status used to determine the visuals.
+     * @param storage - The storage object containing user settings.
+     */
+    function updateSecurityVisuals(secStatus, storage) {
+        const tooltipRoot = document.querySelector(".torpedo-tooltip");
+        if (!tooltipRoot) return;
+
+        tooltipRoot.classList.remove(CLASSES.USER_DEFINED, CLASSES.TRUSTED)
 
         const domain = torpedo.domain;
-        const shouldHideTrusted = storage.referrerPart1?.includes(domain) ||
+        const isAlreadyTrusted =
+            storage.referrerPart1?.includes(domain) ||
             storage.userDefinedDomains?.includes(domain) ||
             storage.trustedDomains?.includes(domain) ||
             storage.redirectDomains?.includes(domain);
 
-        const markTrustedEl = t.querySelector(".torpedo-mark-trusted");
-        if (markTrustedEl) {
-            markTrustedEl.style.display = shouldHideTrusted ? "none" : "block";
-            markTrustedEl.textContent = browser.i18n.getMessage("markAsTrusted");
-        }
-
-        const redirectBtn = t.querySelector(".torpedo-redirect-button");
-        if (redirectBtn) {
-            if (await isRedirect(domain) && storage.privacyModeActivated) {
-                redirectBtn.style.display = "block";
-            } else {
-                redirectBtn.style.display = "none";
-            }
-        }
-
-        const googleBtn = t.querySelector(".torpedo-google");
-        if (googleBtn) {
-            googleBtn.textContent = browser.i18n.getMessage("googleCheck");
-        }
-
-        const settingsBtn = t.querySelector(".torpedo-open-settings");
-        if (settingsBtn) {
-            settingsBtn.textContent = browser.i18n.getMessage("openSettings");
-        }
-
-        const tutorialBtn = t.querySelector(".torpedo-open-tutorial");
-        if (tutorialBtn) {
-            tutorialBtn.textContent = browser.i18n.getMessage("openTutorial");
-        }
-
-        const tooltipRoot = document.querySelector(".torpedo-tooltip");
-        tooltipRoot.classList.remove("torpedoUserDefined");
-        tooltipRoot.classList.remove("torpedoTrusted");
+        UI.toggle(".torpedo-mark-trusted", !isAlreadyTrusted);
+        UI.setText(".torpedo-mark-trusted", browser.i18n.getMessage("markAsTrusted"));
 
         switch (secStatus) {
-            case "T2":
-                tooltipRoot.classList.add("torpedoUserDefined");
-                break;
             case "T1":
-                tooltipRoot.classList.add("torpedoTrusted");
-                if (markTrustedEl) markTrustedEl.style.display = "block";
+                tooltipRoot.classList.add(CLASSES.TRUSTED);
+                UI.toggle(".torpedo-mark-trusted", true);
                 break;
+
+            case "T2":
+                tooltipRoot.classList.add(CLASSES.USER_DEFINED);
+                break;
+
             case "T32":
-                if (markTrustedEl) markTrustedEl.style.display = "block";
-                const warningImg = t.querySelector(".torpedo-warning-img");
-                if (warningImg) warningImg.style.display = "block";
-                break;
-            default:
+                UI.toggle(".torpedo-mark-trusted", true);
+                UI.toggle(".torpedo-warning-img", true);
                 break;
         }
+    }
 
+    /**
+     * Handles the timer logic for link activation based on the security status and storage settings.
+     * @param storage - The storage object containing user settings.
+     * @param secStatus - The security status used to determine if the timer should be activated.
+     */
+    function handleTimerLogic(storage, secStatus) {
         const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
 
         if (isTimerActivated(storage, secStatus)) {
             countdown(storage.timer, secStatus, eventTypes);
         } else {
             Utils.reactivateEvents(torpedo.target, eventTypes);
-            Utils.reactivateEvents(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"]);
-        }
-
-        deactivateLoader();
-    }
-
-    function assignText(state, url) {
-        // get texts from textfile
-        const button = browser.i18n.getMessage("ButtonWeiterleitung");
-        const ueberschrift = browser.i18n.getMessage(state + "Ueberschrift");
-        const erklaerung = browser.i18n.getMessage(state + "Erklaerung");
-        const mehrInfo = browser.i18n.getMessage("MehrInfo");
-        const infotext = browser.i18n.getMessage(state + "Infotext").replace("<URL>", url);
-        const linkDeaktivierung = browser.i18n.getMessage(state + "LinkDeaktivierung");
-
-        setHTML(".torpedo-redirect-button", button);
-        setHTML(".torpedo-state-title", ueberschrift);
-        setHTML(".torpedo-security-status", erklaerung);
-        setHTML(".torpedo-info-text", mehrInfo);
-        setHTML(".torpedo-more-info", infotext);
-        setHTML(".torpedo-link-delay", linkDeaktivierung);
-
-        const elementsToHide = [
-            ".torpedo-warning-img",
-            ".torpedo-timer",
-            ".torpedo-info-div",
-            ".torpedo-link-delay",
-            ".torpedo-redirect-button"
-        ];
-        elementsToHide.forEach(hide);
-
-        if (linkDeaktivierung) {
-            show(".torpedo-link-delay");
-        } else {
-            setStyle(".torpedo-info", {
-                marginBottom: "0",
-                paddingBottom: "0"
-            });
+            Utils.reactivateEvents(UI.find(".torpedo-URL"), ["click"]);
         }
     }
 
-    async function processClick() {
-        const storage = await browser.storage.sync.get(["userDefinedDomains", "trustedDomains", "onceClickedDomains"]);
-        if (storage.userDefinedDomains.includes(torpedo.domain) || storage.trustedDomains.includes(torpedo.domain)) return;
-
-        let { onceClickedDomains = [] } = storage;
-        if (onceClickedDomains.includes(torpedo.domain)) {
-            await browser.storage.sync.set({
-                onceClickedDomains: onceClickedDomains.filter(d => d !== torpedo.domain),
-                userDefinedDomains: [...(storage.userDefinedDomains || []), torpedo.domain]
-            })
-        } else {
-            await browser.storage.sync.set({ onceClickedDomains: [...onceClickedDomains, torpedo.domain] });
-        }
-    }
-
-    /*
-     * Starts the loader animation.
-     */
-    function onlyShowLoader() {
-        const loaderBg = document.querySelector('.torpedo-tooltip > .loader-bg');
-        if (loaderBg) loaderBg.classList.add("transparent-bg");
-    }
-
-    /*
-     * Stops the loader animation.
-     */
     function deactivateLoader() {
         document.querySelector(".torpedo-tooltip").classList.remove("is-loading");
 
@@ -366,9 +401,6 @@ const TooltipManager = (function() {
         if (loader) loader.classList.add("loader-active");
     }
 
-    /*
-     * Sets the incoming URL as the new torpedo URL.
-     */
     function setNewUrl(uri) {
         if (uri.hostname.endsWith(".")) {
             uri.hostname = uri.hostname.slice(0, -1);
@@ -379,10 +411,6 @@ const TooltipManager = (function() {
         torpedo.domain = extractDomain(uri.hostname);
     }
 
-    /*
-     * Extracts the domain from a URL, using the public suffix list if available. If the URL is an IP address
-     * or if the public suffix list does not return a valid domain, it returns the original URL.
-     */
     function extractDomain(url) {
         if (isIP(url)) {
             return url;
@@ -392,5 +420,5 @@ const TooltipManager = (function() {
         return psl || url;
     }
 
-    return { showTooltip, hideTooltip, updateTooltip, setNewUrl, extractDomain, showLoaderWithOverlay, processClick };
+    return { showTooltip, hideTooltip, updateTooltip, setNewUrl, extractDomain, showLoaderWithOverlay };
 })();
