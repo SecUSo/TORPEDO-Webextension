@@ -11,7 +11,6 @@ const torpedo = {
     // The current location of the browser e.x. mail.google.com
     location: null,
     oldDomain: "",
-    oldUrl: "",
     // Flag that indicating if the tooltip is currently open.
     opened: false,
     // The public suffix list instance.
