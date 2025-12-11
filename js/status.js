@@ -15,12 +15,21 @@ async function getSecurityStatus(storage) {
     }
 
     if (await isRedirect(torpedo.domain)) {
+        torpedo.countRedirect++;
+        console.log("is redirector domain");
+
         if (!storage.privacyModeActivated) {
             resolveRedirect();
             return "URLnachErmittelnButtonPrivacyMode";
         }
         return "URLnachErmittelnButton2";
+
+    } else {
+        console.log("is not redirector domain");
     }
+
+    console.log("url after redirects: " + torpedo.url);
+    console.log(torpedo.countRedirect, " redirects found.");
 
     let tooltipWarning;
     if (torpedo.target.getAttribute("title")) {
@@ -29,13 +38,29 @@ async function getSecurityStatus(storage) {
         tooltipWarning = false;
     }
 
+    console.log("tooltipWarning: " + tooltipWarning);
+    console.log("domain: " + torpedo.domain);
+
+    const invisibleChar = hasInvisibleChar(torpedo.domain);
+    const mixedScript = isMixedScript(torpedo.domain);
+
+    console.log("Invisible Char: " + invisibleChar + ", Mixed Script: " + mixedScript);
+
     if (inTrusted(torpedo.domain, storage)) return "T1";
     if (inUserList(torpedo.domain, storage)) return "T2";
     if (tooltipWarning || isIP(torpedo.domain)) return "T32";
 
+    console.log("was no ip or tooltipwarning")
+
+    const areMismatch = isMismatch(torpedo.domain);
+
+    console.log("isMismatch: " + areMismatch);
+
     if (torpedo.countRedirect === 0) {
         return isMismatch(torpedo.domain) ? "T32" : "T31";
     }
+
+    console.log("redirectModeAct: " + storage.redirectModeActivated);
 
     return storage.redirectModeActivated && !isMismatch(torpedo.domain) ? "T31" : "T32";
 }
@@ -99,6 +124,27 @@ const IPV4_REGEX = new RegExp(
  */
 function isIP(address) {
     return IPV4_REGEX.test(address);
+}
+
+function hasInvisibleChar(domain) {
+    try {
+        domain = decodeURIComponent(domain);
+    } catch (e) {
+        // If decoding fails, continue with original string
+    }
+
+    // 2. Run the Regex
+    const invisibleRegex = /[\p{Cf}\p{Cc}\p{Co}\p{Cn}]/u;
+    return invisibleRegex.test(domain);
+}
+
+function isMixedScript(domain) {
+    domain = punycode.toUnicode(domain);
+
+    const hasLatin = /\p{Script=Latin}/u.test(domain);
+    const hasOther = /\p{Script=Cyrillic}|\p{Script=Greek}/u.test(domain);
+
+    return hasLatin && hasOther;
 }
 
 
