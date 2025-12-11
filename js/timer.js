@@ -25,8 +25,6 @@ function countdown(time, state, clickLinkEventTypes) {
     }
 
     updateTimerText(time);
-    torpedo.target.classList.add("torpedoTimerShowing");
-
     if (time > 0) time--;
 
     torpedo.timerInterval = setInterval(async () => {
