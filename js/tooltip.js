@@ -188,7 +188,6 @@ const TooltipManager = (function() {
      * Initializes static content in the tooltip, including images and event listeners for info text and redirect button.
      */
     function initStaticContent() {
-        torpedo.countRedirect = 0;
         torpedo.oldDomain = torpedo.domain;
 
         showLoaderWithOverlay();
