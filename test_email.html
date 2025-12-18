@@ -161,14 +161,38 @@
                 </div>
 
                 <div class="scenario">
-                    <p>Mixed Scripts (Cyrillic 'a')</p>
+                    <p>Mixed Scripts (Cyrillic '&#1072;' instead of 'a')</p>
                     <a href="https://www.p&#1072;ypal.com/">https://www.p&#1072;ypal.com/</a>
                 </div>
 
                 <div class="scenario">
-                    <p>Invisible Characters (Zero Width Space)</p>
-                    <a href="https://www.goo&#8203;gle.com/">https://www.google.com/</a>
+                    <p>Mixed Scripts (Greek Omicron '&#959;' instead of 'o')</p>
+                    <a href="https://www.amaz&#959;n.com/">https://www.amaz&#959;n.com/</a>
                 </div>
+
+                <div class="scenario">
+                    <p>Mixed Scripts (Cyrillic '&#1077;' instead of 'e')</p>
+                    <a href="https://www.fac&#1077;book.com/">https://www.fac&#1077;book.com/</a>
+                </div>
+
+                <div class="scenario">
+                    <p>Invisible Characters (Zero Width Space) (e.x. Gmail automatically delete invisible char)</p>
+                    <a href="https://www.goo&#8203;gle.com/">https://www.goo&#8203;gle.com/</a>
+                </div>
+            </div>
+
+            <div class="case-block">
+                <div class="scenario">
+                    <p>Subdomain Obfuscation (Root domain is evil-site.com)</p>
+                    <a href="https://paypal.com.secure-account-login.evil-site.com/">https://paypal.com.secure-account
+                        -login.evil-site.com/</a>
+                </div>
+
+                <div class="scenario">
+                    <p>Authority Abuse (Root domain is example.com)</p>
+                    <a href="https://www.kit.edu@example.com/">https://www.kit.edu@example.com/</a>
+                </div>
+
             </div>
 
             <div class="spacer"></div>
