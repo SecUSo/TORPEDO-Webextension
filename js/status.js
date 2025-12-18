@@ -15,21 +15,17 @@ async function getSecurityStatus(storage) {
     }
 
     if (await isRedirect(torpedo.domain)) {
-        torpedo.countRedirect++;
-        console.log("is redirector domain");
 
         if (!storage.privacyModeActivated) {
             resolveRedirect();
             return "URLnachErmittelnButtonPrivacyMode";
         }
-        return "URLnachErmittelnButton2";
 
-    } else {
-        console.log("is not redirector domain");
+        return "URLnachErmittelnButton2";
     }
 
-    console.log("url after redirects: " + torpedo.url);
-    console.log(torpedo.countRedirect, " redirects found.");
+    if (inTrusted(torpedo.domain, storage)) return "T1";
+    if (inUserList(torpedo.domain, storage)) return "T2";
 
     let tooltipWarning;
     if (torpedo.target.getAttribute("title")) {
@@ -38,31 +34,19 @@ async function getSecurityStatus(storage) {
         tooltipWarning = false;
     }
 
-    console.log("tooltipWarning: " + tooltipWarning);
-    console.log("domain: " + torpedo.domain);
-
-    const invisibleChar = hasInvisibleChar(torpedo.domain);
     const mixedScript = isMixedScript(torpedo.domain);
+    // const invisibleChar = hasInvisibleChar(torpedo.domain);
 
-    console.log("Invisible Char: " + invisibleChar + ", Mixed Script: " + mixedScript);
-
-    if (inTrusted(torpedo.domain, storage)) return "T1";
-    if (inUserList(torpedo.domain, storage)) return "T2";
-    if (tooltipWarning || isIP(torpedo.domain)) return "T32";
-
-    console.log("was no ip or tooltipwarning")
-
-    const areMismatch = isMismatch(torpedo.domain);
-
-    console.log("isMismatch: " + areMismatch);
+    if (tooltipWarning || mixedScript || isIP(torpedo.domain)) {
+        return "T32";
+    }
 
     if (torpedo.countRedirect === 0) {
         return isMismatch(torpedo.domain) ? "T32" : "T31";
+
+    } else {
+        return storage.redirectModeActivated && !isMismatch(torpedo.domain) ? "T31" : "T32";
     }
-
-    console.log("redirectModeAct: " + storage.redirectModeActivated);
-
-    return storage.redirectModeActivated && !isMismatch(torpedo.domain) ? "T31" : "T32";
 }
 
 /**
