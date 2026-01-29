@@ -11,7 +11,10 @@
   "default_locale": "de",
   "description": "__MSG_extensionDescription__",
   "background": {
-    "service_worker": "service_worker.js"
+    "service_worker": "service_worker.js",
+    "scripts": [
+      "service_worker.js"
+    ]
   },
   "permissions": [
     "tabs",
