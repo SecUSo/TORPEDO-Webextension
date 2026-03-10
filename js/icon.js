@@ -1,17 +1,20 @@
-document.addEventListener("click", (e) => {
+let detectedLocation = "";
+
+
+document.addEventListener("click", async (e) => {
     const targetId = e.target.id;
 
     if (targetId === "torpedoPage") {
-        browser.tabs.create({url: "https://secuso.aifb.kit.edu/TORPEDO.php"});
+        await browser.tabs.create({ url: "https://secuso.aifb.kit.edu/TORPEDO.php" });
     } else if (targetId === "options") {
-        browser.runtime.openOptionsPage();
+        await browser.runtime.openOptionsPage();
     } else if (targetId === "error" && e.target.classList.contains("error")) {
-        browser.runtime.sendMessage({name: "sendMail"});
+        await browser.runtime.sendMessage({ name: "sendMail", location: detectedLocation });
     }
 });
 
 
-function init() {
+async function init() {
     const torpedoPageButton = document.getElementById("torpedoPage");
     const optionsButton = document.getElementById("options");
     const errorButton = document.getElementById("error");
@@ -19,15 +22,30 @@ function init() {
     torpedoPageButton.textContent = browser.i18n.getMessage("extensionName");
     optionsButton.textContent = browser.i18n.getMessage("options");
 
-    browser.storage.sync.get("state").then((object) => {
-        if (object.state && object.state.works) {
-            errorButton.className = "working";
-            errorButton.textContent = browser.i18n.getMessage("OK");
-        } else {
-            errorButton.className = "error";
-            errorButton.textContent = browser.i18n.getMessage("error");
-        }
-    });
+    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+    if (!tab) return;
+
+    try {
+        const url = new URL(tab.url);
+        detectedLocation = url.host;
+
+    } catch (e) {
+        detectedLocation = tab.url;
+    }
+
+    const storage = await browser.storage.sync.get({ state: [] });
+    const stateArray = storage.state;
+    const currentEntry = stateArray.find(entry => entry.location === detectedLocation);
+
+    if (currentEntry && currentEntry.works) {
+        errorButton.className = "working";
+        errorButton.textContent = browser.i18n.getMessage("OK");
+
+    } else {
+        errorButton.className = "error";
+        errorButton.textContent = browser.i18n.getMessage("error");
+    }
 }
+
 
 document.addEventListener("DOMContentLoaded", init);

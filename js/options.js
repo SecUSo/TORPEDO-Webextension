@@ -33,45 +33,45 @@ const OptionsPage = {
             settings.referrerPart1?.includes("deref-web-02.de");
 
         // Tooltip tab
-        if (settings.minimalTooltip_url === true) {
+        if (settings.section_url_active === true) {
             document.querySelector(".tooltip-preview-url").classList.remove("disabled")
 
         } else {
             document.querySelector(".tooltip-preview-url").classList.add("disabled")
         }
 
-        if (settings.minimalTooltip_minimal === true) {
+        if (settings.minimal_url === true) {
             document.querySelector(".tooltip-preview-href").classList.remove("disabled")
         } else {
             document.querySelector(".tooltip-preview-href").classList.add("disabled")
         }
 
-        if (settings.minimalTooltip_security === true) {
+        if (settings.section_security_active === true) {
             document.querySelector(".tooltip-preview-risk").classList.remove("disabled")
         } else {
             document.querySelector(".tooltip-preview-risk").classList.add("disabled")
         }
 
-        if (settings.minimalTooltip_info === true) {
+        if (settings.section_info_active === true) {
             document.querySelector(".tooltip-preview-info").classList.remove("disabled")
         } else {
             document.querySelector(".tooltip-preview-info").classList.add("disabled")
         }
 
-        if (settings.minimalTooltip_timer === true) {
+        if (settings.section_timer_active === true) {
             document.querySelector(".tooltip-preview-timer").classList.remove("disabled")
         } else {
             document.querySelector(".tooltip-preview-timer").classList.add("disabled")
         }
 
-        const img_element = document.getElementById("tooltip-preview-info-img")
-        img_element.src = browser.runtime.getURL("img/info.png")
+        const img_element = document.getElementById("tooltip-preview-info-img");
+        img_element.src = browser.runtime.getURL("img/info.png");
 
-        document.getElementById("tooltipCheckbox-url").checked = settings.minimalTooltip_url;
-        document.getElementById("tooltipCheckbox-url-minimal").checked = settings.minimalTooltip_minimal;
-        document.getElementById("tooltipCheckbox-security").checked = settings.minimalTooltip_security;
-        document.getElementById("tooltipCheckbox-info").checked = settings.minimalTooltip_info;
-        document.getElementById("tooltipCheckbox-timer").checked = settings.minimalTooltip_timer;
+        document.getElementById("tooltipCheckbox-url").checked = settings.section_url_active;
+        document.getElementById("tooltipCheckbox-url-minimal").checked = settings.minimal_url;
+        document.getElementById("tooltipCheckbox-security").checked = settings.section_security_active;
+        document.getElementById("tooltipCheckbox-info").checked = settings.section_info_active;
+        document.getElementById("tooltipCheckbox-timer").checked = settings.section_timer_active;
 
         if (document.getElementById("referrerList")) await this.fillReferrerList();
         if (document.getElementById("trustedList")) await this.fillTrustedList();
@@ -194,31 +194,112 @@ const OptionsPage = {
 
         document.getElementById("defaultSettings").addEventListener("click", async () => {
            await browser.storage.sync.set({
-               onceClickedDomains: [],
-               userDefinedDomains: [],
+               state : [],
                timer: 3,
+
+               privacyModeActivated: true,
+               redirectModeActivated: false,
                trustedTimerActivated: false,
                userTimerActivated: false,
+
+               section_url_active: true,
+               section_security_active: true,
+               section_info_active: true,
+               section_timer_active: true,
+               minimal_url: true,
+
+               referrerPart1: ["deref-gmx.net", "deref-web-02.de", "deref-web.de", "google.*", "google.*"],
+               referrerPart2: ["/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/url?", "/url?"],
+               referrerPart3: ["redirectUrl=", "redirectUrl=", "redirectUrl=", "url=", "q="],
+
                trustedListActivated: true,
-                minimalTooltip_url: true,
-                minimalTooltip_security: true,
-                minimalTooltip_info: true,
-                minimalTooltip_timer: true,
-               minimalTooltip_minimal: true,
-               referrerPart1: [
-                   "deref-gmx.net",
-                   "deref-web-02.de/",
-                   "google.*",
-                   "google.*",
+               trustedDomains:  [
+                   "kit.edu",
+                   "secuso.org",
+                   "amazon.com",
+                   "amazon.de",
+                   "aliexpress.com",
+                   "bahn.de",
+                   "bild.de",
+                   "bing.com",
+                   "blogspot.com",
+                   "booking.com",
+                   "chip.de",
+                   "deutsche-bank.de",
+                   "dhl.de",
+                   "ebay.de",
+                   "ebay-kleinanzeigen.de",
+                   "facebook.com",
+                   "fandom.com",
+                   "gmx.net",
+                   "google.com",
+                   "google.de",
+                   "google.ru",
+                   "idealo.de",
+                   "imdb.com",
+                   "immobilienscout24.de",
+                   "instagram.com",
+                   "live.com",
+                   "mail.ru",
+                   "microsoft.com",
+                   "mobile.de",
+                   "netflix.com",
+                   "ok.ru",
+                   "otto.de",
+                   "paypal.com",
+                   "postbank.de",
+                   "reddit.com",
+                   "shop-apotheke.com",
+                   "spiegel.de",
+                   "telekom.com",
+                   "t-online.de",
+                   "twitch.tv",
+                   "vk.com",
+                   "web.de",
+                   "wetter.com",
+                   "wikipedia.org",
+                   "yahoo.com",
+                   "yandex.ru",
+                   "youtube.com",
+                   "adobe.com",
+                   "apple.com",
+                   "baidu.com",
+                   "chase.com",
+                   "cnn.com",
+                   "craigslist.org",
+                   "dropbox.com",
+                   "ebay.com",
+                   "espn.com",
+                   "force.com",
+                   "imdb.com",
+                   "imgur.com",
+                   "indeed.com",
+                   "jd.com",
+                   "linkedin.com",
+                   "login.tmall.com",
+                   "msn.com",
+                   "myshopify.com",
+                   "nytimes.com",
+                   "office.com",
+                   "qq.com",
+                   "salesforce.com",
+                   "sohu.com",
+                   "spotify.com",
+                   "stackoverflow.com",
+                   "taobao.com",
+                   "tmall.com",
+                   "tumblr.com",
+                   "twitter.com",
+                   "walmart.com",
+                   "wellsfargo.com",
+                   "yelp.com",
+                   "zillow.com",
                ],
-               referrerPart2: [
-                   "/mail/client/[...]/dereferrer/?",
-                   "/mail/client/[...]/dereferrer/?",
-                   "/url?",
-                   "/url?",
-               ],
-               referrerPart3: ["redirectUrl=", "redirectUrl=", "url=", "q="],
-               redirectDomains: [
+
+               onceClickedDomains: [],
+               userDefinedDomains: [],
+
+               redirectDomains:  [
                    "bit.ly",
                    "goo.gl",
                    "bit.do",
@@ -452,7 +533,7 @@ const OptionsPage = {
                    "poprl.com",
                    "njx.me",
                    "shrinkify.info",
-               ],
+               ]
            });
            await this.loadAndApplySettings();
            document.getElementById("statusSettings").textContent = browser.i18n.getMessage("defaultSettingsRestored");

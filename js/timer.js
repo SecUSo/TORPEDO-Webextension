@@ -17,6 +17,8 @@ function countdown(time, state, clickLinkEventTypes) {
 
     if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
 
+    if (!torpedo.tooltip) return;
+
     const timerEl = torpedo.tooltip.querySelector(".torpedo-timer");
     timerEl.style.display = "block";
 

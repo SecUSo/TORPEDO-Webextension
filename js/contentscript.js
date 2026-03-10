@@ -6,18 +6,7 @@
      * Main function to initialize the content script.
      */
     async function main() {
-        const siteConfig = {
-            "mail.yahoo.com": { selectors: ['div[data-test-id="message-view"]'] },
-            "mail.google.com": { selectors: [".adn"] },
-            "owa.kit.edu": { selectors: ['div[role="list"]', " div.isMessageBodyInPopout"] },
-            "outlook.live.com": { selectors: ['div[role="main"]'] },
-            "mail.aol.com": { selectors: ["#displayMessage"] },
-            "email.t-online.de": { iframe: ["mailreadview"] },
-            default: { iframe: ["mailbody"] }
-        };
-
-        torpedo.location = window.location.host;
-        const config = siteConfig[torpedo.location] || siteConfig.default;
+        torpedo.location = window.location.host || "mail-message";
 
         try {
             const tldData = await browser.runtime.sendMessage({ name: "TLD" });
@@ -27,14 +16,10 @@
             console.error("Failed to fetch TLD data:", e);
         }
 
-        if (!config.iframe) {
-            setupEventListeners(config);
+        const tbConfig = { selectors: ["body"] };
+        setupEventListeners(tbConfig);
 
-        } else {
-            setupIframeEventListeners();
-        }
-
-        checkPageAndSetIcon(config);
+        await browser.runtime.sendMessage({ name: "ok", location: torpedo.location });
     }
 
     /**
@@ -49,56 +34,10 @@
             if (targetLink) openTooltip(targetLink, "a");
 
             const targetForm = event.target.closest(formSelectors);
-            if (targetForm) {
-                openTooltip(targetForm, "form");
-            }
+            if (targetForm) openTooltip(targetForm, "form");
         });
     }
 
-    /**
-     * Sets up event listeners for iframes.
-     */
-    function setupIframeEventListeners() {
-        document.body.addEventListener("mouseover", (event) => {
-            const anchorTarget = event.target.closest("a");
-            if (anchorTarget && event.view.location.href.includes("iframe")) openTooltip(anchorTarget, "a");
-        });
-    }
-
-    /**
-     * Checks the page for configured selectors and sets the browser icon.
-     */
-    function checkPageAndSetIcon(config) {
-        if (window.self !== window.top) return;
-        const message = { location: torpedo.location };
-
-        const performCheck = () => {
-            if (config.iframe && window.location.href.includes("iframe")) {
-                message.name = "ok";
-                return true;
-            } else if (!config.iframe && document.body.querySelector(config.selectors.join())) {
-                message.name = "ok";
-                return true;
-            }
-
-            return false;
-        };
-
-        const interval = setInterval(() => {
-            if (performCheck()) {
-                clearInterval(interval);
-                browser.runtime.sendMessage(message);
-            }
-        }, 500);
-
-        setTimeout(() => {
-            if (message.name !== "ok") {
-                clearInterval(interval);
-                message.name = "error";
-                browser.runtime.sendMessage(message);
-            }
-        }, 10000);
-    }
 
     /**
      * Handles mouse enter events on the target element.
@@ -137,34 +76,32 @@
         if (type === "a") {
             const href = torpedo.target.href;
 
-            if (href.includes("mailto:")) return;
-
-            if (href === "") {
-                try {
-                    torpedo.target.setAttribute("href", e.relatedTarget.href);
-                } catch (e) {}
+            if (!href || href.includes("mailto:")) {
+                Utils.reactivateEvents(torpedo.target, eventTypes);
+                return;
             }
         }
 
-        const url = type === "form" ? new URL(torpedo.target.action) : new URL(torpedo.target.href);
+        let url;
+        try {
+            const raw = type === "form" ? torpedo.target.action : torpedo.target.href;
+            url = new URL(raw);
+
+        } catch (e) {
+            Utils.reactivateEvents(torpedo.target, eventTypes);
+            return;
+        }
+
         torpedo.setNewUrl(url);
 
         try {
-            const storage = await browser.storage.sync.get(null);
-            if (storage.referrerSites.includes(torpedo.location)) {
-                resolveReferrer(storage);
-                torpedo.target.href = torpedo.url;
-            }
-
             torpedo.target.addEventListener("mouseenter", handleMouseEnter);
             torpedo.target.addEventListener("mouseleave", handleMouseLeave);
-
             await TooltipManager.showTooltip(torpedo.target);
 
         } catch (err) {
-            console.log(torpedo.target.href);
-            console.log(err);
-            await browser.runtime.sendMessage({ name: "error" });
+            console.log(`Error showing tooltip for ${url.href}:`, err);
+            await browser.runtime.sendMessage({ name: "error", location: torpedo.location });
         }
     }
 
@@ -173,4 +110,5 @@
     } else {
         await main();
     }
+
 })();

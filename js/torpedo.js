@@ -8,9 +8,8 @@ const torpedo = {
     domain: "",
     // Timer to hide the tooltip.
     hideTimer: null,
-    // The current location of the browser e.x. mail.google.com
+    // The current location of the browser e.x. imap.gmail.com:993
     location: null,
-    oldDomain: "",
     // Flag that indicating if the tooltip is currently open.
     opened: false,
     // The public suffix list instance.
@@ -36,6 +35,20 @@ const torpedo = {
 
         this.urlObject = newUrlObject;
         this.url = newUrlObject.href;
-        this.domain = TooltipManager.extractDomain(newUrlObject.hostname)
+        this.domain = this.extractDomain(this.urlObject.hostname);
+    },
+
+    /**
+     * Extracts the domain from a given hostname using the public suffix list.
+     * @param hostname - The hostname to extract the domain from.
+     * @returns {string|*} - The extracted domain or the original hostname if the domain cannot be determined.
+     */
+    extractDomain(hostname) {
+        if (isIP(hostname)) {
+            return hostname;
+        }
+
+        const domain = this.publicSuffixList.getDomain(hostname);
+        return domain ? domain : hostname;
     }
 }

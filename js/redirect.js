@@ -1,46 +1,19 @@
 /**
  * Resolves a redirect URL (e.g., a short URL).
  */
-function resolveRedirect() {
-    TooltipManager.showLoaderWithOverlay()
-    browser.runtime.sendMessage({ name: "redirect", url: torpedo.url })
-        .then(response => {
-            try {
-                const href = new URL(response);
-                TooltipManager.setNewUrl(href);
-                TooltipManager.updateTooltip();
-            } catch (e) { }
-        })
-        .catch(error => console.error(error));
+async function resolveRedirect() {
+    TooltipManager.showLoaderWithOverlay();
+
+    const redirect = await browser.runtime.sendMessage({ name: "redirect", url: torpedo.url });
+
+    const urlObject = new URL(redirect);
+    torpedo.setNewUrl(urlObject);
+
+    await TooltipManager.updateTooltip();
 }
+
 
 /**
- *  Resolves a referrer URL.
- */
-function resolveReferrer(storage) {
-    const { referrerPart1, referrerPart2, referrerPart3 } = storage;
-    if (!referrerPart1 || !referrerPart2 || !referrerPart3) return;
-
-    for (let i = 0; i < referrerPart1.length; i++) {
-        if (torpedo.url.includes(referrerPart1[i])) {
-            const cut = referrerPart3[i] || referrerPart2[i];
-            const index = torpedo.url.indexOf(cut);
-            if (index !== -1) {
-                let temp = torpedo.url.substring(index + cut.length);
-                temp = decodeURIComponent(temp);
-                try {
-                    const href = new URL(temp);
-                    TooltipManager.setNewUrl(href);
-                    return;
-                } catch (e) { }
-                break;
-            }
-        }
-    }
-}
-
-
-/*
  * checks if the current url is a referrer 
  *
  * @return resolved referrer or <NO_RESOLVED_REFERRER> if the current url is no referrer or there was an error 
