@@ -119,11 +119,11 @@ const OptionsPage = {
         addCheckboxListener('userTimerCheckbox', 'userTimerActivated');
         addCheckboxListener('redirectModeCheckbox', 'redirectModeActivated');
 
-        addCheckboxListener("tooltipCheckbox-url", "minimalTooltip_url");
-        addCheckboxListener("tooltipCheckbox-url-minimal", "minimalTooltip_minimal");
-        addCheckboxListener("tooltipCheckbox-security", "minimalTooltip_security");
-        addCheckboxListener("tooltipCheckbox-info", "minimalTooltip_info");
-        addCheckboxListener("tooltipCheckbox-timer", "minimalTooltip_timer");
+        addCheckboxListener("tooltipCheckbox-url", "section_url_active");
+        addCheckboxListener("tooltipCheckbox-url-minimal", "minimal_url");
+        addCheckboxListener("tooltipCheckbox-security", "section_security_active");
+        addCheckboxListener("tooltipCheckbox-info", "section_info_active");
+        addCheckboxListener("tooltipCheckbox-timer", "section_timer_active");
 
         document.getElementById('privacyModeCheckbox').addEventListener('change', (e) => {
             const isChecked = e.target.checked;
