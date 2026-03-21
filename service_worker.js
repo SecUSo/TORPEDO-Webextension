@@ -386,7 +386,7 @@ const initializeStorage = async () => {
  * @returns {Promise<void>} A promise that resolves when the tutorial page is opened.
  */
 const showTutorial = async () => {
-    await browser.tabs.create({ url: browser.runtime.getURL("tutorial.html") });
+    await browser.tabs.create({ url: browser.runtime.getURL("tutorial_new.html") });
 }
 
 
