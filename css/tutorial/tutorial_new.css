@@ -52,7 +52,6 @@ li { padding: 1rem 0; }
 .green { color: green; }
 .grey { color: var(--color-grey); }
 .blue { color: var(--color-primary); }
-.red { color: red; }
 
 /* Header */
 header {

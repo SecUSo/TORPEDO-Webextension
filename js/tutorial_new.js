@@ -130,6 +130,12 @@ function init() {
     setInnerHTML("grey-case-txt-6", "grey_case_txt_6");
     setInnerHTML("grey-case-txt-7", "grey_case_txt_7");
 
+    // grey case showcase page
+    setInnerHTML("grey-case-showcase-one-title", "grey_case_showcase_one_title");
+    setInnerHTML("grey-case-showcase-one-txt", "grey_case_showcase_one_txt");
+    setInnerHTML("grey-case-showcase-two-title", "grey_case_showcase_two_title");
+    setInnerHTML("grey-case-showcase-two-txt", "grey_case_showcase_two_txt");
+
     /*
     for (let i = 1; i < 8; i++) {
         document.getElementById(`functionality-explanation-txt-${i}`).innerHTML =

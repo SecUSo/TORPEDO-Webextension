@@ -500,11 +500,11 @@
     "description": "explanation-title tutorial on page 2"
   },
   "explanation_txt": {
-    "message": "Das Dialogfenster zeigt ausschließlich die Domain, da die Domain der Website‑Adresse der entscheidendste Teil für die Erkennung möglicher Phishing‑Versuche ist. Die Domain ist der Bereich unmittelbar vor dem dritten Schrägstrich, getrennt durch einen Punkt.",
+    "message": "Das Dialogfenster zeigt ausschließlich die Domain, da die Domain der Website‑Adresse der entscheidendste Teil für die Erkennung möglicher Phishing‑Versuche ist. Die Domain ist der Bereich unmittelbar vor dem <span class='fat'>dritten Schrägstrich</span>, getrennt <span class='fat'>durch einen Punkt</span>.",
     "description": "functionality-explanation on page 2"
   },
   "explanation_txt_2": {
-    "message": "Zur Veranschaulichung ist die Domain der unten gezeigten Website‑Adressen entsprechend hervorgehoben:",
+    "message": "Zur Veranschaulichung ist die <span class='domain-mark'>Domain</span> der unten gezeigten Website‑Adressen entsprechend hervorgehoben:",
     "description": "functionality-explanation on page 2"
   },
 
@@ -514,7 +514,7 @@
     "description": "tooltip-title tutorial on page 3"
   },
   "tooltip_txt": {
-    "message": "TORPEDO präsentiert einen von zwei Typen von Dialogfenstern. Der angezeigte Typ hängt vom ermittelten Risikoniveau der mit dem Link verknüpften Website‑Adresse ab: niedriges Risiko bzw. unbekanntes Risiko.",
+    "message": "TORPEDO präsentiert einen von zwei Typen von Dialogfenstern. Der angezeigte Typ hängt vom ermittelten <span class='fat'>Risikoniveau</span> der mit dem Link verknüpften Website‑Adresse ab: <span class='green'>niedriges Risiko</span> bzw. <span class='grey'>unbekanntes Risiko</span>.",
     "description": "tooltip on page 3"
   },
   "tooltip_txt_2": {
@@ -524,25 +524,25 @@
 
 
   "green_case_title": {
-    "message": "Tutorial [4/9]: Dialogfenster bei niedrigem Risiko",
+    "message": "Tutorial [4/9]: <span class='green'>Dialogfenster bei niedrigem Risiko</span>",
     "description": "Title for the first case (green) tutorial"
   },
   "green_case_txt": {
-    "message": "1. **Dialogfenster bei niedrigem Risiko** – Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der mit dem gerade gescannten QR‑Code verknüpften Website‑Adresse als niedrig eingestuft wird. Dies liegt daran, dass die Domain zu einer Liste von Websites gehört, die die Entwickler als legitim betrachten oder bereits zweimal besucht wurde.",
+    "message": "<span class='green'>1. Dialogfenster bei niedrigem Risiko</span> – Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der mit dem gerade gescannten QR‑Code verknüpften Website‑Adresse als <span class='green'>niedrig eingestuft</span> wird. Dies liegt daran, dass die Domain zu einer Liste von Websites gehört, die die Entwickler als legitim betrachten oder bereits zweimal besucht wurde.",
     "description": "Explanation for the first case (green) tutorial"
   },
   "green_case_txt_2": {
-    "message": "Hier ein Beispiel für ein Dialogfenster, in dem TORPEDO die bekannte Domain *knownpage.com* als Teil der Liste legitimer Websites erkannt hat:",
+    "message": "Hier ein Beispiel für ein Dialogfenster, in dem TORPEDO die bekannte Domain <span class='fat'>knownpage.com</span> als Teil der Liste legitimer Websites erkannt hat:",
     "description": "Explanation for the first case (green) tutorial"
   },
 
 
   "grey_case_title": {
-    "message": "Tutorial [5/9]: Dialogfenster bei unbekanntem Risiko",
+    "message": "Tutorial [5/9]: <span class='grey'>Dialogfenster bei unbekanntem Risiko</span>",
     "description": "Title for the second case (grey) tutorial"
   },
   "grey_case_txt": {
-    "message": "2. **Dialogfenster bei unbekanntem Risiko** – Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der mit dem gerade berührten Link verknüpften Website‑Adresse als unbekannt eingestuft wird. In diesem Fall müssen Sie die Domain selbst prüfen und verifizieren, um festzustellen, ob sie sicher ist oder Phishing darstellt.",
+    "message": "<span class='grey'>2. Dialogfenster bei unbekanntem Risiko</span> – Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der mit dem gerade berührten Link verknüpften Website‑Adresse als unbekannt eingestuft wird. In diesem Fall müssen Sie die Domain selbst prüfen und verifizieren, um festzustellen, ob sie sicher ist oder Phishing darstellt.",
     "description": "Explanation for the second case (grey) tutorial"
   },
   "grey_case_txt_2": {
@@ -558,7 +558,7 @@
     "description": "Explanation for the second case (grey) tutorial"
   },
   "grey_case_txt_5": {
-    "message": "Beispiel: Berühren Sie einen Link für ein YouTube‑Video, erwarten Sie die Domain *youtube.com*. Sehen Sie stattdessen etwas wie *sadhaskjas.com*, ist die mit dem Link verknüpfte Website-Adresse höchstwahrscheinlich ein Phishing.",
+    "message": "Beispiel: Berühren Sie einen Link für ein YouTube‑Video, erwarten Sie die Domain <span class='fat'>youtube.com</span>. Sehen Sie stattdessen etwas wie <span class='fat'>sadhaskjas.com</span>, ist die mit dem Link verknüpfte Website-Adresse höchstwahrscheinlich ein Phishing.",
     "description": "Explanation for the second case (grey) tutorial"
   },
   "grey_case_txt_6": {
@@ -568,6 +568,24 @@
   "grey_case_txt_7": {
     "message": "Alle drei sind jedoch Phishing‑Websites.",
     "description": "Explanation for the second case (grey) tutorial"
+  },
+
+
+  "grey_case_showcase_one_title": {
+    "message": "Demonstration 1",
+    "description": "Title for the first demonstration of the grey-case tutorial"
+  },
+  "grey_case_showcase_one_txt": {
+    "message": "Hier ein Beispiel für ein Dialogfenster, in dem TORPEDO <span class='fat'>example.com</span> nicht in der Liste der legitimen Website‑Adressen gefunden hat, obwohl es sich um eine legitime Website handelt, weil sie nicht zu den am häufigsten besuchten Websites gehört.",
+    "description": "Explanation for the first demonstration of the grey-case tutorial"
+  },
+  "grey_case_showcase_two_title": {
+    "message": "Demonstration 2",
+    "description": "Title for the second demonstration of the grey-case tutorial"
+  },
+  "grey_case_showcase_two_txt": {
+    "message": "Hier ein Beispiel für ein Dialogfenster, in dem TORPEDO <span class='fat'>exampie.com</span> (beachten Sie die visuelle Ähnlichkeit des Buchstabens <span class='fat'>i</span> statt <span class='fat'>I</span>) nicht in der Liste der legitimen Website‑Adressen gefunden hat und daher den Dialog mit unbekanntem Risiko anzeigt. In diesem Fall handelt es sich um ein Phishing, das versucht, Sie glauben zu lassen, dass es zu <span class='fat'>example.com</span> führt, was nicht der Fall ist.",
+    "description": "Explanation for the second demonstration of the grey-case tutorial"
   },
 
 
