@@ -480,80 +480,97 @@
     "description": "Entered URL is already in list of referrer URLs"
   },
 
+
   "welcome_title": {
-    "message": "Willkommen!",
+    "message": "Tutorial [1/9]: Vorläufige Informationen",
     "description": "welcome-title tutorial on page 1"
   },
   "introduction_txt": {
-    "message": "TORPEDO ist ein Add-On zur Benutzerunterstützung bei der Erkennung von betrügerischen E-Mails mit gefährlichen Links (oft auch Phishing E-Mails bezeichnet). <br> Es setzt auf dem NoPhish Konzept von SECUSO auf bzw. kann auch als Ergänzung zu diesem eingesetzt werden.",
+    "message": "TORPEDO unterstützt Sie dabei festzustellen, ob es sicher ist, die mit einem Link verknüpfte Website‑Adresse zu besuchen.",
     "description": "Short introduction in tool, tutorial for page 1 "
   },
-  "technical_background_title": {
-    "message": "Technischer Hintergrund",
-    "description": "technical-bg-title tutorial on page 1"
-  },
-  "technical_background_txt": {
-    "message": "Technisch ist es leider derzeit nicht möglich, dass keine Phishing E-Mails in den E-Mail-Posteingängen landen. Gut gemachte Phishing E-Mails erkennt man als Empfänger nur dann, wenn man die Webadresse hinter den Links prüft bevor man auf diese klickt. Die Awareness hierfür – bis hin zum Wissen, wie Webadressen zu prüfen sind – zu schaffen ist wichtig und gescheit über die Maßnahmen im NoPhish-Konzept. Gleichzeitig ist es aber auch klar, dass Empfänger von E-Mails nicht jede Webadresse (in der Statusleiste oder dem Tooltip nach Berühren des Links) so genau prüfen, wie dies notwendig wäre, um Phishing E-Mails zuverlässig als solche zu erkennen. Hier fehlen den Empfängern und Empfängerinnen bei der Masse an E-Mails einfach die Zeit auch oft auch das Wissen.",
-    "description": "technical-bg-txt tutorial on page 1"
-  },
-  "functionality_title": {
-    "message": "Funktionalität von TORPEDO",
-    "description": "functionality-title tutorial on page 1"
-  },
-  "functionality_txt": {
-    "message": "Hier setzt TORPEDO an. TORPEDO zeigt die für die Prüfung relevanten Informationen direkt bei dem Link in einem Tooltip(-overlay) an, so dass es mit TORPEDO einfacher ist, die Prüfung durchzuführen. Außerdem unterscheidet TORPEDO verschiedene Risikostufen von Links und zeigt Ihnen so auf, wann es wichtig ist, die Webadresse hinter dem Link vor dem Klicken des Links zu prüfen. Folgende Risikostufen werden unterschieden.",
-    "description": "functionality-txt tutorial on page 1"
+  "introduction_txt_2": {
+    "message": "Unmittelbar nach berühren eines Links mit dem Mauszeiger, aber bevor die Website‑Adresse im Browser oder in einer Anwendung geöffnet wird, zeigt TORPEDO ein Dialogfenster an, das die Domain der mit dem Link verknüpften Website enthält.",
+    "description": "Short introduction in tool, tutorial for page 1 "
   },
 
-  "functionality_explanation_title": {
-    "message": "So funktioniert TORPEDO",
-    "description": "functionality-explanation-title tutorial on page 2"
+
+  "explanation_title": {
+    "message": "Tutorial [2/9]: Domain der Website‑Adresse",
+    "description": "explanation-title tutorial on page 2"
   },
-  "functionality_explanation_txt_1": {
-    "message": "Wenn Sie mit der Maus einen Link in der E-Mail berühren, erscheint einer von fünf Dialogen.",
-    "description": "functionality-explanation-txt tutorial on page 2"
+  "explanation_txt": {
+    "message": "Das Dialogfenster zeigt ausschließlich die Domain, da die Domain der Website‑Adresse der entscheidendste Teil für die Erkennung möglicher Phishing‑Versuche ist. Die Domain ist der Bereich unmittelbar vor dem dritten Schrägstrich, getrennt durch einen Punkt.",
+    "description": "functionality-explanation on page 2"
   },
-  "functionality_explanation_txt_2": {
-    "message": "Alle Dialoge enthalten die Domain. Die Domain wird auch ",
-    "description": "functionality-explanation-txt tutorial on page 2"
+  "explanation_txt_2": {
+    "message": "Zur Veranschaulichung ist die Domain der unten gezeigten Website‑Adressen entsprechend hervorgehoben:",
+    "description": "functionality-explanation on page 2"
   },
-  "domain_translation": {
-    "message": "Wer-Bereich",
-    "description": "Wer-Bereich Uebersetzung tutorial on page 2"
+
+
+  "tooltip_title": {
+    "message": "Tutorial [3/9]: Dialogfenster",
+    "description": "tooltip-title tutorial on page 3"
   },
-  "functionality_explanation_txt_3": {
-    "message": " genannt. <br/>Die Domain ist der wichtigste Bereich einer URL (auch Webadresse genannt), wenn es um die Erkennung von Phishing E-Mails geht.",
-    "description": "functionality-explanation-txt tutorial on page 2"
+  "tooltip_txt": {
+    "message": "TORPEDO präsentiert einen von zwei Typen von Dialogfenstern. Der angezeigte Typ hängt vom ermittelten Risikoniveau der mit dem Link verknüpften Website‑Adresse ab: niedriges Risiko bzw. unbekanntes Risiko.",
+    "description": "tooltip on page 3"
   },
-  "functionality_explanation_txt_4": {
-    "message": "Die Domain ist in der folgenden Beispiel-URL <span class='fat'>fett</span> markiert:",
-    "description": "functionality-explanation-txt tutorial on page 2"
+  "tooltip_txt_2": {
+    "message": "Für jedes Risikoniveau zeigt die Anwendung unmittelbar nach dem Berühren des Link ein separates Dialogfenster an. Diese werden im Folgenden vorgestellt.",
+    "description": "tooltip on page 3"
   },
-  "functionality_explanation_txt_5": {
-    "message": "Im Dialog würde also die URL angezeigt und die Domain ",
-    "description": "functionality-explanation-txt tutorial on page 2"
-  },
-  "functionality_explanation_txt_6": {
-    "message": " fett markiert.",
-    "description": "functionality-explanation-txt tutorial on page 2"
-  },
-  "functionality_explanation_txt_7": {
-    "message": "Welcher der fünf Dialoge angezeigt wird, hängt davon ab, welches Risikolevel vorliegt: ",
-    "description": "functionality-explanation-txt tutorial on page 2"
-  },
+
 
   "green_case_title": {
-    "message": "Grüner Fall",
+    "message": "Tutorial [4/9]: Dialogfenster bei niedrigem Risiko",
     "description": "Title for the first case (green) tutorial"
   },
-  "green_case_category": {
-    "message": "<span class='green fat'>Grün</span> - das Risiko des Klickens auf den Link wird als <span class='green'>gering eingestuft</span>. Der Grund hierfür ist, dass die Domain in einer Liste der meistbesuchten Webseiten aller Internetnutzer in Deutschland vorkommt.",
-    "description": "Category explanation for the first case (green) tutorial"
+  "green_case_txt": {
+    "message": "1. **Dialogfenster bei niedrigem Risiko** – Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der mit dem gerade gescannten QR‑Code verknüpften Website‑Adresse als niedrig eingestuft wird. Dies liegt daran, dass die Domain zu einer Liste von Websites gehört, die die Entwickler als legitim betrachten oder bereits zweimal besucht wurde.",
+    "description": "Explanation for the first case (green) tutorial"
   },
-  "green_case_specific_link_explanation": {
-    "message": "In dem folgenden Beispiel ist “<span style='color: #00A8F3;'>Hier klicken</span>” der Link. ",
-    "description": "Explains the image specifically for the green-case"
+  "green_case_txt_2": {
+    "message": "Hier ein Beispiel für ein Dialogfenster, in dem TORPEDO die bekannte Domain *knownpage.com* als Teil der Liste legitimer Websites erkannt hat:",
+    "description": "Explanation for the first case (green) tutorial"
   },
+
+
+  "grey_case_title": {
+    "message": "Tutorial [5/9]: Dialogfenster bei unbekanntem Risiko",
+    "description": "Title for the second case (grey) tutorial"
+  },
+  "grey_case_txt": {
+    "message": "2. **Dialogfenster bei unbekanntem Risiko** – Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der mit dem gerade berührten Link verknüpften Website‑Adresse als unbekannt eingestuft wird. In diesem Fall müssen Sie die Domain selbst prüfen und verifizieren, um festzustellen, ob sie sicher ist oder Phishing darstellt.",
+    "description": "Explanation for the second case (grey) tutorial"
+  },
+  "grey_case_txt_2": {
+    "message": "Wenn die Domain legitim ist, wurde sie nicht als niedriges Risiko eingestuft, weil sie nicht in der Liste der von den Entwicklern als legitim betrachteten Websites steht. Beachten Sie, dass es unmöglich ist, eine vollständige Liste legitimer Websites zu haben. Daher haben die Entwickler nur die am häufigsten besuchten Websites klassifiziert.",
+    "description": "Explanation for the second case (grey) tutorial"
+  },
+  "grey_case_txt_3": {
+    "message": "Um eine sorgfältige Prüfung der Domain zu fördern und genügend Zeit für die Inspektion zu ermöglichen, wird der Button, der die mit dem Link verknüpfte Website‑Adresse öffnet, vorübergehend für 3s deaktiviert.",
+    "description": "Explanation for the second case (grey) tutorial"
+  },
+  "grey_case_txt_4": {
+    "message": "Um die Domain zu prüfen und zu verifizieren, vergleichen Sie bitte, ob die im Dialogfenster angezeigte Domain diejenige ist, die Sie erkennen und erwarten, mit dem gerade berührtem Link verknüpft zu sein.",
+    "description": "Explanation for the second case (grey) tutorial"
+  },
+  "grey_case_txt_5": {
+    "message": "Beispiel: Berühren Sie einen Link für ein YouTube‑Video, erwarten Sie die Domain *youtube.com*. Sehen Sie stattdessen etwas wie *sadhaskjas.com*, ist die mit dem Link verknüpfte Website-Adresse höchstwahrscheinlich ein Phishing.",
+    "description": "Explanation for the second case (grey) tutorial"
+  },
+  "grey_case_txt_6": {
+    "message": "Achten Sie besonders auf die Rechtschreibung, denn Phishing‑Domains nutzen häufig Tippfehler, um ihre Opfer zu täuschen.",
+    "description": "Explanation for the second case (grey) tutorial"
+  },
+  "grey_case_txt_7": {
+    "message": "Alle drei sind jedoch Phishing‑Websites.",
+    "description": "Explanation for the second case (grey) tutorial"
+  },
+
+
   "blue_case_title": {
     "message": "Blauer Fall",
     "description": "Title for the blue_case tutorial"
