@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+                name="description"
+                content="Tutorial of the use of TORPEDO. Different examples to undertsand how it works."
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="stylesheet" href="css/all.min.css" />
+        <link rel="stylesheet" href="css/tutorial/tutorial_new.css" />
+        <link rel="icon" href="img/icon64.png" />
+        <title>TORPEDO Tutorial</title>
+        <script src="js/browser-polyfill.min.js"></script>
+        <script src="js/tutorial_new.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div class="header-wrapper">
+                <h1 class="torpedo-title-wrapper">
+                    <img id="torpedo-title" src="img/TORPEDO_fullLockup.svg" alt="TORPEDO" />
+                </h1>
+
+                <nav class="overview" aria-label="Tutorial navigation">
+                    <button class="overview-case welcome not-colored" data-page-name="welcome" aria-label="Welcome">
+                        <i class="fas fa-hand-paper angled" aria-hidden="true"></i>
+                    </button>
+
+                    <button class="overview-case explanation not-colored" data-page-name="explanation" aria-label="Explanation">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    </button>
+
+                    <button class="overview-case tooltip not-colored" data-page-name="tooltip" aria-label="Tooltip">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    </button>
+
+                    <button class="overview-case green-case" data-page-name="green-case" aria-label="Green case"></button>
+                    <button class="overview-case grey-case" data-page-name="grey-case" aria-label="Grey case"></button>
+                    <button class="overview-case grey-case-showcase" data-page-name="grey-case-showcase" aria-label="Grey case showcase"></button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="tut-content-wrapper">
+            <div class="tut-content">
+
+                <!-- Page 0: Welcome -->
+                <div class="welcome card">
+                    <h2 id="welcome-title"></h2>
+                    <p id="introduction-txt"></p>
+                    <p id="introduction-txt-2"></p>
+                </div>
+
+                <!-- Page 1: Explanation -->
+                <div class="explanation card off">
+                    <h2 id="explanation-title"></h2>
+                    <p id="explanation-txt"></p>
+                    <p id="explanation-txt-2"></p>
+                    <p class="link-like">https://www.web.<span class="domain-mark">knownpage.com</span>/dshfgfgdf</p>
+                    <p class="link-like">https://<span class="domain-mark">example.com</span>/shfgsdsa/safd</p>
+                </div>
+
+                <!-- Page 2: Tooltip -->
+                <div class="tooltip off">
+                    <div class="tooltip-general card">
+                        <h2 id="tooltip-title"></h2>
+                        <p id="tooltip-txt"></p>
+                        <p id="tooltip-txt-2"></p>
+                    </div>
+
+                    <div class="tooltip-cases">
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/green_case_de.svg" alt="" id="green-case-showcase-img" class="case-img-summary" />
+                        </div>
+
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/warning-grey_case_no-phish_de.svg" alt="" id="warning-grey-case-showcase-img" class="case-img-summary" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 3: Green case -->
+                <div class="green-case off">
+                    <div class="txt-with-showcase">
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/green_case_de.svg" alt="" id="green-case-showcase-img-2" class="case-img-summary" />
+                        </div>
+
+                        <div class="card">
+                            <h2 id="green-case-title"></h2>
+                            <p id="green-case-txt"></p>
+                            <p id="green-case-txt-2"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 4: Grey case -->
+                <div class="grey-case card off">
+                    <h2 id="grey-case-title"></h2>
+                    <p id="grey-case-txt"></p>
+                    <p id="grey-case-txt-2"></p>
+                    <p id="grey-case-txt-3"></p>
+                    <p id="grey-case-txt-4"></p>
+                    <p id="grey-case-txt-5"></p>
+                    <p id="grey-case-txt-6"></p>
+
+                    <p><span class="link-like">example.com</span> -> <span class="link-like">exampel.com</span> (invertierte Buchstaben, *el* statt *le*)</p>
+                    <p><span class="link-like">example.com</span> -> <span class="link-like">exampie.com</span> (ähnlich aussehender Buchstabe, *i* statt *I*)</p>
+                    <p><span class="link-like">example.com</span> -> <span class="link-like">exaample.com</span> (ein zusätzliches Zeichen, zwei *a* statt eines)</p>
+
+                    <p id="grey-case-txt-7"></p>
+                </div>
+
+                <!-- Page 5: Grey case with showcases -->
+
+            </div>
+        </main>
+
+        <nav class="navigation-btns" aria-label="Page navigation">
+            <button id="prev" aria-label="Previous page">
+                <span class="btn-inner"><i class="fas fa-chevron-left" aria-hidden="true"></i></span>
+            </button>
+
+            <button id="next" aria-label="Next page">
+                <span class="btn-inner"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
+            </button>
+
+            <button id="finish" class="disabled" aria-label="Close tutorial" aria-disabled="true">
+                <span class="btn-inner"><i class="fas fa-times" aria-hidden="true"></i></span>
+            </button>
+        </nav>
+    </body>
+</html>
