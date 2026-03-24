@@ -481,6 +481,7 @@
   },
 
 
+
   "welcome_title": {
     "message": "Tutorial [1/9]: Vorläufige Informationen",
     "description": "welcome-title tutorial on page 1"
@@ -493,7 +494,6 @@
     "message": "Unmittelbar nach berühren eines Links mit dem Mauszeiger, aber bevor die Website‑Adresse im Browser oder in einer Anwendung geöffnet wird, zeigt TORPEDO ein Dialogfenster an, das die Domain der mit dem Link verknüpften Website enthält.",
     "description": "Short introduction in tool, tutorial for page 1 "
   },
-
 
   "explanation_title": {
     "message": "Tutorial [2/9]: Domain der Website‑Adresse",
@@ -508,7 +508,6 @@
     "description": "functionality-explanation on page 2"
   },
 
-
   "tooltip_title": {
     "message": "Tutorial [3/9]: Dialogfenster",
     "description": "tooltip-title tutorial on page 3"
@@ -522,7 +521,6 @@
     "description": "tooltip on page 3"
   },
 
-
   "green_case_title": {
     "message": "Tutorial [4/9]: <span class='green'>Dialogfenster bei niedrigem Risiko</span>",
     "description": "Title for the first case (green) tutorial"
@@ -535,7 +533,6 @@
     "message": "Hier ein Beispiel für ein Dialogfenster, in dem TORPEDO die bekannte Domain <span class='fat'>knownpage.com</span> als Teil der Liste legitimer Websites erkannt hat:",
     "description": "Explanation for the first case (green) tutorial"
   },
-
 
   "grey_case_title": {
     "message": "Tutorial [5/9]: <span class='grey'>Dialogfenster bei unbekanntem Risiko</span>",
@@ -570,7 +567,6 @@
     "description": "Explanation for the second case (grey) tutorial"
   },
 
-
   "grey_case_showcase_one_title": {
     "message": "Demonstration 1",
     "description": "Title for the first demonstration of the grey-case tutorial"
@@ -589,128 +585,21 @@
   },
 
 
-  "blue_case_title": {
-    "message": "Blauer Fall",
-    "description": "Title for the blue_case tutorial"
-  },
-  "blue_case_category": {
-    "message": "<span class='blue fat'>Blau</span> - das Risiko des Klickens auf diesen Link wird als <span class='blue'>gering eingestuft</span>. Der Grund hierfür ist, dass Sie die Domain entweder bereits zweimal angeklickt oder selber manuell hinzugefügt haben.",
-    "description": "Category explanation for the blue_case tutorial"
-  },
-  "blue_case_specific_link_explanation": {
-    "message": "In dem folgenden Beispiel ist <span class='link-like'>https://www.paypal.com/de/home</span> der Link.",
-    "description": "Explains the image specifically for the blue-case"
-  },
-  "simple_grey_case_title": {
-    "message": "Grauer Fall",
-    "description": "Title for the simple_grey_case tutorial"
-  },
-  "simple_grey_case_category": {
-    "message": "<span class='grey fat'>Grau</span> - das Risiko des Klickens auf diesen Link wird als <span class='grey'>unbekanntes Risiko</span> eingestuft. Hier müssen Sie selbst die Domain überprüfen, um herauszufinden ob der Link Sie zu einer Webseite führt, die einen Phishing-Angriff durchführt oder nicht. Damit Sie nicht vorschnell auf den Link klicken, ist das Klicken für <span class='fat'>drei Sekunden</span> deaktiviert.",
-    "description": "Category explanation for the simple_grey_case tutorial"
-  },
-  "simple_grey_case_more_than_one": {
-    "message": "Im Folgenden zeigen wir Ihnen jeweils ein <span class='fat'>phishing</span> und ein <span class='fat'>legitimes</span> Beispiel.",
-    "description": "Note, that there is more than one example."
-  },
-  "simple_grey_case_phish_context": {
-    "message": "Stellen Sie sich vor, dass Sie eine E-Mail öffnen. Die E-Mail sieht vom Design und Absender aus, als würden Sie beim Klicken auf den Link auf einer ARD Webseite zum Thema Corona zu landen.",
-    "description": "Context which will draw the scenario simulated by the screenshot."
-  },
-  "simple_grey_case_phish_specific_link_explanation": {
-    "message": "In diesem Beispiel ist “<span style='color:#00A8F3;'>Hier</span>” der Phishing Link, denn Sie landen hier nicht bei “ard.de”.",
-    "description": "Explains the image specifically for the simple_grey-case"
-  },
-  "simple_grey_case_no_phish_context": {
-    "message": "Stellen Sie sich vor, dass Sie eine E-Mail öffnen. Die E-Mail sieht vom Design und Absender aus, als würden Sie beim Klicken auf den Link auf einer RWTH-Aachen Webseite landen.",
-    "description": "Context which will draw the scenario simulated by the screenshot."
-  },
-  "simple_grey_case_no_phish_specific_link_explanation": {
-    "message": "In diesem Beispiel ist <span class='link-like'>https://www.rwth-aachen.de/</span> der <span class='fat'>legitime</span> Link, denn die Domain gehört zur RWTH Aachen.",
-    "description": "Explains the image specifically for the simple_grey-case"
-  },
-  "warning_grey_case_title": {
-    "message": "Grauer Fall mit Warnsymbol",
-    "description": "Title for the warning_grey_case tutorial"
-  },
-  "warning_grey_case_category": {
-    "message": "<span class='grey fat'>Grau</span> - das Risiko des Klickens auf diesen Link wird als <span class='grey'>unbekanntes Risiko</span> eingestuft. Das Warnsymbol wird angezeigt, weil mindestens ein Indikator gefunden wurde, der auch bei Phishing-Angriffen verwendet wird. Das bedeutet aber nicht, dass es sich hierbei zwangsläufig um eine Phishing URL handelt. Auch in legitimen E-Mails können solche Indikatoren vorkommen. Auch hier müssen Sie selbst überprüfen, ob der Link Sie zu einer Webseite führt, die einen Phishing-Angriff durchführt oder nicht. Damit Sie nicht vorschnell auf den Link klicken, ist das Klicken auch hier für <span class='fat'>3 Sekunden</span> deaktiviert.",
-    "description": "Category explanation for the warning_grey_case tutorial"
-  },
-  "warning_grey_case_more_than_one": {
-    "message": "Im Folgenden zeigen wir Ihnen jeweils ein <span class='fat'>phishing</span> und ein <span class='fat'>legitimes</span> Beispiel mit einem Warnsymbol aufgrund eines gefundenen Indikators. Der Indikator ist jeweils, dass die Domain des Links nicht mit dem Link-Text übereinstimmt.",
-    "description": "Note, that there is more than one example."
-  },
-  "warning_grey_case_phish_context": {
-    "message": "Stellen Sie sich vor, dass Sie eine E-Mail öffnen. Die E-Mail sieht aus als käme sie von der Stadt Karlsruhe und würde Links zu Webseiten der Stadt Karlsruhe beinhalten.",
-    "description": "Context which will draw the scenario simulated by the screenshot."
-  },
-  "warning_grey_case_phish_specific_link_explanation": {
-    "message": "In diesem Beispiel ist <span class='link-like'>www.karlsruhe.de</span> der <span class='fat'>Phishing</span>-Link, denn anhand des Dialogs sehen Sie, dass die Webseite nicht zur Domain karlsruhe.de führt. Das Warndreieck erscheint, weil die Domain des Link-Texts nicht zur hinterlegten Domain passt.",
-    "description": "Explains the image specifically for the warning_grey-case"
-  },
-  "warning_grey_case_no_phish_context": {
-    "message": "Stellen Sie sich vor, dass Sie eine E-Mail öffnen. Die E-Mail sieht vom Design und Absender aus, als würden Sie beim Klicken auf den Link auf einer RWTH-Aachen Webseite landen.",
-    "description": "Context which will draw the scenario simulated by the screenshot."
-  },
-  "warning_grey_case_no_phish_specific_link_explanation": {
-    "message": "In diesem Beispiel ist <span class='link-like'>www.rwth-aachenn.de</span> ein <span class='fat'>legitimer</span> Link. Es wird hier ein Warndreieck angezeigt, weil festgestellt wird, dass die Domain des Link-Texts nicht zu der hinterlegten Domain passt: Im Link-Text hat sich ein Tippfehler eingeschlichen. Dort steht Aachen mit zwei “n”. Dies kann wie jeder andere Tippfehler in einer E-Mail schon einmal passieren. Da die hinterlegte Domain aber die der RWTH Aachen ist, handelt es sich hier um <span class='italic'>keinen</span> Phishing Angriff.",
-    "description": "Explains the image specifically for the warning_grey-case"
-  },
-  "example": {
-    "message": "Beispiel",
-    "description": "translation of example for dynamic use"
-  },
-  "special_cases_title": {
-    "message": "Sonderfälle",
-    "description": "translations for tut on configurations page"
-  },
-  "special_cases_txt": {
-    "message": "TORPEDO unterstützt eine Reihe von Sonderfällen, wie z.B. Kurz-URLs und Weiterleitungen. Damit diese nach Ihren Bedürfnissen konfiguriert sind, empfehlen wir Ihnen ein Blick in die Einstellungen zu werfen. Die Einstellungen können über einen Rechtsklick auf den Tooltip geöffnet werden.",
-    "description": "translations for tut on configurations page"
-  },
-  "settings_title": {
-    "message": "Einstellungen",
-    "description": "translations for tut on configurations page"
-  },
-  "settings_subtitle": {
-    "message": "In den Einstellungen gibt es 4 verschiedene Optionen.",
-    "description": "translations for tut on configurations page"
-  },
-  "settings_option_0": {
-    "message": "Unter „Timer“ können Sie Einstellungen am Timer vornehmen z.B. können Sie die Zeit erhöhen bzw. runtersetzen oder den Timer komplett deaktivieren. Außerdem können Sie die verschiedene Mode aktivieren und deaktivieren. <br/>Beim aktivierten Privatsphäre Modus werden Links immer über die aufgelöste Domain und nicht über den Ursprungs-Link geöffnet. Außerdem werden Kurz-URLs nicht direkt aufgelöst, sondern erst nach Ihrer Bestätigung. <br/>Beim aktivierten Security Mode bekommen Sie erst nach dem zweiten gefundenen Referrer den Grauen Fall mit Warnsymbol angezeigt. Ansonsten passiert dies bereits beim ersten.",
-    "description": "translations for tut on configurations page"
-  },
-  "settings_option_1": {
-    "message": "Unter „Domains“ können Sie die Liste der meist besuchten Webseiten für den Grünen Fall deaktivieren. Außerdem können Sie hier auch eigene Fälle zur Liste des Blauen Fall ergänzen.",
-    "description": "translations for tut on configurations page"
-  },
-  "settings_option_2": {
-    "message": "Unter „Referrer“ können Sie die aktuell integrierten Referrer ansehen und eigene ergänzen.",
-    "description": "translations for tut on configurations page"
-  },
-  "settings_option_3": {
-    "message": "Unter „Kurz-URL“ können Sie die aktuell integrierten Kurz-URLs ansehen und eigene ergänzen.",
-    "description": "translations for tut on configurations page"
-  },
 
   "tooltipCheckboxText_url": {
     "message": "tooltipCheckboxText url",
     "description": ""
   },
-
   "tooltipCheckboxText_security": {
     "message": "tooltipCheckboxText security",
     "description": ""
   },
-
-    "tooltipCheckboxText_info": {
-      "message": "tooltipCheckboxText info",
+  "tooltipCheckboxText_info": {
+    "message": "tooltipCheckboxText info",
+    "description": ""
+  },
+  "tooltipCheckboxText_timer": {
+      "message": "tooltipCheckboxText timer",
       "description": ""
-    },
-
-    "tooltipCheckboxText_timer": {
-        "message": "tooltipCheckboxText timer",
-        "description": ""
-    }
+  }
 }

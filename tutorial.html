@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
                 name="description"
-                content="Tutorial of the use of TORPEDO. Different examples to undertsand how it works."
+                content="Tutorial for TORPEDO. Different examples to understand how it works."
         />
         <meta name="robots" content="index, follow" />
         <link rel="stylesheet" href="css/all.min.css" />
@@ -20,158 +20,138 @@
         <header>
             <div class="header-wrapper">
                 <h1 class="torpedo-title-wrapper">
-                    <img
-                            id="torpedo-title"
-                            src="img/TORPEDO_fullLockup.svg"
-                            alt="TORPEDO"
-                    />
+                    <img id="torpedo-title" src="img/TORPEDO_fullLockup.svg" alt="TORPEDO" />
                 </h1>
 
-                <div class="overview">
-                    <div class="overview-case welcome not-colored" data-page-name="welcome">
-                        <i class="fas fa-hand-paper angled"></i>
-                    </div>
+                <nav class="overview" aria-label="Tutorial navigation">
+                    <button class="overview-case welcome not-colored" data-page-name="welcome" aria-label="Welcome">
+                        <i class="fas fa-hand-paper angled" aria-hidden="true"></i>
+                    </button>
 
-                    <div class="overview-case explanation not-colored" data-page-name="explanation">
-                        <i class="fas fa-info-circle"></i>
-                    </div>
+                    <button class="overview-case explanation not-colored" data-page-name="explanation" aria-label="Explanation">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    </button>
 
-                    <div class="overview-case green-case" data-page-name="green_case"></div>
-                    <div class="overview-case blue-case" data-page-name="blue_case"></div>
-                    <div class="overview-case simple-grey-case-phish" data-page-name="simple-grey_case_phish"></div>
-                    <div class="overview-case simple-grey-case-no-phish" data-page-name="simple-grey_case_no-phish"></div>
-                    <div class="overview-case warning-grey-case-phish" data-page-name="warning-grey_case_phish"></div>
-                    <div class="overview-case warning-grey-case-no-phish" data-page-name="warning-grey_case_no-phish"></div>
+                    <button class="overview-case tooltip not-colored" data-page-name="tooltip" aria-label="Tooltip">
+                        <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    </button>
 
-                    <div class="overview-case configurations not-colored" data-page-name="configurations">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                </div>
+                    <button class="overview-case green-case" data-page-name="green-case" aria-label="Green case"></button>
+                    <button class="overview-case grey-case" data-page-name="grey-case" aria-label="Grey case"></button>
+                    <button class="overview-case grey-case-showcase" data-page-name="grey-case-showcase" aria-label="Grey case showcase"></button>
+                </nav>
             </div>
         </header>
 
-        <div class="tut-content-wrapper">
+        <main class="tut-content-wrapper">
             <div class="tut-content">
-                <div class="welcome card off">
+
+                <!-- Page 0: Welcome -->
+                <div class="welcome card">
                     <h2 id="welcome-title"></h2>
                     <p id="introduction-txt"></p>
-                    <h3 id="technical-bg-title"></h3>
-                    <p id="technical-bg-txt"></p>
-                    <h3 id="functionality-title"></h3>
-                    <p id="functionality-txt"></p>
+                    <p id="introduction-txt-2"></p>
                 </div>
 
-                <div class="explanation off">
-                    <div class="explanation-general card">
-                        <h2 id="functionality-explanation-title"></h2>
-                        <p id="functionality-explanation-txt-1"></p>
-                        <p>
-                            <span id="functionality-explanation-txt-2"></span><span id="domain-explain" class="domain-mark"></span><span id="functionality-explanation-txt-3"></span>
-                        </p>
-                        <p id="functionality-explanation-txt-4"></p>
-                        <p class="link-like">https://www.mail.<span class="domain-mark">google.de</span>/path/<wbr/>somewhere/index.php</p>
-                        <p>
-                            <span id="functionality-explanation-txt-5"></span><span class="domain-mark">google.de</span><span id="functionality-explanation-txt-6"></span>
-                        </p>
-                        <p id="functionality-explanation-txt-7"></p>
+                <!-- Page 1: Explanation -->
+                <div class="explanation card off">
+                    <h2 id="explanation-title"></h2>
+                    <p id="explanation-txt"></p>
+                    <p id="explanation-txt-2"></p>
+                    <p class="link-like">https://www.web.<span class="domain-mark">knownpage.com</span>/dshfgfgdf</p>
+                    <p class="link-like">https://<span class="domain-mark">example.com</span>/shfgsdsa/safd</p>
+                </div>
+
+                <!-- Page 2: Tooltip -->
+                <div class="tooltip off">
+                    <div class="tooltip-general card">
+                        <h2 id="tooltip-title"></h2>
+                        <p id="tooltip-txt"></p>
+                        <p id="tooltip-txt-2"></p>
                     </div>
 
-                    <div class="explanation-summary-cases show-case-card">
-                        <div class="green-case-showcase card show-case-card" data-target-page="green_case">
-                            <h4 class="showcase-title" id="green-case-showcase-title"></h4>
-                            <img src="/img/examples/en/green_case_en.svg" alt="cases showing" id="green-case-showcase-img" class="case-img-summary">
+                    <div class="tooltip-cases">
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/green_case_de_new.png" alt="" id="green-case-showcase-img" class="case-img-summary" />
                         </div>
 
-                        <div class="blue-case-showcase card show-case-card" data-target-page="blue_case">
-                            <h4 class="showcase-title" id="blue-case-showcase-title"></h4>
-                            <img src="/img/examples/en/blue_case_en.svg" alt="cases showing" id="blue-case-showcase-img" class="case-img-summary">
-                        </div>
-
-                        <div class="simple-grey-case-showcase card show-case-card" data-target-page="simple-grey_case">
-                            <h4 class="showcase-title" id="simple-grey-case-showcase-title"></h4>
-                            <img src="/img/examples/en/simple-grey_case_no-phish_en.svg" alt="cases showing" id="simple-grey-case-showcase-img" class="case-img-summary">
-                        </div>
-
-                        <div class="warning-grey-case-showcase card show-case-card" data-target-page="warning-grey_case">
-                            <h4 class="showcase-title" id="warning-grey-case-showcase-title"></h4>
-                            <img src="/img/examples/en/warning-grey_case_no-phish_en.svg" alt="cases showing" id="warning-grey-case-showcase-img" class="case-img-summary">
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/grey_case_one_de.png" alt="" id="warning-grey-case-showcase-img" class="case-img-summary" />
                         </div>
                     </div>
                 </div>
 
-                <div class="example-wrapper off">
-                    <div class="explanation-card card">
-                        <h2 id="example-title" class="example-explain-title"></h2>
-                        <p id="category-explanation" class="example-explain-txt"></p>
-                        <div class="optional-addtional-info off" id="additional-info">
-                            <div id="more-than-one" class="off">
-                                <p id="more-than-one-example" class="example-two-instances"><span class="fat">Phishing</span><span class="fat">legitimes</span></p>
-                                <hr class="visual-seperator">
-                            </div>
-                            <p id="example-context" class="example-explain-context"></p>
+                <!-- Page 3: Green case -->
+                <div class="green-case off">
+                    <div class="txt-with-showcase">
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/green_case_de_new.png" alt="" id="green-case-showcase-img-2" class="case-img-summary" />
                         </div>
-                        <p id="explanation-of-specific-link" class="example-explain-specific-link"></p>
-                    </div>
 
-                    <div class="example-svg ">
-                        <img class="svg-in-img" src="./img/examples/en/green_case_en.svg" alt="green_example">
+                        <div class="card">
+                            <h2 id="green-case-title"></h2>
+                            <p id="green-case-txt"></p>
+                            <p id="green-case-txt-2"></p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="configurations off">
-                    <div class="special-cases-card card card-append">
-                        <div class="special-cases-wrapper">
-                            <div class="special-cases-img">
-                                <img id="contextmenu-img" src="img/examples/en/simple-grey_case_contextmenu_en.svg" alt="picture showing that you can get to settings via contextmenue">
-                            </div>
+                <!-- Page 4: Grey case -->
+                <div class="grey-case card off">
+                    <h2 id="grey-case-title"></h2>
+                    <p id="grey-case-txt"></p>
+                    <p id="grey-case-txt-2"></p>
+                    <p id="grey-case-txt-3"></p>
+                    <p id="grey-case-txt-4"></p>
+                    <p id="grey-case-txt-5"></p>
+                    <p id="grey-case-txt-6"></p>
 
-                            <div class="special-cases-explanation">
-                                <h3 id="special-cases-title"></h3>
-                                <p id="special-cases-txt"></p>
-                            </div>
+                    <p><span class="link-like">example.com</span> -&gt; <span class="link-like">exampel.com</span> (invertierte Buchstaben, <span class="fat">el</span> statt <span class="fat">le</span>)</p>
+                    <p><span class="link-like">example.com</span> -&gt; <span class="link-like">exampie.com</span> (ähnlich aussehender Buchstabe, <span class="fat">i</span> statt <span class="fat">I</span>)</p>
+                    <p><span class="link-like">example.com</span> -&gt; <span class="link-like">exaample.com</span> (ein zusätzliches Zeichen, zwei <span class="fat">a</span> statt eines)</p>
+
+                    <p id="grey-case-txt-7"></p>
+                </div>
+
+                <!-- Page 5: Grey case with showcases -->
+                <div class="grey-case-showcase off">
+                    <div class="showcase-block txt-with-showcase">
+                        <div class="card showcase-text">
+                            <h2 id="grey-case-showcase-one-title"></h2>
+                            <p id="grey-case-showcase-one-txt"></p>
+                        </div>
+
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/grey_case_one_de.png" alt="" id="grey-case-showcase-one-img" class="case-img-summary" />
                         </div>
                     </div>
 
-                    <div class="settings-card card">
-                        <div class="settings-wrapper">
-                            <div class="settings-explanation">
-                                <h3 id="settings-title"></h3>
-                                <h4 id="settings-subtitle"></h4>
-                                <ol>
-                                    <li id="settings-option-1" class="settings-option"></li>
-                                    <li id="settings-option-2" class="settings-option"></li>
-                                    <li id="settings-option-3" class="settings-option"></li>
-                                    <li id="settings-option-4" class="settings-option"></li>
-                                </ol>
-                            </div>
+                    <div class="showcase-block txt-with-showcase">
+                        <div class="card showcase-text">
+                            <h2 id="grey-case-showcase-two-title"></h2>
+                            <p id="grey-case-showcase-two-txt"></p>
+                        </div>
 
-                            <div class="settings-img-wrapper">
-                                <img src="img/examples/en/settings_en.png" alt="showing different options for TORPEDO" id="settings-img">
-                            </div>
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/grey_case_two_de.png" alt="" id="grey-case-showcase-two-img" class="case-img-summary" />
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
 
-        <div class="navigation-btns">
-            <button id="prev">
-                <div class="square-div">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
+        <nav class="navigation-btns" aria-label="Page navigation">
+            <button id="prev" aria-label="Previous page">
+                <span class="btn-inner"><i class="fas fa-chevron-left" aria-hidden="true"></i></span>
             </button>
 
-            <button id="next">
-                <div class="square-div">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
+            <button id="next" aria-label="Next page">
+                <span class="btn-inner"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
             </button>
 
-            <button id="finish" class="disabled">
-                <div class="square-div">
-                    <i class="fas fa-times"></i>
-                </div>
+            <button id="finish" class="disabled" aria-label="Close tutorial" aria-disabled="true">
+                <span class="btn-inner"><i class="fas fa-times" aria-hidden="true"></i></span>
             </button>
-        </div>
+        </nav>
     </body>
 </html>
