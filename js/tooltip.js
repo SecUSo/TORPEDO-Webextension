@@ -353,7 +353,7 @@ const TooltipManager = (function() {
         switch (secStatus) {
             case "T1":
                 tooltipRoot.classList.add(CLASSES.TRUSTED);
-                UI.toggle(".torpedo-mark-trusted", true);
+                UI.toggle(".torpedo-mark-trusted", false);
                 break;
 
             case "T2":
