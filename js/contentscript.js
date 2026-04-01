@@ -58,7 +58,12 @@
      * and the tooltip should open.
      */
     async function openTooltip(e, type) {
-        if (torpedo.opened) return;
+        if (torpedo.opened) {
+            if (e === torpedo.target && torpedo.hideTimer) {
+                clearTimeout(torpedo.hideTimer);
+            }
+            return;
+        }
 
         if (torpedo.target) {
             torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
