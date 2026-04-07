@@ -10,10 +10,10 @@ const torpedo = {
     hideTimer: null,
     // The current location of the browser e.x. imap.gmail.com:993
     location: null,
-    // Flag that indicating if the tooltip is currently open.
-    opened: false,
     // The public suffix list instance.
     publicSuffixList: "",
+    // the current state of the tooltip: "closed/pending/open"
+    state: "closed",
     // The DOM element for which the tooltip should be shown.
     target: null,
     // The timer interval for the countdown timer.

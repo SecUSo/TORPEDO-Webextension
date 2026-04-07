@@ -58,12 +58,19 @@
      * and the tooltip should open.
      */
     async function openTooltip(e, type) {
-        if (torpedo.opened) {
+        if (e.classList.contains("torpedo-URL")) {
+            return;
+        }
+
+        if (torpedo.state !== "closed") {
             if (e === torpedo.target && torpedo.hideTimer) {
                 clearTimeout(torpedo.hideTimer);
             }
+
             return;
         }
+
+        torpedo.state = "pending";
 
         if (torpedo.target) {
             torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
@@ -83,6 +90,7 @@
 
             if (!href || href.includes("mailto:")) {
                 Utils.reactivateEvents(torpedo.target, eventTypes);
+                torpedo.state = "closed";
                 return;
             }
         }
@@ -94,6 +102,7 @@
 
         } catch (e) {
             Utils.reactivateEvents(torpedo.target, eventTypes);
+            torpedo.state = "closed";
             return;
         }
 
@@ -106,6 +115,7 @@
 
         } catch (err) {
             console.log(`Error showing tooltip for ${url.href}:`, err);
+            torpedo.state = "closed";
             await browser.runtime.sendMessage({ name: "error", location: torpedo.location });
         }
     }
