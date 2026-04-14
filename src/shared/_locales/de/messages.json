@@ -582,24 +582,5 @@
   "grey_case_showcase_two_txt": {
     "message": "Hier ein Beispiel für ein Dialogfenster, in dem TORPEDO <span class='fat'>exampie.com</span> (beachten Sie die visuelle Ähnlichkeit des Buchstabens <span class='fat'>i</span> statt <span class='fat'>I</span>) nicht in der Liste der legitimen Website‑Adressen gefunden hat und daher den Dialog mit unbekanntem Risiko anzeigt. In diesem Fall handelt es sich um ein Phishing, das versucht, Sie glauben zu lassen, dass es zu <span class='fat'>example.com</span> führt, was nicht der Fall ist.",
     "description": "Explanation for the second demonstration of the grey-case tutorial"
-  },
-
-
-
-  "tooltipCheckboxText_url": {
-    "message": "tooltipCheckboxText url",
-    "description": ""
-  },
-  "tooltipCheckboxText_security": {
-    "message": "tooltipCheckboxText security",
-    "description": ""
-  },
-  "tooltipCheckboxText_info": {
-    "message": "tooltipCheckboxText info",
-    "description": ""
-  },
-  "tooltipCheckboxText_timer": {
-      "message": "tooltipCheckboxText timer",
-      "description": ""
   }
 }

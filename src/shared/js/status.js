@@ -41,16 +41,13 @@ async function getSecurityStatus(storage) {
     // const invisibleChar = hasInvisibleChar(torpedo.domain);
 
     if (tooltipWarning || mixedScript || isIP(torpedo.domain)) {
-        console.log("Tooltip warning:", tooltipWarning, "Mixed script:", mixedScript, "Is IP:", isIP(torpedo.domain));
         return "T32";
     }
 
     if (torpedo.countRedirect === 0) {
-        console.log("No redirects detected");
         return isMismatch(torpedo.domain) ? "T32" : "T31";
 
     } else {
-        console.log("Redirects detected:", torpedo.countRedirect);
         return storage.redirectModeActivated && !isMismatch(torpedo.domain) ? "T31" : "T32";
     }
 }
@@ -74,8 +71,6 @@ function isMismatch(domain) {
         let displayedLinkText = torpedo.target.innerText;
         const urlObject = new URL(displayedLinkText);
         const displayedDomain = torpedo.extractDomain(urlObject.hostname);
-
-        console.log("Displayed domain:", displayedDomain, "Actual domain:", domain);
 
         return displayedDomain !== domain;
 

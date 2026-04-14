@@ -14,6 +14,10 @@
 /**********************************
  Loading state
 ***********************************/
+.torpedo-tooltip.is-loading {
+    display: none;
+}
+
 .torpedo-tooltip.is-loading > *:not(.loader-bg) {
     display: none;
 }
