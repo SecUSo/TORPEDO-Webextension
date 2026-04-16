@@ -119,7 +119,19 @@
      * and the tooltip should open.
      */
     async function openTooltip(e, type) {
-        if (torpedo.opened) return;
+        if (e.classList.contains("torpedo-URL")) {
+            return;
+        }
+
+        if (torpedo.state !== "closed") {
+            if (e === torpedo.target && torpedo.hideTimer) {
+                clearTimeout(torpedo.hideTimer);
+            }
+
+            return;
+        }
+
+        torpedo.state = "pending";
 
         if (torpedo.target) {
             torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
@@ -137,7 +149,11 @@
         if (type === "a") {
             const href = torpedo.target.href;
 
-            if (href.includes("mailto:")) return;
+            if (!href || href.includes("mailto:")) {
+                Utils.reactivateEvents(torpedo.target, eventTypes);
+                torpedo.state = "closed";
+                return;
+            }
 
             if (href === "") {
                 try {
@@ -152,19 +168,18 @@
         try {
             const storage = await browser.storage.sync.get(null);
             if (storage.referrerSites.includes(torpedo.location)) {
-                resolveReferrer(storage);
+                matchReferrer(storage);
                 torpedo.target.href = torpedo.url;
             }
 
             torpedo.target.addEventListener("mouseenter", handleMouseEnter);
             torpedo.target.addEventListener("mouseleave", handleMouseLeave);
-
             await TooltipManager.showTooltip(torpedo.target);
 
         } catch (err) {
-            console.log(torpedo.target.href);
-            console.log(err);
-            await browser.runtime.sendMessage({ name: "error" });
+            console.log(`Error showing tooltip for ${url.href}:`, err);
+            torpedo.state = "closed";
+            await browser.runtime.sendMessage({ name: "error", location: torpedo.location });
         }
     }
 
@@ -173,4 +188,5 @@
     } else {
         await main();
     }
+
 })();
