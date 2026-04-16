@@ -67,8 +67,7 @@ const TooltipManager = (function() {
         const tooltipDiv = await fetchHTML("tooltip.html");
 
         if (!tooltipDiv) {
-            console.error("Failed to show tooltip.");
-            return;
+            throw new Error("Failed to load tooltip HTML.");
         }
 
         Utils.preventEvents(tooltipDiv.querySelector(".torpedo-URL"), ["click"])
@@ -77,7 +76,7 @@ const TooltipManager = (function() {
         document.body.appendChild(tooltipDiv);
 
         torpedo.tooltip = tooltipDiv;
-        torpedo.opened = true;
+        torpedo.state = "open";
 
         await applyUserSettings();
         bindHoverEvents(tooltipDiv);
@@ -93,14 +92,14 @@ const TooltipManager = (function() {
      * Hides the tooltip by removing it from the DOM and clearing any active timers.
      */
     function hideTooltip() {
-        if (!torpedo.opened || !torpedo.tooltip) return;
+        if (torpedo.state === "closed") return;
 
         if (torpedo.hideTimer) clearTimeout(torpedo.hideTimer);
         if (torpedo.timerInterval) clearInterval(torpedo.timerInterval);
 
-        torpedo.tooltip.remove();
+        torpedo.tooltip?.remove();
         torpedo.tooltip = null;
-        torpedo.opened = false;
+        torpedo.state = "closed";
     }
 
     /**
@@ -353,7 +352,7 @@ const TooltipManager = (function() {
         switch (secStatus) {
             case "T1":
                 tooltipRoot.classList.add(CLASSES.TRUSTED);
-                UI.toggle(".torpedo-mark-trusted", true);
+                UI.toggle(".torpedo-mark-trusted", false);
                 break;
 
             case "T2":
