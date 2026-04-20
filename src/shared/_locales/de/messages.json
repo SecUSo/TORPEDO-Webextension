@@ -283,6 +283,11 @@
     "description": "Options"
   },
 
+  "tutorial": {
+    "message": "TORPEDO Tutorial",
+    "description": "Tutorial"
+  },
+
   "OK": {
     "message": "Status: TORPEDO wird ausgeführt",
     "description": "Status:OK"

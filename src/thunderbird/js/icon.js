@@ -5,7 +5,9 @@ document.addEventListener("click", async (e) => {
     const targetId = e.target.id;
 
     if (targetId === "torpedoPage") {
-        await browser.tabs.create({ url: "https://secuso.aifb.kit.edu/TORPEDO.php" });
+        await browser.tabs.create({url: "https://secuso.aifb.kit.edu/TORPEDO.php"});
+    } else if (targetId === "tutorial") {
+        await browser.runtime.sendMessage({ name: "tutorial" });
     } else if (targetId === "options") {
         await browser.runtime.openOptionsPage();
     } else if (targetId === "error" && e.target.classList.contains("error")) {
@@ -16,10 +18,12 @@ document.addEventListener("click", async (e) => {
 
 async function init() {
     const torpedoPageButton = document.getElementById("torpedoPage");
+    const tutorialButton = document.getElementById("tutorial");
     const optionsButton = document.getElementById("options");
     const errorButton = document.getElementById("error");
 
     torpedoPageButton.textContent = browser.i18n.getMessage("extensionNameThunderbird");
+    tutorialButton.textContent = browser.i18n.getMessage("tutorial");
     optionsButton.textContent = browser.i18n.getMessage("options");
 
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });

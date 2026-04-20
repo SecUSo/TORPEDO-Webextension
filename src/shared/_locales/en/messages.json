@@ -288,6 +288,11 @@
     "description": "Options"
   },
 
+  "tutorial": {
+    "message": "TORPEDO Tutorial",
+    "description": "Tutorial"
+  },
+
   "OK": {
     "message": "Status: TORPEDO works properly",
     "description": "Status:OK"
