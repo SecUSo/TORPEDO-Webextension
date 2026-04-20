@@ -19,7 +19,7 @@ async function init() {
     const optionsButton = document.getElementById("options");
     const errorButton = document.getElementById("error");
 
-    torpedoPageButton.textContent = browser.i18n.getMessage("extensionName");
+    torpedoPageButton.textContent = browser.i18n.getMessage("extensionNameThunderbird");
     optionsButton.textContent = browser.i18n.getMessage("options");
 
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });

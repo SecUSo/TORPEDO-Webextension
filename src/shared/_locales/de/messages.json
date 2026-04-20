@@ -1,11 +1,19 @@
 {
-  "extensionName": {
+  "extensionNameBrowser": {
     "message": "TORPEDO browser",
     "description": "Name of the extension."
   },
+  "extensionNameThunderbird": {
+    "message": "TORPEDO thunderbird",
+    "description": "Name of the extension."
+  },
 
-  "extensionDescription": {
+  "extensionDescriptionBrowser": {
     "message": "Zeigt URLs und deren Sicherheitsstatus, sobald mit der Maus über einen Link auf einer Website eines E-Mail-Providers gefahren wird.",
+    "description": "Description of the extension."
+  },
+  "extensionDescriptionThunderbird": {
+    "message": "Zeigt URLs und deren Sicherheitsstatus, sobald mit der Maus über einen Link in Thunderbird gefahren wird.",
     "description": "Description of the extension."
   },
 

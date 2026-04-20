@@ -1,11 +1,19 @@
 {
-  "extensionName": {
+  "extensionNameBrowser": {
     "message": "TORPEDO browser",
     "description": "Name of the extension."
   },
+  "extensionNameThunderbird": {
+    "message": "TORPEDO thunderbird",
+    "description": "Name of the extension."
+  },
 
-  "extensionDescription": {
+  "extensionDescriptionBrowser": {
     "message": "Shows URLs and their security status when moving over links in a webmail applications. This browser addon is based on the bachelor thesis of Bettina Ballin.",
+    "description": "Description of the extension."
+  },
+  "extensionDescriptionThunderbird": {
+    "message": "Shows URLs and their security status when moving over links in thunderbird. This thunderbird addon is based on the bachelor thesis of Bettina Ballin.",
     "description": "Description of the extension."
   },
 

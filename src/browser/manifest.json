@@ -6,10 +6,10 @@
       "id": "{53319828-3750-4619-836e-10f3c736a61f}"
     }
   },
-  "name": "__MSG_extensionName__",
+  "name": "__MSG_extensionNameBrowser__",
   "version": "1.9.1",
   "default_locale": "de",
-  "description": "__MSG_extensionDescription__",
+  "description": "__MSG_extensionDescriptionBrowser__",
   "background": {
     "service_worker": "service_worker.js"
   },
@@ -81,7 +81,7 @@
     }
   ],
   "action": {
-    "default_title": "__MSG_extensionName__",
+    "default_title": "__MSG_extensionNameBrowser__",
     "default_popup": "icon.html",
     "default_icon": {
       "38": "img/none38.png",
