@@ -141,58 +141,62 @@
 
         <div id="tab5" class="tab">
             <div class="tooltip-preview">
-                <div class="tooltip-preview-url">
-                    <p>Hinterlegte URL (auch Webadresse genannt):</p>
+                <div class="tooltip-preview-url tooltip-preview-row">
+                    <div class="tooltip-preview-content">
+                        <p>Hinterlegte URL (auch Webadresse genannt):</p>
+                    </div>
+
+                    <div class="tooltip-preview-control">
+                        <input id="tooltipCheckbox-url" type="checkbox">
+                    </div>
                 </div>
 
-                <div class="tooltip-preview-href">
-                    <p class="tooltip-preview-href-prefix">https://secuso.aifb.</p>
-                    <p class="tooltip-preview-href-domain tooltip-inline tooltip-bold">kit.edu</p>
-                    <p class="tooltip-preview-href-suffix">/index.php</p>
-                    <p class="tooltip-preview-href-button tooltip-inline">[..]</p>
+                <div class="tooltip-preview-href tooltip-preview-row">
+                    <div class="tooltip-preview-content">
+                        <p class="tooltip-preview-href-prefix">https://secuso.aifb.</p>
+                        <p class="tooltip-preview-href-domain tooltip-inline tooltip-bold">kit.edu</p>
+                        <p class="tooltip-preview-href-suffix">/index.php</p>
+                        <p class="tooltip-preview-href-button tooltip-inline">[..]</p>
+                    </div>
+
+                    <div class="tooltip-preview-control">
+                        <input id="tooltipCheckbox-url-minimal" type="checkbox">
+                    </div>
                 </div>
 
-                <div class="tooltip-preview-risk">
-                    <p class="tooltip-inline tooltip-bold">Unbekanntes Risiko:</p>
-                    <p class="tooltip-inline"> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain</p>
-                    <p class="tooltip-inline tooltip-bold"> (fett hervorgehobener Bereich der URL).</p>
+                <div class="tooltip-preview-risk tooltip-preview-row">
+                    <div class="tooltip-preview-content">
+                        <p class="tooltip-inline tooltip-bold">Unbekanntes Risiko:</p>
+                        <p class="tooltip-inline"> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain</p>
+                        <p class="tooltip-inline tooltip-bold"> (fett hervorgehobener Bereich der URL).</p>
+                    </div>
+
+                    <div class="tooltip-preview-control">
+                        <input id="tooltipCheckbox-security" type="checkbox">
+                    </div>
                 </div>
 
-                <div class="tooltip-preview-info">
-                    <img src="" alt="" id="tooltip-preview-info-img">
-                    <p class="tooltip-inline"> Mehr Informationen zu dieser Einstufung</p>
+                <div class="tooltip-preview-info tooltip-preview-row">
+                    <div class="tooltip-preview-content">
+                        <img src="" alt="" id="tooltip-preview-info-img">
+                        <p class="tooltip-inline"> Mehr Informationen zu dieser Einstufung</p>
+                    </div>
+
+                    <div class="tooltip-preview-control">
+                        <input id="tooltipCheckbox-info" type="checkbox">
+                    </div>
                 </div>
 
-                <div class="tooltip-preview-timer">
-                    <p>Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.</p>
-                    <p>Verbleibende Zeit: 0 Sekunde(n).</p>
+                <div class="tooltip-preview-timer tooltip-preview-row">
+                    <div class="tooltip-preview-content">
+                        <p>Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.</p>
+                        <p>Verbleibende Zeit: 0 Sekunde(n).</p>
+                    </div>
+
+                    <div class="tooltip-preview-control">
+                        <input id="tooltipCheckbox-timer" type="checkbox">
+                    </div>
                 </div>
-            </div>
-
-
-            <div class="form-group">
-                <img src="img/white-background.png" id="tooltipCheckbox-url-img" alt="">
-                <input id="tooltipCheckbox-url" type="checkbox">
-            </div>
-
-            <div class="form-group">
-                <img src="img/white-background.png" id="tooltipCheckbox-url-minimal-img" alt="">
-                <input id="tooltipCheckbox-url-minimal" type="checkbox">
-            </div>
-
-            <div class="form-group">
-                <img src="img/white-background.png" id="tooltipCheckbox-security-img" alt="">
-                <input id="tooltipCheckbox-security" type="checkbox">
-            </div>
-
-            <div class="form-group">
-                <img src="img/white-background.png" id="tooltipCheckbox-info-img" alt="">
-                <input id="tooltipCheckbox-info" type="checkbox">
-            </div>
-
-            <div class="form-group">
-                <img src="img/white-background.png" id="tooltipCheckbox-timer-img" alt="">
-                <input id="tooltipCheckbox-timer" type="checkbox">
             </div>
         </div>
     </div>

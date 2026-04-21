@@ -215,3 +215,27 @@ input[type="number"] {
     height: 14px;
     margin-right: 8px;
 }
+
+.tooltip-preview-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tooltip-preview-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.tooltip-preview-control {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding-left: 10px;
+    border-left: 1px solid #ddd;
+    min-width: 36px;
+    align-self: stretch;
+}
