@@ -30,8 +30,13 @@ async function getSecurityStatus(storage) {
 
     let tooltipWarning;
     if (torpedo.target.getAttribute("title")) {
-        const externalTooltipUrlObject = new URL(torpedo.target.getAttribute("title"));
-        tooltipWarning = !Utils.isDomainMatch(torpedo.domain, externalTooltipUrlObject.hostname);
+        try {
+            const externalTooltipUrlObject = new URL(torpedo.target.getAttribute("title"));
+            tooltipWarning = !Utils.isDomainMatch(torpedo.domain, externalTooltipUrlObject.hostname);
+
+        } catch (e) {
+            tooltipWarning = false;
+        }
 
     } else {
         tooltipWarning = false;
