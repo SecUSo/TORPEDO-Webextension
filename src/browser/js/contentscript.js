@@ -149,7 +149,7 @@
         if (type === "a") {
             const href = torpedo.target.href;
 
-            if (!href || href.includes("mailto:")) {
+            if (!href || href.includes("mailto:") || href.includes("tel:")) {
                 Utils.reactivateEvents(torpedo.target, eventTypes);
                 torpedo.state = "closed";
                 return;
