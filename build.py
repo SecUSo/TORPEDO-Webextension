@@ -3,8 +3,9 @@
 
 """
 Usage:
-    python build.py --version browser
     python build.py --version thunderbird
+    python build.py --version browser --browser chrome
+    python build.py --version browser --browser firefox
 """
 
 import argparse
@@ -22,17 +23,8 @@ def clean_output(out_dir: Path, zip_path: Path) -> None:
         zip_path.unlink()
 
 
-def copy_shared(shared_src: Path, out_dir: Path) -> None:
-    for src in shared_src.glob("*"):
-        dest = out_dir / src.name
-        if src.is_dir():
-            shutil.copytree(src, dest, dirs_exist_ok=True)
-        else:
-            shutil.copy2(src, dest)
-
-
-def overlay_version(ver_src: Path, out_dir: Path) -> None:
-    for src in ver_src.glob("*"):
+def overlay(src_dir: Path, out_dir: Path) -> None:
+    for src in src_dir.glob("*"):
         dest = out_dir / src.name
         if src.is_dir():
             shutil.copytree(src, dest, dirs_exist_ok=True)
@@ -49,27 +41,62 @@ def zip_output(out_dir: Path, zip_path: Path) -> None:
                 zf.write(file_path, arcname)
 
 
+def build_thunderbird(src: Path, root: Path) -> None:
+    out_dir = root / "dist" / "thunderbird"
+    zip_path = root / "extension-thunderbird.zip"
+
+    print("Building Thunderbird extension...")
+
+    clean_output(out_dir, zip_path)
+    overlay(src / "shared", out_dir)
+    overlay(src / "thunderbird", out_dir)
+    zip_output(out_dir, zip_path)
+
+    size_kb = zip_path.stat().st_size / 1024
+    print(f"Built {zip_path} – {size_kb:.2f}) KB")
+
+
+def build_browser(src: Path, root: Path, browser: str) -> None:
+    out_dir = root / "dist" / f"{browser}"
+    zip_path = root / f"extension-{browser}.zip"
+
+    print(f"Building {browser} extension...")
+
+    clean_output(out_dir, zip_path)
+    overlay(src / "shared", out_dir)
+    overlay(src / "browser" / "shared", out_dir)
+    overlay(src / "browser" / browser, out_dir)
+    zip_output(out_dir, zip_path)
+
+    size_kb = zip_path.stat().st_size / 1024
+    print(f"Built {zip_path} – {size_kb:.2f}) KB")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--version",
         required=True,
     )
+    parser.add_argument(
+        "--browser"
+    )
     args = parser.parse_args()
+
+    if args.version == "browser" and not args.browser:
+        parser.error("--browser is required when --version=browser")
+
+    if args.version == "browser" and args.browser not in ["chrome", "firefox"]:
+        parser.error("--browser must be either 'chrome' or 'firefox'")
 
     root = Path(__file__).parent.resolve()
     src = root / "src"
-    out_dir = root / "dist" / args.version
-    zip_path = root / f"extension-{args.version}.zip"
 
-    print(f"Building {args.version} extension...")
-    clean_output(out_dir, zip_path)
-    copy_shared(src / "shared", out_dir)
-    overlay_version(src / args.version, out_dir)
-    zip_output(out_dir, zip_path)
+    if args.version == "thunderbird":
+        build_thunderbird(src, root)
 
-    size_kb = zip_path.stat().st_size / 1024
-    print(f"Built {zip_path} – {size_kb:.2f} KB")
+    elif args.version == "browser":
+        build_browser(src, root, args.browser)
 
 
 if __name__ == "__main__":
