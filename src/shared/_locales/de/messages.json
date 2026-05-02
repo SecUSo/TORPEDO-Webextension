@@ -1,10 +1,6 @@
 {
-  "extensionNameBrowser": {
-    "message": "TORPEDO browser",
-    "description": "Name of the extension."
-  },
-  "extensionNameThunderbird": {
-    "message": "TORPEDO thunderbird",
+  "extensionName": {
+    "message": "TORPEDO",
     "description": "Name of the extension."
   },
 

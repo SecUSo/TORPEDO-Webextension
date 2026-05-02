@@ -22,7 +22,7 @@ async function init() {
     const optionsButton = document.getElementById("options");
     const errorButton = document.getElementById("error");
 
-    torpedoPageButton.textContent = browser.i18n.getMessage("extensionNameThunderbird");
+    torpedoPageButton.textContent = browser.i18n.getMessage("extensionName");
     tutorialButton.textContent = browser.i18n.getMessage("tutorial");
     optionsButton.textContent = browser.i18n.getMessage("options");
 
