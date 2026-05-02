@@ -145,12 +145,18 @@ header {
     background-image: radial-gradient(circle at 35% 35%, white, #bfbfbf);
 }
 
-.overview .green-case {
+.overview .green-case,
+.overview .green-case-showcase {
     background-image: radial-gradient(circle at 35% 35%, green, var(--color-green-dark));
 }
 
 .overview .grey-case,
+.overview .grey-case-two,
 .overview .grey-case-showcase {
+    background-image: radial-gradient(circle at 35% 35%, var(--color-grey), var(--color-grey-dark));
+}
+
+.overview .warning-grey-case {
     background-image: url("../../img/warning2.png"), radial-gradient(circle at 35% 35%, var(--color-grey), var(--color-grey-dark));
     background-size: 50%, 100%;
     background-position: 50% 50%;

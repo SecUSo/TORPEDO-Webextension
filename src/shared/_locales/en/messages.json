@@ -530,10 +530,6 @@
     "message": "under construction",
     "description": "tooltip on page 3"
   },
-  "tooltip_txt_2": {
-    "message": "under construction",
-    "description": "tooltip on page 3"
-  },
 
   "green_case_title": {
     "message": "under construction",
@@ -543,14 +539,27 @@
     "message": "under construction",
     "description": "Explanation for the first case (green) tutorial"
   },
-  "green_case_txt_2": {
+
+  "green_case_showcase_one_title": {
     "message": "under construction",
-    "description": "Explanation for the first case (green) tutorial"
+    "description": "Title for the first demonstration of the green-case tutorial"
+  },
+  "green_case_showcase_one_txt": {
+    "message": "under construction",
+    "description": "Explanation for the first demonstration of the green-case tutorial"
+  },
+  "green_case_showcase_two_title": {
+    "message": "under construction",
+    "description": "Title for the second demonstration of the green-case tutorial"
+  },
+  "green_case_showcase_two_txt": {
+    "message": "under construction",
+    "description": "Explanation for the second demonstration of the green-case tutorial"
   },
 
   "grey_case_title": {
     "message": "under construction",
-    "description": "Title for the second case (grey) tutorial"
+    "description": "Title for the grey case tutorial"
   },
   "grey_case_txt": {
     "message": "under construction",
@@ -560,25 +569,26 @@
     "message": "under construction",
     "description": "Explanation for the second case (grey) tutorial"
   },
-  "grey_case_txt_3": {
+
+  "grey_case_two_title": {
     "message": "under construction",
-    "description": "Explanation for the second case (grey) tutorial"
+    "description": "Title for the second case (grey) tutorial, page 2"
   },
-  "grey_case_txt_4": {
+  "grey_case_two_txt": {
     "message": "under construction",
-    "description": "Explanation for the second case (grey) tutorial"
+    "description": "Explanation for the second case (grey) tutorial, page 2"
   },
-  "grey_case_txt_5": {
+  "grey_case_two_txt_2": {
     "message": "under construction",
-    "description": "Explanation for the second case (grey) tutorial"
+    "description": "Explanation for the second case (grey) tutorial, page 2"
   },
-  "grey_case_txt_6": {
+  "grey_case_two_txt_3": {
     "message": "under construction",
-    "description": "Explanation for the second case (grey) tutorial"
+    "description": "Explanation for the second case (grey) tutorial, page 2"
   },
-  "grey_case_txt_7": {
+  "grey_case_two_txt_4": {
     "message": "under construction",
-    "description": "Explanation for the second case (grey) tutorial"
+    "description": "Explanation for the second case (grey) tutorial, page 2"
   },
 
   "grey_case_showcase_one_title": {
@@ -596,5 +606,34 @@
   "grey_case_showcase_two_txt": {
     "message": "under construction",
     "description": "Explanation for the second demonstration of the grey-case tutorial"
+  },
+
+  "warning_grey_case_title": {
+    "message": "under construction",
+    "description": "Title for the warning in the grey-case tutorial"
+  },
+  "warning_grey_case_txt": {
+    "message": "under construction",
+    "description": "Explanation for the warning in the grey-case tutorial"
+  },
+  "warning_grey_case_txt_2": {
+    "message": "under construction",
+    "description": "Explanation for the warning in the grey-case tutorial"
+  },
+  "warning_grey_case_showcase_one_title": {
+    "message": "under construction",
+    "description": "Title for the first demonstration of the warning in the grey-case tutorial"
+  },
+  "warning_grey_case_showcase_one_txt": {
+    "message": "under construction",
+    "description": "Explanation for the first demonstration of the warning in the grey-case tutorial"
+  },
+  "warning_grey_case_showcase_two_title": {
+    "message": "under construction",
+    "description": "Title for the first demonstration of the warning in the grey-case tutorial"
+  },
+  "warning_grey_case_showcase_two_txt": {
+    "message": "under construction",
+    "description": "Explanation for the second demonstration of the warning in the grey-case tutorial"
   }
 }

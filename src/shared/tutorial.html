@@ -37,8 +37,11 @@
                     </button>
 
                     <button class="overview-case green-case" data-page-name="green-case" aria-label="Green case"></button>
+                    <button class="overview-case green-case-showcase" data-page-name="green-case-showcase" aria-label="Green case showcase"></button>
                     <button class="overview-case grey-case" data-page-name="grey-case" aria-label="Grey case"></button>
+                    <button class="overview-case grey-case-two" data-page-name="grey-case-two" aria-label="Grey case two"></button>
                     <button class="overview-case grey-case-showcase" data-page-name="grey-case-showcase" aria-label="Grey case showcase"></button>
+                    <button class="overview-case warning-grey-case" data-page-name="warning-grey-case" aria-label="Warning grey case"></button>
                 </nav>
             </div>
         </header>
@@ -46,14 +49,14 @@
         <main class="tut-content-wrapper">
             <div class="tut-content">
 
-                <!-- Page 0: Welcome -->
+                <!-- Page 1: Welcome -->
                 <div class="welcome card">
                     <h2 id="welcome-title"></h2>
                     <p id="introduction-txt"></p>
                     <p id="introduction-txt-2"></p>
                 </div>
 
-                <!-- Page 1: Explanation -->
+                <!-- Page 2: Explanation -->
                 <div class="explanation card off">
                     <h2 id="explanation-title"></h2>
                     <p id="explanation-txt"></p>
@@ -62,58 +65,65 @@
                     <p class="link-like">https://<span class="domain-mark">example.com</span>/shfgsdsa/safd</p>
                 </div>
 
-                <!-- Page 2: Tooltip -->
-                <div class="tooltip off">
-                    <div class="tooltip-general card">
-                        <h2 id="tooltip-title"></h2>
-                        <p id="tooltip-txt"></p>
-                        <p id="tooltip-txt-2"></p>
-                    </div>
+                <!-- Page 3: Tooltip -->
+                <div class="tooltip card off">
+                    <h2 id="tooltip-title"></h2>
+                    <p id="tooltip-txt"></p>
+                </div>
 
-                    <div class="tooltip-cases">
-                        <div class="card show-case-card">
-                            <img src="img/examples/de/green_case_de.svg" alt="" id="green-case-showcase-img" class="case-img-summary" />
+                <!-- Page 4: Green case -->
+                <div class="green-case card off">
+                    <h2 id="green-case-title"></h2>
+                    <p id="green-case-txt"></p>
+                </div>
+
+                <!-- Page 5: Green case with showcase -->
+                <div class="green-case-showcase off">
+                    <div class="showcase-block txt-with-showcase">
+                        <div class="card showcase-text">
+                            <h2 id="green-case-showcase-one-title"></h2>
+                            <p id="green-case-showcase-one-txt"></p>
                         </div>
 
                         <div class="card show-case-card">
-                            <img src="img/examples/de/grey_case_one_de.svg" alt="" id="warning-grey-case-showcase-img" class="case-img-summary" />
+                            <img src="img/examples/de/green_case_one_de.svg" alt="" id="green-case-showcase-one-img" class="case-img-summary" />
+                        </div>
+                    </div>
+
+                    <div class="showcase-block txt-with-showcase">
+                        <div class="card showcase-text">
+                            <h2 id="green-case-showcase-two-title"></h2>
+                            <p id="green-case-showcase-two-txt"></p>
+                        </div>
+
+                        <div class="card show-case-card">
+                            <img src="img/examples/de/green_case_two_de.svg" alt="" id="green-case-showcase-two-img" class="case-img-summary" />
                         </div>
                     </div>
                 </div>
 
-                <!-- Page 3: Green case -->
-                <div class="green-case off">
-                    <div class="txt-with-showcase">
-                        <div class="card show-case-card">
-                            <img src="img/examples/de/green_case_de.svg" alt="" id="green-case-showcase-img-2" class="case-img-summary" />
-                        </div>
-
-                        <div class="card">
-                            <h2 id="green-case-title"></h2>
-                            <p id="green-case-txt"></p>
-                            <p id="green-case-txt-2"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Page 4: Grey case -->
+                <!-- Page 6: Grey case -->
                 <div class="grey-case card off">
                     <h2 id="grey-case-title"></h2>
                     <p id="grey-case-txt"></p>
                     <p id="grey-case-txt-2"></p>
-                    <p id="grey-case-txt-3"></p>
-                    <p id="grey-case-txt-4"></p>
-                    <p id="grey-case-txt-5"></p>
-                    <p id="grey-case-txt-6"></p>
+                </div>
+
+                <!-- Page 7: Grey case two -->
+                <div class="grey-case-two card off">
+                    <h2 id="grey-case-two-title"></h2>
+                    <p id="grey-case-two-txt"></p>
+                    <p id="grey-case-two-txt-2"></p>
+                    <p id="grey-case-two-txt-3"></p>
 
                     <p><span class="link-like">example.com</span> -&gt; <span class="link-like">exampel.com</span> (invertierte Buchstaben, <span class="fat">el</span> statt <span class="fat">le</span>)</p>
                     <p><span class="link-like">example.com</span> -&gt; <span class="link-like">exampie.com</span> (ähnlich aussehender Buchstabe, <span class="fat">i</span> statt <span class="fat">I</span>)</p>
                     <p><span class="link-like">example.com</span> -&gt; <span class="link-like">exaample.com</span> (ein zusätzliches Zeichen, zwei <span class="fat">a</span> statt eines)</p>
 
-                    <p id="grey-case-txt-7"></p>
+                    <p id="grey-case-two-txt-4"></p>
                 </div>
 
-                <!-- Page 5: Grey case with showcases -->
+                <!-- Page 8: Grey case with showcases -->
                 <div class="grey-case-showcase off">
                     <div class="showcase-block txt-with-showcase">
                         <div class="card showcase-text">
@@ -134,6 +144,39 @@
 
                         <div class="card show-case-card">
                             <img src="img/examples/de/grey_case_two_de.svg" alt="" id="grey-case-showcase-two-img" class="case-img-summary" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 9: Warning Grey case -->
+                <div class="warning-grey-case off">
+                    <div class="card">
+                        <h2 id="warning-grey-case-title"></h2>
+                        <p id="warning-grey-case-txt"></p>
+                        <p id="warning-grey-case-txt-2"></p>
+                    </div>
+
+                    <div class="showcase-block txt-with-showcase">
+                        <div class="showcase-block txt-with-showcase">
+                            <div class="card showcase-text">
+                                <h2 id="warning-grey-case-showcase-one-title"></h2>
+                                <p id="warning-grey-case-showcase-one-txt"></p>
+                            </div>
+
+                            <div class="card show-case-card">
+                                <img src="img/examples/de/warning_grey_case_one_de.svg" alt="" id="warning-grey-case-showcase-one-img" class="case-img-summary" />
+                            </div>
+                        </div>
+
+                        <div class="showcase-block txt-with-showcase">
+                            <div class="card showcase-text">
+                                <h2 id="warning-grey-case-showcase-two-title"></h2>
+                                <p id="warning-grey-case-showcase-two-txt"></p>
+                            </div>
+
+                            <div class="card show-case-card">
+                                <img src="img/examples/de/warning_grey_case_two_de.svg" alt="" id="warning-grey-case-showcase-two-img" class="case-img-summary" />
+                            </div>
                         </div>
                     </div>
                 </div>

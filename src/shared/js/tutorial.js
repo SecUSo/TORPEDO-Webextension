@@ -4,8 +4,11 @@ const pages = [
     "explanation",              // 1
     "tooltip",                  // 2
     "green-case",               // 3
-    "grey-case",                // 4
-    "grey-case-showcase"        // 5
+    "green-case-showcase",      // 4
+    "grey-case",                // 5
+    "grey-case-two",            // 6
+    "grey-case-showcase",       // 7
+    "warning-grey-case"         // 8
 ];
 
 const LAST_PAGE = pages.length - 1;
@@ -103,28 +106,43 @@ function init() {
     // tooltip page
     setInnerHTML("tooltip-title", "tooltip_title");
     setInnerHTML("tooltip-txt", "tooltip_txt");
-    setInnerHTML("tooltip-txt-2", "tooltip_txt_2");
 
     // green case page
     setInnerHTML("green-case-title", "green_case_title");
     setInnerHTML("green-case-txt", "green_case_txt");
-    setInnerHTML("green-case-txt-2", "green_case_txt_2");
+
+    // green case showcase page
+    setInnerHTML("green-case-showcase-one-title", "green_case_showcase_one_title");
+    setInnerHTML("green-case-showcase-one-txt", "green_case_showcase_one_txt");
+    setInnerHTML("green-case-showcase-two-title", "green_case_showcase_two_title");
+    setInnerHTML("green-case-showcase-two-txt", "green_case_showcase_two_txt");
 
     // grey case page
     setInnerHTML("grey-case-title", "grey_case_title");
     setInnerHTML("grey-case-txt", "grey_case_txt");
     setInnerHTML("grey-case-txt-2", "grey_case_txt_2");
-    setInnerHTML("grey-case-txt-3", "grey_case_txt_3");
-    setInnerHTML("grey-case-txt-4", "grey_case_txt_4");
-    setInnerHTML("grey-case-txt-5", "grey_case_txt_5");
-    setInnerHTML("grey-case-txt-6", "grey_case_txt_6");
-    setInnerHTML("grey-case-txt-7", "grey_case_txt_7");
+
+    // grey case two page
+    setInnerHTML("grey-case-two-title", "grey_case_two_title");
+    setInnerHTML("grey-case-two-txt", "grey_case_two_txt");
+    setInnerHTML("grey-case-two-txt-2", "grey_case_two_txt_2");
+    setInnerHTML("grey-case-two-txt-3", "grey_case_two_txt_3");
+    setInnerHTML("grey-case-two-txt-4", "grey_case_two_txt_4");
 
     // grey case showcase page
     setInnerHTML("grey-case-showcase-one-title", "grey_case_showcase_one_title");
     setInnerHTML("grey-case-showcase-one-txt", "grey_case_showcase_one_txt");
     setInnerHTML("grey-case-showcase-two-title", "grey_case_showcase_two_title");
     setInnerHTML("grey-case-showcase-two-txt", "grey_case_showcase_two_txt");
+
+    // warning grey case
+    setInnerHTML("warning-grey-case-title", "warning_grey_case_title");
+    setInnerHTML("warning-grey-case-txt", "warning_grey_case_txt");
+    setInnerHTML("warning-grey-case-txt-2", "warning_grey_case_txt_2");
+    setInnerHTML("warning-grey-case-showcase-one-title", "warning_grey_case_showcase_one_title");
+    setInnerHTML("warning-grey-case-showcase-one-txt", "warning_grey_case_showcase_one_txt");
+    setInnerHTML("warning-grey-case-showcase-two-title", "warning_grey_case_showcase_two_title");
+    setInnerHTML("warning-grey-case-showcase-two-txt", "warning_grey_case_showcase_two_txt");
 }
 
 

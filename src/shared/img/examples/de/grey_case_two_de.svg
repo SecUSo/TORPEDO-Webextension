@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   width="100%"
-   height="100%"
-   viewBox="0 0 576 348"
+   width="584.5"
+   height="347.5"
+   viewBox="0 0 584.5 347.5"
    version="1.1"
    xml:space="preserve"
-   style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;"
+   style="clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
    id="svg21"
    sodipodi:docname="grey_case_two_de.svg"
    inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
@@ -22,36 +22,36 @@
    inkscape:pageopacity="0.0"
    inkscape:pagecheckerboard="0"
    inkscape:deskcolor="#d1d1d1"
-   inkscape:zoom="1.6767241"
-   inkscape:cx="161.32648"
-   inkscape:cy="178.62211"
+   inkscape:zoom="2.371246"
+   inkscape:cx="237.84964"
+   inkscape:cy="175.22434"
    inkscape:window-width="2560"
-   inkscape:window-height="1369"
-   inkscape:window-x="-8"
-   inkscape:window-y="-8"
+   inkscape:window-height="1334"
+   inkscape:window-x="2869"
+   inkscape:window-y="-11"
    inkscape:window-maximized="1"
    inkscape:current-layer="text_in_border" />
     <g
-   transform="matrix(1,0,0,1,-21,-1028)"
+   transform="translate(-21,-1028)"
    id="g21">
         <g
    id="simple-grey_case_no-phish_de"
-   transform="matrix(1,0,0,1,0,74.5107)">
+   transform="translate(0,74.5107)">
             <g
    id="border_template"
-   transform="matrix(4.87356,0,0,3.5867,-149.336,870.674)">
+   transform="matrix(4.9544279,0,0,3.5867,-152.16638,870.674)">
                 <path
-   d="M153,31.394C153,30.625 152.54,30 151.974,30L36.026,30C35.46,30 35,30.625 35,31.394L35,118.606C35,119.375 35.46,120 36.026,120L151.974,120C152.54,120 153,119.375 153,118.606L153,31.394Z"
-   style="fill:white;"
+   d="M 153,31.394 C 153,30.625 152.54,30 151.974,30 H 36.026 C 35.46,30 35,30.625 35,31.394 v 87.212 c 0,0.769 0.46,1.394 1.026,1.394 h 115.948 c 0.566,0 1.026,-0.625 1.026,-1.394 z"
+   style="fill:#ffffff"
    id="path1" />
                 <path
-   d="M153,31.394C153,30.625 152.54,30 151.974,30L36.026,30C35.46,30 35,30.625 35,31.394L35,118.606C35,119.375 35.46,120 36.026,120L151.974,120C152.54,120 153,119.375 153,118.606L153,31.394ZM36.231,31.673L36.231,118.327L151.769,118.327L151.769,31.673L36.231,31.673Z"
-   style="fill:rgb(191,185,185);"
+   d="M 153,31.394 C 153,30.625 152.54,30 151.974,30 H 36.026 C 35.46,30 35,30.625 35,31.394 v 87.212 c 0,0.769 0.46,1.394 1.026,1.394 h 115.948 c 0.566,0 1.026,-0.625 1.026,-1.394 z M 36.231,31.673 v 86.654 H 151.769 V 31.673 Z"
+   style="fill:#bfb9b9"
    id="path2" />
             </g>
             <g
    id="text_in_border"
-   transform="matrix(1,0,0,1,-16.2752,651.512)">
+   transform="translate(-16.2752,651.512)">
                 <g
    id="URL_optimized_readability"
    transform="translate(2,-3)">
@@ -60,10 +60,10 @@
                     <text
    x="54.824997"
    y="399"
-   style="font-weight:bold;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;display:inline;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline"
    id="text4"><tspan
      sodipodi:role="line"
-     id="tspan26">e x a m p i e . c o m</tspan></text>
+     id="tspan10">e x a m p i e . c o m</tspan></text>
                     <text
    x="229.84201"
    y="399"
@@ -76,143 +76,151 @@
                 </g>
                 <g
    id="first_line"
-   transform="matrix(1,0,0,1,-2.25699,0)">
+   transform="translate(-2.25699)">
                     <text
-   x="58px"
-   y="362px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"
+   x="58"
+   y="362"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
    id="text6">Hinterlegte URL<tspan
-   x="186.44px 191.483px "
-   y="362px 362px "
+   x="186.44 191.483"
+   y="362 362"
    id="tspan5"> (</tspan>auch W<tspan
-   x="258.725px 268.818px "
-   y="362px 362px "
+   x="258.72501 268.81799"
+   y="362 362"
    id="tspan6">eb</tspan>adresse genannt):</text>
                 </g>
                 <g
-   transform="matrix(1,0,0,1,-5.45944,-3)"
+   transform="translate(-5.45944,-3)"
    id="g13">
                     <text
-   x="62px"
-   y="434.787px"
-   style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:18.149px;"
+   x="62"
+   y="434.78699"
+   style="font-weight:700;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif"
    id="text7">U<tspan
-   x="75.233px 86.446px 97.659px 107.88px 118.1px 128.321px 139.533px 150.746px 156.917px 167.137px 177.358px 182.527px 195.761px 200.93px 211.15px 216.32px 226.54px 237.753px "
-   y="434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px "
+   x="75.233002 86.445999 97.658997 107.88 118.1 128.321 139.533 150.746 156.91701 167.13699 177.358 182.52699 195.761 200.92999 211.14999 216.32001 226.53999 237.75301"
+   y="434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699"
    id="tspan7">nbekanntes Risiko:</tspan></text>
                     <text
-   x="249.093px"
-   y="434.787px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"
+   x="249.093"
+   y="434.78699"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
    id="text8"><tspan
-     x="249.093px 262.326px 272.547px 281.748px 286.917px 300.151px 304.31px 313.511px 317.67px 326.872px 337.092px 342.261px 347.431px 357.651px 363.822px 368.991px 379.211px 389.432px 398.633px 403.803px 416.035px 420.194px 424.353px 433.554px 442.755px 452.976px 463.196px 468.366px 478.586px 488.806px 493.976px 499.145px 509.365px 519.586px 529.806px 534.976px 545.196px 549.355px 559.576px "
-     y="434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px 434.787px "
-     id="tspan8">Das Risiko für das Klicken auf den Link</tspan></text>
+     sodipodi:role="line"
+     id="tspan3"
+     x="249.093"
+     y="434.78699">Das Risiko für das Klicken auf den Link kann</tspan></text>
                     <text
-   x="62px"
-   y="458.53px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"
-   id="text9">k<tspan
-   x="71.201px 81.422px 91.642px 101.863px 107.032px 117.252px 121.411px 130.613px 140.833px 146.003px 151.172px 161.392px 171.613px 180.814px 185.983px 190.142px 205.387px 220.632px 225.802px 230.971px 244.204px 254.425px 260.595px 270.816px 281.036px 291.257px 296.426px 301.595px 313.827px 317.986px 328.207px 333.376px 348.621px 358.842px 368.043px 377.244px 387.465px 397.685px 402.854px 413.075px 417.234px 427.454px 433.625px 438.794px 449.015px 459.235px 468.436px 473.606px 486.839px 490.998px 500.2px 504.359px 513.56px 523.78px 528.95px 538.151px 548.371px 552.531px 562.751px 571.952px "
-   y="458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px 458.53px "
-   id="tspan9">ann nicht bestimmt werden. Sie müssen hier das Risiko selbst</tspan></text>
+   x="62"
+   y="458.53"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text9"><tspan
+     sodipodi:role="line"
+     id="tspan4"
+     x="62"
+     y="458.53">nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen.</tspan></text>
                     <text
-   x="62px"
-   y="482.272px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"
-   id="text10">e<tspan
-   x="72.22px 76.38px 86.6px 95.801px 100.971px 111.191px 116.36px 126.581px 136.801px 141.97px 147.14px 160.373px 164.532px 174.753px 180.923px 190.125px 200.345px 205.514px 215.735px 221.905px 232.126px 237.295px 247.516px 257.736px 262.905px 275.137px 279.296px 289.517px 294.686px 304.907px 309.066px 319.286px 324.455px 337.689px 347.909px 363.154px 373.375px 377.534px "
-   y="482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px 482.272px "
-   id="tspan10">instufen. Hierzu prüfen Sie die Domain</tspan></text>
+   x="62"
+   y="482.272"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text10"><tspan
+     sodipodi:role="line"
+     id="tspan8"
+     x="62"
+     y="482.272">Hierzu prüfen Sie die Domain (</tspan></text>
+                    
                     <text
-   x="62px"
-   y="506.014px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"
-   id="text11">(</text>
+   x="62.170998"
+   y="506.01401"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text12"><tspan
+     sodipodi:role="line"
+     id="tspan9"
+     x="62.170998"
+     y="506.01401">URL</tspan></text>
                     <text
-   x="68.171px"
-   y="506.014px"
-   style="font-family:'Arial-BoldMT', 'Arial', sans-serif;font-weight:700;font-size:18.149px;"
-   id="text12">f<tspan
-   x="74.341px 84.562px 90.732px 96.903px 102.072px 113.285px 123.506px 130.696px 140.916px 152.129px 159.319px 170.532px 180.752px 191.965px 203.178px 214.391px 224.611px 235.824px 246.045px 253.234px 258.404px 271.637px 281.857px 289.047px 299.268px 304.437px 314.657px "
-   y="506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px 506.014px "
-   id="tspan11">ett hervorgehobener Bereich</tspan></text>
-                    <text
-   x="325.87px"
-   y="506.014px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"
+   x="99.870003"
+   y="506.01401"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
    id="text13">)<tspan
-   x="332.041px "
-   y="506.014px "
+   x="106.04099"
+   y="506.01401"
    id="tspan12">.</tspan></text>
-                </g>
+                <text
+   x="309.76105"
+   y="482.21597"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
+   id="text12-5"><tspan
+     sodipodi:role="line"
+     id="tspan2"
+     x="309.76105"
+     y="482.21597">fett hervorgehobener Bereich der</tspan></text></g>
                 <g
-   transform="matrix(1,0,0,1,14.875,-257.954)"
+   transform="translate(14.875,-257.954)"
    id="g14">
                     <text
-   x="40.921px"
-   y="853px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"
+   x="40.921001"
+   y="853"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
    id="text14">D<tspan
-   x="54.155px 64.375px 70.546px 75.715px 85.935px 90.094px 100.315px 109.516px 114.686px 127.919px 138.139px 144.31px 154.53px 164.751px 169.92px 180.141px 190.361px 200.581px 209.783px 214.952px 219.111px 228.313px 232.472px 242.692px 248.863px 254.032px 259.201px 264.371px 274.591px 284.811px 300.056px 304.215px 309.385px 314.554px 326.786px 330.945px 341.166px 346.335px 356.555px 360.714px 370.935px 376.104px 389.338px 399.558px 414.803px 425.023px 429.182px 439.403px 444.572px 448.731px 458.952px 464.121px 477.354px 487.575px 497.795px 508.016px 513.185px 523.405px 529.576px 539.796px 544.966px 555.186px 565.407px "
-   y="853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px 853px "
+   x="54.154999 64.375 70.545998 75.714996 85.934998 90.094002 100.315 109.516 114.686 127.919 138.13901 144.31 154.53 164.75101 169.92 180.14101 190.36099 200.58099 209.783 214.952 219.11099 228.313 232.472 242.692 248.86301 254.032 259.20099 264.371 274.591 284.811 300.056 304.215 309.38501 314.55399 326.78601 330.94501 341.16599 346.33499 356.55499 360.71399 370.935 376.104 389.33801 399.55801 414.80301 425.02301 429.18201 439.40302 444.57199 448.73099 458.952 464.121 477.354 487.57501 497.79501 508.01599 513.185 523.40503 529.57599 539.79602 544.966 555.18597 565.40698"
+   y="853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853"
    id="tspan13">er Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.</tspan></text>
                 </g>
                 <g
-   transform="matrix(1,0,0,1,16.1954,-253.707)"
+   transform="translate(16.1954,-253.707)"
    id="g15">
                     <text
-   x="40.921px"
-   y="884.54px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:18.149px;"
+   x="40.921001"
+   y="884.53998"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
    id="text15">V<tspan
-   x="52.17px 62.409px 68.597px 78.836px 83.013px 93.252px 97.429px 107.668px 117.906px 128.145px 138.383px 148.622px 153.809px 165.04px 175.279px 179.456px 184.644px 189.831px 195.019px 205.257px 210.445px 222.695px 232.933px 242.153px 252.391px 262.63px 272.869px 283.107px 289.296px 299.535px 305.723px "
-   y="884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px 884.54px "
+   x="52.169998 62.409 68.597 78.835999 83.013 93.251999 97.429001 107.668 117.906 128.145 138.383 148.62199 153.80901 165.03999 175.27901 179.45599 184.644 189.83099 195.019 205.257 210.44501 222.69501 232.933 242.153 252.39101 262.63 272.86899 283.10699 289.29599 299.535 305.72299"
+   y="884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998"
    id="tspan14">erbleibende Zeit: 2 Sekunde(n).</tspan></text>
                 </g>
                 <g
    id="more_information_classification"
-   transform="matrix(1,0,0,1,0.98364,-43.2288)">
+   transform="translate(0.98364,-43.2288)">
                     <g
-   transform="matrix(1,0,0,1,-592.961,-556.608)"
+   transform="translate(-592.961,-556.608)"
    id="g16">
                         <text
-   x="695px"
-   y="1149.09px"
-   style="font-family:'ArialMT', 'Arial', sans-serif;font-size:19px;"
+   x="695"
+   y="1149.09"
+   style="font-size:19px;font-family:ArialMT, Arial, sans-serif"
    id="text16">M<tspan
-   x="710.352px 720.444px 730.536px 736.388px 741.192px 745.996px 756.088px 760.891px 770.983px 776.835px 792.188px 802.279px 807.083px 810.829px 820.921px 831.013px 841.105px 851.197px 856.001px 865.026px 875.118px 879.922px 890.013px 893.76px 903.852px 912.877px 922.968px 928.821px 933.624px 945.822px 949.568px 959.66px 968.685px 973.489px 983.581px 988.385px 998.477px 1008.57px "
-   y="1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px 1149.09px "
+   x="710.35199 720.44397 730.53601 736.388 741.19202 745.99597 756.08801 760.89099 770.98297 776.83502 792.18799 802.27899 807.08301 810.82898 820.92102 831.013 841.10498 851.19702 856.00098 865.026 875.11798 879.922 890.013 893.76001 903.85199 912.87701 922.96802 928.82098 933.62402 945.82202 949.56799 959.65997 968.685 973.48901 983.58099 988.38501 998.47699 1008.57"
+   y="1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09"
    id="tspan15">ehr Informationen zu dieser Einstufung</tspan></text>
                         <rect
    x="695"
    y="1151.1"
-   width="323.661"
+   width="323.66101"
    height="1.392"
    id="rect16" />
                     </g>
                     <g
    id="info_icon"
-   transform="matrix(1,0,0,1,-591.961,-552.438)">
+   transform="translate(-591.961,-552.438)">
                         <g
    id="information_icon_text"
-   transform="matrix(1,0,0,1,0,0.499922)">
+   transform="translate(0,0.499922)">
                             <g
    transform="matrix(30,0,0,30,658.802,1148.72)"
    id="g17">
                                 <path
-   d="M0.199,-0C0.181,0.004 0.177,0.008 0.127,0.009C0.118,0.009 0.108,0.006 0.102,0.005C0.076,-0 0.064,-0.008 0.065,-0.018L0.065,-0.021C0.081,-0.113 0.09,-0.166 0.093,-0.181C0.103,-0.243 0.107,-0.297 0.107,-0.342C0.107,-0.352 0.103,-0.359 0.093,-0.363C0.083,-0.366 0.071,-0.368 0.056,-0.368C0.041,-0.368 0.031,-0.367 0.026,-0.367L0.028,-0.393C0.037,-0.391 0.045,-0.391 0.053,-0.391L0.077,-0.391C0.093,-0.391 0.116,-0.395 0.146,-0.403C0.177,-0.411 0.199,-0.415 0.213,-0.415C0.224,-0.415 0.231,-0.411 0.233,-0.403C0.236,-0.396 0.237,-0.388 0.237,-0.382C0.237,-0.326 0.233,-0.259 0.224,-0.179C0.218,-0.138 0.214,-0.097 0.209,-0.057L0.261,-0.068L0.266,-0.037C0.256,-0.029 0.246,-0.022 0.236,-0.017C0.226,-0.011 0.212,-0.003 0.199,-0Z"
-   style="fill:rgb(10,20,87);fill-rule:nonzero;"
+   d="M 0.199,0 C 0.181,0.004 0.177,0.008 0.127,0.009 0.118,0.009 0.108,0.006 0.102,0.005 0.076,0 0.064,-0.008 0.065,-0.018 v -0.003 c 0.016,-0.092 0.025,-0.145 0.028,-0.16 0.01,-0.062 0.014,-0.116 0.014,-0.161 0,-0.01 -0.004,-0.017 -0.014,-0.021 -0.01,-0.003 -0.022,-0.005 -0.037,-0.005 -0.015,0 -0.025,0.001 -0.03,0.001 l 0.002,-0.026 c 0.009,0.002 0.017,0.002 0.025,0.002 h 0.024 c 0.016,0 0.039,-0.004 0.069,-0.012 0.031,-0.008 0.053,-0.012 0.067,-0.012 0.011,0 0.018,0.004 0.02,0.012 0.003,0.007 0.004,0.015 0.004,0.021 0,0.056 -0.004,0.123 -0.013,0.203 -0.006,0.041 -0.01,0.082 -0.015,0.122 l 0.052,-0.011 0.005,0.031 c -0.01,0.008 -0.02,0.015 -0.03,0.02 C 0.226,-0.011 0.212,-0.003 0.199,0 Z"
+   style="fill:#0a1457;fill-rule:nonzero"
    id="path16" />
                             </g>
                             <g
    transform="matrix(1.75018,0,0,1.75018,-498.398,-849.473)"
    id="g18">
                                 <circle
-   cx="664.369"
+   cx="664.36902"
    cy="1132.35"
-   r="1.333"
-   style="fill:rgb(10,20,87);"
+   r="1.3329999"
+   style="fill:#0a1457"
    id="circle17" />
                             </g>
                         </g>
@@ -223,23 +231,25 @@
    cx="663"
    cy="1139"
    r="16"
-   style="fill:none;stroke:rgb(10,20,87);stroke-width:3px;"
+   style="fill:none;stroke:#0a1457;stroke-width:3px"
    id="circle18" />
                         </g>
                     </g>
                 </g>
             </g>
             <g
-   transform="matrix(1,0,0,1,-3,-2)"
+   transform="translate(-3,-2)"
    id="g20">
                 <text
    x="26.239"
    y="969.47601"
-   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif;display:inline;fill:#195ace;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#195ace"
    id="text19"
    inkscape:label="text19"><tspan
      sodipodi:role="line"
-     id="tspan25">https://www.exampie.com</tspan></text>
+     id="tspan21"
+     x="26.239"
+     y="969.47601">https://www.example.com</tspan></text>
                 <rect
    x="26.239"
    y="971.39801"
@@ -252,8 +262,8 @@
    id="mouse_cursor"
    transform="matrix(0.600152,0,0,0.600152,57.0454,821.711)">
                 <path
-   d="M353,272C353.833,273.715 355.845,275.407 357,277.292C358.544,279.815 362.266,287.133 362.266,287.133C362.266,287.133 364.95,291.689 367,293C369.05,294.311 372.233,295 374.566,295C376.812,295 379.134,294.25 381,293C383.239,291.5 386.774,289.064 388,286C389.333,282.667 389,276.833 389,273C389,269.65 388.588,264.878 388,263C386.962,259.685 382.287,260.866 382.357,262.065C382.507,264.632 382.434,266.133 382.434,266.133C382.434,266.133 382.572,261.355 382,260C381.533,258.893 380.031,258 379,258C377.969,258 375.532,258.29 375.816,260C376.1,261.71 375.816,266 375.816,266C375.816,266 376.119,261.5 375.816,260C375.585,258.854 374.803,257.5 374,257C373.197,256.5 371.769,256.862 371,257C370.405,257.107 369.388,257.829 369.388,257.829L369.434,266C369.434,266 369.426,247.097 368.96,245.231C368.394,242.967 362.732,242.649 361.96,245.231C361.187,247.812 362,272 362,272C362,272 357.188,265.357 356,265C354.812,264.643 352.277,264.877 352,267C351.723,269.123 352.257,270.471 353,272Z"
-   style="fill:white;stroke:black;stroke-width:2.03px;"
+   d="m 353,272 c 0.833,1.715 2.845,3.407 4,5.292 1.544,2.523 5.266,9.841 5.266,9.841 0,0 2.684,4.556 4.734,5.867 2.05,1.311 5.233,2 7.566,2 2.246,0 4.568,-0.75 6.434,-2 2.239,-1.5 5.774,-3.936 7,-7 1.333,-3.333 1,-9.167 1,-13 0,-3.35 -0.412,-8.122 -1,-10 -1.038,-3.315 -5.713,-2.134 -5.643,-0.935 0.15,2.567 0.077,4.068 0.077,4.068 0,0 0.138,-4.778 -0.434,-6.133 -0.467,-1.107 -1.969,-2 -3,-2 -1.031,0 -3.468,0.29 -3.184,2 0.284,1.71 0,6 0,6 0,0 0.303,-4.5 0,-6 -0.231,-1.146 -1.013,-2.5 -1.816,-3 -0.803,-0.5 -2.231,-0.138 -3,0 -0.595,0.107 -1.612,0.829 -1.612,0.829 l 0.046,8.171 c 0,0 -0.008,-18.903 -0.474,-20.769 -0.566,-2.264 -6.228,-2.582 -7,0 C 361.187,247.812 362,272 362,272 c 0,0 -4.812,-6.643 -6,-7 -1.188,-0.357 -3.723,-0.123 -4,2 -0.277,2.123 0.257,3.471 1,5 z"
+   style="fill:#ffffff;stroke:#000000;stroke-width:2.03px"
    id="path20" />
             </g>
         </g>
