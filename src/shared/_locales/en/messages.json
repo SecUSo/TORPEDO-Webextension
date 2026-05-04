@@ -494,6 +494,11 @@
     "description": "Entered URL is already in list of referrer URLs"
   },
 
+  "tooltip_text": {
+    "message": "under construction",
+    "description": "Tooltip text for the user to check the URL"
+  },
+
 
 
   "welcome_title": {

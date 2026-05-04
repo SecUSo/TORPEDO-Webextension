@@ -489,6 +489,11 @@
     "description": "Entered URL is already in list of referrer URLs"
   },
 
+  "tooltip_text": {
+    "message": "Hier können Sie einzelne Sektionen des Dialogfensters durch Anklicken der Boxen ein- bzw. ausschalten. Die Vorschau des Dialogfensters zeigt Ihnen, wie das Dialogfenster entsprechend aussehen würde.",
+    "description": "Tooltip text for the user to check the URL"
+  },
+
 
 
   "welcome_title": {

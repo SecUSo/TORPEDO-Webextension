@@ -612,6 +612,7 @@ const OptionsPage = {
             "trustedListTitle": "trustedList",
             "userListTitle": "userList",
             // Tooltip tab
+            "tooltip-text": "tooltip_text",
             "tooltipCheckboxText-url": "tooltipCheckboxText_url",
             "tooltipCheckboxText-security": "tooltipCheckboxText_security",
             "tooltipCheckboxText-info": "tooltipCheckboxText_info",
