@@ -492,7 +492,7 @@
 
 
   "welcome_title": {
-    "message": "Tutorial [1/?]: Allgemeine Informationen",
+    "message": "Tutorial [1/8]: Allgemeine Informationen",
     "description": "welcome-title tutorial on page 1"
   },
   "introduction_txt": {
@@ -505,7 +505,7 @@
   },
 
   "explanation_title": {
-    "message": "Tutorial [2/?]: Domain der URL",
+    "message": "Tutorial [2/8]: Domain der URL",
     "description": "explanation-title tutorial on page 2"
   },
   "explanation_txt": {
@@ -518,7 +518,7 @@
   },
 
   "tooltip_title": {
-    "message": "Tutorial [3/?]: Dialogfenster",
+    "message": "Tutorial [3/8]: Dialogfenster",
     "description": "tooltip-title tutorial on page 3"
   },
   "tooltip_txt": {
@@ -527,7 +527,7 @@
   },
 
   "green_case_title": {
-    "message": "Tutorial [4/?]: <span class='green'>Dialogfenster bei niedrigem Risiko</span>",
+    "message": "Tutorial [4/8]: <span class='green'>Dialogfenster bei niedrigem Risiko</span>",
     "description": "Title for the first case (green) tutorial"
   },
   "green_case_txt": {
@@ -553,7 +553,7 @@
   },
 
   "grey_case_title": {
-    "message": "Tutorial [5/?]: <span class='grey'>Dialogfenster bei unbekanntem Risiko</span>",
+    "message": "Tutorial [5/8]: <span class='grey'>Dialogfenster bei unbekanntem Risiko</span>",
     "description": "Title for the grey case tutorial"
   },
   "grey_case_txt": {
@@ -566,7 +566,7 @@
   },
 
   "grey_case_two_title": {
-    "message": "Tutorial [6/?]: Prüfung der Domain",
+    "message": "Tutorial [6/8]: Prüfung der Domain",
     "description": "Title for the second case (grey) tutorial, page 2"
   },
   "grey_case_two_txt": {
@@ -604,7 +604,7 @@
   },
 
   "warning_grey_case_title": {
-    "message": "Tutorial [7/?]: <span class='grey'>Dialogfenster bei unbekanntem Risiko mit Warnsymbol</span>",
+    "message": "Tutorial [7/8]: <span class='grey'>Dialogfenster bei unbekanntem Risiko mit Warnsymbol</span>",
     "description": "Title for the warning in the grey-case tutorial"
   },
   "warning_grey_case_txt": {
@@ -630,5 +630,42 @@
   "warning_grey_case_showcase_two_txt": {
     "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem die mit dem Link verknüpfte URL nicht zur angezeigten URL passt, aber dennoch legitim ist. Im Link-Text hat sich ein Tippfehler eingeschlichen. Dort steht Aachen mit zwei <span class='fat'>n</span>. Dies kann wie jeder andere Tippfehler in einer E-Mail schon einmal passieren. Da die hinterlegte Domain aber die der RWTH Aachen ist, handelt es sich hier um keinen Phishing-Angriff.",
     "description": "Explanation for the second demonstration of the warning in the grey-case tutorial"
+  },
+
+  "configuration_title": {
+    "message": "Tutorial [8/8]: Einstellungen",
+    "description": "Title for the configuration tutorial"
+  },
+  "configuration_txt": {
+    "message": "TORPEDO unterstützt eine Reihe von Sonderfällen, wie z.B. Kurz-URLs und Weiterleitungen. Damit diese nach Ihren Bedürfnissen konfiguriert sind, empfehlen wir Ihnen ein Blick in die Einstellungen zu werfen.",
+    "description": "Explanation for the configuration tutorial"
+  },
+  "configuration_showcase_one_txt": {
+    "message": "Die Einstellungen können über einen Rechtsklick auf den Tooltip geöffnet werden.",
+    "description": "Explanation for the first demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_two_title": {
+    "message": "In den Einstellungen gibt es 5 verschiedene Optionen.",
+    "description": "Title for the second demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_two_txt": {
+    "message": "1. Unter <span class='fat'>Timer</span> können Sie Einstellungen am Timer vornehmen z.B. können Sie die Zeit erhöhen bzw. runtersetzen oder den Timer komplett deaktivieren. Außerdem können Sie die verschiedene Mode aktivieren und deaktivieren.\nBeim aktivierten Privatsphäre Modus werden Links immer über die aufgelöste Domain und nicht über den Ursprungs-Link geöffnet. Außerdem werden Kurz-URLs nicht direkt aufgelöst, sondern erst nach Ihrer Bestätigung.\nBeim aktivierten Security Mode bekommen Sie erst nach dem zweiten gefundenen Referrer den Grauen Fall mit Warnsymbol angezeigt. Ansonsten passiert dies bereits beim ersten.",
+    "description": "Explanation for the second demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_two_txt_2": {
+    "message": "2. Unter <span class='fat'>Domains</span> können Sie sowohl die Liste der meist besuchten Webseiten für den Grünen Fall deaktivieren. Außerdem können Sie hier auch eigene Fälle zur Liste des Blauen Fall ergänzen.",
+    "description": "Explanation for the second demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_two_txt_3": {
+    "message": "3. Unter <span class='fat'>Referrer</span> können Sie die aktuell integrierten Referrer ansehen und eigene ergänzen.",
+    "description": "Explanation for the second demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_two_txt_4": {
+    "message": "4. Unter <span class='fat'>Kurz-URL</span> können Sie die aktuell integrierten Kurz-URLs ansehen und eigene ergänzen.",
+    "description": "Explanation for the second demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_two_txt_5": {
+    "message": "5. Unter <span class='fat'>Tooltip</span> können Sie die einzelnen Sektionen des Dialogfensters aktivieren oder deaktivieren. Außerdem können Sie einstellen, ob nur die Domain oder die gesamte URL im Dialogfenster angezeigt werden soll.",
+    "description": "Explanation for the second demonstration of the configuration tutorial"
   }
 }

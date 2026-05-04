@@ -8,7 +8,8 @@ const pages = [
     "grey-case",                // 5
     "grey-case-two",            // 6
     "grey-case-showcase",       // 7
-    "warning-grey-case"         // 8
+    "warning-grey-case",        // 8
+    "configuration"             // 9
 ];
 
 const LAST_PAGE = pages.length - 1;
@@ -143,6 +144,17 @@ function init() {
     setInnerHTML("warning-grey-case-showcase-one-txt", "warning_grey_case_showcase_one_txt");
     setInnerHTML("warning-grey-case-showcase-two-title", "warning_grey_case_showcase_two_title");
     setInnerHTML("warning-grey-case-showcase-two-txt", "warning_grey_case_showcase_two_txt");
+
+    // configuration
+    setInnerHTML("configuration-title", "configuration_title");
+    setInnerHTML("configuration-txt", "configuration_txt");
+    setInnerHTML("configuration-showcase-one-txt", "configuration_showcase_one_txt");
+    setInnerHTML("configuration-showcase-two-title", "configuration_showcase_two_title");
+    setInnerHTML("configuration-showcase-two-txt", "configuration_showcase_two_txt");
+    setInnerHTML("configuration-showcase-two-txt-2", "configuration_showcase_two_txt_2");
+    setInnerHTML("configuration-showcase-two-txt-3", "configuration_showcase_two_txt_3");
+    setInnerHTML("configuration-showcase-two-txt-4", "configuration_showcase_two_txt_4");
+    setInnerHTML("configuration-showcase-two-txt-5", "configuration_showcase_two_txt_5");
 }
 
 
