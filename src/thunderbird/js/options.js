@@ -180,7 +180,7 @@ const OptionsPage = {
             this.originalSettings = {};
             this.originalSettings = { ...set };
             console.log(set);
-            document.getElementById("statusSettings").textContent = browser.i18n.getMessage("savedChanges");
+            document.getElementById("statusSettings").textContent = browser.i18n.getMessage("savedChangesThunderbird");
         });
 
         document.getElementById("revertChanges").addEventListener("click", async () => {

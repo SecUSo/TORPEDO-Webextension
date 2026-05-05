@@ -459,8 +459,12 @@
     "description": "Example for Input Attribute"
   },
 
-  "savedChanges": {
+  "savedChangesBrowser": {
     "message": "Changes saved! Please reload the page on which you are using TORPEDO.",
+    "description": "Changes saved"
+  },
+  "savedChangesThunderbird": {
+    "message": "Changes saved!",
     "description": "Changes saved"
   },
 
