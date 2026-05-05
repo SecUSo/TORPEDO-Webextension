@@ -259,6 +259,15 @@ header {
     margin-right: 2rem;
 }
 
+#configuration-showcase-two-img {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .show-case-card .case-img-summary {
     width: 100%;
     height: auto;
