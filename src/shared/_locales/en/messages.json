@@ -503,6 +503,10 @@
     "description": "Tooltip text for the user to check the URL"
   },
 
+  "open_tutorial_text": {
+    "message": "under construction",
+    "description": "Button text for opening the tutorial"
+  },
 
 
   "welcome_title": {

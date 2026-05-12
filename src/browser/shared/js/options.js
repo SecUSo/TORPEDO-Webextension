@@ -99,18 +99,18 @@ const OptionsPage = {
         document.getElementById("timerCheckbox").addEventListener('change', (e) => {
             const timerValue = e.target.checked ? 3 : 0;
             document.getElementById('timerInput').value = timerValue;
-            chrome.storage.sync.set({ timer: timerValue });
+            browser.storage.sync.set({ timer: timerValue });
         });
 
         document.getElementById("timerInput").addEventListener('change', (e) => {
             const timerValue = e.target.value;
             document.getElementById('timerCheckbox').checked = timerValue > 0;
-            chrome.storage.sync.set({ timer: timerValue });
+            browser.storage.sync.set({ timer: timerValue });
         });
 
         const addCheckboxListener = (id, settingName) => {
             document.getElementById(id).addEventListener('change', (e) => {
-                chrome.storage.sync.set({ [settingName]: e.target.checked });
+                browser.storage.sync.set({ [settingName]: e.target.checked });
                 this.loadAndApplySettings();
             });
         };
@@ -128,19 +128,19 @@ const OptionsPage = {
         document.getElementById('privacyModeCheckbox').addEventListener('change', (e) => {
             const isChecked = e.target.checked;
             document.getElementById('securityModeCheckbox').checked = !isChecked;
-            chrome.storage.sync.set({ privacyModeActivated: isChecked, securityModeActivated: !isChecked });
+            browser.storage.sync.set({ privacyModeActivated: isChecked, securityModeActivated: !isChecked });
         });
         document.getElementById('securityModeCheckbox').addEventListener('change', (e) => {
             const isChecked = e.target.checked;
             document.getElementById('privacyModeCheckbox').checked = !isChecked;
-            chrome.storage.sync.set({ securityModeActivated: isChecked, privacyModeActivated: !isChecked });
+            browser.storage.sync.set({ securityModeActivated: isChecked, privacyModeActivated: !isChecked });
         });
 
         // Domains tab
         document.getElementById('trustedListActivated').addEventListener('change', (e) => {
             const isChecked = e.target.checked;
             document.getElementById('showTrustedDomains').disabled = !isChecked;
-            chrome.storage.sync.set({ trustedListActivated: isChecked });
+            browser.storage.sync.set({ trustedListActivated: isChecked });
         });
 
         document.getElementById('showTrustedDomains').addEventListener('click', () => this.toggleListVisibility('trustedList'));
@@ -153,10 +153,10 @@ const OptionsPage = {
             const tbody = table.querySelector('tbody');
             tbody.innerHTML = `
                 <tr>
-                    <th id="referrerListTitle">${chrome.i18n.getMessage("referrerList")}</th>
+                    <th id="referrerListTitle">${browser.i18n.getMessage("referrerList")}</th>
                 </tr>
             `;
-            await chrome.storage.sync.set({ referrerPart1: [], referrerPart2: [], referrerPart3: [] });
+            await browser.storage.sync.set({ referrerPart1: [], referrerPart2: [], referrerPart3: [] });
             await this.loadAndApplySettings();
         });
 
@@ -174,6 +174,10 @@ const OptionsPage = {
         });
 
         document.getElementById("editShortURL").addEventListener("click", () => this.toggleListVisibility("shortURLList"));
+
+        document.getElementById("openTutorial").addEventListener("click", async () => {
+            await browser.runtime.sendMessage({ name: "tutorial" });
+        });
 
         document.getElementById("saveChanges").addEventListener("click", async () => {
             const set = await browser.storage.sync.get(null);
@@ -616,7 +620,9 @@ const OptionsPage = {
             "tooltipCheckboxText-url": "tooltipCheckboxText_url",
             "tooltipCheckboxText-security": "tooltipCheckboxText_security",
             "tooltipCheckboxText-info": "tooltipCheckboxText_info",
-            "tooltipCheckboxText-timer": "tooltipCheckboxText_timer"
+            "tooltipCheckboxText-timer": "tooltipCheckboxText_timer",
+            // Tutorial tab
+            "openTutorial": "open_tutorial_text"
         }
 
         for (const id in textMap) {
@@ -633,7 +639,7 @@ const OptionsPage = {
             { host: 'deref-web-02.de', path: '/mail/client/[...]/dereferrer/?', attribute: 'redirectUrl=' }
         ];
 
-        const settings = await chrome.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
+        const settings = await browser.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
         const hosts = settings.referrerPart1 || [];
         const paths = settings.referrerPart2 || [];
         const attributes = settings.referrerPart3 || [];
@@ -653,7 +659,7 @@ const OptionsPage = {
             }
         });
 
-        await chrome.storage.sync.set({ referrerPart1: hosts, referrerPart2: paths, referrerPart3: attributes });
+        await browser.storage.sync.set({ referrerPart1: hosts, referrerPart2: paths, referrerPart3: attributes });
         await this.fillReferrerList();
         document.getElementById("addDefaultReferrer").disabled = true;
     },
@@ -668,7 +674,7 @@ const OptionsPage = {
         const tbody = table.querySelector('tbody');
         tbody.innerHTML = `
                 <tr>
-                    <th id="referrerListTitle">${chrome.i18n.getMessage("referrerList")}</th>
+                    <th id="referrerListTitle">${browser.i18n.getMessage("referrerList")}</th>
                 </tr>
             `;
 
@@ -698,7 +704,7 @@ const OptionsPage = {
     },
 
     async deleteReferrer(index) {
-        const settings = await chrome.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
+        const settings = await browser.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
 
         const hosts = settings.referrerPart1 || [];
         const paths = settings.referrerPart2 || [];
@@ -710,7 +716,7 @@ const OptionsPage = {
         attributes.splice(index, 1);
 
         // Save the modified arrays back to storage
-        await chrome.storage.sync.set({ referrerPart1: hosts, referrerPart2: paths, referrerPart3: attributes });
+        await browser.storage.sync.set({ referrerPart1: hosts, referrerPart2: paths, referrerPart3: attributes });
 
         // Re-render the list with the updated data
         await this.fillReferrerList();
@@ -765,7 +771,7 @@ const OptionsPage = {
         const tbody = table.querySelector('tbody');
         tbody.innerHTML = `
                 <tr>
-                    <th id="trustedListTitle">${chrome.i18n.getMessage("trustedList")}</th>
+                    <th id="trustedListTitle">${browser.i18n.getMessage("trustedList")}</th>
                 </tr>
             `;
 
@@ -783,7 +789,7 @@ const OptionsPage = {
         const tbody = table.querySelector('tbody');
         tbody.innerHTML = `
                 <tr>
-                    <th id="userListTitle">${chrome.i18n.getMessage("userList")}</th>
+                    <th id="userListTitle">${browser.i18n.getMessage("userList")}</th>
                 </tr>
             `;
 
@@ -818,13 +824,13 @@ const OptionsPage = {
 
         errorElement.textContent = '';
 
-        chrome.runtime.sendMessage({ name: "TLD" }, async (tld) => {
+        browser.runtime.sendMessage({ name: "TLD" }, async (tld) => {
             torpedo.publicSuffixList.parse(tld, punycode.toASCII);
         });
 
         try {
             const href = new URL(input);
-            input = TooltipManager.extractDomain(href.hostname);
+            input = torpedo.extractDomain(href.hostname);
         } catch (e) {
             errorElement.textContent = browser.i18n.getMessage("nonValidUrl");
             return;
@@ -855,7 +861,7 @@ const OptionsPage = {
         const tbody = table.querySelector('tbody');
         tbody.innerHTML = `
                 <tr>
-                    <th id="shortURLListTitle">${chrome.i18n.getMessage("trustedList")}</th>
+                    <th id="shortURLListTitle">${browser.i18n.getMessage("trustedList")}</th>
                 </tr>
             `;
 
