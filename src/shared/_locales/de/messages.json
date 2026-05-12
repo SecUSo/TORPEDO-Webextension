@@ -545,7 +545,7 @@
     "description": "Title for the first case (green) tutorial"
   },
   "green_case_txt": {
-    "message": "Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der Webseite hinter dem Link von TORPEDO als <span class='green'>niedrig eingestuft</span> wird. Dies liegt entweder daran, dass die Domain zu einer Liste von Webseiten gehört, die die Entwickler von TORPEDO als grundsätzlich vertrauenswürdig einstufen oder zu einer Liste von Webseiten gehört, die von Ihnen entweder bereits zweimal besucht oder manuell hinzugefügt wurden.",
+    "message": "Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der Webseite hinter dem Link von TORPEDO als <span class='green'>niedrig eingestuft</span> wird. Dies liegt entweder daran, dass die Domain zu einer Liste von Domains gehört, die die Entwickler von TORPEDO als grundsätzlich vertrauenswürdig einstufen oder zu einer benutzer-definierten Liste von Domains gehört. Die benutzer-definierte Liste enthält alle Domains die von Ihnen entweder bereits zweimal besucht oder manuell hinzugefügt wurden.",
     "description": "Explanation for the first case (green) tutorial"
   },
 
@@ -554,7 +554,7 @@
     "description": "Title for the first demonstration of the green-case tutorial"
   },
   "green_case_showcase_one_txt": {
-    "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem TORPEDO das Risiko, den Link zu öffnen als gering einstuft, da die URL in der Liste der Entwickler vorkommt:",
+    "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem TORPEDO das Risiko, den Link zu öffnen als gering einstuft, da die Domain in der Liste der Entwickler vorkommt:",
     "description": "Explanation for the first demonstration of the green-case tutorial"
   },
   "green_case_showcase_two_title": {
@@ -562,7 +562,7 @@
     "description": "Title for the second demonstration of the green-case tutorial"
   },
   "green_case_showcase_two_txt": {
-    "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem TORPEDO das Risiko, den Link zu öffnen, als gering einstuft, da Sie die mit dem Link verknüpfte URL bereits zweimal besucht oder manuell hinzugefügt haben:",
+    "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem TORPEDO das Risiko, den Link zu öffnen, als gering einstuft, da Sie die mit dem Link verknüpfte URL bereits zweimal besucht oder manuell zur benutzer-definierten Liste hinzugefügt haben:",
     "description": "Explanation for the second demonstration of the green-case tutorial"
   },
 
@@ -571,7 +571,7 @@
     "description": "Title for the grey case tutorial"
   },
   "grey_case_txt": {
-    "message": "Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der Webseite hinter dem Link von TORPEDO nicht ermittelt werden kann und daher als <span class='grey'>unbekannt eingestuft</span> wird. In diesem Fall müssen Sie die angezeigte Domain selbst überprüfen, um zu entscheiden, ob Sie die Webseite öffnen können oder es sich (wahrscheinlich) um einen Phishing-Angriff handelt.",
+    "message": "Dieses Dialogfenster weist darauf hin, dass das Risikoniveau des Besuchs der URL hinter dem Link von TORPEDO nicht ermittelt werden kann und daher als <span class='grey'>unbekannt eingestuft</span> wird. In diesem Fall müssen Sie die angezeigte Domain selbst überprüfen, um zu entscheiden, ob Sie die URL öffnen können oder es sich (wahrscheinlich) um einen Phishing-Angriff handelt.",
     "description": "Explanation for the second case (grey) tutorial"
   },
   "grey_case_txt_2": {
@@ -605,7 +605,7 @@
     "description": "Title for the first demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_one_txt": {
-    "message": "Hier ist ein Beispiel für ein Dialogfenster für unbekanntes Risiko, in dem TORPEDO <span class='fat'>example.com</span> nicht in der Liste der legitimen URLs gefunden hat, obwohl es sich um eine legitime Webseite handelt, weil sie nicht zu den am häufigsten besuchten Webseiten gehört.",
+    "message": "Hier ist ein Beispiel für ein Dialogfenster für unbekanntes Risiko, in dem TORPEDO <span class='fat'>example.com</span> nicht in der Liste der legitimen Domains gefunden hat, obwohl es sich um eine legitime Webseite handelt, weil sie nicht zu den am häufigsten besuchten Webseiten gehört.",
     "description": "Explanation for the first demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_two_title": {
@@ -613,7 +613,7 @@
     "description": "Title for the second demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_two_txt": {
-    "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem TORPEDO <span class='fat'>exampie.com</span> (beachten Sie die visuelle Ähnlichkeit des Buchstabens <span class='fat'>i</span> statt <span class='fat'>I</span>) nicht in der Liste der legitimen URLs gefunden hat und daher den Dialog mit unbekanntem Risiko anzeigt. In diesem Fall handelt es sich um eine Phishing-Webseite, die versucht, Sie glauben zu lassen, dass sie zu <span class='fat'>example.com</span> führt, was nicht der Fall ist.",
+    "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem TORPEDO <span class='fat'>exampie.com</span> (beachten Sie die visuelle Ähnlichkeit des Buchstabens <span class='fat'>i</span> statt <span class='fat'>I</span>) nicht in der Liste der legitimen Domains gefunden hat und daher den Dialog mit unbekanntem Risiko anzeigt. In diesem Fall handelt es sich um eine Phishing-Webseite, die versucht, Sie glauben zu lassen, dass sie zu <span class='fat'>example.com</span> führt, was nicht der Fall ist.",
     "description": "Explanation for the second demonstration of the grey-case tutorial"
   },
 
