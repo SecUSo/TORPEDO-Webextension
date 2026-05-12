@@ -230,12 +230,12 @@ header {
 }
 
 .txt-with-showcase .show-case-card {
-    flex: 1.5;
+    flex: 1;
     margin-right: 2rem;
 }
 
 .txt-with-showcase .card:not(.show-case-card) {
-    flex: 1;
+    flex: 1.5;
 }
 
 

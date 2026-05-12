@@ -676,5 +676,9 @@
   "configuration_showcase_two_txt_5": {
     "message": "5. Unter <span class='fat'>Tooltip</span> können Sie die einzelnen Sektionen des Dialogfensters aktivieren oder deaktivieren. Außerdem können Sie einstellen, ob nur die Domain oder die gesamte URL im Dialogfenster angezeigt werden soll.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_three_txt": {
+    "message": "Sowohl die Einstellungen als auch dieses Tutorial können jederzeit über das Icon Symbol, meistens in der oberen rechten Ecke, wie hier im Beispiel von Thunderbird, aufgerufen werden.",
+    "description": "Explanation for the third demonstration of the configuration tutorial"
   }
 }

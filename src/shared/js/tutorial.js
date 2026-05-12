@@ -155,6 +155,7 @@ function init() {
     setInnerHTML("configuration-showcase-two-txt-3", "configuration_showcase_two_txt_3");
     setInnerHTML("configuration-showcase-two-txt-4", "configuration_showcase_two_txt_4");
     setInnerHTML("configuration-showcase-two-txt-5", "configuration_showcase_two_txt_5");
+    setInnerHTML("configuration-showcase-three-txt", "configuration_showcase_three_txt");
 }
 
 
