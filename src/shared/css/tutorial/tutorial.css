@@ -156,7 +156,8 @@ header {
     background-image: radial-gradient(circle at 35% 35%, var(--color-grey), var(--color-grey-dark));
 }
 
-.overview .warning-grey-case {
+.overview .warning-grey-case,
+.overview .warning-grey-case-showcase {
     background-image: url("../../img/warning2.png"), radial-gradient(circle at 35% 35%, var(--color-grey), var(--color-grey-dark));
     background-size: 50%, 100%;
     background-position: 50% 50%;

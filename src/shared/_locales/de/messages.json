@@ -498,6 +498,10 @@
     "description": "Tooltip text for the user to check the URL"
   },
 
+  "tutorial_text" : {
+    "message": "Mit diesem Knopf können Sie jederzeit das Tutorial öffnen, um mehr Informationen zu den Funktionen von TORPEDO zu erhalten.",
+    "description": "Tooltip text for the button to open the tutorial"
+  },
   "open_tutorial_text": {
     "message": "Tutorial öffnen",
     "description": "Button text for opening the tutorial"
@@ -659,7 +663,7 @@
     "description": "Explanation for the first demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_title": {
-    "message": "In den Einstellungen gibt es 5 verschiedene Optionen.",
+    "message": "In den Einstellungen gibt es 6 verschiedene Optionen.",
     "description": "Title for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt": {
@@ -680,6 +684,10 @@
   },
   "configuration_showcase_two_txt_5": {
     "message": "5. Unter <span class='fat'>Tooltip</span> können Sie die einzelnen Sektionen des Dialogfensters aktivieren oder deaktivieren. Außerdem können Sie einstellen, ob nur die Domain oder die gesamte URL im Dialogfenster angezeigt werden soll.",
+    "description": "Explanation for the second demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_two_txt_6": {
+    "message": "6. Unter <span class='fat'>Tutorial</span> können Sie jederzeit das Tutorial öffnen, um mehr Informationen zu den Funktionen von TORPEDO zu erhalten.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_three_txt": {

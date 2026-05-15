@@ -1,15 +1,16 @@
 // Page registry
 const pages = [
-    "welcome",                  // 0
-    "explanation",              // 1
-    "tooltip",                  // 2
-    "green-case",               // 3
-    "green-case-showcase",      // 4
-    "grey-case",                // 5
-    "grey-case-two",            // 6
-    "grey-case-showcase",       // 7
-    "warning-grey-case",        // 8
-    "configuration"             // 9
+    "welcome",                      // 0
+    "explanation",                  // 1
+    "tooltip",                      // 2
+    "green-case",                   // 3
+    "green-case-showcase",          // 4
+    "grey-case",                    // 5
+    "grey-case-two",                // 6
+    "grey-case-showcase",           // 7
+    "warning-grey-case",            // 8
+    "warning-grey-case-showcase",   // 9
+    "configuration"                 // 10
 ];
 
 const LAST_PAGE = pages.length - 1;
@@ -155,6 +156,7 @@ function init() {
     setInnerHTML("configuration-showcase-two-txt-3", "configuration_showcase_two_txt_3");
     setInnerHTML("configuration-showcase-two-txt-4", "configuration_showcase_two_txt_4");
     setInnerHTML("configuration-showcase-two-txt-5", "configuration_showcase_two_txt_5");
+    setInnerHTML("configuration-showcase-two-txt-6", "configuration_showcase_two_txt_6");
     setInnerHTML("configuration-showcase-three-txt", "configuration_showcase_three_txt");
 }
 

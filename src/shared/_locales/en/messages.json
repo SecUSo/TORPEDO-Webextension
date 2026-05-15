@@ -503,6 +503,10 @@
     "description": "Tooltip text for the user to check the URL"
   },
 
+  "tutorial_text" : {
+    "message": "under construction",
+    "description": "Tooltip text for the button to open the tutorial"
+  },
   "open_tutorial_text": {
     "message": "under construction",
     "description": "Button text for opening the tutorial"
@@ -683,6 +687,10 @@
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_5": {
+    "message": "under construction",
+    "description": "Explanation for the second demonstration of the configuration tutorial"
+  },
+  "configuration_showcase_two_txt_6": {
     "message": "under construction",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },

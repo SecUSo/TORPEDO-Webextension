@@ -622,6 +622,7 @@ const OptionsPage = {
             "tooltipCheckboxText-info": "tooltipCheckboxText_info",
             "tooltipCheckboxText-timer": "tooltipCheckboxText_timer",
             // Tutorial tab
+            "tutorialText": "tutorial_text",
             "openTutorial": "open_tutorial_text"
         }
 
