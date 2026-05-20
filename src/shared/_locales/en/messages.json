@@ -514,97 +514,97 @@
 
 
   "welcome_title": {
-    "message": "under construction",
+    "message": "Tutorial [1/8]: Preliminary information",
     "description": "welcome-title tutorial on page 1"
   },
   "introduction_txt": {
-    "message": "under construction",
+    "message": "TORPEDO assists you in determining whether it's safe to visit the website address (also known as URL) associated with a link.",
     "description": "Short introduction in tool, tutorial for page 1 "
   },
   "introduction_txt_2": {
-    "message": "under construction",
+    "message": "Immediately after hovering over a link, but before the URL is loaded into the browser or an application, TORPEDO presents a dialog window containing the domain of the URL associated with the link.",
     "description": "Short introduction in tool, tutorial for page 1 "
   },
 
   "explanation_title": {
-    "message": "under construction",
+    "message": "Tutorial [2/8]: Domain of the URL",
     "description": "explanation-title tutorial on page 2"
   },
   "explanation_txt": {
-    "message": "under construction",
+    "message": "The dialog window only shows the domain, since the domain of the URL is the most critical part for identifying potential phishing attempts. The domain of the URL is the area right before the <span class='fat'>third slash</span> separated <span class='fat'>by a dot</span>.",
     "description": "functionality-explanation on page 2"
   },
   "explanation_txt_2": {
-    "message": "under construction",
+    "message": "To illustrate this, the <span class='domain-mark'>domain</span> of the URLs shown below, is emphasized accordingly:",
     "description": "functionality-explanation on page 2"
   },
 
   "tooltip_title": {
-    "message": "under construction",
+    "message": "Tutorial [3/8]: Dialog windows",
     "description": "tooltip-title tutorial on page 3"
   },
   "tooltip_txt": {
-    "message": "under construction",
+    "message": "TORPEDO displays one of two types of dialog windows. The type displayed depends on the identified <span class='fat'>risk level</span> of the URL associated with the link: <span class='green'>low risk</span> and <span class='grey'>unknown risk</span>. For each risk level, TORPEDO displays a separate dialog window immediately after hovering over a link. These risk levels are explained in the following.",
     "description": "tooltip on page 3"
   },
 
   "green_case_title": {
-    "message": "under construction",
+    "message": "Tutorial [4/8]: <span class='green'>Low risk dialog window</span>",
     "description": "Title for the first case (green) tutorial"
   },
   "green_case_txt": {
-    "message": "under construction",
+    "message": "This dialog window indicates that the risk level of visiting the URL associated with the link is <span class='green'>deemed low</span>. This is because the domain belongs to a list of websites which the developers consider to be legitimate or it belongs to a user-defined list of websites. The user-defined list contains all websites that you have either visited twice or added manually.",
     "description": "Explanation for the first case (green) tutorial"
   },
 
   "green_case_showcase_one_title": {
-    "message": "under construction",
+    "message": "<span class='green'>Low risk</span> dialog window - Example 1",
     "description": "Title for the first demonstration of the green-case tutorial"
   },
   "green_case_showcase_one_txt": {
-    "message": "under construction",
+    "message": "Here is an example of a dialog window where the risk level of visiting the URL is deemed low because the Domain is part of the developer’s list of websites:",
     "description": "Explanation for the first demonstration of the green-case tutorial"
   },
   "green_case_showcase_two_title": {
-    "message": "under construction",
+    "message": "<span class='green'>Low risk</span> dialog window - Example 2",
     "description": "Title for the second demonstration of the green-case tutorial"
   },
   "green_case_showcase_two_txt": {
-    "message": "under construction",
+    "message": "Here is an example of a dialog window where TORPEDO deems the risk of visiting the URL as low, because you have already visited it twice or manually added it to the user-defined list:",
     "description": "Explanation for the second demonstration of the green-case tutorial"
   },
 
   "grey_case_title": {
-    "message": "under construction",
+    "message": "Tutorial [5/8]: <span class='grey'>Unknown risk dialog window</span>",
     "description": "Title for the grey case tutorial"
   },
   "grey_case_txt": {
-    "message": "under construction",
+    "message": "This dialog window indicates that the risk level of visiting the URL associated with the link is <span class='grey'>deemed unknown</span>. In this case, you need to inspect and verify the domain of the URL by yourself to determine whether the URL is safe to open or if it is likely a phishing attack.",
     "description": "Explanation for the second case (grey) tutorial"
   },
   "grey_case_txt_2": {
-    "message": "under construction",
+    "message": "To encourage a careful consideration of the domain of the URL, the link is temporarily disabled for 3 seconds (3s).",
     "description": "Explanation for the second case (grey) tutorial"
   },
 
   "grey_case_two_title": {
-    "message": "under construction",
+    "message": "Tutorial [6/8]: Unknown risk dialog window",
     "description": "Title for the second case (grey) tutorial, page 2"
   },
   "grey_case_two_txt": {
-    "message": "under construction",
+    "message": "First, verify whether the domain displayed by TORPEDO is plausible, i.e. it matches the name of the website provider you expect behind the link.",
     "description": "Explanation for the second case (grey) tutorial, page 2"
   },
   "grey_case_two_txt_2": {
-    "message": "under construction",
+    "message": "For example, if you hover over a link for a YouTube video, you expect the domain to be <span class='fat'>youtube.com</span>. If you see something like <span class='fat'>sadhaskjas.com</span> instead, then the URL associated with the link is likely to be a phishing one.",
     "description": "Explanation for the second case (grey) tutorial, page 2"
   },
   "grey_case_two_txt_3": {
-    "message": "under construction",
+    "message": "Also pay special attention to the spelling in the domain because phishing domains often mimic legitimate ones with only slight typos.",
     "description": "Explanation for the second case (grey) tutorial, page 2"
   },
   "grey_case_two_txt_4": {
-    "message": "under construction",
+    "message": "But all three are phishing websites.",
     "description": "Explanation for the second case (grey) tutorial, page 2"
   },
 
@@ -613,7 +613,7 @@
     "description": "Title for the first demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_one_txt": {
-    "message": "under construction",
+    "message": "Here is an example of a dialog window where TORPEDO did not find the <span class='fat'>example.com</span> on the list of legitimate domains even though it’s a legitimate website because it is not one of the most visited websites.",
     "description": "Explanation for the first demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_two_title": {
@@ -621,28 +621,29 @@
     "description": "Title for the second demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_two_txt": {
-    "message": "under construction",
+    "message": "Here is an example of a dialog window where TORPEDO did not find the <span class='fat'>exampie.com</span> (notice the visual resemblance of the letter <span class='fat'>i</span> instead of <span class='fat'>l</span>) on the list of legitimate domains, and therefore shows the unknown risk type of dialog window. In this case the website is a phishing one which tries to make you believe it goes to <span class='fat'>example.com</span> which is not the case.",
     "description": "Explanation for the second demonstration of the grey-case tutorial"
   },
 
   "warning_grey_case_title": {
-    "message": "under construction",
+    "message": "Tutorial [7/8]: <span class='grey'>Unknown risk dialog window with warning symbol</span>",
     "description": "Title for the warning in the grey-case tutorial"
   },
   "warning_grey_case_txt": {
-    "message": "under construction",
+    "message": "The warning symbol is displayed since at least one indicator that is often used in phishing attacks was found. However, it does not necessarily mean that it is a phishing URL. Legitimate emails may contain these indicators as well. Here you need to check particularly carefully whether the link leads to a website that might perform a phishing attack or not.",
     "description": "Explanation for the warning in the grey-case tutorial"
   },
   "warning_grey_case_txt_2": {
-    "message": "under construction",
+    "message": "To encourage a careful consideration of the domain of the URL, the link is temporarily disabled for 3 seconds (3s) as well.",
     "description": "Explanation for the warning in the grey-case tutorial"
   },
+
   "warning_grey_case_showcase_one_title": {
     "message": "under construction",
     "description": "Title for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_one_txt": {
-    "message": "under construction",
+    "message": "Here is an example of a dialog window where the URL associated with the link does not match the displayed URL. In this case, it is a phishing link, as the dialog reveals that the page does not actually lead to <span class='fat'>karlsruhe.de</span>.",
     "description": "Explanation for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_two_title": {
@@ -650,16 +651,16 @@
     "description": "Title for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_two_txt": {
-    "message": "under construction",
+    "message": "Here is an example of a dialog window where the URL associated with the link does not match the displayed URL, although the link is still legitimate. The link text contains a typo: 'Aachen' is spelled with two 'n's. Such typos can occasionally occur in emails. However, since the underlying domain belongs to RWTH Aachen, this is not a phishing attempt.",
     "description": "Explanation for the second demonstration of the warning in the grey-case tutorial"
   },
 
   "configuration_title": {
-    "message": "under construction",
+    "message": "Tutorial [8/8]: Special cases and settings",
     "description": "Title for the configuration tutorial"
   },
   "configuration_txt": {
-    "message": "under construction",
+    "message": "TORPEDO supports a number of special cases, such as short URLs and redirects. To ensure that these are configured according to your needs, we recommend that you take a look at the settings.",
     "description": "Explanation for the configuration tutorial"
   },
   "configuration_showcase_one_txt": {
@@ -667,27 +668,27 @@
     "description": "Explanation for the first demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_title": {
-    "message": "under construction",
+    "message": "In the settings there are 6 different options.",
     "description": "Title for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt": {
-    "message": "under construction",
+    "message": "1. <span class='fat'>Timer</span> lets you change the settings of the timer e.g., you can increase or decrease the time or deactivate the timer completely. You can also activate and deactivate the different modes. \nIf the privacy mode is activated, links are always opened via the resolved domain and not via the origin link. Also, short URLs are not resolved directly, but only after your confirmation. \nIf Security Mode is enabled, you will see the gray case with a warning icon only after the second referrer. Otherwise, this already happens with the first one.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_2": {
-    "message": "under construction",
+    "message": "2. <span class='fat'>Domains</span> lets you deactivate the list of most visited websites for the green case. You can also add your own cases to the Blue Case list here.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_3": {
-    "message": "under construction",
+    "message": "3. <span class='fat'>Referrer</span> lets you view the currently integrated referrers and add your own.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_4": {
-    "message": "under construction",
+    "message": "4. <span class='fat'>Short URL</span> lets you view the currently integrated short URLs and add your own.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_5": {
-    "message": "under construction",
+    "message": "5. <span class='fat'>Tooltip</span> lets you enable or disable individual sections of the dialog window. You can also configure whether to display only the domain or the full URL in the dialog window.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_6": {
@@ -695,7 +696,7 @@
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_three_txt": {
-    "message": "under construction",
+    "message": "Both the settings and this tutorial can be accessed at any time via the TORPEDO icon, typically located in the upper-right corner, as shown in this Thunderbird example.",
     "description": "Explanation for the third demonstration of the configuration tutorial"
   }
 }

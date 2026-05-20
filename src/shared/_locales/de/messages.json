@@ -554,7 +554,7 @@
   },
 
   "green_case_showcase_one_title": {
-    "message": "Dialogfenster bei <span class='green'>niedrigem Risiko</span> - Beispiel 1</span>",
+    "message": "Dialogfenster bei <span class='green'>niedrigem Risiko</span> - Beispiel 1",
     "description": "Title for the first demonstration of the green-case tutorial"
   },
   "green_case_showcase_one_txt": {
@@ -633,6 +633,7 @@
     "message": "Um eine sorgfältige Prüfung der Domain zu fördern, deaktiviert TORPEDO auch hier das Öffnen des Links für drei Sekunden (3s).",
     "description": "Explanation for the warning in the grey-case tutorial"
   },
+  
   "warning_grey_case_showcase_one_title": {
     "message": "Dialogfenster bei <span class='grey'>unbekanntem Risiko mit Warnsymbol</span> - Beispiel 1",
     "description": "Title for the first demonstration of the warning in the grey-case tutorial"
