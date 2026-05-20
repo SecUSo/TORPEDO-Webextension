@@ -502,6 +502,7 @@
     "message": "Mit diesem Knopf können Sie jederzeit das Tutorial öffnen, um mehr Informationen zu den Funktionen von TORPEDO zu erhalten.",
     "description": "Tooltip text for the button to open the tutorial"
   },
+
   "open_tutorial_text": {
     "message": "Tutorial öffnen",
     "description": "Button text for opening the tutorial"

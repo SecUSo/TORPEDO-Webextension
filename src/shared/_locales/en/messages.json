@@ -499,18 +499,19 @@
   },
 
   "tooltip_text": {
-    "message": "under construction",
+    "message": "Here you can enable or disable individual sections of the dialog box by clicking the checkboxes. The preview of the dialog box shows you what the dialog box would look like.",
     "description": "Tooltip text for the user to check the URL"
   },
 
   "tutorial_text" : {
-    "message": "under construction",
+    "message": "Use this button to open the tutorial at any time for more information about TORPEDO's features.",
     "description": "Tooltip text for the button to open the tutorial"
   },
   "open_tutorial_text": {
-    "message": "under construction",
+    "message": "open Tutorial",
     "description": "Button text for opening the tutorial"
   },
+
 
 
   "welcome_title": {
@@ -609,7 +610,7 @@
   },
 
   "grey_case_showcase_one_title": {
-    "message": "under construction",
+    "message": "<span class='grey'>Unknown risk</span> dialog window - Example 1",
     "description": "Title for the first demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_one_txt": {
@@ -617,7 +618,7 @@
     "description": "Explanation for the first demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_two_title": {
-    "message": "under construction",
+    "message": "<span class='grey'>Unknown risk</span> dialog window - Example 2",
     "description": "Title for the second demonstration of the grey-case tutorial"
   },
   "grey_case_showcase_two_txt": {
@@ -639,7 +640,7 @@
   },
 
   "warning_grey_case_showcase_one_title": {
-    "message": "under construction",
+    "message": "<span class='grey'>Unknown risk with warning symbol</span> dialog window - Example 1",
     "description": "Title for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_one_txt": {
@@ -647,11 +648,11 @@
     "description": "Explanation for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_two_title": {
-    "message": "under construction",
+    "message": "<span class='grey'>Unknown risk with warning symbol</span> dialog window - Example 2",
     "description": "Title for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_two_txt": {
-    "message": "Here is an example of a dialog window where the URL associated with the link does not match the displayed URL, although the link is still legitimate. The link text contains a typo: 'Aachen' is spelled with two 'n's. Such typos can occasionally occur in emails. However, since the underlying domain belongs to RWTH Aachen, this is not a phishing attempt.",
+    "message": "Here is an example of a dialog window where the URL associated with the link does not match the displayed URL, although the link is still legitimate. The link text contains a typo: 'Aachen' is spelled with two <span class='fat'>n</span>. Such typos can occasionally occur in emails. However, since the underlying domain belongs to RWTH Aachen, this is not a phishing attempt.",
     "description": "Explanation for the second demonstration of the warning in the grey-case tutorial"
   },
 
@@ -664,7 +665,7 @@
     "description": "Explanation for the configuration tutorial"
   },
   "configuration_showcase_one_txt": {
-    "message": "under construction",
+    "message": "You can open the settings by right-clicking on the tooltip.",
     "description": "Explanation for the first demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_title": {
@@ -692,7 +693,7 @@
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_6": {
-    "message": "under construction",
+    "message": "6. <span class='fat'>Tutorial</span> lets you open the tutorial at any time to learn more about TOREPDO's features.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_three_txt": {
