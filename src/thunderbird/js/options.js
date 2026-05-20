@@ -103,8 +103,13 @@ const OptionsPage = {
         });
 
         document.getElementById("timerInput").addEventListener('change', (e) => {
-            const timerValue = e.target.value;
+            let timerValue = e.target.value;
             document.getElementById('timerCheckbox').checked = timerValue > 0;
+
+            if (timerValue < 0) {
+                timerValue = 0;
+            }
+
             browser.storage.sync.set({ timer: timerValue });
         });
 
