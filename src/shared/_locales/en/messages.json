@@ -5,11 +5,11 @@
   },
 
   "extensionDescriptionBrowser": {
-    "message": "Shows URLs and their security status when moving over links in a webmail applications. This browser addon is based on the bachelor thesis of Bettina Ballin.",
+    "message": "Shows URLs and their security status when moving over links in a webmail applications.",
     "description": "Description of the extension."
   },
   "extensionDescriptionThunderbird": {
-    "message": "Shows URLs and their security status when moving over links in thunderbird. This thunderbird addon is based on the bachelor thesis of Bettina Ballin.",
+    "message": "Shows URLs and their security status when moving over links in thunderbird.",
     "description": "Description of the extension."
   },
 
@@ -274,11 +274,6 @@
     "description": "Address of info image"
   },
 
-  "deduceURL": {
-    "message": "Deduce target URL",
-    "description": "Button text for deducing the target URL if the URL is a redirect"
-  },
-
   "options": {
     "message": "TORPEDO Options",
     "description": "Options"
@@ -329,11 +324,6 @@
     "description": "Activate list of trusted domains."
   },
 
-  "showLowRiskList": {
-    "message": "Toggle entries",
-    "description": "Toggle list of trusted domains."
-  },
-
   "activatePrivacyMode": {
     "message": "Privacy Mode",
     "description": "Activate privacy mode."
@@ -354,9 +344,14 @@
     "description": "Trusted domains."
   },
 
+  "showLowRiskList": {
+    "message": "Toggle entries",
+    "description": "Show list of trusted domains."
+  },
+
   "userDomains": {
     "message": "Domains you considered as 'low-risk' (blue).",
-    "description": "Activate timer on list of user list domains."
+    "description": "List of user risk domains."
   },
 
   "userList": {
@@ -473,8 +468,13 @@
     "description": "Changes reversed"
   },
 
-  "defaultSettingsRestored": {
+  "defaultSettingsRestoredBrowser": {
     "message": "Default settings restored! Please reload the page on which you are using TORPEDO.",
+    "description": "Default settings"
+  },
+
+  "defaultSettingsRestoredThunderbird": {
+    "message": "Default settings restored!",
     "description": "Default settings"
   },
 
@@ -507,6 +507,7 @@
     "message": "Use this button to open the tutorial at any time for more information about TORPEDO's features.",
     "description": "Tooltip text for the button to open the tutorial"
   },
+
   "open_tutorial_text": {
     "message": "open Tutorial",
     "description": "Button text for opening the tutorial"
