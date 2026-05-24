@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="576"
+   height="363.5"
+   viewBox="0 0 576 363.5"
+   version="1.1"
+   xml:space="preserve"
+   style="clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
+   id="svg24"
+   sodipodi:docname="warning_grey_case_one_en.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+   id="namedview24"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   showgrid="false"
+   inkscape:zoom="2.7512563"
+   inkscape:cx="227.53242"
+   inkscape:cy="164.47032"
+   inkscape:window-width="2880"
+   inkscape:window-height="1514"
+   inkscape:window-x="-11"
+   inkscape:window-y="-5"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="warning-grey_case_phish_de" />
+    <g
+   transform="translate(-626,-92)"
+   id="g24">
+        <g
+   id="warning-grey_case_phish_de"
+   transform="translate(607.159,-866.972)">
+            <g
+   id="border_template"
+   transform="matrix(4.87356,0,0,3.77101,-150.884,870.1442)">
+                <path
+   d="M 153,31.207 C 153,30.541 152.54,30 151.974,30 H 36.026 C 35.46,30 35,30.541 35,31.207 v 87.586 c 0,0.666 0.46,1.207 1.026,1.207 h 115.948 c 0.566,0 1.026,-0.541 1.026,-1.207 z"
+   style="fill:#ffffff"
+   id="path1" />
+                <path
+   d="M 153,31.207 C 153,30.541 152.54,30 151.974,30 H 36.026 C 35.46,30 35,30.541 35,31.207 v 87.586 c 0,0.666 0.46,1.207 1.026,1.207 h 115.948 c 0.566,0 1.026,-0.541 1.026,-1.207 z M 36.231,31.448 v 87.104 H 151.769 V 31.448 Z"
+   style="fill:#bfb9b9"
+   id="path2" />
+            </g>
+            <g
+   id="warning_triangle"
+   transform="matrix(1.0625,0,0,1.06897,-1.24005,-69.6877)">
+                <g
+   transform="matrix(0.941176,0,0,0.935484,18.8997,962.294)"
+   id="g2">
+                    <use
+   xlink:href="#_Image1"
+   x="16.443001"
+   y="34.705002"
+   width="37.525002"
+   height="35.514"
+   transform="scale(0.9875,0.986486)"
+   id="use2" />
+                </g>
+                <g
+   transform="translate(-607.054,867.765)"
+   id="g3">
+                    <text
+   x="657"
+   y="152"
+   style="font-size:20px;font-family:ARJULIAN, 'AR JULIAN';fill:#ffffff"
+   id="text2">!</text>
+                </g>
+            </g>
+            <g
+   id="text_in_border"
+   transform="translate(-17.8237,656.512)">
+                <g
+   transform="translate(-5.45944,-3)"
+   id="g11">
+                    <text
+   x="62"
+   y="434.78699"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text3"><tspan
+     sodipodi:role="line"
+     id="tspan14"
+     x="62"
+     y="434.78699">Unknown risk but careful:</tspan></text>
+                    <text
+   x="290.61273"
+   y="434.78699"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text4"><tspan
+     sodipodi:role="line"
+     id="tspan15"
+     x="290.61273"
+     y="434.78699">The risk of clicking the link can not</tspan></text>
+                    <text
+   x="62"
+   y="458.53"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text5"><tspan
+     sodipodi:role="line"
+     id="tspan16"
+     x="62"
+     y="458.53">deﬁnitively be classiﬁed. However, at least one indicator that is</tspan></text>
+                    <text
+   x="62"
+   y="482.272"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text6"><tspan
+     sodipodi:role="line"
+     id="tspan17"
+     x="62"
+     y="482.272">often used in phishing attacks to mislead you was found. You have</tspan></text>
+                    <text
+   x="62"
+   y="506.01401"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text7"><tspan
+     sodipodi:role="line"
+     id="tspan18"
+     x="62"
+     y="506.01401">to classify the risk yourself by checking the domain (</tspan></text>
+                    <text
+   x="62"
+   y="529.75702"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text8"><tspan
+     sodipodi:role="line"
+     id="tspan21"
+     x="62"
+     y="529.75702">of the URL.</tspan></text>
+                    
+                    <text
+   x="480.96933"
+   y="506.20877"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text10"><tspan
+     sodipodi:role="line"
+     id="tspan19"
+     x="480.96933"
+     y="506.20877">bold area</tspan></text>
+                    <text
+   x="560.58765"
+   y="506.72278"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text11"><tspan
+     sodipodi:role="line"
+     id="tspan20"
+     x="560.58765"
+     y="506.72278">)</tspan></text>
+                </g>
+                <g
+   transform="translate(15.3181,-243.717)"
+   id="g12">
+                    <text
+   x="40.921001"
+   y="853"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text12"><tspan
+     sodipodi:role="line"
+     id="tspan13"
+     x="40.921001"
+     y="853">The link was deactivated to give you time to check the domain.</tspan></text>
+                </g>
+                <g
+   transform="translate(16.6385,-238.773)"
+   id="g13">
+                    <text
+   x="40.921001"
+   y="884.53998"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text13"><tspan
+     sodipodi:role="line"
+     id="tspan12"
+     x="40.921001"
+     y="884.53998">Time remaining: 0 second(s).</tspan></text>
+                </g>
+                <g
+   id="URL_optimized_readability"
+   transform="translate(0,-1)">
+                    
+                    
+                    <text
+   x="57.391998"
+   y="399"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text16"><tspan
+     sodipodi:role="line"
+     id="tspan24"
+     x="57.391998"
+     y="399">2 0 2 0 v a c c i n e . o r g</tspan></text>
+                    
+                </g>
+                <g
+   id="first_line"
+   transform="translate(39.743,-1.3439)">
+                    <text
+   x="58"
+   y="362"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text18"><tspan
+     sodipodi:role="line"
+     id="tspan2"
+     x="58"
+     y="362">Deposited URL (also called web address):</tspan></text>
+                </g>
+                <g
+   id="more_information_classification"
+   transform="translate(2.62532,-29.36794)">
+                    <g
+   transform="translate(-592.961,-556.608)"
+   id="g19">
+                        <text
+   x="695"
+   y="1149.09"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text19"><tspan
+     sodipodi:role="line"
+     id="tspan1"
+     x="695"
+     y="1149.09">More information on this classification</tspan></text>
+                        <rect
+   x="695"
+   y="1151.1"
+   width="316.9787"
+   height="1.392"
+   id="rect19"
+   style="stroke-width:0.989623" />
+                    </g>
+                    <g
+   id="info_icon"
+   transform="translate(-591.961,-552.438)">
+                        <g
+   id="information_icon_text"
+   transform="translate(0,0.499922)">
+                            <g
+   transform="matrix(30,0,0,30,658.802,1148.72)"
+   id="g20">
+                                <path
+   d="M 0.199,0 C 0.181,0.004 0.177,0.008 0.127,0.009 0.118,0.009 0.108,0.006 0.102,0.005 0.076,0 0.064,-0.008 0.065,-0.018 v -0.003 c 0.016,-0.092 0.025,-0.145 0.028,-0.16 0.01,-0.062 0.014,-0.116 0.014,-0.161 0,-0.01 -0.004,-0.017 -0.014,-0.021 -0.01,-0.003 -0.022,-0.005 -0.037,-0.005 -0.015,0 -0.025,0.001 -0.03,0.001 l 0.002,-0.026 c 0.009,0.002 0.017,0.002 0.025,0.002 h 0.024 c 0.016,0 0.039,-0.004 0.069,-0.012 0.031,-0.008 0.053,-0.012 0.067,-0.012 0.011,0 0.018,0.004 0.02,0.012 0.003,0.007 0.004,0.015 0.004,0.021 0,0.056 -0.004,0.123 -0.013,0.203 -0.006,0.041 -0.01,0.082 -0.015,0.122 l 0.052,-0.011 0.005,0.031 c -0.01,0.008 -0.02,0.015 -0.03,0.02 C 0.226,-0.011 0.212,-0.003 0.199,0 Z"
+   style="fill:#0a1457;fill-rule:nonzero"
+   id="path19" />
+                            </g>
+                            <g
+   transform="matrix(1.75018,0,0,1.75018,-498.398,-849.473)"
+   id="g21">
+                                <circle
+   cx="664.36902"
+   cy="1132.35"
+   r="1.3329999"
+   style="fill:#0a1457"
+   id="circle20" />
+                            </g>
+                        </g>
+                        <g
+   transform="matrix(0.9375,0,0,0.9375,41.6198,72.1875)"
+   id="g22">
+                            <circle
+   cx="663"
+   cy="1139"
+   r="16"
+   style="fill:none;stroke:#0a1457;stroke-width:3px"
+   id="circle21" />
+                        </g>
+                    </g>
+                </g>
+            <text
+   x="279.70325"
+   y="397.59937"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;clip-rule:evenodd;fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
+   id="text6-9"><tspan
+     sodipodi:role="line"
+     id="tspan18-4"
+     x="279.70325"
+     y="397.59937">[..]</tspan></text></g>
+            <g
+   transform="translate(-4.54856,3)"
+   id="g23">
+                <text
+   x="26.239"
+   y="969.47601"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif;fill:#195ace"
+   id="text22">w<tspan
+   x="38.890999 51.543999 63.195 67.783997 76.403999 86.043999 91.634003 95.211998 103.833 109.423 119.062 128.702 138.342 142.92999 152.57001"
+   y="969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601 969.47601"
+   id="tspan22">ww.karlsruhe.de</tspan></text>
+                <rect
+   x="26.239"
+   y="971.39801"
+   width="135.97099"
+   height="1.329"
+   style="fill:#195ace"
+   id="rect22" />
+            </g>
+            <g
+   id="mouse_cursor"
+   transform="matrix(0.600152,0,0,0.600152,-72.5031,822.711)">
+                <path
+   d="m 353,272 c 0.833,1.715 2.845,3.407 4,5.292 1.544,2.523 5.266,9.841 5.266,9.841 0,0 2.684,4.556 4.734,5.867 2.05,1.311 5.233,2 7.566,2 2.246,0 4.568,-0.75 6.434,-2 2.239,-1.5 5.774,-3.936 7,-7 1.333,-3.333 1,-9.167 1,-13 0,-3.35 -0.412,-8.122 -1,-10 -1.038,-3.315 -5.713,-2.134 -5.643,-0.935 0.15,2.567 0.077,4.068 0.077,4.068 0,0 0.138,-4.778 -0.434,-6.133 -0.467,-1.107 -1.969,-2 -3,-2 -1.031,0 -3.468,0.29 -3.184,2 0.284,1.71 0,6 0,6 0,0 0.303,-4.5 0,-6 -0.231,-1.146 -1.013,-2.5 -1.816,-3 -0.803,-0.5 -2.231,-0.138 -3,0 -0.595,0.107 -1.612,0.829 -1.612,0.829 l 0.046,8.171 c 0,0 -0.008,-18.903 -0.474,-20.769 -0.566,-2.264 -6.228,-2.582 -7,0 C 361.187,247.812 362,272 362,272 c 0,0 -4.812,-6.643 -6,-7 -1.188,-0.357 -3.723,-0.123 -4,2 -0.277,2.123 0.257,3.471 1,5 z"
+   style="fill:#ffffff;stroke:#000000;stroke-width:2.03px"
+   id="path23" />
+            </g>
+        </g>
+    </g>
+    <defs
+   id="defs24">
+        <image
+   id="_Image1"
+   width="38"
+   height="36"
+   xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkCAYAAADl9UilAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAEg0lEQVRYhc1XXUgjVxQ+mVTTaOpPVhPt+hMXs8K2JdiHRugW2hLKgujOTJJRIRWiLhpEs2iRLUGQLJRC26cGtn+CvvhUSF9KEV9ECIJiXwILEhJNSCQR8UGdDMkwc/vgzpiMiTEaN/0gD9+55+R+883JuTcAJYDT6Xzm9/tZv9/POp3OZ6X4zltDr9c/CAQCHHqDQCDA6fX6B+XWBR6P5x8kgcfj+busokwmU/fh4aFUF0okEshkMnWXTdjy8vK/l1S9wdLS0k5ZRNlstic0TYtCWJZFLMuKnKZpZLPZnrx1YV6vN5LpUDAYRKFQKMs1r9cbfquipqenxzhO/CEihmGQz+dDPp8PMQwjxjmOQ1NTUyM32QO7SRGO4z9i2EVpOBwGnueB53kIhy9MwjAMCIL46SZ7yIstmJ+ffzkyMvKVwM/OziAUConryWQS1Go1VFZWAgBAR0fHuxzHYRsbG+vF7FOUY2q1upUkybnM2N7e3qU8acxsNr9Qq9WtxexVlGNut9tDkuTHAj8+PoZoNHopL5VKgUqlAqVSCQAATU1NcgzD7q2trf113b2u7ZjBYHhosVhsmbH9/f28+dI1q9X6tcFgeFhyYQ6H4xedTicTeDweh2QymTc/mUxCPB4XuU6nk01MTLwqqbC+vr4eiqK+EDjP8xCJRArWRSIR4Hle5BRFfdnb2/tJyYQNDg7+UV9fL/JYLAbpdLpgXTqdhlgsJnK1Wg1DQ0OLJRFmt9ufms3mDwTOsmzOhs+HaDQKLMuK3GKxfGi325/eWhhJkq8UCoXII5EIcBx3bWEcx2W9doVCASRJFuy1K8fF7Ozs1OTkJCWTnfc8wzAQCASuLUoATdPQ2NgIFRUVAACg1+vfOz09Pdrc3NzOV3OlYziOfyeIAjgfAQihooUhhLLGh0wmAxzHv7+qJq9jCwsLPwwPD38u8JOTkyvnViEwDAN1dXUgtEV7e3ulTCZTra+vr+XKz+lYc3Nzu8VieZ4Zy3X0FAvpg5nN5ufNzc3tuXJzOuZ2u3/v7+//SOBHR0dwcHBwa2GpVAqqq6uhqqoKAAA0Gg2GYdj7q6urf0pzLzlmNBofWa1Wq8ARQllXmdtC2qcWi4UyGo2PCgobGxv7raWlReTxeBwYhimZMIZhso6q1tZWGB0d/fVKYWaz+TOKoj4VuHQGlQrSWUhR1GOCIB7nFUZR1GJNTY3IpVO7VJCeHrW1tTAwMJB1VInNPz4+PjAzMzMul5+H0uk07O7u3mhuXQc0TYNWqwVhv66urnuJROL1zs7Oa4AMx3Ac/1mYzAAX9/i7grRNKioqgCAIj8DlAABzc3PfOBwOXAgmk0kIBoN3JkoATdPQ0NAgHlWdnZ3VDMOc+Xy+TUypVN4nSdKdWbC3t3dnrzAT0qMKAIAgiJdKpfL+Oy6X61uj0agUFnieh/r6esi8f901eJ4H4e9gT0+P0uVyvYDt7W0G/c+wtbXFYBqNRlHggd46tFqtQq7Valva2tq6VSqVDCEE5f5Eo1G0srKyKMsQqimbRdk4BAD4D7GZQUBgFrNhAAAAAElFTkSuQmCC" />
+    </defs>
+</svg>

@@ -158,6 +158,18 @@ function init() {
     setInnerHTML("configuration-showcase-two-txt-5", "configuration_showcase_two_txt_5");
     setInnerHTML("configuration-showcase-two-txt-6", "configuration_showcase_two_txt_6");
     setInnerHTML("configuration-showcase-three-txt", "configuration_showcase_three_txt");
+
+    // images based on language
+    const lang = browser.i18n.getUILanguage().substring(0, 2);
+    setImage("green-case-showcase-one-img", `img/examples/${lang}/green_case_one_${lang}.svg`);
+    setImage("green-case-showcase-two-img", `img/examples/${lang}/green_case_two_${lang}.svg`);
+    setImage("grey-case-showcase-one-img", `img/examples/${lang}/grey_case_one_${lang}.svg`);
+    setImage("grey-case-showcase-two-img", `img/examples/${lang}/grey_case_two_${lang}.svg`);
+    setImage("warning-grey-case-showcase-one-img", `img/examples/${lang}/warning_grey_case_one_${lang}.svg`);
+    setImage("warning-grey-case-showcase-two-img", `img/examples/${lang}/warning_grey_case_two_${lang}.svg`);
+    setImage("configuration-showcase-one-img", `img/examples/${lang}/simple-grey_case_contextmenu_${lang}.svg`);
+    setImage("configuration-showcase-two-img", `img/examples/${lang}/configuration_${lang}.png`);
+    setImage("configuration-showcase-three-img", `img/examples/${lang}/icon_${lang}.png`);
 }
 
 
@@ -169,4 +181,9 @@ function getMsg(key) {
 function setInnerHTML(elementId, msgKey) {
     const el = document.getElementById(elementId);
     if (el) el.innerHTML = getMsg(msgKey);
+}
+
+function setImage(id, path) {
+    const el = document.getElementById(id);
+    if (el) el.src = path;
 }
