@@ -545,7 +545,7 @@ const OptionsPage = {
                 ]
             });
             await this.loadAndApplySettings();
-            document.getElementById("statusSettings").textContent = browser.i18n.getMessage("defaultSettingsRestored");
+            document.getElementById("statusSettings").textContent = browser.i18n.getMessage("defaultSettingsRestoredBrowser");
         });
     },
 

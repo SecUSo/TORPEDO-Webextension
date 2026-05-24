@@ -468,8 +468,13 @@
     "description": "Changes reversed"
   },
 
-  "defaultSettingsRestored": {
+  "defaultSettingsRestoredBrowser": {
     "message": "Ursprungszustand wiederhergestellt! Bitte laden Sie die Seite erneut, auf der Sie TORPEDO nutzen.",
+    "description": "Default settings"
+  },
+
+  "defaultSettingsRestoredThunderbird": {
+    "message": "Ursprungszustand wiederhergestellt!",
     "description": "Default settings"
   },
 
