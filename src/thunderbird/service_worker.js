@@ -354,6 +354,7 @@ const initialStorage = new Map([
         "poprl.com",
         "njx.me",
         "shrinkify.info",
+        "share.google"
     ]],
 ]);
 
