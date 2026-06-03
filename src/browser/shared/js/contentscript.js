@@ -124,11 +124,14 @@
         }
 
         if (torpedo.state !== "closed") {
-            if (e === torpedo.target && torpedo.hideTimer) {
-                clearTimeout(torpedo.hideTimer);
+            if (e === torpedo.target) {
+                if (torpedo.hideTimer) {
+                    clearTimeout(torpedo.hideTimer);
+                }
+                return;
+            } else {
+                TooltipManager.hideTooltip();
             }
-
-            return;
         }
 
         torpedo.state = "pending";

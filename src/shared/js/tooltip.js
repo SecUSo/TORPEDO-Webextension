@@ -66,6 +66,8 @@ const TooltipManager = (function() {
     async function showTooltip(target) {
         const tooltipDiv = await fetchHTML("tooltip.html");
 
+        if (target !== torpedo.target) return;
+
         if (!tooltipDiv) {
             throw new Error("Failed to load tooltip HTML.");
         }
@@ -79,8 +81,13 @@ const TooltipManager = (function() {
         torpedo.state = "open";
 
         await applyUserSettings();
+
+        if (target !== torpedo.target) { tooltipDiv?.remove(); return; }
+
         bindHoverEvents(tooltipDiv);
         await positionTooltip(target, tooltipDiv);
+
+        if (target !== torpedo.target) { tooltipDiv?.remove(); return; }
 
         initStaticContent();
         initContextMenu();
@@ -173,7 +180,7 @@ const TooltipManager = (function() {
         try {
             computePosition(target, tooltipDiv, {
                 placement: "bottom-start",
-                middleware: [offset(8), flip(), shift({ padding: 5 })]
+                middleware: [flip(), shift({ padding: 5 })]
             }).then(({ x, y }) => {
                 tooltipDiv.style.left = `${x}px`;
                 tooltipDiv.style.top = `${y}px`;
