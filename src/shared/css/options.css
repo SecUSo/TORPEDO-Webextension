@@ -1,6 +1,9 @@
 body{
   background: #fafafa;
   font-family: Helvetica;
+    margin: 0;
+    padding: 15px;
+    box-sizing: border-box;
 }
 table, td {
     border: 1px solid black;
@@ -238,4 +241,9 @@ input[type="number"] {
     border-left: 1px solid #ddd;
     min-width: 36px;
     align-self: stretch;
+}
+
+#statusSettings {
+    margin: 0;
+    padding-bottom: 15px;
 }
