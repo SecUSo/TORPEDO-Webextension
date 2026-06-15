@@ -645,7 +645,7 @@
     "description": "Title for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_one_txt": {
-    "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem die mit dem Link verknüpfte URL nicht zur angezeigten URL passt. In diesem Beispiel handelt es sich um eine Phishing-URL, denn anhand des Dialogs sehen Sie, dass die Webseite nicht zur Domain <span class='fat'>karlsruhe.de</span> führt.",
+    "message": "Hier ist ein Beispiel für ein Dialogfenster, in dem die mit dem Link verknüpfte URL nicht zur angezeigten URL passt. In diesem Beispiel handelt es sich um eine Phishing-URL, denn anhand des Dialogs sehen Sie, dass die Webseite <span class='fat'>nicht</span> zur Domain <span class='fat'>karlsruhe.de</span> führt.",
     "description": "Explanation for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_two_title": {

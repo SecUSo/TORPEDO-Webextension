@@ -645,7 +645,7 @@
     "description": "Title for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_one_txt": {
-    "message": "Here is an example of a dialog window where the URL associated with the link does not match the displayed URL. In this case, it is a phishing link, as the dialog reveals that the page does not actually lead to <span class='fat'>karlsruhe.de</span>.",
+mak    "message": "Here is an example of a dialog window where the URL associated with the link does not match the displayed URL. In this case, it is a phishing link, as the dialog reveals that the page does <span class='fat'>not</span> actually lead to <span class='fat'>karlsruhe.de</span>.",
     "description": "Explanation for the first demonstration of the warning in the grey-case tutorial"
   },
   "warning_grey_case_showcase_two_title": {
