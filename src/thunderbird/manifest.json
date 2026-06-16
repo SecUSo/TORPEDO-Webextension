@@ -37,6 +37,7 @@
     "default_icon": {
       "38": "img/none38.png",
       "32": "img/none64.png"
-    }
+    },
+    "allowed_spaces": ["mail", "default"]
   }
 }
