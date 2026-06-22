@@ -1,5 +1,8 @@
 /**
- * Resolves a redirect URL (e.g., a short URL).
+ * Resolves the current ``torpedo.url`` by asking the ``service_worker`` to follow a URL and set the returned
+ * destination as the new URL.
+ *
+ * @returns {Promise<void>}
  */
 async function resolveRedirect() {
     TooltipManager.showLoaderWithOverlay();
@@ -14,9 +17,7 @@ async function resolveRedirect() {
 
 
 /**
- * checks if the current url is a referrer 
- *
- * @return resolved referrer or <NO_RESOLVED_REFERRER> if the current url is no referrer or there was an error 
+ * Inspects a given URL against a three-part referrer rule set to extract an embedded target URL.
  */
 function matchReferrer(url, storage) {
     const {referrerPart1, referrerPart2, referrerPart3} = storage;

@@ -1,3 +1,11 @@
+/**
+ * Script for the toolbar popup (browserAction / action popup).
+ *
+ * This script gets injected into the ``icon.html`` page together with the ``browser-polyfill`` library. It setts
+ * the correct texts and handles the click events inside the toolbar popup.
+ */
+
+
 let detectedLocation = "";
 
 
@@ -5,7 +13,7 @@ document.addEventListener("click", async (e) => {
     const targetId = e.target.id;
 
     if (targetId === "torpedoPage") {
-        await browser.tabs.create({url: "https://secuso.aifb.kit.edu/TORPEDO.php"});
+        await browser.tabs.create({ url: "https://secuso.aifb.kit.edu/TORPEDO.php" });
     } else if (targetId === "tutorial") {
         await browser.runtime.sendMessage({ name: "tutorial" });
     } else if (targetId === "options") {
