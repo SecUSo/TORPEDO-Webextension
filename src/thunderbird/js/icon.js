@@ -1,5 +1,5 @@
 /**
- * Script for the toolbar popup (browserAction / action popup).
+ * Thunderbird version of the Script for the toolbar popup (browserAction / action popup).
  *
  * This script gets injected into the ``icon.html`` page together with the ``browser-polyfill`` library. It setts
  * the correct texts and handles the click events inside the toolbar popup.
@@ -36,6 +36,13 @@ async function init() {
 
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
     if (!tab) return;
+
+    if (tab.spaceId === undefined) {
+        errorButton.style.display = "none";
+        return;
+    } else {
+        errorButton.style.display = "block";
+    }
 
     try {
         const url = new URL(tab.url);
