@@ -156,11 +156,14 @@ const OptionsPage = {
         document.getElementById("clearReferrer").addEventListener("click", async () => {
             const table = document.getElementById("referrerList");
             const tbody = table.querySelector('tbody');
-            tbody.innerHTML = `
-                <tr>
-                    <th id="referrerListTitle">${browser.i18n.getMessage("referrerList")}</th>
-                </tr>
-            `;
+
+            tbody.textContent = '';
+            const headerRow = tbody.insertRow();
+            const headerCell = document.createElement("th");
+            headerCell.id = "referrerListTitle";
+            headerCell.textContent = browser.i18n.getMessage("referrerList")
+            headerRow.appendChild(headerCell);
+
             await browser.storage.sync.set({ referrerPart1: [], referrerPart2: [], referrerPart3: [] });
             await this.loadAndApplySettings();
         });
@@ -678,35 +681,39 @@ const OptionsPage = {
 
         const table = document.getElementById("referrerList");
         const tbody = table.querySelector('tbody');
-        tbody.innerHTML = `
-                <tr>
-                    <th id="referrerListTitle">${browser.i18n.getMessage("referrerList")}</th>
-                </tr>
-            `;
+
+        tbody.textContent = '';
+        const headerRow = tbody.insertRow();
+        const headerCell = document.createElement("th");
+        headerCell.id = "referrerListTitle";
+        headerCell.textContent = browser.i18n.getMessage("referrerList");
+        headerRow.appendChild(headerCell);
 
         hosts.forEach((host, index) => {
             const path = paths[index] || "";
             const attribute = attributes[index] || "";
 
-            const row = table.insertRow();
+            const row = tbody.insertRow();
             const cell = row.insertCell(0);
+            const div = document.createElement("div");
 
-            cell.innerHTML = `
-                <div>
-                    <button class="delete-btn" data-index="${index}" id="row${index}" style="margin-right:10px;color:red">X</button>
-                    <span>${host}${path}${attribute}</span>
-                </div>
-           `;
+            const btn = document.createElement("button");
+            btn.className = "delete-btn";
+            btn.style.marginRight = "10px";
+            btn.style.color = "red";
+            btn.textContent = "X";
+
+            btn.addEventListener("click", async () => {
+               await this.deleteReferrer(index);
+            });
+
+            const span = document.createElement("span");
+            span.textContent = `${host}${path}${attribute}`
+
+            div.appendChild(btn);
+            div.appendChild(span);
+            cell.appendChild(div);
         });
-
-        tbody.onclick = (event) => {
-            if (event.target.classList.contains("delete-btn")) {
-                const indexToDelete = parseInt(event.target.dataset.index, 10);
-                if (!isNaN(indexToDelete)) {
-                    this.deleteReferrer(indexToDelete);
-                }
-            }
-        }
     },
 
     async deleteReferrer(index) {
@@ -771,55 +778,64 @@ const OptionsPage = {
     },
 
     async fillTrustedList() {
-        const table = document.getElementById("trustedList");
         const settings = await browser.storage.sync.get(null);
-
+        const table = document.getElementById("trustedList");
         const tbody = table.querySelector('tbody');
-        tbody.innerHTML = `
-                <tr>
-                    <th id="trustedListTitle">${browser.i18n.getMessage("trustedList")}</th>
-                </tr>
-            `;
+
+        tbody.textContent = '';
+        const headerRow = tbody.insertRow();
+        const headerCell = document.createElement("th");
+        headerCell.id = "trustedListTitle";
+        headerCell.textContent = browser.i18n.getMessage("trustedList");
+        headerRow.appendChild(headerCell);
 
         settings.trustedDomains.forEach(domain => {
-            const row = table.insertRow();
+            const row = tbody.insertRow();
             const cell = row.insertCell(0);
-            cell.textContent = domain;
+
+            const span = document.createElement("span");
+            span.textContent = domain;
+
+            cell.appendChild(span);
         });
     },
 
     async fillUserList() {
         const settings = await browser.storage.sync.get(['userDefinedDomains']);
         const table = document.getElementById("userList");
-
         const tbody = table.querySelector('tbody');
-        tbody.innerHTML = `
-                <tr>
-                    <th id="userListTitle">${browser.i18n.getMessage("userList")}</th>
-                </tr>
-            `;
+
+        tbody.textContent = '';
+        const headerRow = tbody.insertRow();
+        const headerCell = document.createElement("th");
+        headerCell.id = "userListTitle";
+        headerCell.textContent = browser.i18n.getMessage("userList");
+        headerRow.appendChild(headerCell);
 
         settings.userDefinedDomains.forEach((domain, index) => {
-            const row = table.insertRow();
+            const row = tbody.insertRow();
             const cell = row.insertCell(0);
-            cell.innerHTML = `
-                <div>
-                    <button class="delete-btn" data-index="${index}" id="row${index}" style="margin-right:10px;color:red">X</button>
-                    <span>${domain}</span>
-                </div>
-            `;
+            const div = document.createElement("div");
 
-            tbody.onclick = (event) => {
-                if (event.target.classList.contains("delete-btn")) {
-                    const indexToDelete = parseInt(event.target.dataset.index, 10);
-                    if (!isNaN(indexToDelete)) {
-                        const domains = settings.userDefinedDomains;
-                        domains.splice(indexToDelete, 1);
-                        browser.storage.sync.set({ userDefinedDomains: domains });
-                        this.fillUserList();
-                    }
-                }
-            }
+            const btn = document.createElement("button");
+            btn.className = "delete-btn";
+            btn.style.marginRight = "10px";
+            btn.style.color = "red";
+            btn.textContent = "X";
+
+            btn.addEventListener("click", async () => {
+                const domains = settings.userDefinedDomains;
+                domains.splice(index, 1);
+                await browser.storage.sync.set({ userDefinedDomains: domains });
+                await this.fillUserList();
+            });
+
+            const span = document.createElement("span");
+            span.textContent = domain;
+
+            div.appendChild(btn);
+            div.appendChild(span);
+            cell.append(div);
         });
     },
 
@@ -863,36 +879,42 @@ const OptionsPage = {
     async fillShortURLList() {
         const settings = await browser.storage.sync.get(['redirectDomains']);
         const table = document.getElementById("shortURLList");
-
         const tbody = table.querySelector('tbody');
-        tbody.innerHTML = `
-                <tr>
-                    <th id="shortURLListTitle">${browser.i18n.getMessage("trustedList")}</th>
-                </tr>
-            `;
+
+        tbody.textContent = '';
+        const headerRow = tbody.insertRow();
+        const headerCell = document.createElement("th");
+        headerCell.id = "shortURLListTitle";
+        headerCell.textContent = browser.i18n.getMessage("trustedList");
+        headerRow.appendChild(headerCell);
 
         settings.redirectDomains.forEach((domain, index) => {
-            const row = table.insertRow();
+            const row = tbody.insertRow();
             const cell = row.insertCell(0);
-            cell.innerHTML = `
-                <div>
-                    <button class="delete-btn" data-index="${index}" id="row${index}" style="margin-right:10px;color:red">X</button>
-                    <span>${domain}</span>
-                </div>
-            `;
 
-            tbody.onclick = (event) => {
-                if (event.target.classList.contains("delete-btn")) {
-                    const indexToDelete = parseInt(event.target.dataset.index, 10);
-                    if (!isNaN(indexToDelete)) {
-                        const domains = settings.redirectDomains;
-                        domains.splice(indexToDelete, 1);
-                        browser.storage.sync.set({ redirectDomains: domains });
-                        this.fillShortURLList();
-                    }
-                }
-            }
-        });
+            const div = document.createElement("div");
+
+            const btn = document.createElement("button");
+            btn.className = "delete-btn";
+            btn.style.marginRight = "10px";
+            btn.style.color = "red";
+            btn.textContent = "X";
+
+            btn.addEventListener("click", async () => {
+                const domains = settings.redirectDomains;
+                domains.splice(index, 1);
+
+                await browser.storage.sync.set({ redirectDomains: domains });
+                await this.fillShortURLList();
+            });
+
+            const span = document.createElement("span");
+            span.textContent = domain;
+
+            div.appendChild(btn);
+            div.appendChild(span);
+            cell.appendChild(div);
+        })
     },
 
     async addShortURL() {

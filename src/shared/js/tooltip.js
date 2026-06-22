@@ -284,9 +284,9 @@ const TooltipManager = (function() {
         torpedoURL.href = torpedo.url;
 
         const urlSplit = url.split(torpedo.domain);
-        UI.setHTML(".torpedo-url-prefix", urlSplit[0]);
-        UI.setHTML(".torpedo-url-domain", torpedo.domain);
-        UI.setHTML(".torpedo-url-suffix", urlSplit[1] || "");
+        UI.setText(".torpedo-url-prefix", urlSplit[0]);
+        UI.setText(".torpedo-url-domain", torpedo.domain);
+        UI.setText(".torpedo-url-suffix", urlSplit[1] || "");
     }
 
     /**

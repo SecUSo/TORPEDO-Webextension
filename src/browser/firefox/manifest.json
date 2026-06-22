@@ -3,7 +3,10 @@
   "author": "SECUSO",
   "browser_specific_settings": {
     "gecko": {
-      "id": "{53319828-3750-4619-836e-10f3c736a61f}"
+      "id": "{53319828-3750-4619-836e-10f3c736a61f}",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   },
   "name": "__MSG_extensionName__",
