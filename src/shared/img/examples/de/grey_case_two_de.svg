@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="584.5"
+   height="347.5"
+   viewBox="0 0 584.5 347.5"
+   version="1.1"
+   xml:space="preserve"
+   style="clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
+   id="svg21"
+   sodipodi:docname="grey_case_two_de.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs21" /><sodipodi:namedview
+   id="namedview21"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="2.371246"
+   inkscape:cx="238.27136"
+   inkscape:cy="175.22433"
+   inkscape:window-width="2560"
+   inkscape:window-height="1334"
+   inkscape:window-x="2869"
+   inkscape:window-y="-11"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="simple-grey_case_no-phish_de" />
+    <g
+   transform="translate(-21,-1028)"
+   id="g21">
+        <g
+   id="simple-grey_case_no-phish_de"
+   transform="translate(0,74.5107)">
+            <g
+   id="border_template"
+   transform="matrix(4.9544279,0,0,3.5867,-152.16638,870.674)">
+                <path
+   d="M 153,31.394 C 153,30.625 152.54,30 151.974,30 H 36.026 C 35.46,30 35,30.625 35,31.394 v 87.212 c 0,0.769 0.46,1.394 1.026,1.394 h 115.948 c 0.566,0 1.026,-0.625 1.026,-1.394 z"
+   style="fill:#ffffff"
+   id="path1" />
+                <path
+   d="M 153,31.394 C 153,30.625 152.54,30 151.974,30 H 36.026 C 35.46,30 35,30.625 35,31.394 v 87.212 c 0,0.769 0.46,1.394 1.026,1.394 h 115.948 c 0.566,0 1.026,-0.625 1.026,-1.394 z M 36.231,31.673 v 86.654 H 151.769 V 31.673 Z"
+   style="fill:#bfb9b9"
+   id="path2" />
+            </g>
+            <g
+   id="text_in_border"
+   transform="translate(-16.2752,651.512)">
+                <g
+   id="URL_optimized_readability"
+   transform="translate(2,-3)">
+                    
+                    
+                    <text
+   x="54.824997"
+   y="399"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline"
+   id="text4"><tspan
+     sodipodi:role="line"
+     id="tspan10">e x a m p i e . c o m</tspan></text>
+                    <text
+   x="229.84201"
+   y="399"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0000ff"
+   id="text5"><tspan
+     sodipodi:role="line"
+     id="tspan22"
+     x="229.84201"
+     y="399">[..]</tspan></text>
+                </g>
+                <g
+   id="first_line"
+   transform="translate(-2.25699)">
+                    <text
+   x="58"
+   y="362"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
+   id="text6">Hinterlegte URL<tspan
+   x="186.44 191.483"
+   y="362 362"
+   id="tspan5"> (</tspan>auch W<tspan
+   x="258.72501 268.81799"
+   y="362 362"
+   id="tspan6">eb</tspan>adresse genannt):</text>
+                </g>
+                <g
+   transform="translate(-5.45944,-3)"
+   id="g13">
+                    <text
+   x="62"
+   y="434.78699"
+   style="font-weight:700;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif"
+   id="text7">U<tspan
+   x="75.233002 86.445999 97.658997 107.88 118.1 128.321 139.533 150.746 156.91701 167.13699 177.358 182.52699 195.761 200.92999 211.14999 216.32001 226.53999 237.75301"
+   y="434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699 434.78699"
+   id="tspan7">nbekanntes Risiko:</tspan></text>
+                    <text
+   x="249.093"
+   y="434.78699"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text8"><tspan
+     sodipodi:role="line"
+     id="tspan3"
+     x="249.093"
+     y="434.78699">Das Risiko für das Klicken auf den Link kann</tspan></text>
+                    <text
+   x="62"
+   y="458.53"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text9"><tspan
+     sodipodi:role="line"
+     id="tspan4"
+     x="62"
+     y="458.53">nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen.</tspan></text>
+                    <text
+   x="62"
+   y="482.272"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text10"><tspan
+     sodipodi:role="line"
+     id="tspan8"
+     x="62"
+     y="482.272">Hierzu prüfen Sie die Domain (</tspan></text>
+                    
+                    <text
+   x="62.170998"
+   y="506.01401"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text12"><tspan
+     sodipodi:role="line"
+     id="tspan9"
+     x="62.170998"
+     y="506.01401">URL</tspan></text>
+                    <text
+   x="99.870003"
+   y="506.01401"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
+   id="text13">)<tspan
+   x="106.04099"
+   y="506.01401"
+   id="tspan12">.</tspan></text>
+                <text
+   x="309.76105"
+   y="482.21597"
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
+   id="text12-5"><tspan
+     sodipodi:role="line"
+     id="tspan2"
+     x="309.76105"
+     y="482.21597">fett hervorgehobener Bereich der</tspan></text></g>
+                <g
+   transform="translate(14.875,-257.954)"
+   id="g14">
+                    <text
+   x="40.921001"
+   y="853"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
+   id="text14">D<tspan
+   x="54.154999 64.375 70.545998 75.714996 85.934998 90.094002 100.315 109.516 114.686 127.919 138.13901 144.31 154.53 164.75101 169.92 180.14101 190.36099 200.58099 209.783 214.952 219.11099 228.313 232.472 242.692 248.86301 254.032 259.20099 264.371 274.591 284.811 300.056 304.215 309.38501 314.55399 326.78601 330.94501 341.16599 346.33499 356.55499 360.71399 370.935 376.104 389.33801 399.55801 414.80301 425.02301 429.18201 439.40302 444.57199 448.73099 458.952 464.121 477.354 487.57501 497.79501 508.01599 513.185 523.40503 529.57599 539.79602 544.966 555.18597 565.40698"
+   y="853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853 853"
+   id="tspan13">er Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.</tspan></text>
+                </g>
+                <g
+   transform="translate(16.1954,-253.707)"
+   id="g15">
+                    <text
+   x="40.921001"
+   y="884.53998"
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
+   id="text15">V<tspan
+   x="52.169998 62.409 68.597 78.835999 83.013 93.251999 97.429001 107.668 117.906 128.145 138.383 148.62199 153.80901 165.03999 175.27901 179.45599 184.644 189.83099 195.019 205.257 210.44501 222.69501 232.933 242.153 252.39101 262.63 272.86899 283.10699 289.29599 299.535 305.72299"
+   y="884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998 884.53998"
+   id="tspan14">erbleibende Zeit: 2 Sekunde(n).</tspan></text>
+                </g>
+                <g
+   id="more_information_classification"
+   transform="translate(0.98364,-43.2288)">
+                    <g
+   transform="translate(-592.961,-556.608)"
+   id="g16">
+                        <text
+   x="695"
+   y="1149.09"
+   style="font-size:19px;font-family:ArialMT, Arial, sans-serif"
+   id="text16">M<tspan
+   x="710.35199 720.44397 730.53601 736.388 741.19202 745.99597 756.08801 760.89099 770.98297 776.83502 792.18799 802.27899 807.08301 810.82898 820.92102 831.013 841.10498 851.19702 856.00098 865.026 875.11798 879.922 890.013 893.76001 903.85199 912.87701 922.96802 928.82098 933.62402 945.82202 949.56799 959.65997 968.685 973.48901 983.58099 988.38501 998.47699 1008.57"
+   y="1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09 1149.09"
+   id="tspan15">ehr Informationen zu dieser Einstufung</tspan></text>
+                        <rect
+   x="695"
+   y="1151.1"
+   width="323.66101"
+   height="1.392"
+   id="rect16" />
+                    </g>
+                    <g
+   id="info_icon"
+   transform="translate(-591.961,-552.438)">
+                        <g
+   id="information_icon_text"
+   transform="translate(0,0.499922)">
+                            <g
+   transform="matrix(30,0,0,30,658.802,1148.72)"
+   id="g17">
+                                <path
+   d="M 0.199,0 C 0.181,0.004 0.177,0.008 0.127,0.009 0.118,0.009 0.108,0.006 0.102,0.005 0.076,0 0.064,-0.008 0.065,-0.018 v -0.003 c 0.016,-0.092 0.025,-0.145 0.028,-0.16 0.01,-0.062 0.014,-0.116 0.014,-0.161 0,-0.01 -0.004,-0.017 -0.014,-0.021 -0.01,-0.003 -0.022,-0.005 -0.037,-0.005 -0.015,0 -0.025,0.001 -0.03,0.001 l 0.002,-0.026 c 0.009,0.002 0.017,0.002 0.025,0.002 h 0.024 c 0.016,0 0.039,-0.004 0.069,-0.012 0.031,-0.008 0.053,-0.012 0.067,-0.012 0.011,0 0.018,0.004 0.02,0.012 0.003,0.007 0.004,0.015 0.004,0.021 0,0.056 -0.004,0.123 -0.013,0.203 -0.006,0.041 -0.01,0.082 -0.015,0.122 l 0.052,-0.011 0.005,0.031 c -0.01,0.008 -0.02,0.015 -0.03,0.02 C 0.226,-0.011 0.212,-0.003 0.199,0 Z"
+   style="fill:#0a1457;fill-rule:nonzero"
+   id="path16" />
+                            </g>
+                            <g
+   transform="matrix(1.75018,0,0,1.75018,-498.398,-849.473)"
+   id="g18">
+                                <circle
+   cx="664.36902"
+   cy="1132.35"
+   r="1.3329999"
+   style="fill:#0a1457"
+   id="circle17" />
+                            </g>
+                        </g>
+                        <g
+   transform="matrix(0.9375,0,0,0.9375,41.6198,72.1875)"
+   id="g19">
+                            <circle
+   cx="663"
+   cy="1139"
+   r="16"
+   style="fill:none;stroke:#0a1457;stroke-width:3px"
+   id="circle18" />
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <g
+   transform="translate(-3,-2)"
+   id="g20">
+                <text
+   x="26.239"
+   y="969.47601"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;fill:#195ace"
+   id="text19"
+   inkscape:label="text19"><tspan
+     sodipodi:role="line"
+     id="tspan1">https://www.exampie.com</tspan></text>
+                <rect
+   x="26.239"
+   y="971.39801"
+   width="205.05836"
+   height="1.329"
+   style="fill:#195ace;stroke-width:0.76512"
+   id="rect19" />
+            </g>
+            <g
+   id="mouse_cursor"
+   transform="matrix(0.600152,0,0,0.600152,57.0454,821.711)">
+                <path
+   d="m 353,272 c 0.833,1.715 2.845,3.407 4,5.292 1.544,2.523 5.266,9.841 5.266,9.841 0,0 2.684,4.556 4.734,5.867 2.05,1.311 5.233,2 7.566,2 2.246,0 4.568,-0.75 6.434,-2 2.239,-1.5 5.774,-3.936 7,-7 1.333,-3.333 1,-9.167 1,-13 0,-3.35 -0.412,-8.122 -1,-10 -1.038,-3.315 -5.713,-2.134 -5.643,-0.935 0.15,2.567 0.077,4.068 0.077,4.068 0,0 0.138,-4.778 -0.434,-6.133 -0.467,-1.107 -1.969,-2 -3,-2 -1.031,0 -3.468,0.29 -3.184,2 0.284,1.71 0,6 0,6 0,0 0.303,-4.5 0,-6 -0.231,-1.146 -1.013,-2.5 -1.816,-3 -0.803,-0.5 -2.231,-0.138 -3,0 -0.595,0.107 -1.612,0.829 -1.612,0.829 l 0.046,8.171 c 0,0 -0.008,-18.903 -0.474,-20.769 -0.566,-2.264 -6.228,-2.582 -7,0 C 361.187,247.812 362,272 362,272 c 0,0 -4.812,-6.643 -6,-7 -1.188,-0.357 -3.723,-0.123 -4,2 -0.277,2.123 0.257,3.471 1,5 z"
+   style="fill:#ffffff;stroke:#000000;stroke-width:2.03px"
+   id="path20" />
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,195 @@
+/**
+ * Content script for the Torpedo browser extension.
+ */
+(async function () {
+    /**
+     * Main function to initialize the content script.
+     */
+    async function main() {
+        const siteConfig = {
+            "mail.yahoo.com": { selectors: ['div[data-test-id="message-view"]'] },
+            "mail.google.com": { selectors: [".adn"] },
+            "owa.kit.edu": { selectors: ['div[role="list"]', " div.isMessageBodyInPopout"] },
+            "outlook.live.com": { selectors: ['div[role="main"]'] },
+            "mail.aol.com": { selectors: ["#displayMessage"] },
+            "email.t-online.de": { iframe: ["mailreadview"] },
+            default: { iframe: ["mailbody"] }
+        };
+
+        torpedo.location = window.location.host;
+        const config = siteConfig[torpedo.location] || siteConfig.default;
+
+        try {
+            const tldData = await browser.runtime.sendMessage({ name: "TLD" });
+            if (tldData) torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
+
+        } catch (e) {
+            console.error("Failed to fetch TLD data:", e);
+        }
+
+        if (!config.iframe) {
+            setupEventListeners(config);
+
+        } else {
+            setupIframeEventListeners();
+        }
+
+        checkPageAndSetIcon(config);
+    }
+
+    /**
+     * Sets up event listeners for regular pages.
+     */
+    function setupEventListeners(config) {
+        const anchorSelectors = config.selectors.map((selector) => selector + " a").join();
+        const formSelectors = config.selectors.map((selector) => selector + " form").join();
+
+        document.body.addEventListener("mouseover", (event) => {
+            const targetLink = event.target.closest(anchorSelectors);
+            if (targetLink) openTooltip(targetLink, "a");
+
+            const targetForm = event.target.closest(formSelectors);
+            if (targetForm) {
+                openTooltip(targetForm, "form");
+            }
+        });
+    }
+
+    /**
+     * Sets up event listeners for iframes.
+     */
+    function setupIframeEventListeners() {
+        document.body.addEventListener("mouseover", (event) => {
+            const anchorTarget = event.target.closest("a");
+            if (anchorTarget && event.view.location.href.includes("iframe")) openTooltip(anchorTarget, "a");
+        });
+    }
+
+    /**
+     * Checks the page for configured selectors and sets the browser icon.
+     */
+    function checkPageAndSetIcon(config) {
+        if (window.self !== window.top) return;
+        const message = { location: torpedo.location };
+
+        const performCheck = () => {
+            if (config.iframe && window.location.href.includes("iframe")) {
+                message.name = "ok";
+                return true;
+            } else if (!config.iframe && document.body.querySelector(config.selectors.join())) {
+                message.name = "ok";
+                return true;
+            }
+
+            return false;
+        };
+
+        const interval = setInterval(() => {
+            if (performCheck()) {
+                clearInterval(interval);
+                browser.runtime.sendMessage(message);
+            }
+        }, 500);
+
+        setTimeout(() => {
+            if (message.name !== "ok") {
+                clearInterval(interval);
+                message.name = "error";
+                browser.runtime.sendMessage(message);
+            }
+        }, 10000);
+    }
+
+    /**
+     * Handles mouse enter events on the target element.
+     */
+    const handleMouseEnter = () => {
+        if (torpedo.hideTimer) clearTimeout(torpedo.hideTimer);
+    };
+
+    /**
+     * Handles mouse leave events on the target element.
+     */
+    const handleMouseLeave = () => {
+        torpedo.hideTimer = setTimeout(() => TooltipManager.hideTooltip(), 150);
+    };
+
+    /**
+     * This method is being called when the user hovers over a link
+     * and the tooltip should open.
+     */
+    async function openTooltip(e, type) {
+        if (e.classList.contains("torpedo-URL")) {
+            return;
+        }
+
+        if (torpedo.state !== "closed") {
+            if (e === torpedo.target) {
+                if (torpedo.hideTimer) {
+                    clearTimeout(torpedo.hideTimer);
+                }
+                return;
+            } else {
+                TooltipManager.hideTooltip();
+            }
+        }
+
+        torpedo.state = "pending";
+
+        if (torpedo.target) {
+            torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
+            torpedo.target.removeEventListener("mouseleave", handleMouseLeave);
+        }
+
+        torpedo.target = e;
+
+        torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
+        torpedo.target.removeEventListener("mouseleave", handleMouseLeave);
+
+        const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+        Utils.preventEvents(torpedo.target, eventTypes);
+
+        if (type === "a") {
+            const href = torpedo.target.href;
+
+            if (!href || href.includes("mailto:") || href.includes("tel:")) {
+                Utils.reactivateEvents(torpedo.target, eventTypes);
+                torpedo.state = "closed";
+                return;
+            }
+
+            if (href === "") {
+                try {
+                    torpedo.target.setAttribute("href", e.relatedTarget.href);
+                } catch (e) {}
+            }
+        }
+
+        const url = type === "form" ? new URL(torpedo.target.action) : new URL(torpedo.target.href);
+        torpedo.setNewUrl(url);
+
+        try {
+            const storage = await browser.storage.sync.get(null);
+            if (storage.referrerSites.includes(torpedo.location)) {
+                matchReferrer(storage);
+                torpedo.target.href = torpedo.url;
+            }
+
+            torpedo.target.addEventListener("mouseenter", handleMouseEnter);
+            torpedo.target.addEventListener("mouseleave", handleMouseLeave);
+            await TooltipManager.showTooltip(torpedo.target);
+
+        } catch (err) {
+            console.log(`Error showing tooltip for ${url.href}:`, err);
+            torpedo.state = "closed";
+            await browser.runtime.sendMessage({ name: "error", location: torpedo.location });
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", main);
+    } else {
+        await main();
+    }
+
+})();

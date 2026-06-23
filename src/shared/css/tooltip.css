@@ -1,0 +1,208 @@
+/**********************************
+ Base Tooltip
+***********************************/
+.torpedo-tooltip {
+    position: absolute;
+    max-width: 430px;
+    padding: 15px;
+    border: 4px solid #bfb9b9;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/**********************************
+ Loading state
+***********************************/
+.torpedo-tooltip.is-loading {
+    display: none;
+}
+
+.torpedo-tooltip.is-loading > *:not(.loader-bg) {
+    display: none;
+}
+
+.torpedo-tooltip.is-loading .loader-bg {
+    display: block;
+}
+
+.torpedo-tooltip .loader-bg {
+    display: none;
+}
+
+/**********************************
+ Sections
+***********************************/
+.torpedo-section {
+    display: none;
+    margin-bottom: 0;
+}
+
+.torpedo-section.active {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+/* it can be not last-child, but is last visible child -> change later */
+.torpedo-section.active:last-child {
+    margin-bottom: 0;
+}
+
+.torpedo-section:has(p[style*="display: none"]),
+.torpedo-section:has(button[style*="display: none"]) {
+    margin-bottom: 0;
+}
+
+.section-content {
+    display: flex;
+    align-items: center;
+}
+
+/**********************************
+ Context Menu
+***********************************/
+.torpedo-context-menu {
+    position: absolute;
+    padding: 10px;
+    border: 2px solid #bfb9b9;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 14px;
+    line-height: 1.4;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.torpedo-context-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.torpedo-context-menu li {
+    padding: 5px;
+    background-color: white;
+    border: 1px solid #bfb9b9;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.torpedo-context-menu li:hover {
+    background-color: #cce0ff;
+}
+
+/**********************************
+ Tooltip states
+***********************************/
+.torpedoTrusted {
+    border-color: #28a745;
+}
+
+.torpedoUserDefined {
+    border-color: #28a745;
+}
+
+/**********************************
+ Standard Elements
+***********************************/
+.torpedo-tooltip p {
+    font: 14px/1.5 Helvetica, sans-serif;
+    margin: 0;
+    color: black;
+}
+
+.torpedo-tooltip img {
+    width: 22px;
+    height: 22px;
+    margin-right: 15px;
+}
+
+.torpedo-tooltip a {
+    color: black;
+}
+
+.torpedo-tooltip button {
+    padding: 8px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/**********************************
+ URL Element Styles
+***********************************/
+.torpedo-URL {
+    word-wrap: break-word;
+    word-break: break-all;
+    text-decoration: none;
+}
+
+.torpedo-URL:hover {
+    text-decoration: underline;
+}
+
+.torpedo-url-domain {
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.torpedo-URL.active .torpedo-url-suffix,
+.torpedo-URL.active .torpedo-url-prefix {
+    display: none;
+}
+
+.torpedo-url-suffix,
+.torpedo-url-prefix {
+    display: inline;
+}
+
+.torpedo-url-button {
+    display: inline;
+    color: blue !important;
+    font-size: 14px !important;
+    padding-left: 5px !important;
+    cursor: pointer;
+}
+
+.torpedo-url-button:hover {
+    text-decoration: underline;
+}
+
+/**********************************
+ Info Element Styles
+***********************************/
+.torpedo-info-text {
+    display: inline;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: font-weight 0.2s ease;
+}
+
+.torpedo-info-text:hover {
+    font-weight: bold;
+}
+
+.torpedo-info-div {
+    max-height: 90px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+/**********************************
+ Redirect Button Styles
+***********************************/
+.torpedo-redirect-button {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.torpedo-redirect-button:hover {
+    background-color: lightgray;
+}
+
+.torpedoHighlight {
+    font-weight: bold;
+}

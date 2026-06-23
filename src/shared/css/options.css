@@ -1,0 +1,249 @@
+body{
+  background: #fafafa;
+  font-family: Helvetica;
+    margin: 0;
+    padding: 15px;
+    box-sizing: border-box;
+}
+table, td {
+    border: 1px solid black;
+}
+#userList{
+  display: inline-block;
+  border: 2.5px solid #1a509d;
+}
+#trustedList{
+  float: left;
+  margin-right: 10px;
+  border: 2.5px solid green;
+}
+#timerInput{
+  margin-right: 5px;
+  margin-left: 5px;
+}
+#trustedListText{
+  font-weight: bold;
+}
+#userListText,#referrerHeadline{
+  font-weight: bold;
+  margin-top: 25px;
+}
+#optionButtons{
+  margin-top: 10px;
+}
+#userDefinedInput, #referrerInput{
+  width: 400px;
+}
+#addDefaultReferrer{
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+#addDefaultReferrer:hover:enabled{
+  text-decoration: underline;
+}
+.left{
+  float: left;
+}
+.right{
+  padding:4px;
+}
+.last{
+  padding:10px;
+}
+.clear{
+  clear: left;
+}
+
+/*----- Tabs -----*/
+.tabs {
+    width:100%;
+    display:inline-block;
+}
+
+/*----- Tab Links -----*/
+.tab-links{
+  margin: 0;
+  padding: 0;
+}
+/* Clearfix */
+.tab-links:after {
+    display:block;
+    clear:both;
+    content:'';
+}
+
+.tab-links li {
+    margin:0px 5px 0px 0px;
+    float:left;
+    list-style:none;
+}
+
+    .tab-links a {
+        padding:9px 15px;
+        display:inline-block;
+        border-radius:3px 3px 0px 0px;
+        background:#d9d9d9;
+        font-size:16px;
+        font-weight:600;
+        color:#4c4c4c;
+        transition:all linear 0.15s;
+    }
+
+    .tab-links a:hover {
+        background:#a7cce5;
+        text-decoration:none;
+    }
+
+li.active a, li.active a:hover {
+    background:#a7cce5;
+    color:#4c4c4c;
+}
+
+/*----- Content of Tabs -----*/
+.tab-content {
+    padding:15px;
+    border-radius:3px;
+    box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
+    background: #f2f2f2;
+    border:1px solid #999;
+}
+.tab {
+    display:none;
+}
+.tab.active {
+    display:block;
+  }
+.tab > div{
+  margin: 10px 5px 15px 5px;
+}
+
+h1, h2, h3 {
+    color: #212529;
+}
+
+.form-section {
+    margin-top: 2rem;
+    border-top: 1px solid #dee2e6;
+    padding-top: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-group label {
+    margin-left: 0.5rem;
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 1rem;
+    flex-grow: 1;
+}
+
+/****************
+ tooltip preview css
+*******************/
+.tooltip-preview {
+    border: 4px solid #bfb9b9;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    font-size: 12px;
+}
+
+.tooltip-preview > div {
+    color: black;
+    margin-bottom: 8px;
+}
+
+.tooltip-preview > div.disabled {
+    color: lightgray;
+}
+
+.tooltip-preview p {
+    margin: 0 !important;
+}
+
+.tooltip-preview-href {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.tooltip-preview-href.disabled .tooltip-preview-href-prefix,
+.tooltip-preview-href.disabled .tooltip-preview-href-suffix {
+    display: inline;
+    color: black !important;
+}
+
+.tooltip-preview-href-prefix,
+.tooltip-preview-href-suffix {
+    display: none;
+}
+
+.tooltip-preview-href-domain {
+    letter-spacing: 3px;
+    color: black !important;
+}
+
+.tooltip-preview-href-button {
+    color: blue !important;
+}
+
+.tooltip-preview-risk {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.tooltip-inline {
+    display: inline;
+}
+
+.tooltip-bold {
+    font-weight: bold;
+}
+
+.tooltip-preview-info {
+    display: flex;
+    align-items: center;
+}
+
+.tooltip-preview img {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+}
+
+.tooltip-preview-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tooltip-preview-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.tooltip-preview-control {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding-left: 10px;
+    border-left: 1px solid #ddd;
+    min-width: 36px;
+    align-self: stretch;
+}
+
+#statusSettings {
+    margin: 0;
+    padding-bottom: 15px;
+}

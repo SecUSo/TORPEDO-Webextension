@@ -1,0 +1,92 @@
+{
+  "manifest_version": 3,
+  "author": "SECUSO",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{53319828-3750-4619-836e-10f3c736a61f}"
+    }
+  },
+  "name": "__MSG_extensionName__",
+  "version": "1.9.1",
+  "default_locale": "de",
+  "description": "__MSG_extensionDescriptionBrowser__",
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "options_ui": {
+    "page": "options.html"
+  },
+  "icons": {
+    "38": "img/icon38.png",
+    "64": "img/icon64.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "img/*.png",
+        "img/*.svg",
+        "tooltip.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mg.mail.yahoo.com/*",
+        "https://mail.yahoo.com/*",
+        "https://email.t-online.de/*",
+        "https://outlook.live.com/*",
+        "https://mail.aol.com/*",
+        "https://navigator.web.de/*",
+        "https://bap.navigator.web.de/*",
+        "https://3c-bap.web.de/*",
+        "https://3c.web.de/*",
+        "https://bap.navigator.gmx.net/*",
+        "https://navigator.gmx.net/*",
+        "https://3c.gmx.net/*",
+        "https://3c-bap.gmx.net/*",
+        "https://mail.google.com/*",
+        "https://owa.kit.edu/*"
+      ],
+      "css": [
+        "css/all.min.css",
+        "css/tooltip.css",
+        "css/loader/loader.css"
+      ],
+      "js": [
+        "js/floating-ui.core.umd.min.js",
+        "js/floating-ui.dom.umd.min.js",
+        "js/browser-polyfill.min.js",
+        "js/torpedo.js",
+        "js/utils.js",
+        "js/punycode.js",
+        "js/contentscript.js",
+        "js/publicsuffixlist.js",
+        "js/timer.js",
+        "js/tooltip.js",
+        "js/status.js",
+        "js/redirect.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_title": "__MSG_extensionName__",
+    "default_popup": "icon.html",
+    "default_icon": {
+      "38": "img/none38.png",
+      "32": "img/none64.png"
+    }
+  },
+  "content_security_policy": {}
+}
