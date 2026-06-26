@@ -7,7 +7,7 @@
     }
   },
   "name": "__MSG_extensionName__",
-  "version": "1.9.1",
+  "version": "2.0.0",
   "default_locale": "de",
   "description": "__MSG_extensionDescriptionBrowser__",
   "background": {
