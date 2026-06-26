@@ -9,8 +9,10 @@ async function resolveRedirect() {
 
     const redirect = await browser.runtime.sendMessage({ name: "redirect", url: torpedo.url });
 
-    const urlObject = new URL(redirect);
-    torpedo.setNewUrl(urlObject);
+    if (redirect !== null) {
+        const urlObject = new URL(redirect);
+        torpedo.setNewUrl(urlObject);
+    }
 
     await TooltipManager.updateTooltip();
 }
