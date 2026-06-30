@@ -389,7 +389,13 @@ const TooltipManager = (function() {
             countdown(storage.timer, secStatus, eventTypes);
         } else {
             Utils.reactivateEvents(torpedo.target, eventTypes);
-            Utils.reactivateEvents(UI.find(".torpedo-URL"), ["click"]);
+
+            const urlElement = UI.find(".torpedo-URL");
+            urlElement.addEventListener("click", async (event) => {
+               event.stopPropagation();
+               event.preventDefault();
+               await browser.runtime.sendMessage({ name: "open", url: urlElement.href });
+            }, true);
         }
     }
 
