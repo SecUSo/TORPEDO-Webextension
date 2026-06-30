@@ -1,3 +1,7 @@
+/**
+ * The ``TooltipManager`` for showing, hiding and updating the tooltip.
+ * @type {{showTooltip: (function(*): Promise<void>)|*, hideTooltip: hideTooltip, updateTooltip: (function(): Promise<void>)|*, showLoaderWithOverlay: showLoaderWithOverlay}}
+ */
 const TooltipManager = (function() {
 
     /**

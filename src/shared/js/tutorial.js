@@ -1,4 +1,9 @@
-// Page registry
+/**
+ * This script handles the logic behind the tutorial. It gets injected into the ``tutorial.html`` page
+ * together with the ``browser-polyfill`` library.
+ */
+
+
 const pages = [
     "welcome",                      // 0
     "explanation",                  // 1
@@ -37,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
 
+    // previously page navigation button
     document.getElementById("prev").addEventListener("click", () => {
         if (activePageIndex > 0) {
             activePageIndex--;
@@ -44,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // next page navigation button
     document.getElementById("next").addEventListener("click", () => {
         if (activePageIndex < LAST_PAGE) {
             activePageIndex++;
@@ -51,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // finish/close tutorial button
     document.getElementById("finish").addEventListener("click", async (e) => {
         if (!e.currentTarget.classList.contains("disabled")) {
             await browser.runtime.sendMessage({ name: "close" });
@@ -75,6 +83,7 @@ function show() {
     }, 50);
 }
 
+// update the overview bubbles (highlight the bubble of the current page)
 function updateOverview() {
     const activePageName = pages[activePageIndex];
 
@@ -90,6 +99,7 @@ function updateOverview() {
     finishBtn.setAttribute("aria-disabled", String(!isLastPage));
 }
 
+// hide all pages except the selected page
 function showPageContent() {
     document.querySelectorAll(".tut-content > div").forEach((div) => {
         div.classList.add("off");
@@ -101,6 +111,7 @@ function showPageContent() {
     });
 }
 
+// sets the static texts
 function init() {
     // welcome page
     setInnerHTML("welcome-title", "welcome_title");

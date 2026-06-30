@@ -19,7 +19,9 @@ async function resolveRedirect() {
 
 
 /**
- * Inspects a given URL against a three-part referrer rule set to extract an embedded target URL.
+ * Inspects a ``url`` against a three-part referrer rule set, stored in the ``storage``, to extract an embedded target URL.
+ *
+ * @returns {string} The embedded target url as a string or '<NO_RESOLVED_REFERRER>'
  */
 function matchReferrer(url, storage) {
     const {referrerPart1, referrerPart2, referrerPart3} = storage;
@@ -54,4 +56,3 @@ function matchReferrer(url, storage) {
 
     return "<NO_RESOLVED_REFERRER>";
 }
-

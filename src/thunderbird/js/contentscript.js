@@ -1,5 +1,5 @@
 /**
- * Content script for the Torpedo browser extension.
+ * The Thunderbird version of the content script for the Torpedo browser extension.
  */
 (async function () {
     /**
