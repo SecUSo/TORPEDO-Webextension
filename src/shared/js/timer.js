@@ -1,5 +1,7 @@
 /**
- * Checks if the timer is activated for a given security status.
+ * Checks if the timer should be acticated based on the ``securityStatus`` and the user settings inside the ``storage``.
+ *
+ * @returns {boolean|string|*|boolean} A boolean indicating whether it should or not
  */
 function isTimerActivated(storage, securityStatus) {
     switch (securityStatus) {
@@ -9,8 +11,9 @@ function isTimerActivated(storage, securityStatus) {
     }
 }
 
+
 /**
- * Starts a countdown timer to delay link activation.
+ * Starts a countdown timer for '``time``' seconds to delay link activation.
  */
 function countdown(time, state, clickLinkEventTypes) {
     clearInterval(torpedo.timerInterval);

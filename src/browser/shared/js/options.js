@@ -11,6 +11,7 @@ const OptionsPage = {
         await this.attachEventListeners();
     },
 
+    // load and shows the current user settings
     async loadAndApplySettings() {
         const settings = await browser.storage.sync.get(null);
         this.originalSettings = { ...settings };
@@ -84,6 +85,7 @@ const OptionsPage = {
         document.getElementById('errorAddUserDefinedShortURL').textContent = '';
     },
 
+    // attach event listeners for when the user changes their settings
     async attachEventListeners() {
         // Tab navigation
         document.querySelectorAll('.data-table').forEach(table => table.style.display = 'none');
@@ -552,6 +554,7 @@ const OptionsPage = {
         });
     },
 
+    // switching the tabs of the options
     switchTab(clickedLink) {
         document.querySelectorAll(".tab-links a").forEach(el => el.classList.remove("active"));
         document.querySelectorAll('.tab-content .tab').forEach(tab => tab.classList.remove('active'));
@@ -565,6 +568,7 @@ const OptionsPage = {
         document.querySelectorAll('.data-table').forEach(table => table.style.display = 'none');
     },
 
+    // toggles the visibility between the lists
     toggleListVisibility(listId) {
         const listElement = document.getElementById(listId);
         if (listElement) {
@@ -576,6 +580,7 @@ const OptionsPage = {
         }
     },
 
+    // sets the static texts
     setStaticTexts() {
         const textMap = {
             // Timer tab
@@ -642,6 +647,7 @@ const OptionsPage = {
         }
     },
 
+    // adds the default referrer to the referrer list
     async addDefaultReferrer() {
         const defaultReferrers = [
             { host: 'deref-gmx.net', path: '/mail/client/[...]/dereferrer/?', attribute: 'redirectUrl=' },
@@ -673,6 +679,7 @@ const OptionsPage = {
         document.getElementById("addDefaultReferrer").disabled = true;
     },
 
+    // fills the referrer list with content from the storage
     async fillReferrerList() {
         const settings = await browser.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
         const hosts = settings.referrerPart1 || [];
@@ -716,6 +723,7 @@ const OptionsPage = {
         });
     },
 
+    // method for deleting a referrer
     async deleteReferrer(index) {
         const settings = await browser.storage.sync.get(['referrerPart1', 'referrerPart2', 'referrerPart3']);
 
@@ -735,6 +743,7 @@ const OptionsPage = {
         await this.fillReferrerList();
     },
 
+    // method for when the user wants to add a referrer
     async addReferrer() {
         const hostInput = document.getElementById("referrerInputHost").value.trim().toLowerCase();
         const pathInput = document.getElementById("referrerInputPath").value.trim();
@@ -777,6 +786,7 @@ const OptionsPage = {
         document.getElementById('referrerInputAttribute').value = "";
     },
 
+    // fills the trusted list with content from the storage
     async fillTrustedList() {
         const settings = await browser.storage.sync.get(null);
         const table = document.getElementById("trustedList");
@@ -800,6 +810,7 @@ const OptionsPage = {
         });
     },
 
+    // fills the user list with content from the storage
     async fillUserList() {
         const settings = await browser.storage.sync.get(['userDefinedDomains']);
         const table = document.getElementById("userList");
@@ -839,6 +850,7 @@ const OptionsPage = {
         });
     },
 
+    // method for when the user wants to add a user defined domain to the list
     async addUserDefined() {
         let input = document.getElementById("userDefinedInput").value.trim();
         const errorElement = document.getElementById('errorAddUserDefined');
@@ -876,6 +888,7 @@ const OptionsPage = {
         document.getElementById("userDefinedInput").value = "";
     },
 
+    // fills the short url list with content from the storage
     async fillShortURLList() {
         const settings = await browser.storage.sync.get(['redirectDomains']);
         const table = document.getElementById("shortURLList");
@@ -917,6 +930,7 @@ const OptionsPage = {
         })
     },
 
+    // method for when the user want to add a short url
     async addShortURL() {
         const inputElement = document.getElementById("userDefinedShortURLInput").value.trim().toLowerCase();
         const settings = await browser.storage.sync.get(['redirectDomains']);

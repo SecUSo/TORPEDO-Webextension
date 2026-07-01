@@ -1,5 +1,6 @@
 /**
- * Global state object for the Torpedo extension.
+ * The global ``torpedo`` state object for storing the state of the Extension across files.
+ * @type {{countRedirect: number, domain: string, hideTimer: null, location: null, publicSuffixList: string, state: string, target: null, timerInterval: null, tooltip: null, url: string, urlObject: null, setNewUrl(*): void, extractDomain(*): (string|*)}}
  */
 const torpedo = {
     // Counter for redirects.
@@ -26,7 +27,7 @@ const torpedo = {
     urlObject: null,
 
     /**
-     * Sets a new URL object and updates related properties.
+     * Updates the ``torpedo`` state variables in respect to the ``newUrlObject``.
      */
     setNewUrl(newUrlObject) {
         if (newUrlObject.hostname.endsWith(".")) {
@@ -39,9 +40,9 @@ const torpedo = {
     },
 
     /**
-     * Extracts the domain from a given hostname using the public suffix list.
-     * @param hostname - The hostname to extract the domain from.
-     * @returns {string|*} - The extracted domain or the original hostname if the domain cannot be determined.
+     * Extracts the domain from the ``hostname`` using the public suffix list.
+     *
+     * @returns {string|*} The extracted domain or the original hostname if the domain cannot be determined.
      */
     extractDomain(hostname) {
         if (isIP(hostname)) {

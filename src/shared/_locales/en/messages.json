@@ -546,7 +546,7 @@
     "description": "tooltip-title tutorial on page 3"
   },
   "tooltip_txt": {
-    "message": "TORPEDO displays one of two types of dialog windows. The type displayed depends on the identified <span class='fat'>risk level</span> of the URL associated with the link: <span class='green'>low risk</span> and <span class='grey'>unknown risk</span>. For each risk level, TORPEDO displays a separate dialog window immediately after hovering over a link. These risk levels are explained in the following.",
+    "message": "TORPEDO displays one of three types of dialog windows. The type displayed depends on the identified <span class='fat'>risk level</span> of the URL associated with the link: <span class='green'>low risk</span>, <span class='grey'>unknown risk</span> and <span class='grey'>unknown risk</span> with a warning symbol. For each risk level, TORPEDO displays a separate dialog window immediately after hovering over a link. These risk levels are explained in the following.",
     "description": "tooltip on page 3"
   },
 
@@ -632,7 +632,7 @@
     "description": "Title for the warning in the grey-case tutorial"
   },
   "warning_grey_case_txt": {
-    "message": "The warning symbol is displayed since at least one indicator that is often used in phishing attacks was found. However, it does not necessarily mean that it is a phishing URL. Legitimate emails may contain these indicators as well. Here you need to check particularly carefully whether the link leads to a website that might perform a phishing attack or not.",
+    "message": "This dialog window indicates that the risk level of visiting the URL associated with the link is <span class='grey'>deemed unknown</span>. The warning symbol is displayed since at least one indicator that is often used in phishing attacks was found. However, it does not necessarily mean that it is a phishing URL. Legitimate emails may contain these indicators as well. Here you need to check particularly carefully whether the link leads to a website that might perform a phishing attack or not.",
     "description": "Explanation for the warning in the grey-case tutorial"
   },
   "warning_grey_case_txt_2": {

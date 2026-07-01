@@ -1,5 +1,6 @@
 /**
- * A utility module
+ * A utility module for every kind of tasks.
+ * @type {{preventEvents: preventEvents, reactivateEvents: reactivateEvents, isDomainMatch: function(*, *): boolean}}
  */
 const Utils = (function () {
     /**

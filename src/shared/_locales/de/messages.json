@@ -546,7 +546,7 @@
     "description": "tooltip-title tutorial on page 3"
   },
   "tooltip_txt": {
-    "message": "Wenn Sie mit der Maus einen Link berühren, zeigt TORPEDO einen von zwei Arten von Dialogfenstern an. Je nachdem welches <span class='fat'>Risiko</span> für das Aufrufen der Webseite TORPEDO ermittelt hat, wird ein Dialogfenster mit <span class='green'>niedrigem</span> bzw. <span class='grey'>unbekanntem</span> Risiko angezeigt. Beide Arten werden im Folgenden vorgestellt.",
+    "message": "Wenn Sie mit der Maus einen Link berühren, zeigt TORPEDO einen von drei Arten von Dialogfenstern an. Je nachdem welches <span class='fat'>Risiko</span> für das Aufrufen der Webseite TORPEDO ermittelt hat, wird ein Dialogfenster mit <span class='green'>niedrigem</span> Risiko,  <span class='grey'>unbekanntem</span> Risiko oder <span class='grey'>unbekanntem</span> Risiko mit Warnsymbol angezeigt. Die unterschiedlichen Arten werden im Folgenden vorgestellt.",
     "description": "tooltip on page 3"
   },
 
@@ -632,7 +632,7 @@
     "description": "Title for the warning in the grey-case tutorial"
   },
   "warning_grey_case_txt": {
-    "message": "Das Warnsymbol wird angezeigt, wenn mindestens ein Indikator gefunden wurde, der auch bei Phishing-Angriffen verwendet wird. Das bedeutet aber nicht, dass es sich hierbei zwangsläufig um eine Phishing URL handelt. Auch in legitimen E-Mails können solche Indikatoren vorkommen. Hier müssen Sie besonders sorgfältig überprüfen, ob der Link Sie zu einer Webseite führt, die einen Phishing-Angriff durchführt oder nicht.",
+    "message": "Dieses Dialogfenster weist ebenfalls darauf hin, dass das Risikoniveau des Besuchs der URL hinter dem Link von TORPEDO nicht ermittelt werden kann und daher als <span class='grey'>unbekannt eingestuft</span> wird. Zusätzlich wird ein Warnsymbol angezeigt, da mindestens ein Indikator gefunden wurde, der auch bei Phishing-Angriffen verwendet wird. Das bedeutet aber nicht, dass es sich hierbei zwangsläufig um eine Phishing URL handelt. Auch in legitimen E-Mails können solche Indikatoren vorkommen. Hier müssen Sie besonders sorgfältig überprüfen, ob der Link Sie zu einer Webseite führt, die einen Phishing-Angriff durchführt oder nicht.",
     "description": "Explanation for the warning in the grey-case tutorial"
   },
   "warning_grey_case_txt_2": {
