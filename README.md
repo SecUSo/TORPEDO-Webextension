@@ -1,6 +1,13 @@
+<img src="https://raw.githubusercontent.com/SecUSo/TORPEDO-Webextension/refs/heads/main/src/shared/img/TORPEDO_fullLockup.svg"
+     alt="Privacy Friendly QR Scanner Icon"
+     width="180px"
+     align="right"
+     style="float: right; margin-right: 10px;" />
 # TORPEDO - TOoltip-poweRed Phishing Email DetectiOn
+[<img src="https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-129x45px.8041c789.png" alt="Get it on Firefox" height="60">](https://addons.mozilla.org/en-US/firefox/addon/torpedo-browser/)
+[<img src="https://addons.thunderbird.net/static/img/addons-buttons/TB-AMO-button_2.png" alt="Get it on Firefox" height="60">](https://services.addons.thunderbird.net/En-us/thunderbird/addon/torpedo-phishing-detection/)
 
-TORPEDO is a security-focused WebExtension (Thunderbird + Chrome/Firefox) that intercepts link hover
+TORPEDO is a security-focused WebExtension for Thunderbird and Firefox that intercepts link hover
 events, analyzes the target URL for phishing indicators, and shows an inline tooltip with a security
 verdict before the user can click.
 
