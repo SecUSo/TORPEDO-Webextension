@@ -179,8 +179,8 @@ function init() {
 
     // images based on language
     const lang = browser.i18n.getUILanguage().substring(0, 2);
-    setImage("green-case-showcase-one-img", `img/examples/${lang}/green_case_one_${lang}.svg`);
-    setImage("green-case-showcase-two-img", `img/examples/${lang}/green_case_two_${lang}.svg`);
+    setImage("green-case-showcase-one-img", `img/examples/${lang}/green_case_one_ebay_${lang}.svg`);
+    setImage("green-case-showcase-two-img", `img/examples/${lang}/green_case_two_paypal_${lang}.svg`);
     setImage("grey-case-showcase-one-img", `img/examples/${lang}/grey_case_one_${lang}.svg`);
     setImage("grey-case-showcase-two-img", `img/examples/${lang}/grey_case_two_${lang}.svg`);
     setImage("warning-grey-case-showcase-one-img", `img/examples/${lang}/warning_grey_case_one_${lang}.svg`);
