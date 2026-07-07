@@ -198,7 +198,10 @@ function getMsg(key) {
 
 function setInnerHTML(elementId, msgKey) {
     const el = document.getElementById(elementId);
-    if (el) el.innerHTML = getMsg(msgKey);
+    if (!el) return;
+
+    while (el.firstChild) el.removeChild(el.firstChild);
+    el.appendChild(Utils.parseLimitedMarkup(getMsg(msgKey)));
 }
 
 function setImage(id, path) {

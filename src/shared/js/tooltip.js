@@ -30,9 +30,12 @@ const TooltipManager = (function() {
         },
 
         /** Set inner HTML safely */
-        setHTML: (selector, html) => {
+        setHTML: (selector, str) => {
             const el = UI.find(selector);
-            if (el) el.innerHTML = html;
+            if (!el) return;
+
+            while (el.firstChild) el.removeChild(el.firstChild);
+            el.appendChild(Utils.parseLimitedMarkup(str));
         },
 
         /** Toggle display style */
@@ -126,10 +129,13 @@ const TooltipManager = (function() {
             return null;
         }
 
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = tooltipHTML;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(tooltipHTML, "text/html");
 
-        return tempDiv.firstElementChild ?? null;
+        const firstEl = doc.body.firstElementChild;
+        if (!firstEl) return null;
+
+        return document.importNode(firstEl, true);
     }
 
     /**
@@ -300,14 +306,14 @@ const TooltipManager = (function() {
     function updateTextContent(secStatus) {
         const getMsg = (key) => browser.i18n.getMessage(key);
 
-        UI.setHTML(".torpedo-redirect-button", getMsg("ButtonWeiterleitung"));
-        UI.setHTML(".torpedo-state-title", getMsg(secStatus + "Ueberschrift"));
+        UI.setText(".torpedo-redirect-button", getMsg("ButtonWeiterleitung"));
+        UI.setText(".torpedo-state-title", getMsg(secStatus + "Ueberschrift"));
         UI.setHTML(".torpedo-security-status", getMsg(secStatus + "Erklaerung"));
-        UI.setHTML(".torpedo-info-text", getMsg("MehrInfo"));
+        UI.setText(".torpedo-info-text", getMsg("MehrInfo"));
         UI.setHTML(".torpedo-more-info", getMsg(secStatus + "Infotext").replace("<URL>", torpedo.url));
 
         const linkDelayText = getMsg(secStatus + "LinkDeaktivierung")
-        UI.setHTML(".torpedo-link-delay", linkDelayText);
+        UI.setText(".torpedo-link-delay", linkDelayText);
 
         [
             ".torpedo-warning-img",

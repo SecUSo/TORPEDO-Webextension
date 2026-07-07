@@ -92,5 +92,42 @@ const Utils = (function () {
         }
     }
 
-    return { preventEvents, reactivateEvents, isDomainMatch };
+    /**
+     * It parses only a limited set of HTML tags from a string and returns a DocumentFragment containing
+     * the parsed elements, to avoid the "innerHTML" api because of security issues.
+     * @param str - The string containing HTML tags.
+     * @returns {DocumentFragment} - The resulting DocumentFragment.
+     */
+    function parseLimitedMarkup(str) {
+        const frag = document.createDocumentFragment();
+        const re = /<br\s*\/?>|<span class=['"]([\w-]+)['"]>(.*?)<\/span>/gis;
+        let lastIndex = 0;
+        let match;
+
+        while ((match = re.exec(str)) !== null) {
+            if (match.index > lastIndex) {
+                frag.appendChild(document.createTextNode(str.slice(lastIndex, match.index)));
+            }
+
+            if (match[0].toLowerCase().startsWith("<br")) {
+                frag.appendChild(document.createElement("br"));
+
+            } else{
+                const span = document.createElement("span");
+                span.className = match[1];
+                span.textContent = match[2];
+                frag.appendChild(span);
+            }
+
+            lastIndex = re.lastIndex;
+        }
+
+        if (lastIndex < str.length) {
+            frag.appendChild(document.createTextNode(str.slice(lastIndex)));
+        }
+
+        return frag;
+    }
+
+    return { preventEvents, reactivateEvents, isDomainMatch, parseLimitedMarkup };
 })();
