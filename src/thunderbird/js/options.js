@@ -642,7 +642,8 @@ const OptionsPage = {
         for (const id in textMap) {
             const element = document.getElementById(id);
             if (element) {
-                element.textContent = browser.i18n.getMessage(textMap[id]) || textMap[id];
+                while (element.firstChild) element.removeChild(element.firstChild);
+                element.appendChild(Utils.parseLimitedMarkup(browser.i18n.getMessage(textMap[id]) || textMap[id]));
             }
         }
     },
