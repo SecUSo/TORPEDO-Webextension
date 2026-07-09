@@ -100,7 +100,7 @@ const Utils = (function () {
      */
     function parseLimitedMarkup(str) {
         const frag = document.createDocumentFragment();
-        const re = /<br\s*\/?>|<span\s+([^>]*)>(.*?)<\/span>/gis;
+        const re = /<br\s*\/?>|<span\s+class=['"]([^'"]+)['"]>(.*?)<\/span>/gis;
         let lastIndex = 0;
         let match;
 
