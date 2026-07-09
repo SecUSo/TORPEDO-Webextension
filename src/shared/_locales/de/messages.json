@@ -609,6 +609,19 @@
     "message": "Alle drei sind jedoch Phishing‑Webseiten.",
     "description": "Explanation for the second case (grey) tutorial, page 2"
   },
+  "grey_case_two_txt_5": {
+    "message": "<span class=\"link-like\">example.com</span> -> <span class=\"link-like\">exampel.com</span> (invertierte Buchstaben, <span class=\"fat\">el</span> statt <span class=\"fat\">le</span>)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
+  "grey_case_two_txt_6": {
+    "message": "<span class=\"link-like\">example.com</span> -> <span class=\"link-like\">exampie.com</span> (ähnlich aussehender Buchstabe, <span class=\"fat\">i</span> statt <span class=\"fat\">I</span>)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
+  "grey_case_two_txt_7": {
+    "message": "<span class=\"link-like\">example.com</span> -> <span class=\"link-like\">exaample.com</span> (ein zusätzliches Zeichen, zwei <span class=\"fat\">a</span> statt eines)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
+
 
   "grey_case_showcase_one_title": {
     "message": "Dialogfenster bei <span class='grey'>unbekanntem Risiko</span> - Beispiel 1",

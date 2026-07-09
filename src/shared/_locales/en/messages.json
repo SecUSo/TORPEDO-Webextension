@@ -609,6 +609,18 @@
     "message": "But all three are phishing websites.",
     "description": "Explanation for the second case (grey) tutorial, page 2"
   },
+  "grey_case_two_txt_5": {
+    "message": "<span class='link-like'>example.com</span> -> <span class='link-like'>exampel.com</span> (inverted letters, <span class='fat'>el</span> instead of <span class='fat'>le</span>)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
+  "grey_case_two_txt_6": {
+    "message": "<span class='link-like'>example.com</span> -> <span class='link-like'>exampie.com</span> (the letter <span class='fat'>i</span>, which looks similar to <span class='fat'>I</span>)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
+  "grey_case_two_txt_7": {
+    "message": "<span class='link-like'>example.com</span> -> <span class='link-like'>exaample.com</span> (an extra character, two <span class='fat'>a</span> instead of one)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
 
   "grey_case_showcase_one_title": {
     "message": "<span class='grey'>Unknown risk</span> dialog window - Example 1",
