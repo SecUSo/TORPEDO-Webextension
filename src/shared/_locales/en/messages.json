@@ -69,12 +69,20 @@
     "description": "Button text for activating a link"
   },
 
-  "T1Ueberschrift": {
+  "shortUeberschrift": {
+    "message": "Deposited Domain:",
+    "description": "short Header for tooltip"
+  },
+  "longUeberschrift": {
     "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
+    "description": "long Header for tooltip"
   },
 
-  "T1Erklaerung": {
+  "shortT1Erklaerung": {
+    "message": "Low risk: the risk of clicking the link is considered to be low because of the trustworthiness of the domain of this URL.",
+    "description": "Information on the classification of this domain"
+  },
+  "longT1Erklaerung": {
     "message": "Low risk: the risk of clicking the link is considered to be low because of the trustworthiness of the domain (<span class='torpedoHighlight'>bold area</span>) of this URL.",
     "description": "Information on the classification of this domain"
   },
@@ -94,12 +102,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T2Ueberschrift": {
-    "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
+  "shortT2Erklaerung": {
+    "message": "Low risk: The risk of clicking this link is considered to be low because of your previous statements concerning the trustworthiness of the domain of this URL.",
+    "description": "Information on the classification of this domain"
   },
-
-  "T2Erklaerung": {
+  "longT2Erklaerung": {
     "message": "Low risk: The risk of clicking this link is considered to be low because of your previous statements concerning the trustworthiness of the domain (<span class='torpedoHighlight'>bold area</span>) of this URL.",
     "description": "Information on the classification of this domain"
   },
@@ -119,12 +126,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T31Ueberschrift": {
-    "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
+  "shortT31Erklaerung": {
+    "message": "<span class='torpedoHighlight'>Unknown risk:</span> The risk of clicking this link can not deﬁnitively be classiﬁed. You have to classify the risk yourself by checking the domain of the URL.",
+    "description": "Information on the classification of this domain"
   },
-
-  "T31Erklaerung": {
+  "longT31Erklaerung": {
     "message": "<span class='torpedoHighlight'>Unknown risk:</span> The risk of clicking this link can not deﬁnitively be classiﬁed. You have to classify the risk yourself by checking the domain (<span class='torpedoHighlight'>bold area</span>) of the URL.",
     "description": "Information on the classification of this domain"
   },
@@ -144,12 +150,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T32Ueberschrift": {
-    "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
+  "shortT32Erklaerung": {
+    "message": "<span class='torpedoHighlight'>Unknown risk but careful:</span> The risk of clicking the link can not deﬁnitively be classiﬁed. However, at least one indicator that is often used in phishing attacks to mislead you was found. You have to classify the risk yourself by checking the domain of the URL.",
+    "description": "Information on the classification of this domain"
   },
-
-  "T32Erklaerung": {
+  "longT32Erklaerung": {
     "message": "<span class='torpedoHighlight'>Unknown risk but careful:</span> The risk of clicking the link can not deﬁnitively be classiﬁed. However, at least one indicator that is often used in phishing attacks to mislead you was found. You have to classify the risk yourself by checking the domain (<span class='torpedoHighlight'>bold area</span>) of the URL.",
     "description": "Information on the classification of this domain"
   },
@@ -169,37 +174,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T33Ueberschrift": {
-    "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
-  },
-
-  "T33Erklaerung": {
-    "message": "<span class='torpedoHighlight'>Unknown risk but careful:</span> The risk of clicking the link can not deﬁnitively be classiﬁed. However, at least one severe indicator that is often used in phishing attacks to mislead you was found. You have to classify the risk yourself by checking the domain (<span class='torpedoHighlight'>bold area</span>) of the URL.",
+  "shortShortURLErklaerung": {
+    "message": "This domain is not the target URL. You will be redirected to another URL. To classify the risk of the target URL, TORPEDO would have to detect the target URL.<br>This does not happen automatically, as the detection would put your privacy at risk.",
     "description": "Information on the classification of this domain"
   },
-
-  "T33Infotext": {
-    "message": "This means that the domain (bold area) of the URL and thus its trustworthiness is not known to TORPEDO. It is not among the most frequently visited domains in Germany. Also, URLs with this domain have not been visited many times by you in the past or have been identified as trustable by you in the past. In addition, TORPEDO has discovered at least one indicator that is often used in fraudulent e-mails to fool you. The indicators include e.g. 1) a difference between the displayed URL in the text and the deposited URL; 2) the fact that the domain of the URL behind this link is very similar to the ones identified as trustable by you or by TORPEDO; 3) if a URL is additionally displayed in the tooltip and it differs from the actual URL after the link.",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T33GluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T33LinkDeaktivierung": {
-    "message": "TORPEDO has disabled the link so you can check the domain carefully.",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "ShortURLUeberschrift": {
-    "message": "Referred URL (also known as web address):",
-    "description": "Header for tooltip"
-  },
-
-  "ShortURLErklaerung": {
+  "longShortURLErklaerung": {
     "message": "This domain (highlighted part) is not the target URL. You will be redirected to another URL. To classify the risk of the target URL, TORPEDO would have to detect the target URL.<br>This does not happen automatically, as the detection would put your privacy at risk.",
     "description": "Information on the classification of this domain"
   },
@@ -219,12 +198,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "URLnachErmittelnButton2Ueberschrift": {
-    "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
+  "shortURLnachErmittelnButton2Erklaerung": {
+    "message": "<span class='torpedoHighlight'>Unknown risk:</span> The risk of clicking the link cannot be determined. The domain is not the target domain. If you click on the link, you will be redirected to another domain. To check the target domain, TORPEDO has to determine it. This does not happen automatically, because an investigation endangers your privacy.",
+    "description": "Information on the classification of this domain"
   },
-
-  "URLnachErmittelnButton2Erklaerung": {
+  "longURLnachErmittelnButton2Erklaerung": {
     "message": "<span class='torpedoHighlight'>Unknown risk:</span> The risk of clicking the link cannot be determined. The domain (<span class='torpedoHighlight'>highlighted in bold</span>) is not the target domain. If you click on the link, you will be redirected to another domain. To check the target domain, TORPEDO has to determine it. This does not happen automatically, because an investigation endangers your privacy.",
     "description": "Information on the classification of this domain"
   },
@@ -242,11 +220,6 @@
   "URLnachErmittelnButton2LinkDeaktivierung": {
     "message": "The link has been deactivated so that you can consider whether you want to have the target domain determined.",
     "description": "Text for Deactivation of the link"
-  },
-
-  "URLnachErmittelnButtonPrivacyModeUeberschrift": {
-    "message": "Deposited URL (also called web address):",
-    "description": "Header for tooltip"
   },
 
   "URLnachErmittelnButtonPrivacyModeErklaerung": {
