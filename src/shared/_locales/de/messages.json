@@ -69,12 +69,20 @@
     "description": "Button text for activating a link"
   },
 
-  "T1Ueberschrift": {
+  "shortUeberschrift": {
+    "message": "Hinterlegte Domain:",
+    "description": "short Header for tooltip"
+  },
+  "longUeberschrift": {
     "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
+    "description": "long Header for tooltip"
   },
 
-  "T1Erklaerung": {
+  "shortT1Erklaerung": {
+    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain als gering eingestuft.",
+    "description": "Information on the classification of this domain"
+  },
+  "longT1Erklaerung": {
     "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
@@ -94,12 +102,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T2Ueberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
+  "shortT2Erklaerung": {
+    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain als gering eingestuft.",
+    "description": "Information on the classification of this domain"
   },
-
-  "T2Erklaerung": {
+  "longT2Erklaerung": {
     "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
@@ -119,12 +126,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T31Ueberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
+  "shortT31Erklaerung": {
+    "message": "<span class='torpedoHighlight'>Unbekanntes Risiko:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain.",
+    "description": "Information on the classification of this domain"
   },
-
-  "T31Erklaerung": {
+  "longT31Erklaerung": {
     "message": "<span class='torpedoHighlight'>Unbekanntes Risiko:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>).",
     "description": "Information on the classification of this domain"
   },
@@ -144,12 +150,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T32Ueberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
+  "shortT32Erklaerung": {
+    "message": "<span class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain prüfen.",
+    "description": "Information on the classification of this domain"
   },
-
-  "T32Erklaerung": {
+  "longT32Erklaerung": {
     "message": "<span class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) prüfen.",
     "description": "Information on the classification of this domain"
   },
@@ -169,37 +174,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "T33Ueberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
-  },
-
-  "T33Erklaerung": {
-    "message": "<span class='torpedoHighlight'>Unbekanntes Risiko aber vorsichtig sein:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Es wurde aber mindestens ein gravierender Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Sie müssen hier das Risiko selbst einstufen, indem Sie die Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) prüfen.",
+  "shortShortURLErklaerung": {
+    "message": "Diese Domain ist nicht die Ziel-URL. Sie werden von dort weitergeleitet. Um das Risiko der Ziel-URL einstufen zu können, müsste TORPEDO die Ziel-URL ermitteln.<br>Dies geschieht nicht automatisch, da eine Ermittlung Ihre Privatsphäre gefährdet.",
     "description": "Information on the classification of this domain"
   },
-
-  "T33Infotext": {
-    "message": "Das bedeutet, dass die Domain (fett hervorgehobener Bereich) der URL und damit auch ihre Vertrauenswürdigkeit TORPEDO nicht bekannt ist. Diese ist also nicht unter den in Deutschland am Häufigsten besuchten Domains. URLs mit dieser Domain wurden auch nicht mehrfach von Ihnen in der Vergangenheit aufgerufen oder von Ihnen in der Vergangenheit als vertrauenswürdig eingestuft. Zusätzlich hat TORPEDO aber mindestens einen Indikator entdeckt, der oft auch in betrügerischen E-Mails verwendet wird, um Sie zu täuschen. Zu den Indikatoren zählt z.B. 1) ein Unterschied zwischen der angezeigten URL im Text und der hinterlegten URL, 2) die Tatsache, dass die Domain der URL hinter diesem Link sehr ähnlich zu einer der von TORPEDO oder von Ihnen als vertrauenswürdig eingestuften Domains ist; 3) wenn eine URL zusätzlich im Tooltip angezeigt wird und diese von der eigentlichen URL hinter dem Link abweicht.",
-    "description": "More information on the evaluation of this domain"
-  },
-
-  "T33GluehbirneText": {
-    "message": "",
-    "description": "Advice for the user"
-  },
-
-  "T33LinkDeaktivierung": {
-    "message": "Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.",
-    "description": "Text for Deactivation of the link"
-  },
-
-  "ShortURLUeberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
-  },
-
-  "ShortURLErklaerung": {
+  "longShortURLErklaerung": {
     "message": "Diese Domain (fett hervorgehobener Bereich) ist nicht die Ziel-URL. Sie werden von dort weitergeleitet. Um das Risiko der Ziel-URL einstufen zu können, müsste TORPEDO die Ziel-URL ermitteln.<br>Dies geschieht nicht automatisch, da eine Ermittlung Ihre Privatsphäre gefährdet.",
     "description": "Information on the classification of this domain"
   },
@@ -219,12 +198,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "URLnachErmittelnButton2Ueberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
+  "shortURLnachErmittelnButton2Erklaerung": {
+    "message": "<span class='torpedoHighlight'>Unbekanntes Risiko:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Die Domain ist nicht die Ziel-Domain. Wenn Sie auf den Link klicken, werden Sie auf eine andere Domain weitergeleitet. Um die Ziel-Domain zu überprüfen, muss TORPEDO diese ermitteln. Dies geschieht nicht automatisch, da eine Ermittlung Ihre Privatsphäre gefährdet.",
+    "description": "Information on the classification of this domain"
   },
-
-  "URLnachErmittelnButton2Erklaerung": {
+  "longURLnachErmittelnButton2Erklaerung": {
     "message": "<span class='torpedoHighlight'>Unbekanntes Risiko:</span> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Die Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) ist nicht die Ziel-Domain. Wenn Sie auf den Link klicken, werden Sie auf eine andere Domain weitergeleitet. Um die Ziel-Domain zu überprüfen, muss TORPEDO diese ermitteln. Dies geschieht nicht automatisch, da eine Ermittlung Ihre Privatsphäre gefährdet.",
     "description": "Information on the classification of this domain"
   },
@@ -242,11 +220,6 @@
   "URLnachErmittelnButton2LinkDeaktivierung": {
     "message": "Der Link wurde deaktiviert, damit Sie in Ruhe überlegen, ob Sie die Ziel-Domain ermitteln lassen wollen.",
     "description": "Text for Deactivation of the link"
-  },
-
-  "URLnachErmittelnButtonPrivacyModeUeberschrift": {
-    "message": "Hinterlegte URL (auch Webadresse genannt):",
-    "description": "Header for tooltip"
   },
 
   "URLnachErmittelnButtonPrivacyModeErklaerung": {
@@ -609,6 +582,19 @@
     "message": "Alle drei sind jedoch Phishing‑Webseiten.",
     "description": "Explanation for the second case (grey) tutorial, page 2"
   },
+  "grey_case_two_txt_5": {
+    "message": "<span class=\"link-like\">example.com</span> -> <span class=\"link-like\">exampel.com</span> (invertierte Buchstaben, <span class=\"fat\">el</span> statt <span class=\"fat\">le</span>)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
+  "grey_case_two_txt_6": {
+    "message": "<span class=\"link-like\">example.com</span> -> <span class=\"link-like\">exampie.com</span> (ähnlich aussehender Buchstabe, <span class=\"fat\">i</span> statt <span class=\"fat\">I</span>)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
+  "grey_case_two_txt_7": {
+    "message": "<span class=\"link-like\">example.com</span> -> <span class=\"link-like\">exaample.com</span> (ein zusätzliches Zeichen, zwei <span class=\"fat\">a</span> statt eines)",
+    "description": "Explanation for the second case (grey) tutorial, page 2"
+  },
+
 
   "grey_case_showcase_one_title": {
     "message": "Dialogfenster bei <span class='grey'>unbekanntem Risiko</span> - Beispiel 1",

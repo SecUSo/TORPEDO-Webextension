@@ -148,6 +148,9 @@ function init() {
     setInnerHTML("grey-case-two-txt-2", "grey_case_two_txt_2");
     setInnerHTML("grey-case-two-txt-3", "grey_case_two_txt_3");
     setInnerHTML("grey-case-two-txt-4", "grey_case_two_txt_4");
+    setInnerHTML("grey-case-two-txt-5", "grey_case_two_txt_5");
+    setInnerHTML("grey-case-two-txt-6", "grey_case_two_txt_6");
+    setInnerHTML("grey-case-two-txt-7", "grey_case_two_txt_7");
 
     // grey case showcase page
     setInnerHTML("grey-case-showcase-one-title", "grey_case_showcase_one_title");
@@ -178,7 +181,8 @@ function init() {
     setInnerHTML("configuration-showcase-three-txt", "configuration_showcase_three_txt");
 
     // images based on language
-    const lang = browser.i18n.getUILanguage().substring(0, 2);
+    let lang = browser.i18n.getUILanguage().substring(0, 2);
+    if (lang !== "de") lang = "en";
     setImage("green-case-showcase-one-img", `img/examples/${lang}/green_case_one_ebay_${lang}.svg`);
     setImage("green-case-showcase-two-img", `img/examples/${lang}/green_case_two_paypal_${lang}.svg`);
     setImage("grey-case-showcase-one-img", `img/examples/${lang}/grey_case_one_${lang}.svg`);
@@ -198,7 +202,10 @@ function getMsg(key) {
 
 function setInnerHTML(elementId, msgKey) {
     const el = document.getElementById(elementId);
-    if (el) el.innerHTML = getMsg(msgKey);
+    if (!el) return;
+
+    while (el.firstChild) el.removeChild(el.firstChild);
+    el.appendChild(Utils.parseLimitedMarkup(getMsg(msgKey)));
 }
 
 function setImage(id, path) {

@@ -3,13 +3,13 @@
   "author": "SECUSO",
   "browser_specific_settings": {
     "gecko": {
-      "id": "{53319828-3750-4619-836e-10f3c736a61f}",
+      "id": "torpedo@tu-darmstadt.de",
       "strict_min_version": "128.0"
     }
   },
   "name": "__MSG_extensionName__",
-  "version": "1.9.1",
-  "default_locale": "de",
+  "version": "4.0.2",
+  "default_locale": "en",
   "description": "__MSG_extensionDescriptionThunderbird__",
   "background": {
     "scripts": [
@@ -39,6 +39,9 @@
       "38": "img/none38.png",
       "32": "img/none64.png"
     },
-    "allowed_spaces": ["mail", "default"]
+    "allowed_spaces": [
+      "mail",
+      "default"
+    ]
   }
 }

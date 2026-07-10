@@ -30,9 +30,12 @@ const TooltipManager = (function() {
         },
 
         /** Set inner HTML safely */
-        setHTML: (selector, html) => {
+        setHTML: (selector, str) => {
             const el = UI.find(selector);
-            if (el) el.innerHTML = html;
+            if (!el) return;
+
+            while (el.firstChild) el.removeChild(el.firstChild);
+            el.appendChild(Utils.parseLimitedMarkup(str));
         },
 
         /** Toggle display style */
@@ -126,10 +129,13 @@ const TooltipManager = (function() {
             return null;
         }
 
-        const tempDiv = document.createElement("div");
-        tempDiv.innerHTML = tooltipHTML;
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(tooltipHTML, "text/html");
 
-        return tempDiv.firstElementChild ?? null;
+        const firstEl = doc.body.firstElementChild;
+        if (!firstEl) return null;
+
+        return document.importNode(firstEl, true);
     }
 
     /**
@@ -213,8 +219,9 @@ const TooltipManager = (function() {
             }
         });
         UI.onClick(".torpedo-redirect-button", (event) => resolveRedirect(event));
-        UI.onClick(".torpedo-url-button", () => {
+        UI.onClick(".torpedo-url-button", async () => {
             UI.find(".torpedo-URL")?.classList.toggle(CLASSES.ACTIVE);
+            updateTextContent(torpedo.secStatus);
         });
     }
 
@@ -259,10 +266,12 @@ const TooltipManager = (function() {
     async function updateTooltip() {
         const storage = await browser.storage.sync.get(null);
         const secStatus = await getSecurityStatus(storage);
+        torpedo.secStatus = secStatus;
 
         console.log("Security Status:", secStatus);
 
         updateURLDisplay();
+        resetTextContent();
         updateTextContent(secStatus);
         await updateActionButtons(storage);
         updateSecurityVisuals(secStatus, storage);
@@ -293,22 +302,7 @@ const TooltipManager = (function() {
         UI.setText(".torpedo-url-suffix", urlSplit[1] || "");
     }
 
-    /**
-     * Updates the text content of various elements in the tooltip based on the security status.
-     * @param secStatus - The security status used to determine the text content.
-     */
-    function updateTextContent(secStatus) {
-        const getMsg = (key) => browser.i18n.getMessage(key);
-
-        UI.setHTML(".torpedo-redirect-button", getMsg("ButtonWeiterleitung"));
-        UI.setHTML(".torpedo-state-title", getMsg(secStatus + "Ueberschrift"));
-        UI.setHTML(".torpedo-security-status", getMsg(secStatus + "Erklaerung"));
-        UI.setHTML(".torpedo-info-text", getMsg("MehrInfo"));
-        UI.setHTML(".torpedo-more-info", getMsg(secStatus + "Infotext").replace("<URL>", torpedo.url));
-
-        const linkDelayText = getMsg(secStatus + "LinkDeaktivierung")
-        UI.setHTML(".torpedo-link-delay", linkDelayText);
-
+    function resetTextContent() {
         [
             ".torpedo-warning-img",
             ".torpedo-timer",
@@ -317,6 +311,34 @@ const TooltipManager = (function() {
             ".torpedo-redirect-button"
         ].forEach(sel => UI.toggle(sel, false));
 
+
+    }
+
+    /**
+     * Updates the text content of various elements in the tooltip based on the security status.
+     * @param secStatus - The security status used to determine the text content.
+     */
+    function updateTextContent(secStatus) {
+        const getMsg = (key) => browser.i18n.getMessage(key);
+
+        console.log(`update text content for sec status: ${secStatus}`);
+
+        UI.setText(".torpedo-redirect-button", getMsg("ButtonWeiterleitung"));
+
+        if (UI.find(".torpedo-URL")?.classList.contains(CLASSES.ACTIVE)) {
+            UI.setText(".torpedo-state-title", getMsg("shortUeberschrift"));
+            UI.setHTML(".torpedo-security-status", getMsg("short" + secStatus + "Erklaerung"));
+        } else {
+            UI.setText(".torpedo-state-title", getMsg("longUeberschrift"));
+            UI.setHTML(".torpedo-security-status", getMsg("long" + secStatus + "Erklaerung"));
+        }
+
+
+        UI.setText(".torpedo-info-text", getMsg("MehrInfo"));
+        UI.setHTML(".torpedo-more-info", getMsg(secStatus + "Infotext").replace("<URL>", torpedo.url));
+
+        const linkDelayText = getMsg(secStatus + "LinkDeaktivierung")
+        UI.setText(".torpedo-link-delay", linkDelayText);
         if (linkDelayText) {
             UI.toggle(".torpedo-link-delay", true);
         } else {
