@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="576"
-   height="363.5"
-   viewBox="0 0 576 363.5"
+   height="336"
+   viewBox="0 0 576 336"
    version="1.1"
    xml:space="preserve"
    style="clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
@@ -23,13 +23,13 @@
    inkscape:pagecheckerboard="0"
    inkscape:deskcolor="#d1d1d1"
    showgrid="false"
-   inkscape:zoom="1.945432"
-   inkscape:cx="162.43179"
-   inkscape:cy="217.68944"
-   inkscape:window-width="2880"
-   inkscape:window-height="1514"
-   inkscape:window-x="-11"
-   inkscape:window-y="-5"
+   inkscape:zoom="1.3756282"
+   inkscape:cx="258.79086"
+   inkscape:cy="217.71872"
+   inkscape:window-width="2560"
+   inkscape:window-height="1334"
+   inkscape:window-x="2869"
+   inkscape:window-y="-11"
    inkscape:window-maximized="1"
    inkscape:current-layer="warning-grey_case_phish_de" />
     <g
@@ -40,7 +40,7 @@
    transform="translate(607.159,-866.972)">
             <g
    id="border_template"
-   transform="matrix(4.87356,0,0,3.77101,-150.884,870.1442)">
+   transform="matrix(4.87356,0,0,3.4640795,-150.884,879.35211)">
                 <path
    d="M 153,31.207 C 153,30.541 152.54,30 151.974,30 H 36.026 C 35.46,30 35,30.541 35,31.207 v 87.586 c 0,0.666 0.46,1.207 1.026,1.207 h 115.948 c 0.566,0 1.026,-0.541 1.026,-1.207 z"
    style="fill:#ffffff"
@@ -123,40 +123,16 @@
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
    id="text7"><tspan
      sodipodi:role="line"
-     id="tspan18"
+     id="tspan3"
      x="62"
-     y="506.01401">to classify the risk yourself by checking the domain (</tspan></text>
-                    <text
-   x="62"
-   y="529.75702"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-   id="text8"><tspan
-     sodipodi:role="line"
-     id="tspan21"
-     x="62"
-     y="529.75702">of the URL.</tspan></text>
+     y="506.01401">to classify the risk yourself by checking the domain of the URL.</tspan></text>
                     
-                    <text
-   x="480.96933"
-   y="506.20877"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-   id="text10"><tspan
-     sodipodi:role="line"
-     id="tspan19"
-     x="480.96933"
-     y="506.20877">bold area</tspan></text>
-                    <text
-   x="560.58765"
-   y="506.72278"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-   id="text11"><tspan
-     sodipodi:role="line"
-     id="tspan20"
-     x="560.58765"
-     y="506.72278">)</tspan></text>
+                    
+                    
+                    
                 </g>
                 <g
-   transform="translate(15.3181,-243.717)"
+   transform="translate(15.3181,-267.31517)"
    id="g12">
                     <text
    x="40.921001"
@@ -169,7 +145,7 @@
      y="853">The link was deactivated to give you time to check the domain.</tspan></text>
                 </g>
                 <g
-   transform="translate(16.6385,-238.773)"
+   transform="translate(16.6385,-262.37117)"
    id="g13">
                     <text
    x="40.921001"
@@ -192,7 +168,9 @@
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
    id="text16"><tspan
      sodipodi:role="line"
-     id="tspan23">r w t h - a a c h e n . d e</tspan></text>
+     id="tspan23"
+     x="57.391998"
+     y="399">r w t h - a a c h e n . d e</tspan></text>
                     
                 </g>
                 <g
@@ -206,11 +184,11 @@
      sodipodi:role="line"
      id="tspan2"
      x="58"
-     y="362">Deposited URL (also called web address):</tspan></text>
+     y="362">Deposited Domain:</tspan></text>
                 </g>
                 <g
    id="more_information_classification"
-   transform="translate(2.62532,-29.36794)">
+   transform="translate(2.62532,-52.966113)">
                     <g
    transform="translate(-592.961,-556.608)"
    id="g19">
@@ -283,10 +261,12 @@
                 <text
    x="26.239"
    y="969.47601"
-   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif;fill:#195ace;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#195ace"
    id="text22"><tspan
      sodipodi:role="line"
-     id="tspan24">www.rwth-aachenn.de</tspan></text>
+     id="tspan24"
+     x="26.239"
+     y="969.47601">www.rwth-aachenn.de</tspan></text>
                 <rect
    x="26.239"
    y="971.39801"

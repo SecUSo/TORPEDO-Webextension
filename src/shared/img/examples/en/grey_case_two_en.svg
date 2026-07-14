@@ -8,7 +8,7 @@
    style="clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
    id="svg21"
    sodipodi:docname="grey_case_two_en.svg"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,11 +24,11 @@
    inkscape:deskcolor="#d1d1d1"
    inkscape:zoom="2.371246"
    inkscape:cx="245.8623"
-   inkscape:cy="148.44516"
+   inkscape:cy="148.2343"
    inkscape:window-width="2560"
-   inkscape:window-height="1369"
-   inkscape:window-x="1912"
-   inkscape:window-y="-8"
+   inkscape:window-height="1334"
+   inkscape:window-x="2869"
+   inkscape:window-y="-11"
    inkscape:window-maximized="1"
    inkscape:current-layer="simple-grey_case_no-phish_de"
    showgrid="false" />
@@ -84,9 +84,7 @@
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
    id="text6"><tspan
      sodipodi:role="line"
-     id="tspan1"
-     x="58"
-     y="362">Deposited URL (also called web address):</tspan></text>
+     id="tspan1">Deposited Domain:</tspan></text>
                 </g>
                 <g
    transform="translate(-5.45944,-3)"
@@ -124,29 +122,11 @@
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
    id="text10"><tspan
      sodipodi:role="line"
-     id="tspan8"
-     x="62"
-     y="482.272">domain (</tspan></text>
+     id="tspan2">domain of the URL.</tspan></text>
                     
                     
-                    <text
-   x="214.02927"
-   y="481.97601"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-   id="text13"><tspan
-     sodipodi:role="line"
-     id="tspan11"
-     x="214.02927"
-     y="481.97601">) of the URL.</tspan></text>
-                <text
-   x="133.76105"
-   y="482.21597"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
-   id="text12-5"><tspan
-     sodipodi:role="line"
-     id="tspan10"
-     x="133.76105"
-     y="482.21597">bold area</tspan></text></g>
+                    
+                </g>
                 <g
    transform="translate(14.875,-285.954)"
    id="g14">
