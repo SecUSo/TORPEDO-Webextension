@@ -6,7 +6,7 @@
      * Main function to initialize the content script.
      */
     async function main() {
-        torpedo.location = window.location.host || "mail-message";
+        torpedo.location = window.location.hostname || "mailbox";
 
         try {
             const tldData = await browser.runtime.sendMessage({ name: "TLD" });

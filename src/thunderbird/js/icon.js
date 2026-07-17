@@ -44,12 +44,17 @@ async function init() {
         errorButton.style.display = "block";
     }
 
-    try {
-        const url = new URL(tab.url);
-        detectedLocation = url.host;
+    if (tab.url.startsWith("mailbox://")) {
+        detectedLocation = "mailbox";
 
-    } catch (e) {
-        detectedLocation = tab.url;
+    } else {
+        try {
+            const url = new URL(tab.url);
+            detectedLocation = url.hostname;
+
+        } catch (e) {
+            detectedLocation = tab.url;
+        }
     }
 
     const storage = await browser.storage.sync.get({ state: [] });
