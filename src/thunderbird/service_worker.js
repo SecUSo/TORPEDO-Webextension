@@ -24,9 +24,9 @@ const initialStorage = new Map([
     ['minimal_url', true],
 
     // referrer patterns for extracting the original URL
-    ['referrerPart1', ["deref-gmx.net", "deref-web-02.de", "deref-web.de", "google.*", "google.*", "google.*"]],
-    ['referrerPart2', ["/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/url?", "/url?", "/share.google?"]],
-    ['referrerPart3', ["redirectUrl=", "redirectUrl=", "redirectUrl=", "url=", "q=", "q="]],
+    ['referrerPart1', ["deref-gmx.net", "deref-web-02.de", "deref-web.de", "google.*", "google.*"]],
+    ['referrerPart2', ["/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/mail/client/[...]/dereferrer/?", "/url?", "/url?"]],
+    ['referrerPart3', ["redirectUrl=", "redirectUrl=", "redirectUrl=", "url=", "q="]],
 
     // whether the trusted list should be included in the status calculation or not
     ['trustedListActivated', true],
@@ -456,6 +456,8 @@ const sendEmail = async (location) => {
  * @returns {Promise<void>} A promise that resolves when the extension state is updated.
  */
 const updateExtensionState = async (works, location) => {
+    console.log(`update location ${location} to state ${works}`);
+
     const storage = await browser.storage.sync.get({ state: [] });
     let currentState = Array.isArray(storage.state) ? storage.state : [];
 
