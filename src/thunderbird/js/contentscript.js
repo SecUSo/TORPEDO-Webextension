@@ -7,6 +7,7 @@
      */
     async function main() {
         torpedo.location = window.location.hostname || "mailbox";
+        await browser.storage.sync.set({ lastState: { location: torpedo.location, state: "loading" } });
 
         try {
             const tldData = await browser.runtime.sendMessage({ name: "TLD" });

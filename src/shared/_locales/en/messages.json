@@ -261,7 +261,10 @@
     "message": "Status: TORPEDO works properly",
     "description": "Status:OK"
   },
-
+  "loading": {
+    "message": "Status: TORPEDO is loading",
+    "description": "Status:loading"
+  },
   "error": {
     "message": "Status: TORPEDO can't display a tooltip on this page, because the mail panel element cannot be detected on this page. Click here to inform the developers.",
     "description": "Status:Error"

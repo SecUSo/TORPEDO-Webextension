@@ -261,7 +261,10 @@
     "message": "Status: TORPEDO wird ausgeführt",
     "description": "Status:OK"
   },
-
+  "loading": {
+    "message": "Status: TORPEDO lädt gerade",
+    "description": "Status:loading"
+  },
   "error": {
     "message": "Status: Der TORPEDO Tooltip kann nicht angezeigt werden, da das Mail-Panel-Element auf dieser Seite nicht erkannt werden kann. Klicken Sie hier, um die Entwickler zu benachrichtigen.",
     "description": "Status:Error"
