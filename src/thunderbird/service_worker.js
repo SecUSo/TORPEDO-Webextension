@@ -416,14 +416,13 @@ const onInstalledHandler = async (details) => {
  */
 const sendEmail = async (location) => {
     const recipient = "torpedo@secuso.org";
-    const subject = "Error with TORPEDO Webextension"
 
-    const bodyText = `Dear TORPEDO-dev-Team,
-    
-    TORPEDO seems to not properly work in this location: "${location}"
-    
-    Here is additional information that might help you (add information to help resolve the issue here):
-    `
+    const subject = browser.i18n.getMessage("emailSubject");
+
+    const manifest = browser.runtime.getManifest();
+    const extensionVersion = manifest.version;
+    const browserInfo = await browser.runtime.getBrowserInfo();
+    const bodyText = browser.i18n.getMessage("emailBody", [location, extensionVersion, browserInfo.version]);
 
     const body = encodeURIComponent(bodyText);
 

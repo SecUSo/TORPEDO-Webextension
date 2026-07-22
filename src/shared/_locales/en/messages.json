@@ -270,6 +270,20 @@
     "description": "Status:Error"
   },
 
+  "emailSubject": {
+    "message": "Error with TORPEDO Webextension",
+    "description": "Email subject"
+  },
+  "emailBody": {
+    "message": "Dear TORPEDO-dev-Team,\n\nTORPEDO seems to not properly work.\n\n--- Diagnostic Information ---\nLocation: $1\nExtension Version: $2\nThunderbird Version: $3\n--------------------------------------\n\nHere is additional information that might help you (add information to help resolve the issue here):",
+    "description": "Email body",
+    "placeholders": {
+      "location": { "content": "$1" },
+      "extensionVersion": { "content": "$2" },
+      "thunderbirdVersion": { "content": "$3" }
+    }
+  },
+
   "timerActivated": {
     "message": "Link deactivation delay timer activated",
     "description": "Timer activated"
