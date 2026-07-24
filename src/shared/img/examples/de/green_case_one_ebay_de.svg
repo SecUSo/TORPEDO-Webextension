@@ -7,8 +7,8 @@
    xml:space="preserve"
    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;"
    id="svg17"
-   sodipodi:docname="green_case_one_de_ebay.svg"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="green_case_one_ebay_de.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,14 +23,14 @@
    inkscape:pagecheckerboard="0"
    inkscape:deskcolor="#d1d1d1"
    inkscape:zoom="2.0972222"
-   inkscape:cx="175.70861"
-   inkscape:cy="124.45033"
+   inkscape:cx="175.94702"
+   inkscape:cy="124.68874"
    inkscape:window-width="2560"
-   inkscape:window-height="1369"
-   inkscape:window-x="1912"
-   inkscape:window-y="-8"
+   inkscape:window-height="1334"
+   inkscape:window-x="2869"
+   inkscape:window-y="-11"
    inkscape:window-maximized="1"
-   inkscape:current-layer="blue_case_de"
+   inkscape:current-layer="g12"
    showgrid="false" />
     <g
    transform="translate(-21,-368)"
@@ -101,14 +101,10 @@
                     <text
    x="58"
    y="362"
-   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
-   id="text7">Hinterlegte URL<tspan
-   x="186.44 191.483"
-   y="362 362"
-   id="tspan6"> (</tspan>auch W<tspan
-   x="258.72501 268.81799"
-   y="362 362"
-   id="tspan7">eb</tspan>adresse genannt):</text>
+   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text7"><tspan
+     sodipodi:role="line"
+     id="tspan1">Hinterlegte Domain:</tspan></text>
                 </g>
                 <g
    transform="translate(-5.45944,3)"
@@ -127,36 +123,19 @@
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
    id="text9"><tspan
      sodipodi:role="line"
-     id="tspan4"
-     x="62"
-     y="458.53">aufgrund der bekannten Vertrauenswürdigkeit der Domain (</tspan></text>
+     id="tspan4">aufgrund der bekannten Vertrauenswürdigkeit der Domain als</tspan></text>
+                    
                     
                     <text
-   x="62.203003"
+   x="61.243011"
    y="482.272"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-   id="text11"><tspan
-     sodipodi:role="line"
-     id="tspan5"
-     x="62.203003"
-     y="482.272">hervorgehobener Bereich der URL</tspan></text>
-                    <text
-   x="357.24301"
-   y="482.272"
-   style="font-size:18.149px;font-family:ArialMT, Arial, sans-serif"
-   id="text12">) <tspan
-   x="368.474 378.64001 382.745 391.892 397.00601 407.172 417.33801 423.45499 427.55899 437.72501 447.89099 453.00601 463.172 467.27701 477.44299 487.60901 497.77502 506.92102 512.03601 522.20203 527.31702"
-   y="482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272 482.272"
-   id="tspan12">als gering eingestuft</tspan>.</text>
-                <text
-   x="539.07166"
-   y="460.06924"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5"
-   id="text11-9"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+   id="text12"><tspan
      sodipodi:role="line"
      id="tspan3"
-     x="539.07166"
-     y="460.06924">fett</tspan></text></g>
+     x="61.243011"
+     y="482.272">als gering eingestuft.</tspan></text>
+                </g>
                 <g
    id="more_information_classification"
    transform="translate(0.98364,-65.9701)">

@@ -6,7 +6,8 @@
      * Main function to initialize the content script.
      */
     async function main() {
-        torpedo.location = window.location.host || "mail-message";
+        torpedo.location = window.location.hostname || "mailbox";
+        await browser.storage.sync.set({ lastState: { location: torpedo.location, state: "loading" } });
 
         try {
             const tldData = await browser.runtime.sendMessage({ name: "TLD" });

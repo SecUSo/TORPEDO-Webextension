@@ -1,0 +1,256 @@
+Subject: Test Email for Torpedo
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html>
+    <head>
+        <meta charset=3D"UTF-8">
+        <title>Torpedo Extension Test Email</title>
+        <style>
+            .case-block {
+                margin-bottom: 40px;
+            }
+
+            .scenario {
+                margin-bottom: 10px;
+                padding: 5px;
+                border: 1px solid #e0e0e0;
+                border-radius: 6px;
+            }
+
+            .scenario p {
+                margin-top: 5px;
+                margin-bottom: 10px;
+            }
+
+            .spacer {
+                height: 400px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class=3D"email-container">
+
+            <div class=3D"introduction">
+                <h2>This is a Test Email for the Torpedo Extension.</h2>
+                <p><strong>Note:</strong> The security status is always print=
+ed out in the console.</p>
+            </div>
+
+            <div class=3D"case-block T1-case">
+                <h3 style=3D"color: green">1. Trusted List (T1)</h3>
+
+                <div class=3D"scenario">
+                    <p>Simple Scenario</p>
+                    <a href=3D"https://www.kit.edu/">https://www.kit.edu/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>1x Referrer</p>
+                    <a href=3D"https://deref-gmx.net/mail/client/Aez8AY_ng5Q/=
+dereferrer/?
+                    redirectUrl=3Dhttp%3A%2F%2Fwww.kit.edu%2F">https://deref-=
+gmx.net/mail/client/Aez8AY_ng5Q/dereferrer/?
+                        redirectUrl=3Dhttp%3A%2F%2Fwww.kit.edu%2F</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>1x Redirect</p>
+                    <a href=3D"https://tinyurl.com/2eescc76">https://tinyurl.=
+com/2eescc76</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>first 1x Referrer, then 1x Redirect</p>
+                    <a href=3D"https://deref-gmx.net/mail/client/Aez8AY_ng5Q/=
+dereferrer/?
+                    redirectUrl=3Dhttps%3A%2F%2Ftinyurl.com%2F2eescc76">https=
+://deref-gmx.net/mail/client/Aez8AY_ng5Q/dereferrer/?
+                        redirectUrl=3Dhttps%3A%2F%2Ftinyurl.com%2F2eescc76</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>first 1x Redirect, then 1x Referrer</p>
+                    <a href=3D"https://tinyurl.com/y5ddr3ru">https://tinyurl.=
+com/y5ddr3ru</a>
+                </div>
+            </div>
+
+            <div class=3D"case-block T2-case">
+                <h3 style=3D"color: blue">2. User Trusted List (T2)</h3>
+
+                <p style=3D"font-size: 0.9rem; color: #666; margin-bottom: 20=
+px;">
+                    <em>Action required: First please add <a href=3D"https://=
+www.tu-darmstadt.de/">https://www.tu-darmstadt.de/</a> to the User Trusted Li=
+st.</em>
+                </p>
+
+                <div class=3D"scenario">
+                    <p>Simple Scenario</p>
+                    <a href=3D"https://www.tu-darmstadt.de/">https://www.tu-d=
+armstadt.de/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>1x Referrer</p>
+                    <a href=3D"https://deref-gmx.net/mail/client/i_vsZ0tM3K4/=
+dereferrer/?
+                    redirectUrl=3Dhttp%3A%2F%2Fwww.tu-darmstadt.de%2F">https:=
+//deref-gmx.net/mail/client/i_vsZ0tM3K4/dereferrer/?
+                        redirectUrl=3Dhttps%3A%2F%2Fwww.tu-darmstadt.de%2F</a>
+                </div>
+
+
+                <div class=3D"scenario">
+                    <p>1x Redirect</p>
+                    <a href=3D"https://tinyurl.com/p6j6te4h">https://tinyurl.=
+com/p6j6te4h</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>first 1x Referrer, then 1x Redirect</p>
+                    <a href=3D"https://deref-gmx.net/mail/client/Aez8AY_ng5Q/=
+dereferrer/?
+                    redirectUrl=3Dhttp%3A%2F%2Ftinyurl.com%2Fp6j6te4h">https:=
+//deref-gmx.net/mail/client/Aez8AY_ng5Q/dereferrer/?
+                        redirectUrl=3Dhttps%3A%2F%2Ftinyurl.com%2Fp6j6te4h</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>first 1x Redirect, then 1x Referrer</p>
+                    <a href=3D"https://tinyurl.com/bpbx3r9n">https://tinyurl.=
+com/bpbx3r9n</a>
+                </div>
+            </div>
+
+            <div class=3D"case-block T31-case">
+                <h3>3. Unknown List (T31)</h3>
+                <p style=3D"font-size: 0.9rem; color: #666; margin-bottom: 20=
+px;">
+                    <em>Links that shouldn't be in Trusted and User Trusted L=
+ist.</em>
+                </p>
+
+                <div class=3D"scenario">
+                    <p>Simple Scenario</p>
+                    <a href=3D"https://www.rwth-aachen.de/">https://www.rwth-=
+aachen.de/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>1x Referrer (enable "Redirect Mode" in the options)</p>
+                    <a href=3D"https://deref-gmx.net/mail/client/yMvBCbP-Omc/=
+dereferrer/?
+                    redirectUrl=3Dhttp%3A%2F%2Fwww.rwth-aachen.de%2F">https:/=
+/www.rwth-aachen.de/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>1x Redirect</p>
+                    <a href=3D"https://tinyurl.com/4ksm556m">https://tinyurl.=
+com/4ksm556m</a>
+                </div>
+            </div>
+
+            <div class=3D"case-block T32-case">
+                <h3>4. Suspicious (T32)</h3>
+                <p style=3D"font-size: 0.9rem; color: #666; margin-bottom: 20=
+px;">
+                    <em>Links that shouldn't be in Trusted/User Lists and exh=
+ibit suspicious characteristics.</em>
+                </p>
+
+                <div class=3D"scenario">
+                    <p>tooltip Warning (mismatch between url and programmed t=
+ooltip)</p>
+                    <a href=3D"https://www.rwth-aachen.de/" title=3D"https://=
+www.kit.edu/">https://www.rwth-aachen.de/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>is IP address</p>
+                    <a href=3D"https://141.3.128.6/">https://141.3.128.6/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>mismatch between url and text</p>
+                    <a href=3D"https://www.rwth-aachen.de/">https://www.kit.e=
+du/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>1x Referrer with mismatch between url and text (enable=
+ "Redirect Mode" in the options)</p>
+                    <a href=3D"https://deref-gmx.net/mail/client/yMvBCbP-Omc/=
+dereferrer/?
+                    redirectUrl=3Dhttp%3A%2F%2Fwww.rwth-aachen.de%2F">https:/=
+/www.kit.edu/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>1x Referrer (disable "Redirect Mode" in the options)</=
+p>
+                    <a href=3D"https://deref-gmx.net/mail/client/yMvBCbP-Omc/=
+dereferrer/?
+                    redirectUrl=3Dhttp%3A%2F%2Fwww.rwth-aachen.de%2F">https:/=
+/www.rwth-aachen.de/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>Mixed Scripts (Cyrillic '&#1072;' instead of 'a')</p>
+                    <a href=3D"https://www.p&#1072;ypal.com/">https://www.p&#=
+1072;ypal.com/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>Mixed Scripts (Greek Omicron '&#959;' instead of 'o')<=
+/p>
+                    <a href=3D"https://www.amaz&#959;n.com/">https://www.amaz=
+&#959;n.com/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>Mixed Scripts (Cyrillic '&#1077;' instead of 'e')</p>
+                    <a href=3D"https://www.fac&#1077;book.com/">https://www.f=
+ac&#1077;book.com/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>Invisible Characters (Zero Width Space) (e.x. Gmail au=
+tomatically delete invisible char)</p>
+                    <a href=3D"https://www.goo&#8203;gle.com/">https://www.go=
+o&#8203;gle.com/</a>
+                </div>
+            </div>
+
+            <div class=3D"case-block">
+                <h3>5. Others</h3>
+                <p style=3D"font-size: 0.9rem; color: #666; margin-bottom: 20=
+px;">
+                    <em>Other phishing methods.</em>
+                </p>
+
+                <div class=3D"scenario">
+                    <p>Subdomain Obfuscation (Root domain is 'evil-site.com')=
+</p>
+                    <a href=3D"https://paypal.com.secure-account-login.evil-s=
+ite.com/">https://paypal.com.secure-account
+                        -login.evil-site.com/</a>
+                </div>
+
+                <div class=3D"scenario">
+                    <p>Authority Abuse (Root domain is 'example.com')</p>
+                    <a href=3D"https://www.kit.edu@example.com/">https://www.=
+kit.edu@example.com/</a>
+                </div>
+
+            </div>
+
+            <div class=3D"spacer"></div>
+
+        </div>
+    </body>
+</html>

@@ -8,7 +8,7 @@
    style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;"
    id="svg17"
    sodipodi:docname="green_case_two_paypal_en.svg"
-   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,14 +23,14 @@
    inkscape:pagecheckerboard="0"
    inkscape:deskcolor="#d1d1d1"
    inkscape:zoom="2.0972222"
-   inkscape:cx="103.23179"
-   inkscape:cy="124.45033"
+   inkscape:cx="103.4702"
+   inkscape:cy="124.68874"
    inkscape:window-width="2560"
-   inkscape:window-height="1369"
-   inkscape:window-x="1912"
-   inkscape:window-y="-8"
+   inkscape:window-height="1334"
+   inkscape:window-x="2869"
+   inkscape:window-y="-11"
    inkscape:window-maximized="1"
-   inkscape:current-layer="blue_case_de"
+   inkscape:current-layer="text_in_border"
    showgrid="false" />
     <g
    transform="matrix(1,0,0,1,-21,-368)"
@@ -102,7 +102,7 @@
    style="font-family:ArialMT, Arial, sans-serif;font-size:18.149px;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
    id="text7"><tspan
      sodipodi:role="line"
-     id="tspan1">Deposited URL (also called web address):</tspan></text>
+     id="tspan1">Deposited Domain:</tspan></text>
                 </g>
                 <g
    transform="matrix(1,0,0,1,-5.45944,3)"
@@ -122,24 +122,8 @@
      sodipodi:role="line"
      id="tspan11">because of your previous statements concerning the</tspan></text>
                     
-                    <text
-   x="309.9646"
-   y="480.74884"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.149px;font-family:Arial-BoldMT, Arial, sans-serif;-inkscape-font-specification:'Arial-BoldMT, Arial, sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-   id="text11"><tspan
-     sodipodi:role="line"
-     id="tspan5"
-     x="309.9646"
-     y="480.74884">bold area</tspan></text>
-                    <text
-   x="390.22308"
-   y="480.36472"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.149px;font-family:ArialMT, Arial, sans-serif;-inkscape-font-specification:'ArialMT, Arial, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-   id="text12"><tspan
-     sodipodi:role="line"
-     id="tspan13"
-     x="390.22308"
-     y="480.36472">) of this URL.</tspan></text>
+                    
+                    
                 <text
    x="40.680065"
    y="492.31079"
@@ -147,7 +131,7 @@
    id="text9-9"
    transform="translate(21.73464,-11.6588)"><tspan
      sodipodi:role="line"
-     id="tspan12">trustworthiness of the domain (</tspan></text></g>
+     id="tspan2">trustworthiness of the domain of this URL.</tspan></text></g>
                 <g
    id="more_information_classification"
    transform="matrix(1,0,0,1,0.98364,-65.9701)">

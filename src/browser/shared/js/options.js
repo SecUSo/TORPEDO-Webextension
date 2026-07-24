@@ -43,8 +43,21 @@ const OptionsPage = {
 
         if (settings.minimal_url === true) {
             document.querySelector(".tooltip-preview-href").classList.remove("disabled")
+            document.querySelector("#tooltip-preview-header-long").style.display = "none";
+            document.querySelector("#tooltip-preview-header-short").style.display = "block";
+
+            document.querySelector("#tooltip-preview-risk-long").style.display = "none";
+            document.querySelector("#tooltip-preview-risk-short").style.display = "block";
+            document.querySelector("#tooltip-preview-risk-bold").style.display = "none";
+
         } else {
             document.querySelector(".tooltip-preview-href").classList.add("disabled")
+            document.querySelector("#tooltip-preview-header-long").style.display = "block";
+            document.querySelector("#tooltip-preview-header-short").style.display = "none";
+
+            document.querySelector("#tooltip-preview-risk-long").style.display = "block";
+            document.querySelector("#tooltip-preview-risk-short").style.display = "none";
+            document.querySelector("#tooltip-preview-risk-bold").style.display = "block";
         }
 
         if (settings.section_security_active === true) {

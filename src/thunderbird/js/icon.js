@@ -13,7 +13,7 @@ document.addEventListener("click", async (e) => {
     const targetId = e.target.id;
 
     if (targetId === "torpedoPage") {
-        await browser.tabs.create({ url: "https://secuso.aifb.kit.edu/TORPEDO.php" });
+        await browser.windows.openDefaultBrowser("https://secuso.aifb.kit.edu/TORPEDO.php");
     } else if (targetId === "tutorial") {
         await browser.runtime.sendMessage({ name: "tutorial" });
     } else if (targetId === "options") {
@@ -35,32 +35,32 @@ async function init() {
     optionsButton.textContent = browser.i18n.getMessage("options");
 
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-    if (!tab) return;
-
-    if (tab.spaceId === undefined) {
+    if (!tab || tab.spaceId === undefined) {
         errorButton.style.display = "none";
         return;
-    } else {
-        errorButton.style.display = "block";
     }
 
-    try {
-        const url = new URL(tab.url);
-        detectedLocation = url.host;
-
-    } catch (e) {
-        detectedLocation = tab.url;
+    const displayedMessages = await browser.messageDisplay.getDisplayedMessages(tab.id);
+    if (!displayedMessages || displayedMessages.messages.length === 0) {
+        errorButton.style.display = "none";
+        return;
     }
 
-    const storage = await browser.storage.sync.get({ state: [] });
-    const stateArray = storage.state;
-    const currentEntry = stateArray.find(entry => entry.location === detectedLocation);
+    errorButton.style.display = "block";
 
-    if (currentEntry && currentEntry.works) {
+    const storage = await browser.storage.sync.get({ lastState: null });
+    const lastState = storage.lastState;
+
+    detectedLocation = lastState.location;
+
+    if (lastState.state === "loading") {
+        errorButton.textContent = browser.i18n.getMessage("loading");
+
+    } else if (lastState.state === "works") {
         errorButton.className = "working";
         errorButton.textContent = browser.i18n.getMessage("OK");
 
-    } else {
+    } else if (lastState.state === "error") {
         errorButton.className = "error";
         errorButton.textContent = browser.i18n.getMessage("error");
     }
