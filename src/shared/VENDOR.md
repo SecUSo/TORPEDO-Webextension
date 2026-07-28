@@ -1,6 +1,6 @@
 js/browser-polyfill.min.js
  - Version: 0.12.0
- - URL: https://app.unpkg.com/webextension-polyfill@0.12.0/files/dist/browser-polyfill.min.js
+ - URL: https://unpkg.com/webextension-polyfill@0.12.0/dist/browser-polyfill.min.js
 
 js/floating-ui.core.umd.min.js
  - Version: 1.7.3
