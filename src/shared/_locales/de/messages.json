@@ -275,7 +275,7 @@
     "description": "Email subject"
   },
   "emailBody": {
-    "message": "Sehr geehrtes TORPEDO-Entwicklerteam,\n\nTORPEDO scheint nicht richtig zu funktionieren.\n\n--- Diagnose Informationen ---\nStelle: $1\nErweiterungsversion: $2\nThunderbird Version: $3\n--------------------------------------\n\nHier sind weitere Informationen, die euch helfen könnten (fügt hier Informationen hinzu, die zur Lösung des Problems beitragen):",
+    "message": "Sehr geehrtes TORPEDO-Entwicklerteam,\n\nTORPEDO scheint nicht richtig zu funktionieren.\n\n--- Diagnose Informationen ---\nStelle: $1\nErweiterungsversion: $2\nThunderbird/Browser Version: $3\n--------------------------------------\n\nHier sind weitere Informationen, die euch helfen könnten (fügt hier Informationen hinzu, die zur Lösung des Problems beitragen):",
     "description": "Email body",
     "placeholders": {
       "location": { "content": "$1" },
