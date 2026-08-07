@@ -26,7 +26,7 @@ document.addEventListener("click", async (e) => {
 
 async function setStaticText() {
     const torpedoPageButton = document.getElementById("torpedoPage");
-    torpedoPageButton.textContent = await browser.i18n.getMessage("extensionName");
+    torpedoPageButton.textContent = await browser.i18n.getMessage("website");
 
     const tutorialButton = document.getElementById("tutorial");
     tutorialButton.textContent = await browser.i18n.getMessage("tutorial");

@@ -247,6 +247,11 @@
     "description": "Address of info image"
   },
 
+  "website": {
+    "message": "TORPEDO Webseite",
+    "description": "Website text"
+  },
+
   "options": {
     "message": "TORPEDO Einstellungen",
     "description": "Options"

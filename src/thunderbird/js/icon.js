@@ -30,7 +30,7 @@ async function init() {
     const optionsButton = document.getElementById("options");
     const errorButton = document.getElementById("error");
 
-    torpedoPageButton.textContent = browser.i18n.getMessage("extensionName");
+    torpedoPageButton.textContent = browser.i18n.getMessage("website");
     tutorialButton.textContent = browser.i18n.getMessage("tutorial");
     optionsButton.textContent = browser.i18n.getMessage("options");
 
