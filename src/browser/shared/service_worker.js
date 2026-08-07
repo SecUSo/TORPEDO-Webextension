@@ -1,7 +1,4 @@
 const initialStorage = new Map([
-    // array of objects with the following structure: {works: boolean, location: string}
-    ['state', []],
-
     // default timer value in seconds for the countdown timer
     ['timer', 3],
 
@@ -406,29 +403,8 @@ const onInstalledHandler = async (details) => {
         await showTutorial();
     }
 
-    await browser.action.disable();
-}
-
-
-/**
- * Toggles the action icon based on the URL of the updated tab.
- * @param tabId - The ID of the updated tab.
- * @param changeInfo - The change information of the updated tab.
- * @param tab - The updated tab object.
- * @returns {Promise<void>} A promise that resolves when the action icon is toggled.
- */
-const toggleActionIcon = async (tabId, changeInfo, tab) => {
-    if (tab.url) {
-        const manifest = browser.runtime.getManifest();
-        const contentScriptMatches = manifest.content_scripts[0].matches;
-        const isMatched = contentScriptMatches.some((pattern) => tab.url.match(pattern) !== null);
-
-        if (isMatched) {
-            await browser.action.enable(tabId);
-        } else {
-            await browser.action.disable(tabId);
-        }
-    }
+    await browser.action.enable();
+    await browser.action.setIcon({ path: { "38": "img/icon38.png" } });
 }
 
 
@@ -439,14 +415,24 @@ const toggleActionIcon = async (tabId, changeInfo, tab) => {
  */
 const sendEmail = async (location) => {
     const recipient = "torpedo@secuso.org";
-    const subject = "Error with TORPEDO Webextension"
 
-    const bodyText = `Dear TORPEDO-dev-Team,
-    
-    TORPEDO seems to not properly work in this location: "${location}"
-    
-    Here is additional information that might help you (add information to help resolve the issue here):
-    `
+    const subject = browser.i18n.getMessage("emailSubject");
+
+    const manifest = browser.runtime.getManifest();
+    const extensionVersion = manifest.version;
+
+    let browserVersion = "Unknown";
+    if (browser.runtime.getBrowserInfo) {
+        const browserInfo = await browser.runtime.getBrowserInfo();
+        browserVersion = browserInfo.version;
+
+    } else {
+        const uaData = await navigator.userAgentData.getHighEntropyValues(['fullVersionList']);
+        const chromeEntry = uaData.fullVersionList.find(b => b.brand === 'Google Chrome' || b.brand === 'Chromium');
+        browserVersion = chromeEntry.version;
+    }
+
+    const bodyText = browser.i18n.getMessage("emailBody", [location, extensionVersion, browserVersion]);
 
     const body = encodeURIComponent(bodyText);
 
@@ -457,28 +443,13 @@ const sendEmail = async (location) => {
 
 /**
  * Updates the extension state in storage and changes the action icon accordingly.
- * @param works - A boolean indicating whether the extension works properly.
  * @param location - The location where the state update is occurring.
+ * @param state - A boolean indicating whether the extension works properly.
  * @returns {Promise<void>} A promise that resolves when the extension state is updated.
  */
-const updateExtensionState = async (works, location) => {
-    const storage = await browser.storage.sync.get({ state: [] });
-    let currentState = Array.isArray(storage.state) ? storage.state : [];
-
-    const newEntry = { works, location };
-    const existingIndex = currentState.findIndex(entry => entry.location === location);
-
-
-    if (existingIndex !== -1) {  // If an entry for the same location already exists
-        currentState[existingIndex] = newEntry;
-
-    } else {  // If no entry for the location exists
-        currentState.push(newEntry);
-    }
-
-    await browser.storage.sync.set({ state: currentState });
-
-    const iconPath = works ? "img/icon38.png" : "img/error38.png";
+const updateExtensionState = async (location, state) => {
+    await browser.storage.sync.set({ lastState: { location: location, state: state } });
+    const iconPath = state === "works" ? "img/icon38.png" : "img/error38.png";
 
     try {
         const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
@@ -538,15 +509,15 @@ const onMessageHandler = (request, sender, sendResponse) => {
                 }
 
                 case "error": {
-                    const location = request.location || sender?.tab?.url || "unknown";
-                    await updateExtensionState(false, location);
+                    const location = request.location || "unknown";
+                    await updateExtensionState(location, "error");
                     sendResponse(null);
                     break;
                 }
 
                 case "ok": {
-                    const location = request.location || sender?.tab?.url || "unknown";
-                    await updateExtensionState(true, location);
+                    const location = request.location || "unknown";
+                    await updateExtensionState(location, "works");
                     sendResponse(null);
                     break;
                 }
@@ -635,5 +606,4 @@ const onMessageHandler = (request, sender, sendResponse) => {
 
 
 browser.runtime.onInstalled.addListener(onInstalledHandler);
-browser.tabs.onUpdated.addListener(toggleActionIcon);
 browser.runtime.onMessage.addListener(onMessageHandler);

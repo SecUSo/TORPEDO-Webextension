@@ -24,39 +24,93 @@ document.addEventListener("click", async (e) => {
 });
 
 
-async function init() {
+async function setStaticText() {
     const torpedoPageButton = document.getElementById("torpedoPage");
+    torpedoPageButton.textContent = await browser.i18n.getMessage("extensionName");
+
     const tutorialButton = document.getElementById("tutorial");
+    tutorialButton.textContent = await browser.i18n.getMessage("tutorial");
+
     const optionsButton = document.getElementById("options");
-    const errorButton = document.getElementById("error");
+    optionsButton.textContent = await browser.i18n.getMessage("options");
+}
 
-    torpedoPageButton.textContent = browser.i18n.getMessage("extensionName");
-    tutorialButton.textContent = browser.i18n.getMessage("tutorial");
-    optionsButton.textContent = browser.i18n.getMessage("options");
 
-    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-    if (!tab) return;
+function isUrlInManifest(url) {
+    const manifest = browser.runtime.getManifest();
+    const matches = manifest.content_scripts[0].matches;
+
+    return matches.some((pattern) => {
+        const regexString = pattern
+            .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
+            .replace(/\*/g, '.*');
+
+        const regex = new RegExp(`^${regexString}$`);
+        return regex.test(url);
+    });
+}
+
+
+async function getPageState(tabId) {
+    let pageState = null;
 
     try {
-        const url = new URL(tab.url);
-        detectedLocation = url.host;
+        const response = await browser.tabs.sendMessage(tabId, { name: "getPageState" });
+        if (response) pageState = response;
 
-    } catch (e) {
-        detectedLocation = tab.url;
+    } catch (e) { }
+
+    return pageState;
+}
+
+
+async function init() {
+    await setStaticText();
+    const errorButton = document.getElementById("error");
+
+    const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
+    if (!tab || !tab.url) {
+        errorButton.style.display = "none";
+        return;
     }
 
-    const storage = await browser.storage.sync.get({ state: [] });
-    const stateArray = storage.state;
-    const currentEntry = stateArray.find(entry => entry.location === detectedLocation);
-
-    if (currentEntry && currentEntry.works) {
-        errorButton.className = "working";
-        errorButton.textContent = browser.i18n.getMessage("OK");
-
-    } else {
-        errorButton.className = "error";
-        errorButton.textContent = browser.i18n.getMessage("error");
+    if (tab.url.startsWith("about:") || tab.url.startsWith("moz-extension:")) {
+        errorButton.style.display = "none";
+        return;
     }
+
+    if (!isUrlInManifest(tab.url)) {
+        errorButton.style.display = "none";
+        return;
+    }
+
+    const pageState = await getPageState(tab.id);
+    detectedLocation = pageState.location;
+
+    let className;
+    let messageId;
+    let displayStyle = "block";
+
+    if (!pageState || pageState.status === "error") {
+        className = "error";
+        messageId = "error";
+
+    } else if (pageState.status === "loading") {
+        messageId = "loading";
+
+    } else if (pageState.status === "success") {
+        if (pageState.foundSelectors) {
+            className = "working";
+            messageId = "OK";
+
+        } else {
+            displayStyle = "none";
+        }
+    }
+
+    if (className) errorButton.className = className;
+    if (messageId) errorButton.textContent = browser.i18n.getMessage(messageId);
+    errorButton.style.display = displayStyle;
 }
 
 

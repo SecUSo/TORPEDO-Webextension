@@ -2,102 +2,78 @@
  * The browser version of the content script for the Torpedo browser extension.
  */
 (async function () {
+    const SITE_SELECTORS = {
+        "mail.yahoo.com": ['div[data-test-id="message-view"]'],
+        "mail.google.com": [".adn"],
+        "owa.kit.edu": ['div[role="list"]', " div.isMessageBodyInPopout"],
+        "outlook.live.com": ['div[role="main"]'],
+        "mail.aol.com": ["#displayMessage"],
+        "email.t-online.de": ["mailreadview"]
+    };
+    const pageState = {
+        isReady: false,
+        error: null,
+        selectors: null
+    }
+
     /**
      * Main function to initialize the content script.
      */
     async function main() {
-        const siteConfig = {
-            "mail.yahoo.com": { selectors: ['div[data-test-id="message-view"]'] },
-            "mail.google.com": { selectors: [".adn"] },
-            "owa.kit.edu": { selectors: ['div[role="list"]', " div.isMessageBodyInPopout"] },
-            "outlook.live.com": { selectors: ['div[role="main"]'] },
-            "mail.aol.com": { selectors: ["#displayMessage"] },
-            "email.t-online.de": { iframe: ["mailreadview"] },
-            default: { iframe: ["mailbody"] }
-        };
+        torpedo.location = window.location.hostname;
+        pageState.selectors = SITE_SELECTORS[torpedo.location];
 
-        torpedo.location = window.location.host;
-        const config = siteConfig[torpedo.location] || siteConfig.default;
+        addPageStateListener();
+
+        if (!pageState.selectors) {
+            pageState.error = "UNSUPPORTED_SITE";
+            return;
+        }
 
         try {
             const tldData = await browser.runtime.sendMessage({ name: "TLD" });
-            if (tldData) torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
+            torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
+            pageState.isReady = true;
 
-        } catch (e) {
-            console.error("Failed to fetch TLD data:", e);
+        } catch (error) {
+            pageState.error = "TLD_FETCH_FAILED";
+            return;
         }
 
-        if (!config.iframe) {
-            setupEventListeners(config);
-
-        } else {
-            setupIframeEventListeners();
-        }
-
-        checkPageAndSetIcon(config);
+        addEventListeners();
     }
 
-    /**
-     * Sets up event listeners for regular pages.
-     */
-    function setupEventListeners(config) {
-        const anchorSelectors = config.selectors.map((selector) => selector + " a").join();
-        const formSelectors = config.selectors.map((selector) => selector + " form").join();
+    function addEventListeners() {
+        const anchorSelectors = pageState.selectors.map(selector => `${selector} a`).join(", ");
 
-        document.body.addEventListener("mouseover", (event) => {
-            const targetLink = event.target.closest(anchorSelectors);
-            if (targetLink) openTooltip(targetLink, "a");
+        document.addEventListener("mouseover", (event) => {
+            const targetAnchor = event.target.closest(anchorSelectors);
 
-            const targetForm = event.target.closest(formSelectors);
-            if (targetForm) {
-                openTooltip(targetForm, "form");
+            if (targetAnchor) {
+                openTooltip(targetAnchor, "a");
             }
         });
     }
 
-    /**
-     * Sets up event listeners for iframes.
-     */
-    function setupIframeEventListeners() {
-        document.body.addEventListener("mouseover", (event) => {
-            const anchorTarget = event.target.closest("a");
-            if (anchorTarget && event.view.location.href.includes("iframe")) openTooltip(anchorTarget, "a");
-        });
-    }
+    function addPageStateListener() {
+        browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            if (request.name === "getPageState") {
+                if (pageState.error) {
+                    sendResponse({ location: torpedo.location, status: "error", reason: pageState.error });
+                    return false;
+                }
 
-    /**
-     * Checks the page for configured selectors and sets the browser icon.
-     */
-    function checkPageAndSetIcon(config) {
-        if (window.self !== window.top) return;
-        const message = { location: torpedo.location };
+                if (!pageState.isReady) {
+                    sendResponse({ location: torpedo.location, status: "loading" });
+                    return false;
+                }
 
-        const performCheck = () => {
-            if (config.iframe && window.location.href.includes("iframe")) {
-                message.name = "ok";
-                return true;
-            } else if (!config.iframe && document.body.querySelector(config.selectors.join())) {
-                message.name = "ok";
-                return true;
+                const selectorsFound = document.body.querySelector(pageState.selectors.join()) ? true : false;
+                sendResponse({ location: torpedo.location, status: "success", foundSelectors: selectorsFound });
             }
 
             return false;
-        };
-
-        const interval = setInterval(() => {
-            if (performCheck()) {
-                clearInterval(interval);
-                browser.runtime.sendMessage(message);
-            }
-        }, 500);
-
-        setTimeout(() => {
-            if (message.name !== "ok") {
-                clearInterval(interval);
-                message.name = "error";
-                browser.runtime.sendMessage(message);
-            }
-        }, 10000);
+        });
     }
 
     /**
