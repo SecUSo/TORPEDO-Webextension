@@ -27,6 +27,7 @@
 
         if (!pageState.selectors) {
             pageState.error = "UNSUPPORTED_SITE";
+            await browser.runtime.sendMessage({ name: "error" });
             return;
         }
 
@@ -37,9 +38,11 @@
 
         } catch (error) {
             pageState.error = "TLD_FETCH_FAILED";
+            await browser.runtime.sendMessage({ name: "error" });
             return;
         }
 
+        await browser.runtime.sendMessage({ name: "ok" });
         addEventListeners();
     }
 
@@ -158,7 +161,8 @@
         } catch (err) {
             console.log(`Error showing tooltip for ${url.href}:`, err);
             torpedo.state = "closed";
-            await browser.runtime.sendMessage({ name: "error", location: torpedo.location });
+            pageState.error = "TOOLTIP_ERROR";
+            await browser.runtime.sendMessage({ name: "error" });
         }
     }
 
