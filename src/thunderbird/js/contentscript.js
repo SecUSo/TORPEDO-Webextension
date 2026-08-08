@@ -2,43 +2,67 @@
  * The Thunderbird version of the content script for the Torpedo browser extension.
  */
 (async function () {
+    const pageState = {
+        isReady: false,
+        error: null,
+        selectors: null
+    }
+
     /**
      * Main function to initialize the content script.
      */
     async function main() {
         torpedo.location = window.location.hostname || "mailbox";
-        await browser.storage.sync.set({ lastState: { location: torpedo.location, state: "loading" } });
+        pageState.selectors = ["body"];
+
+        addPageStateListener();
 
         try {
             const tldData = await browser.runtime.sendMessage({ name: "TLD" });
-            if (tldData) torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
+            torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
+            pageState.isReady = true;
 
-        } catch (e) {
-            console.error("Failed to fetch TLD data:", e);
+        } catch (error) {
+            pageState.error = "TLD_FETCH_FAILED";
+            await browser.runtime.sendMessage({ name: "error" });
+            return;
         }
 
-        const tbConfig = { selectors: ["body"] };
-        setupEventListeners(tbConfig);
-
-        await browser.runtime.sendMessage({ name: "ok", location: torpedo.location });
+        await browser.runtime.sendMessage({ name: "ok" });
+        addEventListeners();
     }
 
-    /**
-     * Sets up event listeners for regular pages.
-     */
-    function setupEventListeners(config) {
-        const anchorSelectors = config.selectors.map((selector) => selector + " a").join();
-        const formSelectors = config.selectors.map((selector) => selector + " form").join();
+    function addEventListeners() {
+        const anchorSelectors = pageState.selectors.map(selector => `${selector} a`).join(", ");
 
-        document.body.addEventListener("mouseover", (event) => {
-            const targetLink = event.target.closest(anchorSelectors);
-            if (targetLink) openTooltip(targetLink, "a");
+        document.addEventListener("mouseover", (event) => {
+            const targetAnchor = event.target.closest(anchorSelectors);
 
-            const targetForm = event.target.closest(formSelectors);
-            if (targetForm) openTooltip(targetForm, "form");
+            if (targetAnchor) {
+                openTooltip(targetAnchor, "a");
+            }
         });
     }
 
+    function addPageStateListener() {
+        browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            if (request.name === "getPageState") {
+                if (pageState.error) {
+                    sendResponse({ location: torpedo.location, status: "error", reason: pageState.error });
+                    return false;
+                }
+
+                if (!pageState.isReady) {
+                    sendResponse({ location: torpedo.location, status: "loading" });
+                    return false;
+                }
+
+                sendResponse({ location: torpedo.location, status: "success", foundSelectors: true });
+            }
+
+            return false;
+        });
+    }
 
     /**
      * Handles mouse enter events on the target element.
@@ -120,7 +144,8 @@
         } catch (err) {
             console.log(`Error showing tooltip for ${url.href}:`, err);
             torpedo.state = "closed";
-            await browser.runtime.sendMessage({ name: "error", location: torpedo.location });
+            pageState.error = "TOOLTIP_ERROR";
+            await browser.runtime.sendMessage({ name: "error" });
         }
     }
 

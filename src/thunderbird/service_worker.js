@@ -1,7 +1,4 @@
 const initialStorage = new Map([
-    // the last state with its location of the extension
-    ['lastState', null],
-
     // default timer value in seconds for the countdown timer
     ['timer', 3],
 
@@ -406,6 +403,7 @@ const onInstalledHandler = async (details) => {
     }
 
     await browser.action.enable();
+    await browser.action.setIcon({ path: { "38": "img/icon38.png" } });
 }
 
 
@@ -433,22 +431,16 @@ const sendEmail = async (location) => {
 
 /**
  * Updates the extension state in storage and changes the action icon accordingly.
- * @param location - The location where the state update is occurring.
  * @param state - A boolean indicating whether the extension works properly.
  * @returns {Promise<void>} A promise that resolves when the extension state is updated.
  */
-const updateExtensionState = async (location, state) => {
-    await browser.storage.sync.set({ lastState: { location: location, state: state } });
+const updateExtensionState = async (state) => {
     const iconPath = state === "works" ? "img/icon38.png" : "img/error38.png";
 
     try {
         const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
-        if (tab) {
-            await browser.action.setIcon({ tabId: tab.id, path: { "38": iconPath } });
-        }
-    } catch (e) {
-        console.log("Failed to set action icon:", e);
-    }
+        if (tab) await browser.action.setIcon({ tabId: tab.id, path: { "38": iconPath } });
+    } catch (e) { }
 }
 
 
@@ -499,15 +491,13 @@ const onMessageHandler = (request, sender, sendResponse) => {
                 }
 
                 case "error": {
-                    const location = request.location || "unknown";
-                    await updateExtensionState(location, "error");
+                    await updateExtensionState("error");
                     sendResponse(null);
                     break;
                 }
 
                 case "ok": {
-                    const location = request.location || "unknown";
-                    await updateExtensionState(location, "works");
+                    await updateExtensionState("works");
                     sendResponse(null);
                     break;
                 }

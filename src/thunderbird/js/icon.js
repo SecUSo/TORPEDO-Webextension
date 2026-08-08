@@ -24,15 +24,34 @@ document.addEventListener("click", async (e) => {
 });
 
 
-async function init() {
+async function setStaticText() {
     const torpedoPageButton = document.getElementById("torpedoPage");
-    const tutorialButton = document.getElementById("tutorial");
-    const optionsButton = document.getElementById("options");
-    const errorButton = document.getElementById("error");
+    torpedoPageButton.textContent = await browser.i18n.getMessage("website");
 
-    torpedoPageButton.textContent = browser.i18n.getMessage("website");
-    tutorialButton.textContent = browser.i18n.getMessage("tutorial");
-    optionsButton.textContent = browser.i18n.getMessage("options");
+    const tutorialButton = document.getElementById("tutorial");
+    tutorialButton.textContent = await browser.i18n.getMessage("tutorial");
+
+    const optionsButton = document.getElementById("options");
+    optionsButton.textContent = await browser.i18n.getMessage("options");
+}
+
+
+async function getPageState(tabId) {
+    let pageState = null;
+
+    try {
+        const response = await browser.tabs.sendMessage(tabId, { name: "getPageState" });
+        if (response) pageState = response;
+
+    } catch (e) { }
+
+    return pageState;
+}
+
+
+async function init() {
+    await setStaticText();
+    const errorButton = document.getElementById("error");
 
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
     if (!tab || tab.spaceId === undefined) {
@@ -46,24 +65,28 @@ async function init() {
         return;
     }
 
-    errorButton.style.display = "block";
+    const pageState = await getPageState(tab.id);
+    detectedLocation = pageState.location;
 
-    const storage = await browser.storage.sync.get({ lastState: null });
-    const lastState = storage.lastState;
+    let className;
+    let messageId;
+    let displayStyle = "block";
 
-    detectedLocation = lastState.location;
+    if (!pageState || pageState.status === "error") {
+        className = "error";
+        messageId = "error";
 
-    if (lastState.state === "loading") {
-        errorButton.textContent = browser.i18n.getMessage("loading");
+    } else if (pageState.status === "loading") {
+        messageId = "loading";
 
-    } else if (lastState.state === "works") {
-        errorButton.className = "working";
-        errorButton.textContent = browser.i18n.getMessage("OK");
-
-    } else if (lastState.state === "error") {
-        errorButton.className = "error";
-        errorButton.textContent = browser.i18n.getMessage("error");
+    } else if (pageState.status === "success") {
+        className = "working";
+        messageId = "OK";
     }
+
+    if (className) errorButton.className = className;
+    if (messageId) errorButton.textContent = browser.i18n.getMessage(messageId);
+    errorButton.style.display = displayStyle;
 }
 
 
