@@ -34,7 +34,7 @@ function countdown(time, state, clickLinkEventTypes) {
 
     torpedo.timerInterval = setInterval(async () => {
         updateTimerText(time);
-        if (time === 0) {
+        if (time <= 0) {
             clearInterval(torpedo.timerInterval);
             if (!await isRedirect(torpedo.domain) && state !== "T4" && state !== "T4a") {
                 torpedo.target.classList.add("torpedoTimerFinished");

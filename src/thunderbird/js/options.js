@@ -117,15 +117,19 @@ const OptionsPage = {
             browser.storage.sync.set({ timer: timerValue });
         });
 
-        document.getElementById("timerInput").addEventListener('change', (e) => {
+        document.getElementById("timerInput").addEventListener('change', async (e) => {
             let timerValue = e.target.value;
+            if (timerValue === "") timerValue = 3;
+            timerValue = Math.ceil(parseFloat(timerValue.replace(',', '.')));
+
             document.getElementById('timerCheckbox').checked = timerValue > 0;
 
             if (timerValue < 0) {
                 timerValue = 0;
             }
 
-            browser.storage.sync.set({ timer: timerValue });
+            await browser.storage.sync.set({ timer: timerValue });
+            await this.loadAndApplySettings()
         });
 
         const addCheckboxListener = (id, settingName) => {
