@@ -120,7 +120,7 @@ const OptionsPage = {
         document.getElementById("timerInput").addEventListener('change', async (e) => {
             let timerValue = e.target.value;
             if (timerValue === "") timerValue = 3;
-            timerValue = Math.ceil(parseFloat(timerValue.replace(',', '.')));
+            timerValue = Math.ceil(parseFloat(timerValue));
 
             document.getElementById('timerCheckbox').checked = timerValue > 0;
 
