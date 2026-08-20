@@ -8,6 +8,7 @@ function handleTimerLogic(target, dict, storage, secStatus) {
         countdown(target, dict, storage.timer, eventTypes);
 
     } else {
+        dict.tooltip.querySelector(".torpedo-timer").style.display = "none";
         reactivateEvents(target, eventTypes);
 
         const urlElement = dict.tooltip.querySelector(".torpedo-URL");

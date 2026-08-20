@@ -14,6 +14,8 @@ const TooltipManager = (function() {
         TRUSTED: "torpedoTrusted"
     };
 
+    let cachedTooltipTemplate = null;
+
     /**
      * Shows the tooltip by fetching the HTML, applying user settings, binding events, positioning it,
      * and updating its content.
@@ -42,7 +44,8 @@ const TooltipManager = (function() {
         try {
             dict.tooltip = await firstInitialization(target, dict, settings);
         } catch (error) {
-            throw new Error(`Error during the first initialization: ${error}`);
+            debugLog("Error during the first initialization:", error);
+            return;
         }
 
         if (target !== Torpedo.target) return;
@@ -66,15 +69,24 @@ const TooltipManager = (function() {
      * @returns {Promise<Element>}
      */
     async function firstInitialization(target, dict, settings) {
-        const tooltipDiv = await fetchHTML("tooltip.html");
-        if (!tooltipDiv) throw new Error("Failed to load tooltip HTML.");
+        let tooltipDiv;
+
+        if (cachedTooltipTemplate) {
+            tooltipDiv = cachedTooltipTemplate.cloneNode(true);
+        } else {
+            tooltipDiv = await fetchHTML("tooltip.html");
+            if (!tooltipDiv) throw new Error("Failed to load tooltip HTML.");
+
+            await setStaticTextAndImages(tooltipDiv);
+
+            cachedTooltipTemplate = tooltipDiv.cloneNode(true);
+        }
 
         preventEvents(tooltipDiv.querySelector(".torpedo-URL"), ["click"]);
         tooltipDiv.classList.add(CLASSES.LOADING);
 
         applySectionSettings(tooltipDiv, settings);
         bindHoverEvents(target, tooltipDiv);
-        await loadImages(tooltipDiv);
         await addButtonListeners(target, dict, tooltipDiv);
         initContextMenu(target, dict, tooltipDiv);
 
@@ -107,7 +119,7 @@ const TooltipManager = (function() {
      * @returns {Promise<Element|null>} - A promise that resolves to the tooltip DOM element or null if loading fails.
      */
     async function fetchHTML(filePath) {
-        const tooltipHTML = await Torpedo.loadFromCache(filePath, "HTML");
+        const tooltipHTML = await browser.runtime.sendMessage({ name: "loadResource", path: filePath });
         if (!tooltipHTML) return null;
 
         const parser = new DOMParser();
@@ -117,6 +129,30 @@ const TooltipManager = (function() {
         if (!firstEl) return null;
 
         return document.importNode(firstEl, true);
+    }
+
+    /**
+     *
+     * @param tooltipDiv
+     * @returns {Promise<void>}
+     */
+    async function setStaticTextAndImages(tooltipDiv) {
+        tooltipDiv.querySelector(".torpedo-info-text").textContent = browser.i18n.getMessage("MehrInfo");
+        tooltipDiv.querySelector(".torpedo-redirect-button").textContent = browser.i18n.getMessage("ButtonWeiterleitung");
+        tooltipDiv.querySelector(".torpedo-google").textContent = browser.i18n.getMessage("googleCheck");
+        tooltipDiv.querySelector(".torpedo-open-settings").textContent = browser.i18n.getMessage("openSettings");
+        tooltipDiv.querySelector(".torpedo-open-tutorial").textContent = browser.i18n.getMessage("openTutorial");
+        tooltipDiv.querySelector(".torpedo-mark-trusted").textContent = browser.i18n.getMessage("markAsTrusted");
+
+        const classImageMap = {
+            ".torpedo-warning-img": "img/warning2.png",
+            ".torpedo-info-img": "img/info.png",
+            ".torpedo-lens-img": "img/TORPEDO_Icon.svg"
+        };
+
+        for (const [elClass, imagePath] of Object.entries(classImageMap)) {
+            tooltipDiv.querySelector(elClass).src = await browser.runtime.sendMessage({ name: "getImageData", path: imagePath });
+        }
     }
 
     /**
@@ -180,22 +216,7 @@ const TooltipManager = (function() {
             });
 
         } catch (e) {
-            console.error("Torpedo: Positioning error", e);
-        }
-    }
-
-    /**
-     * Initializes static content in the tooltip, including images and event listeners for info text and redirect button.
-     */
-    async function loadImages(tooltipDiv) {
-        const classImageMap = {
-            ".torpedo-warning-img": "img/warning2.png",
-            ".torpedo-info-img": "img/info.png",
-            ".torpedo-lens-img": "img/TORPEDO_Icon.svg"
-        };
-
-        for (const [elClass, imagePath] of Object.entries(classImageMap)) {
-            tooltipDiv.querySelector(elClass).src = await Torpedo.loadFromCache(imagePath, "img");
+            debugLog("Positioning error:", e);
         }
     }
 
@@ -216,7 +237,6 @@ const TooltipManager = (function() {
         tooltipDiv.querySelector(".torpedo-url-button").addEventListener("click", async () => {
             tooltipDiv.querySelector(".torpedo-URL").classList.toggle(CLASSES.ACTIVE);
             updateTextContent(tooltipDiv, dict.secStatus, dict.urlObj.href);
-            // await updateTooltip(target, dict);
         });
 
         tooltipDiv.querySelector(".torpedo-redirect-button").addEventListener("click", async () => {
@@ -269,12 +289,6 @@ const TooltipManager = (function() {
         tooltipDiv.querySelector(".torpedo-open-tutorial").addEventListener("click", async () => {
             await browser.runtime.sendMessage({ name: "tutorial" })
         });
-
-        tooltipDiv.querySelector(".torpedo-google").textContent = browser.i18n.getMessage("googleCheck");
-        tooltipDiv.querySelector(".torpedo-open-settings").textContent = browser.i18n.getMessage("openSettings");
-        tooltipDiv.querySelector(".torpedo-open-tutorial").textContent = browser.i18n.getMessage("openTutorial");
-        tooltipDiv.querySelector(".torpedo-mark-trusted").textContent = browser.i18n.getMessage("markAsTrusted");
-
     }
 
     /**
@@ -298,7 +312,6 @@ const TooltipManager = (function() {
 
         updateURLDisplay(dict.tooltip, dict.urlObj, dict.domain);
         updateTextContent(dict.tooltip, secStatus.status, dict.urlObj.href);
-        resetTextContent(dict.tooltip);
 
         await updateActionButtons(dict.tooltip, dict.domain, storage);
 
@@ -333,13 +346,6 @@ const TooltipManager = (function() {
         tooltipDiv.querySelector(".torpedo-url-suffix").textContent = urlSplit[1] || "";
     }
 
-    function resetTextContent(tooltipDiv) {
-        [
-            ".torpedo-timer",
-            ".torpedo-info-div"
-        ].forEach(sel => tooltipDiv.querySelector(sel).style.display = "none");
-    }
-
     /**
      * Updates the text content of various elements in the tooltip based on the security status.
      * @param tooltipDiv
@@ -348,8 +354,6 @@ const TooltipManager = (function() {
      */
     function updateTextContent(tooltipDiv, secStatus, torpedoURL) {
         const getMsg = (key) => browser.i18n.getMessage(key);
-
-        tooltipDiv.querySelector(".torpedo-redirect-button").textContent = getMsg("ButtonWeiterleitung");
 
         const isActive = tooltipDiv.querySelector(".torpedo-URL").classList.contains(CLASSES.ACTIVE);
         const titleId = isActive ? "shortUeberschrift" : "longUeberschrift";
@@ -361,8 +365,7 @@ const TooltipManager = (function() {
         while (el.firstChild) el.removeChild(el.firstChild);
         el.appendChild(parseLimitedMarkup(getMsg(statusId)));
 
-        tooltipDiv.querySelector(".torpedo-info-text").textContent = getMsg("MehrInfo");
-
+        tooltipDiv.querySelector(".torpedo-info-div").style.display = "none";
         const infoEl = tooltipDiv.querySelector(".torpedo-more-info");
         while (infoEl.firstChild) infoEl.removeChild(infoEl.firstChild);
         const msg = getMsg(secStatus + "Infotext").replace("<URL>", torpedoURL);

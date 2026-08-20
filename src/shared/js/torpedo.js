@@ -43,37 +43,5 @@ const Torpedo = {
 
         const domain = this.publicSuffixList.getDomain(hostname);
         return domain ? domain : hostname;
-    },
-
-    /**
-     * Retrieves a resource (HTML or image) from the background script, utilizing a cache
-     * to avoid duplicate requests for the same file.
-     * @returns {Promise<any|null>} - A promise resolving to the resource data, or null.
-     */
-    async loadFromCache(path, type) {
-        if (!this.cache.has(path)) {
-            let requestPromise;
-
-            switch (type) {
-                case "HTML":
-                    requestPromise = browser.runtime.sendMessage({ name: "loadResource", path: path });
-                    break;
-                case "img": {
-                    requestPromise = browser.runtime.sendMessage({ name: "getImageData", path: path });
-                    break;
-                }
-                default:
-                    return null;
-            }
-
-            this.cache.set(path, requestPromise);
-
-            requestPromise.catch((error) => {
-                console.error(`Failed to load ${path}: ${error}`);
-                this.cache.delete(path);
-            });
-        }
-
-        return await this.cache.get(path);
     }
 }
