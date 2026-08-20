@@ -16,160 +16,104 @@
         selectors: null
     }
 
-    /**
-     * Main function to initialize the content script.
-     */
-    async function main() {
-        torpedo.location = window.location.hostname;
-        pageState.selectors = SITE_SELECTORS[torpedo.location];
+    Torpedo.location = window.location.hostname;
+    pageState.selectors = SITE_SELECTORS[Torpedo.location];
 
-        addPageStateListener();
+    addPageStateListener();
 
-        if (!pageState.selectors) {
-            pageState.error = "UNSUPPORTED_SITE";
-            await browser.runtime.sendMessage({ name: "error" });
-            return;
-        }
-
-        try {
-            const tldData = await browser.runtime.sendMessage({ name: "TLD" });
-            torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
-            pageState.isReady = true;
-
-        } catch (error) {
-            pageState.error = "TLD_FETCH_FAILED";
-            await browser.runtime.sendMessage({ name: "error" });
-            return;
-        }
-
-        await browser.runtime.sendMessage({ name: "ok" });
-        addEventListeners();
+    if (!pageState.selectors) {
+        pageState.error = "UNSUPPORTED_SITE";
+        await browser.runtime.sendMessage({ name: "error" });
+        return;
     }
 
+    try {
+        const tldData = await browser.runtime.sendMessage({ name: "TLD" });
+        Torpedo.publicSuffixList.parse(tldData, punycode.toASCII);
+        pageState.isReady = true;
+
+    } catch (error) {
+        pageState.error = "TLD_FETCH_FAILED";
+        await browser.runtime.sendMessage({ name: "error" });
+        return;
+    }
+
+    await browser.runtime.sendMessage({ name: "ok" });
+    addEventListeners();
+
+    /**
+     *
+     */
     function addEventListeners() {
         const anchorSelectors = pageState.selectors.map(selector => `${selector} a`).join(", ");
 
         document.addEventListener("mouseover", (event) => {
             const targetAnchor = event.target.closest(anchorSelectors);
-
-            if (targetAnchor) {
-                openTooltip(targetAnchor, "a");
-            }
+            if (targetAnchor) openTooltip(targetAnchor, "a");
         });
     }
 
+    /**
+     *
+     */
     function addPageStateListener() {
         browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
             if (request.name === "getPageState") {
                 if (pageState.error) {
-                    sendResponse({ location: torpedo.location, status: "error", reason: pageState.error });
+                    sendResponse({ location: Torpedo.location, status: "error", reason: pageState.error });
                     return false;
                 }
 
                 if (!pageState.isReady) {
-                    sendResponse({ location: torpedo.location, status: "loading" });
+                    sendResponse({ location: Torpedo.location, status: "loading" });
                     return false;
                 }
 
                 const selectorsFound = document.body.querySelector(pageState.selectors.join()) ? true : false;
-                sendResponse({ location: torpedo.location, status: "success", foundSelectors: selectorsFound });
+                sendResponse({ location: Torpedo.location, status: "success", foundSelectors: selectorsFound });
             }
 
             return false;
         });
     }
 
-    /**
-     * Handles mouse enter events on the target element.
-     */
-    const handleMouseEnter = () => {
-        if (torpedo.hideTimer) clearTimeout(torpedo.hideTimer);
-    };
-
-    /**
-     * Handles mouse leave events on the target element.
-     */
-    const handleMouseLeave = () => {
-        torpedo.hideTimer = setTimeout(() => TooltipManager.hideTooltip(), 150);
-    };
 
     /**
      * This method is being called when the user hovers over a link
      * and the tooltip should open.
      */
-    async function openTooltip(e, type) {
-        if (e.classList.contains("torpedo-URL")) {
-            return;
+    async function openTooltip(newTarget) {
+        if (newTarget.classList.contains("torpedo-URL")) return;
+
+        const href = newTarget.href;
+        if (!href || href.includes("mailto:") || href.includes("tel:")) return;
+
+        const currTarget = Torpedo.target;
+        if (newTarget === currTarget) return;
+
+        debugLog("Tooltip triggered for link:", href);
+
+        // if the tooltip of the current Torpedo target is shown
+        if (Torpedo.targetTooltipMap.has(currTarget)) {
+            TooltipManager.hideTooltip(currTarget);
         }
 
-        if (torpedo.state !== "closed") {
-            if (e === torpedo.target) {
-                if (torpedo.hideTimer) {
-                    clearTimeout(torpedo.hideTimer);
-                }
-                return;
-            } else {
-                TooltipManager.hideTooltip();
-            }
-        }
+        Torpedo.target = newTarget;
 
-        torpedo.state = "pending";
+        preventEvents(newTarget, ["click", "contextmenu", "mouseup", "mousedown"]);
 
-        if (torpedo.target) {
-            torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
-            torpedo.target.removeEventListener("mouseleave", handleMouseLeave);
-        }
-
-        torpedo.target = e;
-
-        torpedo.target.removeEventListener("mouseenter", handleMouseEnter);
-        torpedo.target.removeEventListener("mouseleave", handleMouseLeave);
-
-        const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
-        Utils.preventEvents(torpedo.target, eventTypes);
-
-        if (type === "a") {
-            const href = torpedo.target.href;
-
-            if (!href || href.includes("mailto:") || href.includes("tel:")) {
-                Utils.reactivateEvents(torpedo.target, eventTypes);
-                torpedo.state = "closed";
-                return;
-            }
-
-            if (href === "") {
-                try {
-                    torpedo.target.setAttribute("href", e.relatedTarget.href);
-                } catch (e) {}
-            }
-        }
-
-        const url = type === "form" ? new URL(torpedo.target.action) : new URL(torpedo.target.href);
-        torpedo.setNewUrl(url);
+        newTarget.addEventListener("mouseenter", handleMouseEnter);
+        newTarget.addEventListener("mouseleave", handleMouseLeave);
 
         try {
-            const storage = await browser.storage.sync.get(null);
-            if (storage.referrerSites.includes(torpedo.location)) {
-                matchReferrer(storage);
-                torpedo.target.href = torpedo.url;
-            }
-
-            torpedo.target.addEventListener("mouseenter", handleMouseEnter);
-            torpedo.target.addEventListener("mouseleave", handleMouseLeave);
-            await TooltipManager.showTooltip(torpedo.target);
+            await TooltipManager.showTooltip(newTarget);
 
         } catch (err) {
-            console.log(`Error showing tooltip for ${url.href}:`, err);
-            torpedo.state = "closed";
+            TooltipManager.hideTooltip(newTarget);
+
+            debugLog(`Error showing tooltip for ${newTarget.href}:`, err);
             pageState.error = "TOOLTIP_ERROR";
             await browser.runtime.sendMessage({ name: "error" });
         }
     }
-
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", main);
-    } else {
-        await main();
-    }
-
 })();

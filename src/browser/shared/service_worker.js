@@ -352,10 +352,7 @@ const initialStorage = new Map([
         "njx.me",
         "shrinkify.info",
         "share.google"
-    ]],
-
-    // referrer sites
-    ['referrerSites', ["3c-bap.web.de", "3c.web.de", "3c.gmx.net"]]
+    ]]
 ]);
 
 

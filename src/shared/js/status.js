@@ -1,90 +1,115 @@
 /**
- * Determines the security status of the current ``torpedo.url`` based on the settings stored in the ``storage``.
- *
- * @returns {Promise<string|string>} A string representing the security status (e.g., T1, T2, ...)
+ * Orchestrates the security checks for a hovered ``targetElement``, resolving redirects and determining
+ * the final security tier.
+ * @returns {Promise<{status: string, finalUrl: string}>} - An object containing the status code and final URL.
  */
-async function getSecurityStatus(storage) {
-    torpedo.countRedirect = 0;
-    let referrerURL = matchReferrer(torpedo.url, storage);
+async function getSecurityStatus(targetElement, dict, storage) {
+    let countRedirect = 0;
+    let currentUrl = dict.urlObj.href;
+    let currentDomain = dict.domain;
+    let result;
 
+    let tooltipWarning = null;
+    let mixedScript = null;
+    let invisibleChar = null;
+    let isIp = null;
+    let visualMismatch = null;
+
+    let referrerURL = matchReferrer(currentUrl, storage);
     while (referrerURL !== "<NO_RESOLVED_REFERRER>") {
         try {
-            const urlObject = new URL(referrerURL);
-            torpedo.setNewUrl(urlObject);
+            const newUrlObj = new URL(referrerURL);
+            currentUrl = newUrlObj.href;
+            currentDomain = Torpedo.extractDomain(newUrlObj.hostname);
+            dict.urlObj = newUrlObj;
+            dict.domain = currentDomain;
+
         } catch (e) { }
 
-        referrerURL = matchReferrer(torpedo.url, storage);
-        torpedo.countRedirect++;
+        referrerURL = matchReferrer(currentUrl, storage);
+        countRedirect++;
     }
 
-    if (await isRedirect(torpedo.domain)) {
-
+    if (await isRedirect(currentDomain)) {
         if (!storage.privacyModeActivated) {
-            await resolveRedirect();
-            return "URLnachErmittelnButtonPrivacyMode";
+
+            const redirectResult = await browser.runtime.sendMessage({ name: "redirect", url: currentUrl });
+            if (redirectResult) {
+                const newUrlObj = new URL(redirectResult);
+                currentUrl = newUrlObj.href;
+                currentDomain = Torpedo.extractDomain(newUrlObj.hostname);
+                dict.urlObj = newUrlObj;
+                dict.domain = currentDomain;
+            }
+
+            result = { status: "URLnachErmittelnButtonPrivacyMode", finalUrl: currentUrl };
+        } else {
+            result = { status: "URLnachErmittelnButton2", finalUrl: currentUrl };
         }
 
-        return "URLnachErmittelnButton2";
-    }
+    } else {
+        const inTrustedList = storage.trustedListActivated && storage.trustedDomains?.some(d => d.includes(currentDomain));
+        const inUserTrustedList = storage.userDefinedDomains?.some(d => d.includes(currentDomain));
 
-    if (inTrusted(torpedo.domain, storage)) return "T1";
-    if (inUserList(torpedo.domain, storage)) return "T2";
+        if (inTrustedList) {
+            result = { status: "T1", finalUrl: currentUrl };
 
-    let tooltipWarning;
-    if (torpedo.target.getAttribute("title")) {
-        try {
-            const externalTooltipUrlObject = new URL(torpedo.target.getAttribute("title"));
-            tooltipWarning = !Utils.isDomainMatch(torpedo.domain, externalTooltipUrlObject.hostname);
+        } else if (inUserTrustedList) {
+            result = { status: "T2", finalUrl: currentUrl };
 
-        } catch (e) {
+        } else {
             tooltipWarning = false;
+            const titleAttr = targetElement.getAttribute("title");
+            if (titleAttr) {
+                try {
+                    const externalUrlObj = new URL(titleAttr);
+                    tooltipWarning = !(Torpedo.extractDomain(currentDomain) === Torpedo.extractDomain(externalUrlObj.hostname));
+
+                } catch (e) { }
+            }
+
+            mixedScript = isMixedScript(currentDomain);
+            invisibleChar = hasInvisibleChar(currentDomain);
+            isIp = isIPv4(currentDomain);
+
+            if (tooltipWarning || mixedScript || invisibleChar || isIp) {
+                result = { status: "T32", finalUrl: currentUrl };
+
+            } else {
+                visualMismatch = isVisualMismatch(currentDomain, targetElement);
+                if (countRedirect === 0) {
+                    result = { status: visualMismatch ? "T32" : "T31", finalUrl: currentUrl };
+
+                } else {
+                    result = {status: storage.redirectModeActivated && !visualMismatch ? "T31" : "T32", finalUrl: currentUrl};
+                }
+            }
         }
-
-    } else {
-        tooltipWarning = false;
     }
 
-    const mixedScript = isMixedScript(torpedo.domain);
-    // const invisibleChar = hasInvisibleChar(torpedo.domain);
+    debugLog("Security Evaluation Complete:", {
+        finalUrl: result.finalUrl,
+        status: result.status,
+        redirectsFound: countRedirect,
+        tooltipWarning,
+        mixedScript,
+        invisibleChar,
+        isIp,
+        visualMismatch
+    });
 
-    if (tooltipWarning || mixedScript || isIP(torpedo.domain)) {
-        return "T32";
-    }
-
-    if (torpedo.countRedirect === 0) {
-        return isMismatch(torpedo.domain) ? "T32" : "T31";
-
-    } else {
-        return storage.redirectModeActivated && !isMismatch(torpedo.domain) ? "T31" : "T32";
-    }
+    return result;
 }
 
 
 /**
- * Checks if the ``url`` is a known redirect URL.
- *
- * @returns {Promise<boolean>} A boolean indicating whether it is or not
+ * Checks for a visual mismatch between the underlying domain and the text displayed to the user.
+ * @returns {boolean} - True if there is a deceptive mismatch, false otherwise.
  */
-async function isRedirect(url) {
+function isVisualMismatch(domain, targetElement) {
     try {
-        const { redirectDomains = [] } = await browser.storage.sync.get("redirectDomains");
-        return redirectDomains.some(domain => domain.includes(url));
-    } catch (e) { }
-}
-
-
-/**
- * Checks for a mismatch between the ``domain`` and the link text (``torpedo.target.innerText``).
- *
- * @returns {boolean} A boolean indicating whether it is or not
- */
-function isMismatch(domain) {
-    try {
-        let displayedLinkText = torpedo.target.innerText;
-        const urlObject = new URL(displayedLinkText);
-        const displayedDomain = torpedo.extractDomain(urlObject.hostname);
-
-        return displayedDomain !== domain;
+        const urlObject = new URL(targetElement.innerText);
+        return Torpedo.extractDomain(urlObject.hostname) !== domain;
 
     } catch (e) {
         return false;
@@ -93,62 +118,21 @@ function isMismatch(domain) {
 
 
 /**
- * Checks if the ``domain`` is in the trusted list, based on the ``storage``.
- *
- * @returns {boolean|*|boolean} A boolean indicating whether it is or not
- */
-function inTrusted(domain, storage) {
-    return storage.trustedListActivated && storage.trustedDomains?.some(d => d.includes(domain));
-}
-
-
-/**
- * Checks if the ``domain`` is in the user-defined list, based on the ``storage``.
- *
- * @returns {boolean|*|boolean} A boolean indicating whether it is or not
- */
-function inUserList(url, storage) {
-    return storage.userDefinedDomains?.some(d => d.includes(url));
-}
-
-
-const IPV4_REGEX = new RegExp(
-    /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$/
-);
-
-
-/**
- * Checks if the ``address`` is a valid IPv4 address.
- *
- * @returns {boolean} A boolean indicating whether it is or not
- */
-function isIP(address) {
-    return IPV4_REGEX.test(address);
-}
-
-
-/**
- * Checks if the ``domain`` has invisible characters.
- *
- * @returns {boolean} A boolean indicating whether it is or not
+ * Inspects a domain name for hodden or invisible Unicode characters.
+ * @returns {boolean} - True if invisible formatiing characters are found.
  */
 function hasInvisibleChar(domain) {
     try {
         domain = decodeURIComponent(domain);
-    } catch (e) {
-        // If decoding fails, continue with original string
-    }
+    } catch (e) { }
 
-    // 2. Run the Regex
-    const invisibleRegex = /[\p{Cf}\p{Cc}\p{Co}\p{Cn}]/u;
-    return invisibleRegex.test(domain);
+    return /[\p{Cf}\p{Cc}\p{Co}\p{Cn}]/u.test(domain);
 }
 
 
 /**
- * Checks if the ``domain`` is a mixture if multiple scripts (like Latin and Cyrillic characters).
- *
- * @returns {boolean} A boolean indicating whether it is or not
+ * Checks if the domain mixes multiple writing scripts (e.g. Latin, Cyrillic)
+ * @returns {boolean} - True if multiple conflicting scripts are detected.
  */
 function isMixedScript(domain) {
     domain = punycode.toUnicode(domain);

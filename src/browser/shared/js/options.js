@@ -660,7 +660,7 @@ const OptionsPage = {
             const element = document.getElementById(id);
             if (element) {
                 while (element.firstChild) element.removeChild(element.firstChild);
-                element.appendChild(Utils.parseLimitedMarkup(browser.i18n.getMessage(textMap[id]) || textMap[id]));
+                element.appendChild(parseLimitedMarkup(browser.i18n.getMessage(textMap[id]) || textMap[id]));
             }
         }
     },

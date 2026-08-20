@@ -296,7 +296,7 @@
     
     // Public API
     
-    root = torpedo || window;
+    root = Torpedo || window;
     
     root.publicSuffixList = {
         'version': '1.0',

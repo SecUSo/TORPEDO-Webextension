@@ -205,7 +205,7 @@ function setInnerHTML(elementId, msgKey) {
     if (!el) return;
 
     while (el.firstChild) el.removeChild(el.firstChild);
-    el.appendChild(Utils.parseLimitedMarkup(getMsg(msgKey)));
+    el.appendChild(parseLimitedMarkup(getMsg(msgKey)));
 }
 
 function setImage(id, path) {

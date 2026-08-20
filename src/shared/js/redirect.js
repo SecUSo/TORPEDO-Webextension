@@ -1,27 +1,21 @@
 /**
- * Resolves the current ``torpedo.url`` by asking the ``service_worker`` to follow a URL and set the returned
- * destination as the new URL.
- *
- * @returns {Promise<void>}
+ * Checks if the ``URL`` matches any known redirect domains stored in the user settings.
+ * @returns {Promise<boolean>} - A promise resolving to true if it is a known redirect, otherwise false.
  */
-async function resolveRedirect() {
-    TooltipManager.showLoaderWithOverlay();
-
-    const redirect = await browser.runtime.sendMessage({ name: "redirect", url: torpedo.url });
-
-    if (redirect !== null) {
-        const urlObject = new URL(redirect);
-        torpedo.setNewUrl(urlObject);
+async function isRedirect(url) {
+    try {
+        const { redirectDomains = [] } = await browser.storage.sync.get("redirectDomains");
+        return redirectDomains.some(domain => domain.includes(url));
+    } catch (e) {
+        return false;
     }
-
-    await TooltipManager.updateTooltip();
 }
 
 
 /**
- * Inspects a ``url`` against a three-part referrer rule set, stored in the ``storage``, to extract an embedded target URL.
- *
- * @returns {string} The embedded target url as a string or '<NO_RESOLVED_REFERRER>'
+ * Inspects a ``URL`` against a three-part referrer rule set stored in the ``storage``
+ * to extract an embedded target URL.
+ * @returns {string} - The decoded embedded target URL, or '<NO_RESOLVED_REFERRER>'.
  */
 function matchReferrer(url, storage) {
     const {referrerPart1, referrerPart2, referrerPart3} = storage;

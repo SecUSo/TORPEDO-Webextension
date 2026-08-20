@@ -1,55 +1,79 @@
+const handleMouseEnter = (event) => {
+    const target = event.currentTarget;
+    const dict = Torpedo.targetTooltipMap.get(target);
+
+    if (dict && dict.hideTimer) clearTimeout(dict.hideTimer);
+};
 /**
- * The global ``torpedo`` state object for storing the state of the Extension across files.
- * @type {{countRedirect: number, domain: string, hideTimer: null, location: null, publicSuffixList: string, state: string, target: null, timerInterval: null, tooltip: null, url: string, urlObject: null, setNewUrl(*): void, extractDomain(*): (string|*)}}
+ * Handles mouse leave events on the target element.
  */
-const torpedo = {
-    // Counter for redirects.
-    countRedirect: 0,
-    // The domain of the torpedo target link.
-    domain: "",
-    // Timer to hide the tooltip.
-    hideTimer: null,
-    // The current location
+const handleMouseLeave = (event) => {
+    const target = event.currentTarget;
+    const dict = Torpedo.targetTooltipMap.get(target);
+    if (!dict) return;
+
+    dict.hideTimer = setTimeout(() => TooltipManager.hideTooltip(target), 150);
+};
+
+
+/**
+ * The global ``Torpedo`` state object of the Extension across files.
+ * @type {{location: null, publicSuffixList: string, target: null, targetTooltipMap: Map<any, any>, cache: Map<any, any>, extractDomain(*): (string|*), loadFromCache(*, *): Promise<null|*>}}
+ */
+const Torpedo = {
+    debug: false,
+    // The current website or Thunderbird location
     location: null,
-    // The public suffix list instance.
+    // The public suffix list instance
     publicSuffixList: "",
-    // the current state of the tooltip: "closed/pending/open"
-    state: "closed",
-    // The DOM element for which the tooltip should be shown.
+    // The current target element over which the user hovered
     target: null,
-    // The timer interval for the countdown timer.
-    timerInterval: null,
-    // The tooltip DOM element.
-    tooltip: null,
-    // The href of the URL object.
-    url: "",
-    // The URL object of the target link.
-    urlObject: null,
+    // The map connecting DOM targets to their attribute dictionary
+    targetTooltipMap: new Map(),
+    // The cache for HTML files and images
+    cache: new Map(),
 
     /**
-     * Updates the ``torpedo`` state variables in respect to the ``newUrlObject``.
-     */
-    setNewUrl(newUrlObject) {
-        if (newUrlObject.hostname.endsWith(".")) {
-            newUrlObject.hostname = newUrlObject.hostname.slice(0, -1);
-        }
-
-        this.urlObject = newUrlObject;
-        this.url = newUrlObject.href;
-        this.domain = this.extractDomain(this.urlObject.hostname);
-    },
-
-    /**
-     * Extracts the domain from the ``hostname`` using the public suffix list.
-     *
-     * @returns {string|*} The extracted domain or the original hostname if the domain cannot be determined.
+     * Extracts the base domain from the ``hostname`` using the public suffix list.
+     * If the ``hostname`` is an IP address, it returns the IP directly.
+     * @returns {string} - The extracted base domain or the original hostname.
      */
     extractDomain(hostname) {
-        if (isIP(hostname)) {
-            return hostname;
-        }
+        if (isIPv4(hostname)) return hostname;
 
         const domain = this.publicSuffixList.getDomain(hostname);
         return domain ? domain : hostname;
+    },
+
+    /**
+     * Retrieves a resource (HTML or image) from the background script, utilizing a cache
+     * to avoid duplicate requests for the same file.
+     * @returns {Promise<any|null>} - A promise resolving to the resource data, or null.
+     */
+    async loadFromCache(path, type) {
+        if (!this.cache.has(path)) {
+            let requestPromise;
+
+            switch (type) {
+                case "HTML":
+                    requestPromise = browser.runtime.sendMessage({ name: "loadResource", path: path });
+                    break;
+                case "img": {
+                    requestPromise = browser.runtime.sendMessage({ name: "getImageData", path: path });
+                    break;
+                }
+                default:
+                    return null;
+            }
+
+            this.cache.set(path, requestPromise);
+
+            requestPromise.catch((error) => {
+                console.error(`Failed to load ${path}: ${error}`);
+                this.cache.delete(path);
+            });
+        }
+
+        return await this.cache.get(path);
     }
 }

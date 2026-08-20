@@ -1,7 +1,28 @@
 /**
- * Checks if the timer should be acticated based on the ``securityStatus`` and the user settings inside the ``storage``.
- *
- * @returns {boolean|string|*|boolean} A boolean indicating whether it should or not
+ * Determines whether to trigger the countdown timer or immediately reactivate the link listeners.
+ */
+function handleTimerLogic(target, dict, storage, secStatus) {
+    const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+
+    if (isTimerActivated(storage, secStatus)) {
+        countdown(target, dict, storage.timer, eventTypes);
+
+    } else {
+        reactivateEvents(target, eventTypes);
+
+        const urlElement = dict.tooltip.querySelector(".torpedo-URL");
+        urlElement.addEventListener("click", async (event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            await browser.runtime.sendMessage({ name: "open", url: urlElement.href });
+        }, true);
+    }
+}
+
+
+/**
+ * Evaluates whether the link delay timer should be activated based on user preferences.
+ * @returns {boolean} - True if the countdown timer should be enforced, false if not.
  */
 function isTimerActivated(storage, securityStatus) {
     switch (securityStatus) {
@@ -13,16 +34,13 @@ function isTimerActivated(storage, securityStatus) {
 
 
 /**
- * Starts a countdown timer for '``time``' seconds to delay link activation.
+ * Starts an asynchronous countdown timer that temporarily blocks link interactions.
  */
-function countdown(time, state, clickLinkEventTypes) {
-    clearInterval(torpedo.timerInterval);
+function countdown(target, dict, time, clickLinkEventTypes) {
+    if (dict.timerInterval) clearInterval(dict.timerInterval);
+    if (target.classList.contains("torpedoTimerFinished")) time = 0;
 
-    if (torpedo.target.classList.contains("torpedoTimerFinished")) time = 0;
-
-    if (!torpedo.tooltip) return;
-
-    const timerEl = torpedo.tooltip.querySelector(".torpedo-timer");
+    const timerEl = dict.tooltip.querySelector(".torpedo-timer");
     timerEl.style.display = "block";
 
     const updateTimerText = (remainingTime) => {
@@ -30,23 +48,19 @@ function countdown(time, state, clickLinkEventTypes) {
     }
 
     updateTimerText(time);
-    if (time > 0) time--;
 
-    torpedo.timerInterval = setInterval(async () => {
-        updateTimerText(time);
+    dict.timerInterval = setInterval(async () => {
+        time--;
+
         if (time <= 0) {
-            clearInterval(torpedo.timerInterval);
-            if (!await isRedirect(torpedo.domain) && state !== "T4" && state !== "T4a") {
-                torpedo.target.classList.add("torpedoTimerFinished");
-            }
+            if (time === 0) updateTimerText(time);
+            clearInterval(dict.timerInterval);
+            if (!(await isRedirect(dict.domain))) target.classList.add("torpedoTimerFinished");
 
-            Utils.reactivateEvents(torpedo.target, clickLinkEventTypes)
-
-            if (torpedo.tooltip !== null) {
-                Utils.reactivateEvents(torpedo.tooltip.querySelector(".torpedo-URL"), ["click"])
-            }
+            reactivateEvents(target, clickLinkEventTypes);
+            reactivateEvents(dict.tooltip.querySelector(".torpedo-URL"), ["click"]);
         } else {
-            time--;
+            updateTimerText(time);
         }
     }, 1000);
 }
