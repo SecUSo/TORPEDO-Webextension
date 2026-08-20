@@ -68,9 +68,9 @@
         "css/loader/loader.css"
       ],
       "js": [
-        "js/floating-ui.core.umd.min.js",
-        "js/floating-ui.dom.umd.min.js",
-        "js/browser-polyfill.min.js",
+        "js/lib/floating-ui.core.umd.min.js",
+        "js/lib/floating-ui.dom.umd.min.js",
+        "js/lib/browser-polyfill.min.js",
         "js/torpedo.js",
         "js/utils.js",
         "js/punycode.js",
