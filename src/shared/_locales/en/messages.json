@@ -79,11 +79,11 @@
   },
 
   "shortT1Erklaerung": {
-    "message": "Low risk: the risk of clicking the link is considered to be low because of the trustworthiness of the domain of this URL.",
+    "message": "<span class='torpedoHighlight'>Low risk:</span> the risk of clicking the link is considered to be low because of the trustworthiness of the domain of this URL.",
     "description": "Information on the classification of this domain"
   },
   "longT1Erklaerung": {
-    "message": "Low risk: the risk of clicking the link is considered to be low because of the trustworthiness of the domain (<span class='torpedoHighlight'>bold area</span>) of this URL.",
+    "message": "<span class='torpedoHighlight'>Low risk:</span> the risk of clicking the link is considered to be low because of the trustworthiness of the domain (<span class='torpedoHighlight'>bold area</span>) of this URL.",
     "description": "Information on the classification of this domain"
   },
 
@@ -103,11 +103,11 @@
   },
 
   "shortT2Erklaerung": {
-    "message": "Low risk: The risk of clicking this link is considered to be low because of your previous statements concerning the trustworthiness of the domain of this URL.",
+    "message": "<span class='torpedoHighlight'>Low risk:</span> The risk of clicking this link is considered to be low because of your previous statements concerning the trustworthiness of the domain of this URL.",
     "description": "Information on the classification of this domain"
   },
   "longT2Erklaerung": {
-    "message": "Low risk: The risk of clicking this link is considered to be low because of your previous statements concerning the trustworthiness of the domain (<span class='torpedoHighlight'>bold area</span>) of this URL.",
+    "message": "<span class='torpedoHighlight'>Low risk:</span> The risk of clicking this link is considered to be low because of your previous statements concerning the trustworthiness of the domain (<span class='torpedoHighlight'>bold area</span>) of this URL.",
     "description": "Information on the classification of this domain"
   },
 

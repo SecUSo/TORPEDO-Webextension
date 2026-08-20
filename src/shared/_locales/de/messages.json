@@ -79,11 +79,11 @@
   },
 
   "shortT1Erklaerung": {
-    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain als gering eingestuft.",
+    "message": "<span class='torpedoHighlight'>Geringes Risiko:</span> Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
   "longT1Erklaerung": {
-    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) als gering eingestuft.",
+    "message": "<span class='torpedoHighlight'>Geringes Risiko:</span> Das Risiko für das Klicken auf den Link wird aufgrund der bekannten Vertrauenswürdigkeit der Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
 
@@ -103,11 +103,11 @@
   },
 
   "shortT2Erklaerung": {
-    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain als gering eingestuft.",
+    "message": "<span class='torpedoHighlight'>Geringes Risiko:</span> Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
   "longT2Erklaerung": {
-    "message": "Geringes Risiko: Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) als gering eingestuft.",
+    "message": "<span class='torpedoHighlight'>Geringes Risiko:</span> Das Risiko für das Klicken auf den Link wird aufgrund Ihren früheren Angaben zur Vertrauenswürdigkeit der Domain (<span class='torpedoHighlight'>fett hervorgehobener Bereich der URL</span>) als gering eingestuft.",
     "description": "Information on the classification of this domain"
   },
 
