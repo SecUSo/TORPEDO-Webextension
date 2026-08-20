@@ -56,16 +56,24 @@ async function init() {
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
     if (!tab || tab.spaceId === undefined) {
         errorButton.style.display = "none";
+        debugLog("Hide icon error button because of '!tab || tab.spaceId === undefined'");
         return;
     }
 
     const displayedMessages = await browser.messageDisplay.getDisplayedMessages(tab.id);
     if (!displayedMessages || displayedMessages.messages.length === 0) {
         errorButton.style.display = "none";
+        debugLog("Hide icon error button because of '!displayedMessages || displayedMessages.messages.length === 0'");
         return;
     }
 
     const pageState = await getPageState(tab.id);
+    if (!pageState) {
+        errorButton.style.display = "none";
+        debugLog("Hide icon error button because of '!pageState'");
+        return;
+    }
+
     detectedLocation = pageState.location;
 
     let className;
@@ -83,6 +91,16 @@ async function init() {
         className = "working";
         messageId = "OK";
     }
+
+    debugLog("Setting the icon to:", {
+        pageStateLocation: pageState.location,
+        pageStateStatus: pageState.status,
+        pageStateFoundSelectors: pageState.foundSelectors,
+        pageStateReason: pageState.reason,
+        className,
+        messageId,
+        displayStyle
+    });
 
     if (className) errorButton.className = className;
     if (messageId) errorButton.textContent = browser.i18n.getMessage(messageId);

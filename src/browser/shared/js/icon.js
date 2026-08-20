@@ -71,20 +71,29 @@ async function init() {
     const [tab] = await browser.tabs.query({ active: true, currentWindow: true });
     if (!tab || !tab.url) {
         errorButton.style.display = "none";
+        debugLog("Hide icon error button because of '!tab || !tab.url'");
         return;
     }
 
     if (tab.url.startsWith("about:") || tab.url.startsWith("moz-extension:")) {
         errorButton.style.display = "none";
+        debugLog("Hide icon error button because of '.startsWith(\"about:\") || .startsWith(\"moz-extension:\")'");
         return;
     }
 
     if (!isUrlInManifest(tab.url)) {
         errorButton.style.display = "none";
+        debugLog("Hide icon error button because 'tab.url' is not in manifest");
         return;
     }
 
     const pageState = await getPageState(tab.id);
+    if (!pageState) {
+        errorButton.style.display = "none";
+        debugLog("Hide icon error button because of '!pageState'");
+        return;
+    }
+
     detectedLocation = pageState.location;
 
     let className;
@@ -111,6 +120,16 @@ async function init() {
     if (className) errorButton.className = className;
     if (messageId) errorButton.textContent = browser.i18n.getMessage(messageId);
     errorButton.style.display = displayStyle;
+
+    debugLog("Setting the icon to:", {
+        pageStateLocation: pageState.location,
+        pageStateStatus: pageState.status,
+        pageStateFoundSelectors: pageState.foundSelectors,
+        pageStateReason: pageState.reason,
+        className,
+        messageId,
+        displayStyle
+    });
 }
 
 
