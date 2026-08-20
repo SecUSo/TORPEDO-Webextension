@@ -6,9 +6,15 @@ Usage:
     python build.py --version thunderbird
     python build.py --version browser --browser chrome
     python build.py --version browser --browser firefox
+
+For Debug-Mode:
+    python build.py --version thunderbird --debug
+    python build.py --version browser --browser chrome --debug
+    python build.py --version browser --browser firefox --debug
 """
 
 import argparse
+import re
 import os
 import shutil
 import zipfile
@@ -41,7 +47,29 @@ def zip_output(out_dir: Path, zip_path: Path) -> None:
                 zf.write(file_path, arcname)
 
 
-def build_thunderbird(src: Path, root: Path) -> None:
+DEBUG_FLAG_PATTERN = re.compile(r"(debug\s*:\s*)(true|false)(\s*,)")
+
+
+def set_debug_flag(out_dir: Path, debug: bool) -> None:
+    value = "true" if debug else "false"
+    matches = list(out_dir.rglob("torpedo.js"))
+
+    if not matches:
+        print("  WARNING: torpedo.js not found in build output; debug flag not patched.")
+        return
+
+    for file_path in matches:
+        content = file_path.read_text(encoding="utf-8")
+        new_content, count = DEBUG_FLAG_PATTERN.subn(rf"\g<1>{value}\g<3>", content, count=1)
+
+        if count:
+            file_path.write_text(new_content, encoding="utf-8")
+
+        else:
+            print(f"  WARNING: found {file_path.relative_to(out_dir)} but no 'debug: true/false' pattern to patch.")
+
+
+def build_thunderbird(src: Path, root: Path, debug: bool) -> None:
     out_dir = root / "dist" / "thunderbird"
     zip_path = root / "extension-thunderbird.zip"
 
@@ -50,13 +78,14 @@ def build_thunderbird(src: Path, root: Path) -> None:
     clean_output(out_dir, zip_path)
     overlay(src / "shared", out_dir)
     overlay(src / "thunderbird", out_dir)
+    set_debug_flag(out_dir, debug)
     zip_output(out_dir, zip_path)
 
     size_kb = zip_path.stat().st_size / 1024
-    print(f"Built {zip_path} – {size_kb:.2f}) KB")
+    print(f"Built {zip_path} – {size_kb:.2f} KB")
 
 
-def build_browser(src: Path, root: Path, browser: str) -> None:
+def build_browser(src: Path, root: Path, browser: str, debug: bool) -> None:
     out_dir = root / "dist" / f"{browser}"
     zip_path = root / f"extension-{browser}.zip"
 
@@ -66,10 +95,11 @@ def build_browser(src: Path, root: Path, browser: str) -> None:
     overlay(src / "shared", out_dir)
     overlay(src / "browser" / "shared", out_dir)
     overlay(src / "browser" / browser, out_dir)
+    set_debug_flag(out_dir, debug)
     zip_output(out_dir, zip_path)
 
     size_kb = zip_path.stat().st_size / 1024
-    print(f"Built {zip_path} – {size_kb:.2f}) KB")
+    print(f"Built {zip_path} – {size_kb:.2f} KB")
 
 
 def main() -> None:
@@ -80,6 +110,10 @@ def main() -> None:
     )
     parser.add_argument(
         "--browser"
+    )
+    parser.add_argument(
+    "--debug",
+    action="store_true"
     )
     args = parser.parse_args()
 
@@ -93,10 +127,10 @@ def main() -> None:
     src = root / "src"
 
     if args.version == "thunderbird":
-        build_thunderbird(src, root)
+        build_thunderbird(src, root, args.debug)
 
     elif args.version == "browser":
-        build_browser(src, root, args.browser)
+        build_browser(src, root, args.browser, args.debug)
 
 
 if __name__ == "__main__":
