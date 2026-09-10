@@ -21,6 +21,7 @@ const handleMouseLeave = (event) => {
  * @type {{location: null, publicSuffixList: string, target: null, targetTooltipMap: Map<any, any>, cache: Map<any, any>, extractDomain(*): (string|*), loadFromCache(*, *): Promise<null|*>}}
  */
 const Torpedo = {
+    // The debug flag for the debug mode
     debug: false,
     // The current website or Thunderbird location
     location: null,
@@ -30,8 +31,6 @@ const Torpedo = {
     target: null,
     // The map connecting DOM targets to their attribute dictionary
     targetTooltipMap: new Map(),
-    // The cache for HTML files and images
-    cache: new Map(),
 
     /**
      * Extracts the base domain from the ``hostname`` using the public suffix list.
