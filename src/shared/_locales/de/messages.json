@@ -290,12 +290,12 @@
   },
 
   "timerActivated": {
-    "message": "Link-Verzögerung aktiviert",
+    "message": "Link-Verzögerung aktivieren",
     "description": "Timer activated"
   },
 
   "timerAmount": {
-    "message": "Link-Verzögerung Zeit auf:",
+    "message": "Link-Verzögerung eingestellt auf",
     "description": "Timer amount"
   },
 
@@ -305,12 +305,12 @@
   },
 
   "lowRiskDomains": {
-    "message": "Domains, die von den Entwicklern als 'geringes Risiko' eingestuft wurden (grün)",
+    "message": "Domains, die von den Entwicklern als 'geringes Risiko' eingestuft wurden",
     "description": "List of trusted domains."
   },
 
   "activateTimerOnLowRisk": {
-    "message": "Aktiviert Verzögerung auf Domains, die vom Entwickler als niedrig riskant eingestuft wurden.",
+    "message": "Link-Verzögerung für Domains aktivieren, die der Entwickler als 'geringes Risiko' eingestuft hat",
     "description": "Activate timer on list of trusted domains."
   },
 
@@ -323,15 +323,27 @@
     "message": "Privacy Mode",
     "description": "Activate privacy mode."
   },
+  "privacyModeTooltip": {
+    "message": "Wenn der Privacy Mode aktiviert ist, werden Links immer über die aufgelöste Domain und nicht über den ursprünglichen Link geöffnet. Außerdem werden short-URLs nicht direkt aufgelöst, sondern erst nach Ihrer Bestätigung.",
+    "description": "Tooltip description for privacy mode"
+  },
 
   "activateSecurityMode": {
     "message": "Security Mode",
     "description": "Activate security mode."
   },
+  "securityModeTooltip": {
+    "message": "",
+    "description": "Tooltip description for security mode"
+  },
 
   "activateRedirectMode": {
     "message": "Redirect Mode",
     "description": "Activate redirect mode."
+  },
+  "redirectModeTooltip": {
+    "message": "Wenn der Redirect Mode aktiviert ist, werden Links mit mindestens einem Referrer, die zu einer optischen Diskrepanz zwischen dem Linktext und dem tatsächlichen Ziel führen, als grauer Fall mit einem Warnsymbol angezeigt.",
+    "description": "Tooltip description for redirect mode"
   },
 
   "trustedList": {
@@ -345,7 +357,7 @@
   },
 
   "userDomains": {
-    "message": "Domains, die von Ihnen als 'geringes Risiko' eingestuft wurden (blau)",
+    "message": "Domains, die von Ihnen als 'geringes Risiko' eingestuft wurden",
     "description": "List of user risk domains."
   },
 
@@ -355,7 +367,7 @@
   },
 
   "activateTimerOnUserList": {
-    "message": "Aktiviert Verzögerung auf Domains, die von Ihnen als niedrig riskant eingestuft wurden.",
+    "message": "Link-Verzögerung für Domains aktivieren, die Sie als 'geringes Risiko' eingestuft haben",
     "description": "Activate timer on list of user risk domains."
   },
 
@@ -370,12 +382,12 @@
   },
 
   "referrerExample": {
-    "message": "Zum Beispiel: Die URL https://deref-gmx.net/mail/client/<span style='color:blue'>OcIb3TeWrtE</span>/dereferrer/?redirectUrl=https%3A%2F%2Fwww.google.de/ leitet zu der URL https://www.google.de weiter.",
+    "message": "Zum Beispiel: Die URL 'https://deref-gmx.net/mail/client/OcIb3TeWrtE/dereferrer/?redirectUrl=https%3A%2F%2Fwww.google.de/' leitet zu der URL 'https://www.google.de' weiter.",
     "description": "Description of referrers."
   },
 
   "referrerInfo2": {
-    "message": "Viele Referrer nutzen einen zufallsgenerierten Code in der Weiterleitungs-URL, hier dargestellt mit<span style='color:blue'> [...] </span>. Wenn Sie in der URL, die Sie hinzufügen möchten, einen solchen zufallsgenerierten Code erkennen, ersetzen Sie diesen Teil der URL mit<span style='color:blue'> [...] </span>",
+    "message": "Viele Referrer nutzen einen zufallsgenerierten Code in der Weiterleitungs-URL, hier dargestellt mit [...]. Wenn Sie in der URL, die Sie hinzufügen möchten, einen solchen zufallsgenerierten Code erkennen, ersetzen Sie diesen Teil der URL mit [...].",
     "description": "How to add referrer to TORPEDO."
   },
 
@@ -395,7 +407,7 @@
   },
 
   "shortURLListText": {
-    "message": "Liste der Kurz-URL-Dienste.",
+    "message": "Liste der Kurz-URL-Dienste",
     "description": "Short URL description"
   },
 
@@ -708,5 +720,31 @@
   "configuration_showcase_three_txt": {
     "message": "Sowohl die Einstellungen als auch dieses Tutorial können jederzeit über das Icon Symbol, meistens in der oberen rechten Ecke, wie hier im Beispiel von Thunderbird, aufgerufen werden.",
     "description": "Explanation for the third demonstration of the configuration tutorial"
+  },
+
+
+  "toastNotificationInvalidDomain": {
+    "message": "Ungültiges Domain Format. Verwenden Sie z.B. 'example.com' oder 'https://example.com'.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAddError": {
+    "message": "Beim hinzufügen ist ein Fehler aufgetreten.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAlreadyInDev": {
+    "message": "Die Domain ist bereits in der Liste der vertrauenswürdigen Domains des Entwicklers enthalten.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAlreadyInUser": {
+    "message": "Die Domain befindet sich bereits in der Liste der vertrauenswürdigen Domains des Benutzers.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAlreadyInReferrer": {
+    "message": "Der Referrer ist bereits in der Referrer Liste.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAlreadyInShortUrl": {
+    "message": "Die domain ist bereits in der Short-Url Liste.",
+    "description": "toast notication message"
   }
 }

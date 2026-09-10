@@ -5,14 +5,15 @@
     <title>Torpedo Options</title>
     <link rel="stylesheet" href="css/options.css" />
 
-    <script type="text/javascript" src="js/torpedo.js"></script>
-    <script type="text/javascript" src="js/browser-polyfill.min.js"></script>
-  	<script type="text/javascript" src="js/publicsuffixlist.js"></script>
-  	<script type="text/javascript" src="js/punycode.js"></script>
-  	<script type="text/javascript" src="js/options.js"></script>
-  	<script type="text/javascript" src="js/status.js"></script>
-  	<script type="text/javascript" src="js/tooltip.js"></script>
+    <script src="js/lib/floating-ui.core.umd.min.js"></script>
+    <script src="js/lib/floating-ui.dom.umd.min.js"></script>
+    <script src="js/lib/browser-polyfill.min.js"></script>
+
+    <script type="module" src="js/options.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/torpedo.js"></script>
+    <script src="js/publicsuffixlist.js"></script>
+    <script src="js/punycode.js"></script>
 </head>
 
 <body>
@@ -20,219 +21,236 @@
 
     <nav class="tabs">
         <ul class="tab-links">
-            <li><a href="#tab1" class="active">Timer</a></li>
-            <li><a href="#tab2">Domains</a></li>
-            <li><a href="#tab3">Redirect</a></li>
-		    <li><a href="#tab4">Short-URL</a></li>
-            <li><a href="#tab5">Tooltip</a></li>
-            <li><a href="#tab6">Tutorial</a></li>
+            <li><a href="#tab1" class="tab-link active">Timer</a></li>
+            <li><a href="#tab2" class="tab-link">Domains</a></li>
+            <li><a href="#tab3" class="tab-link">Redirect</a></li>
+		    <li><a href="#tab4" class="tab-link">Short-URL</a></li>
+            <li><a href="#tab5" class="tab-link">Tooltip</a></li>
+            <li><a href="#tab6" class="tab-link">Tutorial</a></li>
         </ul>
     </nav>
 
     <div class="tab-content">
         <div id="tab1" class="tab active">
+            <div class="form-section">
 
-            <div class="form-group">
-                <input id="timerCheckbox" type="checkbox">
-                <label for="timerCheckbox" id="timerCheckboxText"></label>
+                <div class="form-group">
+                    <input id="timerCheckbox" type="checkbox">
+                    <label for="timerCheckbox" id="timerCheckboxText"></label>
+                </div>
+
+                <div id="timerChildSection" class="child-section">
+                    <div class="form-group">
+                        <label for="timerInput" id="timerInputPrefix"></label>
+                        <input id="timerInput" type="number" min="0" max="100" value="3"/>
+                        <span id="timerInputSuffix"></span>
+                    </div>
+
+                    <div class="form-group toggle-group">
+                        <input id="devTrustedTimerCheckbox" type="checkbox">
+                        <label for="devTrustedTimerCheckbox" id="devTrustedTimerCheckboxText"></label>
+                    </div>
+
+                    <div class="form-group toggle-group">
+                        <input id="userTrustedTimerCheckbox" type="checkbox">
+                        <label for="userTrustedTimerCheckbox" id="userTrustedTimerCheckboxText"></label>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="form-group">
-                <label for="timerInput" id="timerAmountText"></label>
-                <input id="timerInput" type="number" value="3" min="0" max="100">
-                <span id="seconds"></span>
-            </div>
+            <div class="form-section">
+                <div class="form-group toggle-group">
+                    <input id="privacyModeCheckbox" type="checkbox">
+                    <label for="privacyModeCheckbox" id="privacyModeCheckboxText" data-tooltip="privacyModeTooltip"></label>
+                </div>
 
-            <div class="form-group">
-                <input id="trustedTimerCheckbox" type="checkbox">
-                <label for="trustedTimerCheckbox" id="trustedTimerActivated"></label>
-            </div>
+                <div class="form-group toggle-group">
+                    <input id="securityModeCheckbox" type="checkbox">
+                    <label for="securityModeCheckbox" id="securityModeCheckboxText" data-tooltip="securityModeTooltip"></label>
+                </div>
 
-            <div class="form-group">
-                <input id="userTimerCheckbox" type="checkbox">
-                <label for="userTimerCheckbox" id="userTimerActivated"></label>
-            </div>
-
-            <div class="form-group">
-                <input id="privacyModeCheckbox" type="checkbox">
-                <label for="privacyModeCheckbox" id="privacyModeActivated"></label>
-            </div>
-
-            <div class="form-group">
-                <input id="securityModeCheckbox" type="checkbox">
-                <label for="securityModeCheckbox" id="securityModeActivated"></label>
-            </div>
-
-            <div class="form-group">
-                <input id="redirectModeCheckbox" type="checkbox">
-                <label for="redirectModeCheckbox" id="redirectModeActivated"></label>
+                <div class="form-group toggle-group">
+                    <input id="redirectModeCheckbox" type="checkbox">
+                    <label for="redirectModeCheckbox" id="redirectModeCheckboxText" data-tooltip="redirectModeTooltip"></label>
+                </div>
             </div>
         </div>
 
         <div id="tab2" class="tab">
-
             <div class="form-section">
-                <h3 id="trustedListText"></h3>
+                <h3 id="trustedDomainsTitle"></h3>
 
-                <div class="form-group">
-                    <input id="trustedListActivated" type="checkbox">
-                    <label for="trustedListActivated" id="activateTrustedList"></label>
+                <div class="form-group toggle-group">
+                    <input id="devTrustedDomainsCheckbox" type="checkbox">
+                    <label for="devTrustedDomainsCheckbox" id="devTrustedDomainsCheckboxText"></label>
                 </div>
 
-                <button id="showTrustedDomains" class="button"></button>
+                <button id="showDevTrustedDomainsBtn"></button>
             </div>
 
             <div class="form-section">
-                <h3 id="userListText"></h3>
+                <h3 id="userTrustedDomainsTitle"></h3>
+                <button id="showUserTrustedDomainsBtn"></button>
 
-                <button id="editUserDefined" class="button"></button>
                 <div class="form-group">
-                    <input id="userDefinedInput" type="text" placeholder="e.g., example.com">
-                    <button id="addUserDefined" class="button-primary"></button>
+                    <input id="userTrustedDomainInput" type="text" placeholder="e.g., example.com">
+                    <button id="addUserTrustedDomainBtn"></button>
                 </div>
-                <p id="errorAddUserDefined" class="error-message"></p>
             </div>
         </div>
 
         <div id="tab3" class="tab">
-            <p id="referrerDialog1"></p>
-            <p id="referrerExample" class="code-example"></p>
-            <button id="addDefaultReferrer" class="button"></button>
-
-            <table id="referrerList">
-              <tr>
-                <th id="referrerListTitle"></th>
-              </tr>
-            </table>
-            <button id="clearReferrer" class="button-danger"></button>
+            <div class="form-section">
+                <p id="redirectTextOne"></p>
+                <p id="redirectTextTwo"></p>
+                <button id="addDefaultReferrerBtn"></button>
+                <button id="showReferrerBtn"></button>
+            </div>
 
             <div class="form-section">
-                <h3 id="referrerHeadline"></h3>
-                <p id="referrerDialog2"></p>
-                <div class="form-group-column">
-                    <label for="referrerInputHost" id="exampleReferrerHost"></label>
+                <h3 id="redirectTitle"></h3>
+                <p id="redirectTextThree"></p>
+
+                <div class="form-group">
+                    <label for="referrerInputHost" id="referrerInputHostText"></label>
                     <input id="referrerInputHost" type="text" placeholder="e.g., google.*">
-                    <label for="referrerInputPath" id="exampleReferrerPath"></label>
+                </div>
+
+                <div class="form-group">
+                    <label for="referrerInputPath" id="referrerInputPathText"></label>
                     <input id="referrerInputPath" type="text" placeholder="e.g., /url?">
-                    <label for="referrerInputAttribute" id="exampleReferrerAttribute"></label>
+                </div>
+
+                <div class="form-group">
+                    <label for="referrerInputAttribute" id="referrerInputAttributeText"></label>
                     <input id="referrerInputAttribute" type="text" placeholder="e.g., q=">
                 </div>
-                <button id="addReferrerAttribute" class="button-primary"></button>
-                <p id="errorAddReferrer" class="error-message"></p>
+
+                <button id="addReferrerBtn"></button>
             </div>
 		</div>
 		
 		<div id="tab4" class="tab">
-
-            <p id="shortURLText"></p>
-            <h3 id="shortURLListText"></h3>
-            <button id="editShortURL" class="button"></button>
-
-            <table id="shortURLList" class="data-table">
-                <tr>
-                    <th id="shortURLListTitle"></th>
-                </tr>
-            </table>
-
-            <div class="form-group">
-                <input id="userDefinedShortURLInput" type="text" placeholder="e.g., tiny.cc">
-                <button id="addUserDefinedShortURL" class="button-primary"></button>
+            <div class="form-section">
+                <p id="shortUrlTextOne"></p>
             </div>
-            <p id="errorAddUserDefinedShortURL" class="error-message"></p>
+
+            <div class="form-section">
+                <h3 id="shortUrlTitle"></h3>
+                <button id="showShortUrlBtn"></button>
+
+                <div class="form-group">
+                    <input id="shortUrlInput" type="text" placeholder="e.g., tiny.cc">
+                    <button id="addShortUrlBtn"></button>
+                </div>
+            </div>
         </div>
 
         <div id="tab5" class="tab">
-            <p id="tooltip-text"></p>
+            <div class="form-section">
+                <p id="tooltipTextOne"></p>
+            </div>
 
-            <div class="tooltip-preview">
-                <div class="tooltip-preview-url tooltip-preview-row">
-                    <div class="tooltip-preview-content">
-                        <p id="tooltip-preview-header-long">Hinterlegte URL (auch Webadresse genannt):</p>
-                        <p id="tooltip-preview-header-short">Hinterlegte Domain:</p>
+            <div class="form-section">
+                <div class="tooltip-preview">
+                    <div class="tooltip-preview-section" id="tooltipPreviewUrlTitleDiv">
+                        <div class="tooltip-preview-section-content">
+                            <p id="tooltipPreviewUrlLongTitle"></p>
+                            <p id="tooltipPreviewUrlShortTitle"></p>
+                        </div>
+
+                        <div class="tooltip-preview-section-control">
+                            <input id="tooltipPreviewUrlTitleCheckbox" type="checkbox">
+                        </div>
                     </div>
 
-                    <div class="tooltip-preview-control">
-                        <input id="tooltipCheckbox-url" type="checkbox">
-                    </div>
-                </div>
+                    <div class="tooltip-preview-section" id="tooltipPreviewUrlDiv">
+                        <div class="tooltip-preview-section-content" id="tooltipPreviewUrlLinkDiv">
+                            <span id="tooltipPreviewUrlPrefix">https://secuso.aifb.</span>
+                            <span id="tooltipPreviewUrlDomain" class="torpedoHighlight">kit.edu</span>
+                            <span id="tooltipPreviewUrlSuffix">/index.php</span>
+                            <span id="tooltipPreviewUrlBtn">[..]</span>
+                        </div>
 
-                <div class="tooltip-preview-href tooltip-preview-row">
-                    <div class="tooltip-preview-content">
-                        <p class="tooltip-preview-href-prefix">https://secuso.aifb.</p>
-                        <p class="tooltip-preview-href-domain tooltip-inline tooltip-bold">kit.edu</p>
-                        <p class="tooltip-preview-href-suffix">/index.php</p>
-                        <p class="tooltip-preview-href-button tooltip-inline">[..]</p>
-                    </div>
-
-                    <div class="tooltip-preview-control">
-                        <input id="tooltipCheckbox-url-minimal" type="checkbox">
-                    </div>
-                </div>
-
-                <div class="tooltip-preview-risk tooltip-preview-row">
-                    <div class="tooltip-preview-content">
-                        <p class="tooltip-inline tooltip-bold">Unbekanntes Risiko:</p>
-                        <p class="tooltip-inline" id="tooltip-preview-risk-long"> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain</p>
-                        <p class="tooltip-inline" id="tooltip-preview-risk-short"> Das Risiko für das Klicken auf den Link kann nicht bestimmt werden. Sie müssen hier das Risiko selbst einstufen. Hierzu prüfen Sie die Domain.</p>
-                        <p class="tooltip-inline tooltip-bold" id="tooltip-preview-risk-bold"> (fett hervorgehobener Bereich der URL).</p>
+                        <div class="tooltip-preview-section-control">
+                            <input id="tooltipPreviewUrlCheckbox" type="checkbox">
+                        </div>
                     </div>
 
-                    <div class="tooltip-preview-control">
-                        <input id="tooltipCheckbox-security" type="checkbox">
-                    </div>
-                </div>
+                    <div class="tooltip-preview-section" id="tooltipPreviewSecurityDiv">
+                        <div class="tooltip-preview-section-content">
+                            <p id="tooltipPreviewSecurityLong"></p>
+                            <p id="tooltipPreviewSecurityShort"></p>
+                        </div>
 
-                <div class="tooltip-preview-info tooltip-preview-row">
-                    <div class="tooltip-preview-content">
-                        <img src="" alt="" id="tooltip-preview-info-img">
-                        <p class="tooltip-inline"> Mehr Informationen zu dieser Einstufung</p>
-                    </div>
-
-                    <div class="tooltip-preview-control">
-                        <input id="tooltipCheckbox-info" type="checkbox">
-                    </div>
-                </div>
-
-                <div class="tooltip-preview-timer tooltip-preview-row">
-                    <div class="tooltip-preview-content">
-                        <p>Der Link wurde deaktiviert, damit Sie die Domain in Ruhe prüfen.</p>
-                        <p>Verbleibende Zeit: 0 Sekunde(n).</p>
+                        <div class="tooltip-preview-section-control">
+                            <input id="tooltipPreviewSecurityCheckbox" type="checkbox">
+                        </div>
                     </div>
 
-                    <div class="tooltip-preview-control">
-                        <input id="tooltipCheckbox-timer" type="checkbox">
+                    <div class="tooltip-preview-section" id="tooltipPreviewMoreInfoDiv">
+                        <div class="tooltip-preview-section-content">
+                            <span>
+                                <img src="img/info.png" alt="info">
+                                <span id="moreInfoText"></span>
+                            </span>
+                        </div>
+
+                        <div class="tooltip-preview-section-control">
+                            <input id="tooltipPreviewMoreInfoCheckbox" type="checkbox">
+                        </div>
+                    </div>
+
+                    <div class="tooltip-preview-section" id="tooltipPreviewTimerDiv">
+                        <div class="tooltip-preview-section-content">
+                            <p id="timerTextOne"></p>
+                            <p id="timerTextTwo"></p>
+                        </div>
+
+                        <div class="tooltip-preview-section-control">
+                            <input id="tooltipPreviewTimerCheckbox" type="checkbox">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="tab6" class="tab">
-            <p id="tutorialText"></p>
-            <button id="openTutorial" class="button"></button>
+            <div class="form-section">
+                <p id="tutorialTextOne"></p>
+                <button id="openTutorialBtn"></button>
+            </div>
         </div>
     </div>
 
-    <div id="optionButtons">
-        <button id="saveChanges" class="button-primary"></button>
-        <button id="revertChanges" class="button"></button>
-        <button id="defaultSettings" class="button-danger"></button>
-    </div>
-
-    <p id="statusSettings" class="status-message"></p>
-
     <div class="list-container">
-		<table id="trustedList" class="data-table">
+		<table id="devTrustedList" class="data-table">
 			<tr>
-				<th id="trustedListTitle"></th>
+				<th id="devTrustedListTitle"></th>
 			</tr>
 		</table>
 
-		<table id="userList" class="data-table">
-			<tr>
-				<th id="userListTitle"></th>
-			</tr>
-		</table>
+        <table id="userTrustedList" class="data-table">
+            <tr>
+                <th id="userTrustedListTitle"></th>
+            </tr>
+        </table>
+
+        <table id="referrerList" class="data-table">
+            <tr>
+                <th id="referrerListTitle"></th>
+            </tr>
+        </table>
+
+        <table id="shortUrlList" class="data-table">
+            <tr>
+                <th id="shortUrlListTitle"></th>
+            </tr>
+        </table>
 	</div>
 
+    <div id="floating-tooltip" class="floating-tooltip" role="tooltip"></div>
+    <div id="toast-notification" class="toast-notification" role="status" aria-live="polite"></div>
 </body>
 </html>

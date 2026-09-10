@@ -290,12 +290,12 @@
   },
 
   "timerActivated": {
-    "message": "Link deactivation delay timer activated",
+    "message": "Enable link delay timer",
     "description": "Timer activated"
   },
 
   "timerAmount": {
-    "message": "Link deactivation timer set to",
+    "message": "Timer duration set to",
     "description": "Timer amount"
   },
 
@@ -305,12 +305,12 @@
   },
 
   "lowRiskDomains": {
-    "message": "Domains the developer considered as 'low-risk' (green)",
+    "message": "Domains the developer considered as 'low-risk'",
     "description": "Activate timer on list of trusted domains."
   },
 
   "activateTimerOnLowRisk": {
-    "message": "Activate timer on domains the developer considered as 'low-risk' (green border).",
+    "message": "Activate timer on domains the developer considered as 'low-risk'",
     "description": "Activate timer on list of trusted domains."
   },
 
@@ -323,15 +323,27 @@
     "message": "Privacy Mode",
     "description": "Activate privacy mode."
   },
+  "privacyModeTooltip": {
+    "message": "If the privacy mode is activated, links are always opened via the resolved domain and not via the origin link. Also, short URLs are not resolved directly, but only after your confirmation.",
+    "description": "Tooltip description for privacy mode"
+  },
 
   "activateSecurityMode": {
     "message": "Security Mode",
     "description": "Activate security mode."
   },
+  "securityModeTooltip": {
+    "message": "",
+    "description": "Tooltip description for security mode"
+  },
 
   "activateRedirectMode": {
     "message": "Redirect Mode",
     "description": "Activate redirect mode."
+  },
+  "redirectModeTooltip": {
+    "message": "If the redirect mode is enabled, links with at least one referrer that resulting in a visual mismatch between the link text and its actual target will be shown as a grey case with a warning icon.",
+    "description": "Tooltip description for redirect mode"
   },
 
   "trustedList": {
@@ -345,7 +357,7 @@
   },
 
   "userDomains": {
-    "message": "Domains you considered as 'low-risk' (blue).",
+    "message": "Domains you considered as 'low-risk'",
     "description": "List of user risk domains."
   },
 
@@ -355,7 +367,7 @@
   },
 
   "activateTimerOnUserList": {
-    "message": "Activate timer on domains you considered as 'low-risk' (blue border).",
+    "message": "Activate timer on domains you considered as 'low-risk'",
     "description": "Activate timer on list of user risk domains."
   },
 
@@ -370,12 +382,12 @@
   },
 
   "referrerExample": {
-    "message": "For example: The URL https://deref-gmx.net/mail/client/<span style='color:blue'>OcIb3TeWrtE</span>/dereferrer/?redirectUrl=https%3A%2F%2Fwww.google.de/ redirects to the URL https://www.google.de .",
+    "message": "For example: The URL 'https://deref-gmx.net/mail/client/OcIb3TeWrtE/dereferrer/?redirectUrl=https%3A%2F%2Fwww.google.de/' redirects to the URL 'https://www.google.de'.",
     "description": "Description of referrers."
   },
 
   "referrerInfo2": {
-    "message": "Many referrer use a randomly generated code in the redirection URL, indicated by<span style='color:blue'> [...] </span>. If you recognize a generated code in the URL you are about to add, replace this part with<span style='color:blue'> [...] </span>.",
+    "message": "Many referrer use a randomly generated code in the redirection URL, indicated by [...]. If you recognize a generated code in the URL you are about to add, replace this part with [...].",
     "description": "How to add referrer to TORPEDO."
   },
 
@@ -390,12 +402,12 @@
   },
 
   "shortURLInfo": {
-    "message": "Kurz-URL bedeutet, dass die URL hinter dem Link nicht die Ziel URL ist, sondern erst einmal ein sogenannter Kurz-URL-Dienst. Von dieser URL werden Sie automatisch zum tatsächlichen, vorgesehenen Ziel weitergeleitet.",
+    "message": "A Short-URL means that the URL behind the link is not the destination URL itself, but rather a so called Short-URL service. From this URL, you are automatically redirected to the actual intended destination.",
     "description": "Short URL description"
   },
 
   "shortURLListText": {
-    "message": "Liste der Kurz-URL-Dienste.",
+    "message": "List of Short-URL services",
     "description": "Short URL description"
   },
 
@@ -707,5 +719,31 @@
   "configuration_showcase_three_txt": {
     "message": "Both the settings and this tutorial can be accessed at any time via the TORPEDO icon, typically located in the upper-right corner, as shown in this Thunderbird example.",
     "description": "Explanation for the third demonstration of the configuration tutorial"
+  },
+
+
+  "toastNotificationInvalidDomain": {
+    "message": "Invalid domain format. Use e.g., 'example.com' or 'https://example.com'.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAddError": {
+    "message": "An error occurred while adding.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAlreadyInDev": {
+    "message": "The domain is already in the developer trusted domains list.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAlreadyInUser": {
+    "message": "The domain is already in the user trusted domains list.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAlreadyInReferrer": {
+    "message": "The referrer is already in the referrer list.",
+    "description": "toast notication message"
+  },
+  "toastNotificationAlreadyInShortUrl": {
+    "message": "The domain is already in the Short-Url list.",
+    "description": "toast notication message"
   }
 }
