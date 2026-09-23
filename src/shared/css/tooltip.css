@@ -3,7 +3,7 @@
 ***********************************/
 .torpedo-tooltip {
     position: absolute;
-    max-width: 430px;
+    min-width: 430px;
     padding: 15px;
     border: 4px solid #bfb9b9;
     border-radius: 8px;
@@ -43,6 +43,18 @@
     flex-direction: column;
     gap: 5px;
     margin-bottom: 10px;
+}
+
+/* Prevent all sections except the URL from expanding the tooltip's width */
+.torpedo-section:not(:has(.torpedo-URL)) {
+    width: 0;
+    min-width: 100%;
+}
+
+/* Constrain the URL section's width contribution to just the domain */
+.torpedo-section:has(.torpedo-URL) {
+    width: min-content;
+    min-width: 100%;
 }
 
 /* it can be not last-child, but is last visible child -> change later */
@@ -135,6 +147,7 @@
     word-wrap: break-word;
     word-break: break-all;
     text-decoration: none;
+    min-width: 0;
 }
 
 .torpedo-URL:hover {
@@ -144,6 +157,7 @@
 .torpedo-url-domain {
     font-weight: bold;
     letter-spacing: 3px;
+    white-space: nowrap;
 }
 
 .torpedo-URL.active .torpedo-url-suffix,
