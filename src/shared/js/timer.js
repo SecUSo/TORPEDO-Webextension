@@ -2,7 +2,7 @@
  * Determines whether to trigger the countdown timer or immediately reactivate the link listeners.
  */
 function handleTimerLogic(target, dict, storage, secStatus) {
-    const eventTypes = ["click", "contextmenu", "mouseup", "mousedown"];
+    const eventTypes = ["click", "contextmenu", "mouseup", "mousedown", "auxclick"];
 
     if (isTimerActivated(storage, secStatus)) {
         countdown(target, dict, storage.timer, eventTypes);
@@ -59,7 +59,7 @@ function countdown(target, dict, time, clickLinkEventTypes) {
             if (!(await isRedirect(dict.domain))) target.classList.add("torpedoTimerFinished");
 
             reactivateEvents(target, clickLinkEventTypes);
-            reactivateEvents(dict.tooltip.querySelector(".torpedo-URL"), ["click"]);
+            reactivateEvents(dict.tooltip.querySelector(".torpedo-URL"), ["click", "contextmenu", "mouseup", "mousedown", "auxclick"]);
         } else {
             updateTimerText(time);
         }

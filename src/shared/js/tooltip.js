@@ -82,7 +82,7 @@ const TooltipManager = (function() {
             cachedTooltipTemplate = tooltipDiv.cloneNode(true);
         }
 
-        preventEvents(tooltipDiv.querySelector(".torpedo-URL"), ["click"]);
+        preventEvents(tooltipDiv.querySelector(".torpedo-URL"), ["click", "contextmenu", "mouseup", "mousedown", "auxclick"]);
         tooltipDiv.classList.add(CLASSES.LOADING);
 
         applySectionSettings(tooltipDiv, settings);
@@ -101,7 +101,7 @@ const TooltipManager = (function() {
 
         target.removeEventListener("mouseenter", handleMouseEnter);
         target.removeEventListener("mouseleave", handleMouseLeave);
-        reactivateEvents(target, ["click", "contextmenu", "mouseup", "mousedown"]);
+        reactivateEvents(target, ["click", "contextmenu", "mouseup", "mousedown", "auxclick"]);
 
         const dict = Torpedo.targetTooltipMap.get(target);
         if (dict) {

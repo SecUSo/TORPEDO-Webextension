@@ -86,7 +86,7 @@
 
         Torpedo.target = newTarget;
 
-        preventEvents(newTarget, ["click", "contextmenu", "mouseup", "mousedown"]);
+        preventEvents(newTarget, ["click", "contextmenu", "mouseup", "mousedown", "auxclick"]);
 
         newTarget.addEventListener("mouseenter", handleMouseEnter);
         newTarget.addEventListener("mouseleave", handleMouseLeave);
