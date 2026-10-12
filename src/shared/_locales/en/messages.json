@@ -63,6 +63,10 @@
     "message": "Determine target URL",
     "description": "Button text for deducing the target URL if the URL is a redirect"
   },
+  "ButtonWeiterleitungURLDOESNTEXIST": {
+    "message": "Target destination of the Redirect does not exist",
+    "description": "Button text for deducing the target URL if the URL is a redirect"
+  },
 
   "LinkAktivierung": {
     "message": "activate link",
@@ -222,7 +226,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "URLnachErmittelnButtonPrivacyModeErklaerung": {
+  "shortURLnachErmittelnButtonPrivacyModeErklaerung": {
+    "message": "This URL is going to be validated. Please wait...",
+    "description": "Information on the classification of this domain"
+  },
+  "longURLnachErmittelnButtonPrivacyModeErklaerung": {
     "message": "This URL is going to be validated. Please wait...",
     "description": "Information on the classification of this domain"
   },

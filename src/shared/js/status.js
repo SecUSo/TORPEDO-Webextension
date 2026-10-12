@@ -1,104 +1,128 @@
 /**
- * Orchestrates the security checks for a hovered ``targetElement``, resolving redirects and determining
- * the final security tier.
- * @returns {Promise<{status: string, finalUrl: string}>} - An object containing the status code and final URL.
+ * Resolves referrers and redirects for ``urlObj`` first, then evaluates the security status of the FINAL url.
+ * @returns {Promise<{status: string, urlObj: URL, domain: string, redirectPending: boolean, redirectFailed: boolean}>}
  */
-async function getSecurityStatus(targetElement, dict, storage) {
-    let countRedirect = 0;
-    let currentUrl = dict.urlObj.href;
-    let currentDomain = dict.domain;
-    let result;
+async function getSecurityStatus(targetElement, urlObj, storage, { forceRedirect = false } = {}) {
+    const resolved = await resolveTarget(urlObj, storage, forceRedirect);
+    const domain = Torpedo.extractDomain(resolved.urlObj.hostname);
 
-    let tooltipWarning = null;
-    let mixedScript = null;
-    let invisibleChar = null;
-    let isIp = null;
-    let visualMismatch = null;
+    let status;
+    let checks = {};
 
-    let referrerURL = matchReferrer(currentUrl, storage);
-    while (referrerURL !== "<NO_RESOLVED_REFERRER>") {
-        try {
-            const newUrlObj = new URL(referrerURL);
-            currentUrl = newUrlObj.href;
-            currentDomain = Torpedo.extractDomain(newUrlObj.hostname);
-            dict.urlObj = newUrlObj;
-            dict.domain = currentDomain;
-
-        } catch (e) { }
-
-        referrerURL = matchReferrer(currentUrl, storage);
-        countRedirect++;
-    }
-
-    if (await isRedirect(currentDomain)) {
-        if (!storage.privacyModeActivated) {
-
-            const redirectResult = await browser.runtime.sendMessage({ name: "redirect", url: currentUrl });
-            if (redirectResult) {
-                const newUrlObj = new URL(redirectResult);
-                currentUrl = newUrlObj.href;
-                currentDomain = Torpedo.extractDomain(newUrlObj.hostname);
-                dict.urlObj = newUrlObj;
-                dict.domain = currentDomain;
-            }
-
-            result = { status: "URLnachErmittelnButtonPrivacyMode", finalUrl: currentUrl };
-        } else {
-            result = { status: "URLnachErmittelnButton2", finalUrl: currentUrl };
-        }
-
+    if (resolved.redirectPending) {
+        status = storage.privacyModeActivated ? "URLnachErmittelnButton2" : "URLnachErmittelnButtonPrivacyMode";
     } else {
-        const inTrustedList = storage.trustedListActivated && storage.trustedDomains?.some(d => d.includes(currentDomain));
-        const inUserTrustedList = storage.userDefinedDomains?.some(d => d.includes(currentDomain));
-
-        if (inTrustedList) {
-            result = { status: "T1", finalUrl: currentUrl };
-
-        } else if (inUserTrustedList) {
-            result = { status: "T2", finalUrl: currentUrl };
-
-        } else {
-            tooltipWarning = false;
-            const titleAttr = targetElement.getAttribute("title");
-            if (titleAttr) {
-                try {
-                    const externalUrlObj = new URL(titleAttr);
-                    tooltipWarning = !(Torpedo.extractDomain(currentDomain) === Torpedo.extractDomain(externalUrlObj.hostname));
-
-                } catch (e) { }
-            }
-
-            mixedScript = isMixedScript(currentDomain);
-            invisibleChar = hasInvisibleChar(currentDomain);
-            isIp = isIPv4(currentDomain);
-
-            if (tooltipWarning || mixedScript || invisibleChar || isIp) {
-                result = { status: "T32", finalUrl: currentUrl };
-
-            } else {
-                visualMismatch = isVisualMismatch(currentDomain, targetElement);
-                if (countRedirect === 0) {
-                    result = { status: visualMismatch ? "T32" : "T31", finalUrl: currentUrl };
-
-                } else {
-                    result = {status: storage.redirectModeActivated && !visualMismatch ? "T31" : "T32", finalUrl: currentUrl};
-                }
-            }
-        }
+        ({ status, checks } = evaluateDomain(targetElement, domain, resolved.referrerHops, storage));
     }
 
     debugLog("Security Evaluation Complete:", {
-        finalUrl: result.finalUrl,
-        status: result.status,
-        redirectsFound: countRedirect,
-        tooltipWarning,
-        mixedScript,
-        invisibleChar,
-        isIp,
-        visualMismatch
+        finalUrl: resolved.urlObj.href,
+        status,
+        referrerHops: resolved.referrerHops,
+        redirectPending: resolved.redirectPending,
+        redirectFailed: resolved.redirectFailed,
+        ...checks
     });
 
-    return result;
+    return {
+        status,
+        urlObj: resolved.urlObj,
+        domain,
+        redirectPending: resolved.redirectPending,
+        redirectFailed: resolved.redirectFailed
+    };
+}
+
+
+/**
+ * Follows referrers and redirects services until a final URL is reached. Referrers are resolved locally;
+ * redirect services are resolved via the background script, unless privacy mode is active (then only
+ * when ``forceRedirect`` is set).
+ * @returns {Promise<{urlObj: URL, referrerHops: number, redirectPending: boolean, redirectFailed: boolean}>}
+ */
+async function resolveTarget(startUrlObj, storage, forceRedirect) {
+    let urlObj = startUrlObj;
+    let referrerHops = 0;
+    const done = (redirectPending, redirectFailed) => ({ urlObj, referrerHops, redirectPending, redirectFailed });
+
+    let keepResolving = true;
+    while (keepResolving) {
+        // Check for referrer
+        const referrerRaw = matchReferrer(urlObj.href, storage);
+        if (referrerRaw !== "<NO_RESOLVED_REFERRER>") {
+            let next = null;
+            try {
+                next = new URL(referrerRaw);
+            } catch (e) { }
+
+            if (next) {
+                urlObj = next;
+                referrerHops++;
+                continue;
+            }
+        }
+
+        // return if no referrer, nor redirect
+        if (!(await isRedirect(Torpedo.extractDomain(urlObj.hostname)))) {
+            return done(false, false);
+        }
+
+        // from here on, we have a redirect
+        if (storage.privacyModeActivated && !forceRedirect) {
+            return done(true, false);
+        }
+
+        let next = null;
+        try {
+            const redirectResult = await browser.runtime.sendMessage({ name: "redirect", url: urlObj.href });
+            next = new URL(redirectResult);
+        } catch (e) { }
+        if (!next) {
+            return done(true, true);
+        }
+
+        urlObj = next;
+    }
+}
+
+
+/**
+ * Pure evaluation of an already resolved domain.
+ * @returns {{status: string, checks: Object}}
+ */
+function evaluateDomain(targetElement, domain, referrerHops, storage) {
+    if (storage.trustedListActivated && storage.trustedDomains.includes(domain)) {
+        return { status: "T1", checks: {} };
+    }
+    if (storage.userDefinedDomains.includes(domain)) {
+        return { status: "T2", checks: {} };
+    }
+
+    let tooltipWarning = false;
+    const titleAttr = targetElement.getAttribute("title");
+    if (titleAttr) {
+        try {
+            const externalUrlObj = new URL(titleAttr);
+            tooltipWarning = !(domain === Torpedo.extractDomain(externalUrlObj.hostname));
+
+        } catch (e) { }
+    }
+    const checks = {
+        tooltipWarning: tooltipWarning,
+        mixedScript: isMixedScript(domain),
+        invisibleChar: hasInvisibleChar(domain),
+        isIp: isIPv4(domain)
+    };
+
+    if (Object.values(checks).some(Boolean)) {
+        return { status: "T32", checks };
+    }
+
+    checks.visualMismatch = isVisualMismatch(domain, targetElement);
+
+    // Redirected links are only safe if the user allows it and the visible text does not contradict the target.
+    const redirectsOk = referrerHops === 0 || storage.redirectModeActivated;
+    return { status: !checks.visualMismatch && redirectsOk ? "T31" : "T32", checks };
 }
 
 

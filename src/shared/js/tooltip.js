@@ -241,12 +241,7 @@ const TooltipManager = (function() {
 
         tooltipDiv.querySelector(".torpedo-redirect-button").addEventListener("click", async () => {
             showLoaderWithOverlay(tooltipDiv);
-            const redirectResult = await browser.runtime.sendMessage({ name: "redirect", url: dict.urlObj.href });
-            if (redirectResult) {
-                dict.urlObj = new URL(redirectResult);
-                dict.domain = Torpedo.extractDomain(dict.urlObj.hostname);
-            }
-            await updateTooltip(target, dict);
+            await updateTooltip(target, dict, { forceRedirect: true });
         });
     }
 
@@ -295,33 +290,28 @@ const TooltipManager = (function() {
      * Updates the tooltip content based on the current security status and user settings.
      * @returns {Promise<void>} - A promise that resolves when the tooltip has been updated.
      */
-    async function updateTooltip(target, dict) {
+    async function updateTooltip(target, dict, { forceRedirect = false } = {}) {
         const storage = await browser.storage.sync.get(null);
         if (target !== Torpedo.target) {
             hideTooltip(target);
             return;
         }
 
-        const secStatus = await getSecurityStatus(target, dict, storage);
+        const result = await getSecurityStatus(target, dict.urlObj, storage, { forceRedirect });
         if (target !== Torpedo.target) {
             hideTooltip(target);
             return;
         }
 
-        dict.secStatus = secStatus.status;
+        dict.urlObj = result.urlObj;
+        dict.domain = result.domain;
+        dict.secStatus = result.status;
 
         updateURLDisplay(dict.tooltip, dict.urlObj, dict.domain);
-        updateTextContent(dict.tooltip, secStatus.status, dict.urlObj.href);
-
-        await updateActionButtons(dict.tooltip, dict.domain, storage);
-
-        if (target !== Torpedo.target) {
-            hideTooltip(target);
-            return;
-        }
-
-        updateSecurityVisuals(dict.tooltip, dict.domain, secStatus.status, storage);
-        handleTimerLogic(target, dict, storage, secStatus.status);
+        updateTextContent(dict.tooltip, result.status, dict.urlObj.href);
+        updateActionButtons(dict.tooltip, result);
+        updateSecurityVisuals(dict.tooltip, dict.domain, result.status, storage);
+        handleTimerLogic(target, dict, storage, result.status);
 
         deactivateLoader(dict.tooltip);
     }
@@ -384,16 +374,13 @@ const TooltipManager = (function() {
 
     /**
      * Updates the action buttons in the tooltip based on the current storage settings.
-     * @param tooltipDiv
-     * @param domain
-     * @param storage - The storage object containing user settings.
-     * @returns {Promise<void>} - A promise that resolves when the action buttons have been updated.
      */
-    async function updateActionButtons(tooltipDiv, domain, storage) {
-        const isRedirectDomain = await isRedirect(domain);
-        const showRedirect = isRedirectDomain && storage.privacyModeActivated;
+    function updateActionButtons(tooltipDiv, { redirectPending, redirectFailed }) {
+        const button = tooltipDiv.querySelector(".torpedo-redirect-button");
 
-        tooltipDiv.querySelector(".torpedo-redirect-button").style.display = showRedirect ? "block" : "none";
+        button.style.display = redirectPending ? "block" : "none";
+        button.disabled = redirectFailed;
+        button.textContent = browser.i18n.getMessage(redirectFailed ? "ButtonWeiterleitungURLDOESNTEXIST" : "ButtonWeiterleitung");
     }
 
     /**

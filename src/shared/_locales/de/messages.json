@@ -63,6 +63,10 @@
     "message": "Beim Kurz-URL Dienst hinterlegte URL ermitteln",
     "description": "Button text for deducing the target URL if the URL is a redirect"
   },
+  "ButtonWeiterleitungURLDOESNTEXIST": {
+    "message": "Die hinterlegte URL existiert nicht mehr",
+    "description": "Button text for deducing the target URL if the URL is a redirect"
+  },
 
   "LinkAktivierung": {
     "message": "Link aktivieren",
@@ -222,7 +226,11 @@
     "description": "Text for Deactivation of the link"
   },
 
-  "URLnachErmittelnButtonPrivacyModeErklaerung": {
+  "shortURLnachErmittelnButtonPrivacyModeErklaerung": {
+    "message": "Diese URL wird nun überprüft. Bitte warten Sie...",
+    "description": "Information on the classification of this domain"
+  },
+  "longURLnachErmittelnButtonPrivacyModeErklaerung": {
     "message": "Diese URL wird nun überprüft. Bitte warten Sie...",
     "description": "Information on the classification of this domain"
   },
