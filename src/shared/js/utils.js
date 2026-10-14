@@ -13,35 +13,19 @@ function isIPv4(address) {
 }
 
 
-
-/**
- * Prevents the default actions and stops propagation of the specified event.
- * @param event - The event for which to prevent default actions and stop propagation.
- */
-function preventDefaultActions(event) {
-    event.preventDefault();
-    event.stopPropagation();
+function preventEvents(target) {
+    if (target.hasAttribute("href")) {
+        target.dataset.href = target.getAttribute("href");
+        target.removeAttribute("href");
+    }
 }
 
+function reactivateEvents(target) {
+    if (target.dataset.href) {
+        target.setAttribute("href", target.dataset.href);
+        delete target.dataset.href;
+    }
 
-/**
- * Prevents the specified events on the target element by adding event listeners that call preventDefaultActions.
- * @param target - The element on which to prevent the events.
- * @param eventTypes - An array of event types to prevent (e.g., ["click", "contextmenu"]).
- */
-function preventEvents(target, eventTypes) {
-    eventTypes.forEach(eventType => target.addEventListener(eventType, preventDefaultActions, { capture: true }));
-}
-
-
-/**
- * Reactivates the specified events on the target element by removing the event listeners that prevent default
- * actions and adding a click listener to process clicks.
- * @param target - The element on which to reactivate the events.
- * @param eventTypes - An array of event types to reactivate (e.g., ["click", "contextmenu"]).
- */
-function reactivateEvents(target, eventTypes) {
-    eventTypes.forEach(eventType => target.removeEventListener(eventType, preventDefaultActions, { capture: true }));
     target.addEventListener("click", () => processClick(target));
 }
 

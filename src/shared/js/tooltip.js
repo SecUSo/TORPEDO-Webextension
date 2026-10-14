@@ -22,12 +22,12 @@ const TooltipManager = (function() {
      * @param target - The target element for which the tooltip is to be shown.
      * @returns {Promise<void>} - A promise that resolves when the tooltip has been shown.
      */
-    async function showTooltip(target) {
+    async function showTooltip(target, targetHref) {
         if (target !== Torpedo.target) return;
 
-        debugLog("Initializing Tooltip UI for:", target.href);
+        debugLog("Initializing Tooltip UI for:", targetHref);
 
-        const urlObj = new URL(target.href);
+        const urlObj = new URL(targetHref);
         const dict = {
             urlObj: urlObj,
             domain: Torpedo.extractDomain(urlObj.hostname),
@@ -82,7 +82,7 @@ const TooltipManager = (function() {
             cachedTooltipTemplate = tooltipDiv.cloneNode(true);
         }
 
-        preventEvents(tooltipDiv.querySelector(".torpedo-URL"), ["click", "contextmenu", "mouseup", "mousedown", "auxclick"]);
+        preventEvents(tooltipDiv.querySelector(".torpedo-URL"));
         tooltipDiv.classList.add(CLASSES.LOADING);
 
         applySectionSettings(tooltipDiv, settings);
@@ -101,7 +101,7 @@ const TooltipManager = (function() {
 
         target.removeEventListener("mouseenter", handleMouseEnter);
         target.removeEventListener("mouseleave", handleMouseLeave);
-        reactivateEvents(target, ["click", "contextmenu", "mouseup", "mousedown", "auxclick"]);
+        reactivateEvents(target);
 
         const dict = Torpedo.targetTooltipMap.get(target);
         if (dict) {
@@ -321,7 +321,7 @@ const TooltipManager = (function() {
      */
     function updateURLDisplay(tooltipDiv, urlObj, domain) {
         const torpedoURL = tooltipDiv.querySelector(".torpedo-URL");
-        torpedoURL.href = urlObj.href;
+        torpedoURL.dataset.href = urlObj.href;
 
         let url = urlObj.href;
         const pathSuffix = urlObj.pathname + urlObj.search + urlObj.hash;

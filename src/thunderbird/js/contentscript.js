@@ -86,13 +86,13 @@
 
         Torpedo.target = newTarget;
 
-        preventEvents(newTarget, ["click", "contextmenu", "mouseup", "mousedown", "auxclick"]);
+        preventEvents(newTarget);
 
         newTarget.addEventListener("mouseenter", handleMouseEnter);
         newTarget.addEventListener("mouseleave", handleMouseLeave);
 
         try {
-            await TooltipManager.showTooltip(newTarget);
+            await TooltipManager.showTooltip(newTarget, href);
 
         } catch (err) {
             TooltipManager.hideTooltip(newTarget);

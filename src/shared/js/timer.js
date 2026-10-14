@@ -9,7 +9,8 @@ function handleTimerLogic(target, dict, storage, secStatus) {
 
     } else {
         dict.tooltip.querySelector(".torpedo-timer").style.display = "none";
-        reactivateEvents(target, eventTypes);
+        reactivateEvents(target);
+        reactivateEvents(dict.tooltip.querySelector(".torpedo-URL"));
 
         const urlElement = dict.tooltip.querySelector(".torpedo-URL");
         urlElement.addEventListener("click", async (event) => {
@@ -58,8 +59,8 @@ function countdown(target, dict, time, clickLinkEventTypes) {
             clearInterval(dict.timerInterval);
             if (!(await isRedirect(dict.domain))) target.classList.add("torpedoTimerFinished");
 
-            reactivateEvents(target, clickLinkEventTypes);
-            reactivateEvents(dict.tooltip.querySelector(".torpedo-URL"), ["click", "contextmenu", "mouseup", "mousedown", "auxclick"]);
+            reactivateEvents(target);
+            reactivateEvents(dict.tooltip.querySelector(".torpedo-URL"));
         } else {
             updateTimerText(time);
         }
