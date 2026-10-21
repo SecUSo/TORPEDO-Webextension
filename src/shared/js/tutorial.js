@@ -23,10 +23,31 @@ const LAST_PAGE = pages.length - 1;
 
 // State
 let activePageIndex = 0;
+let tutorialCompleted = false;
+
+
+/**
+ * Checks if the tutorial has been completed at least once.
+ */
+async function loadCompletedState() {
+    const result = await browser.storage.sync.get("tutorialCompleted");
+    tutorialCompleted = result.tutorialCompleted === true;
+}
+
+
+/**
+ * Marks the tutorial as at least completed once.
+ */
+async function markTutorialCompleted() {
+    if (tutorialCompleted) return;
+    tutorialCompleted = true;
+    await browser.storage.sync.set({ tutorialCompleted: true });
+}
 
 
 // DOM ready
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+    await loadCompletedState();
 
     // overview bubble clicks
     document.querySelectorAll(".overview-case").forEach((btn) => {
@@ -93,10 +114,20 @@ function updateOverview() {
         btn.setAttribute("aria-current", isActive ? "step" : "false");
     });
 
+    const isFirstPage = activePageIndex === 0;
     const isLastPage = activePageIndex === LAST_PAGE;
-    const finishBtn = document.getElementById("finish");
-    finishBtn.classList.toggle("disabled", !isLastPage);
-    finishBtn.setAttribute("aria-disabled", String(!isLastPage));
+
+    if (isLastPage) markTutorialCompleted();
+
+    setButtonDisabled("prev", isFirstPage);
+    setButtonDisabled("next", isLastPage);
+    setButtonDisabled("finish", !(isLastPage || tutorialCompleted));
+}
+
+function setButtonDisabled(buttonId, disabled) {
+    const btn = document.getElementById(buttonId);
+    btn.classList.toggle("disabled", disabled);
+    btn.setAttribute("aria-disabled", String(disabled));
 }
 
 // hide all pages except the selected page

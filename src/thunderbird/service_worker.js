@@ -1,4 +1,7 @@
 const initialStorage = new Map([
+    // tutorial flag
+    ['tutorialCompleted', false],
+
     // default timer value in seconds for the countdown timer
     ['timer', 3],
 
