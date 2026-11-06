@@ -314,6 +314,7 @@ const TooltipManager = (function() {
         handleTimerLogic(target, dict, storage, result.status);
 
         deactivateLoader(dict.tooltip);
+        await positionTooltip(target, dict.tooltip);
     }
 
     /**
