@@ -5,7 +5,11 @@
 async function isRedirect(url) {
     try {
         const { redirectDomains = [] } = await browser.storage.sync.get("redirectDomains");
-        return redirectDomains.some(domain => domain.includes(url));
+        const host = url.toLowerCase();
+        return redirectDomains.some(d => {
+            d = d.toLowerCase();
+            return host === d;
+        });
     } catch (e) {
         return false;
     }
@@ -25,11 +29,12 @@ function matchReferrer(url, storage) {
 
     const href = new URL(url);
     const hostnameURL = href.hostname;
+    const suffix = Torpedo.publicSuffixList.getPublicSuffix(hostnameURL);
 
     const indices = referrerPart1
         .map((element, i) => {
-            const domainParts = element.split("*").filter(Boolean);
-            return domainParts.every(part => hostnameURL.includes(part)) ? i : -1;
+            const host = element.replace("*", suffix);
+            return hostnameURL === host || hostnameURL.endsWith("." + host) ? i : -1;
         })
         .filter(index => index !== -1);
 

@@ -131,13 +131,29 @@ function evaluateDomain(targetElement, domain, referrerHops, storage) {
  * @returns {boolean} - True if there is a deceptive mismatch, false otherwise.
  */
 function isVisualMismatch(domain, targetElement) {
+    const text = targetElement.innerText.trim();
+    let urlObject;
+
     try {
-        const urlObject = new URL(targetElement.innerText);
-        return Torpedo.extractDomain(urlObject.hostname) !== domain;
+        urlObject = new URL(text);
 
     } catch (e) {
-        return false;
+        if (/\s/.test(text) || !text.includes(".")) {
+            return false;
+        }
+
+        try {
+            urlObject = new URL(`https://${text}`);
+        } catch (e) {
+            return false;
+        }
+
+        if (!Torpedo.publicSuffixList.getDomain(urlObject.hostname)) {
+            return false;
+        }
     }
+
+    return Torpedo.extractDomain(urlObject.hostname) !== domain;
 }
 
 
