@@ -82,7 +82,7 @@ function setStaticText() {
         "devTrustedTimerCheckboxText": "activateTimerOnLowRisk",
         "userTrustedTimerCheckboxText": "activateTimerOnUserList",
         "privacyModeCheckboxText": "activatePrivacyMode",
-        "securityModeCheckboxText": "activateSecurityMode",
+        // "securityModeCheckboxText": "activateSecurityMode",
         "redirectModeCheckboxText": "activateRedirectMode",
 
         // domain tab
