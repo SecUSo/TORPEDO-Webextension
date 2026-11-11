@@ -84,6 +84,7 @@ const TooltipManager = (function() {
 
         preventEvents(tooltipDiv.querySelector(".torpedo-URL"));
         tooltipDiv.classList.add(CLASSES.LOADING);
+        tooltipDiv.querySelector(".torpedo-loading-text").textContent = browser.i18n.getMessage("torpedo_loading_text");
 
         applySectionSettings(tooltipDiv, settings);
         bindHoverEvents(target, tooltipDiv);

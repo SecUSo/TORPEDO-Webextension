@@ -265,6 +265,11 @@
     "description": "Options"
   },
 
+  "torpedo_loading_text": {
+    "message": "Redirect auflösen...",
+    "description": "text in loading state"
+  },
+
   "tutorial": {
     "message": "TORPEDO Tutorial",
     "description": "Tutorial"
