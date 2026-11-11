@@ -20,13 +20,19 @@ function preventEvents(target) {
     }
 }
 
+
+function handleLinkClick(event) {
+    if (event.currentTarget.dataset.href) return;
+    processClick(event.currentTarget);
+}
+
 function reactivateEvents(target) {
     if (target.dataset.href) {
         target.setAttribute("href", target.dataset.href);
         delete target.dataset.href;
     }
 
-    target.addEventListener("click", () => processClick(target));
+    target.addEventListener("click", handleLinkClick);
 }
 
 
