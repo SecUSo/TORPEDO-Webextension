@@ -148,6 +148,7 @@ function init() {
     setInnerHTML("welcome-title", "welcome_title");
     setInnerHTML("introduction-txt", "introduction_txt");
     setInnerHTML("introduction-txt-2", "introduction_txt_2");
+    setInnerHTML("introduction-txt-3", "introduction_txt_3");
 
     // explanation page
     setInnerHTML("explanation-title", "explanation_title");

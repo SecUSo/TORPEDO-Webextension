@@ -544,7 +544,11 @@
     "description": "Short introduction in tool, tutorial for page 1 "
   },
   "introduction_txt_2": {
-    "message": "Unmittelbar nach berühren eines Links mit dem Mauszeiger, aber bevor die URL im Browser oder in einer Anwendung geöffnet wird, zeigt TORPEDO ein Dialogfenster an, das die Domain der URL hinter dem Link enthält.",
+    "message": "Unmittelbar nach berühren eines Links mit dem Mauszeiger, aber bevor Sie auf den Link klicken und somit die URL im Browser oder in einer Anwendung geöffnet wird, zeigt TORPEDO ein Dialogfenster an, das die Domain der URL hinter dem Link enthält.",
+    "description": "Short introduction in tool, tutorial for page 1 "
+  },
+  "introduction_txt_3": {
+    "message": "Schon das bloße Klicken auf einen Links kann riskant sein. TORPEDO unterstützt Sie deshalb dabei eine Entscheidung zu treffen, bevor Sie den Link öffnen.",
     "description": "Short introduction in tool, tutorial for page 1 "
   },
 

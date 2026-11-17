@@ -544,7 +544,11 @@
     "description": "Short introduction in tool, tutorial for page 1 "
   },
   "introduction_txt_2": {
-    "message": "Immediately after hovering over a link, but before the URL is loaded into the browser or an application, TORPEDO presents a dialog window containing the domain of the URL associated with the link.",
+    "message": "Immediately after hovering over a link, but before you click on the link and the URL is loaded into the browser or an application, TORPEDO presents a dialog window containing the domain of the URL associated with the link.",
+    "description": "Short introduction in tool, tutorial for page 1 "
+  },
+  "introduction_txt_3": {
+    "message": "Even simply clicking on a link can be risky. That's why TORPEDO helps you make a decision before you open the link.",
     "description": "Short introduction in tool, tutorial for page 1 "
   },
 
