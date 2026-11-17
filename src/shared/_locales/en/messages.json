@@ -710,7 +710,7 @@
     "description": "Title for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt": {
-    "message": "1. <span class='fat'>Timer</span> lets you change the settings of the timer e.g., you can increase or decrease the time or deactivate the timer completely. You can also activate and deactivate the different modes. \nIf the privacy mode is activated, links are always opened via the resolved domain and not via the origin link. Also, short URLs are not resolved directly, but only after your confirmation. \nIf Security Mode is enabled, you will see the gray case with a warning icon only after the second referrer. Otherwise, this already happens with the first one.",
+    "message": "1. <span class='fat'>Timer</span> lets you change the settings of the timer e.g., you can increase or decrease the time or deactivate the timer completely. You can also activate and deactivate the different modes. \nIf the privacy mode is activated, links are always opened via the resolved domain and not via the origin link. Also, short URLs are not resolved directly, but only after your confirmation.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_2": {

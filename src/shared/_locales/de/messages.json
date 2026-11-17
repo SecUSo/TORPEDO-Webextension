@@ -711,7 +711,7 @@
     "description": "Title for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt": {
-    "message": "1. Unter <span class='fat'>Timer</span> können Sie Einstellungen am Timer vornehmen z.B. können Sie die Zeit erhöhen bzw. runtersetzen oder den Timer komplett deaktivieren. Außerdem können Sie die verschiedene Mode aktivieren und deaktivieren.\nBeim aktivierten Privatsphäre Modus werden Links immer über die aufgelöste Domain und nicht über den Ursprungs-Link geöffnet. Außerdem werden Kurz-URLs nicht direkt aufgelöst, sondern erst nach Ihrer Bestätigung.\nBeim aktivierten Security Mode bekommen Sie erst nach dem zweiten gefundenen Referrer den Grauen Fall mit Warnsymbol angezeigt. Ansonsten passiert dies bereits beim ersten.",
+    "message": "1. Unter <span class='fat'>Timer</span> können Sie Einstellungen am Timer vornehmen z.B. können Sie die Zeit erhöhen bzw. runtersetzen oder den Timer komplett deaktivieren. Außerdem können Sie die verschiedene Mode aktivieren und deaktivieren.\nBeim aktivierten Privatsphäre Modus werden Links immer über die aufgelöste Domain und nicht über den Ursprungs-Link geöffnet. Außerdem werden Kurz-URLs nicht direkt aufgelöst, sondern erst nach Ihrer Bestätigung.",
     "description": "Explanation for the second demonstration of the configuration tutorial"
   },
   "configuration_showcase_two_txt_2": {
